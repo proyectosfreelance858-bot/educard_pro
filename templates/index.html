@@ -5,20 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Educard - Módulos Educativos Virtuales</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Instrument+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Variables CSS (Adaptadas a Diseño Claro) */
+        /* Variables CSS (Diseño Ultra Moderno y Minimalista) */
         :root {
-            --color-primary: #007bff; /* Azul brillante, típico de diseños modernos */
-            --color-secondary: #ffc107; /* Amarillo/Naranja para acentos de calidad/rating */
+            --color-primary: #007bff; /* Azul vibrante (botones, títulos) */
+            --color-secondary: #ffc107; /* Amarillo/Naranja (resaltado, rating) */
             --color-background: #ffffff; /* Fondo Blanco Puro */
-            --color-surface: #f8f9fa; /* Superficies o fondos de secciones */
-            --color-text-dark: #343a40; /* Texto principal oscuro */
-            --color-text-light: #ffffff; /* Texto claro para botones/fondos oscuros */
+            --color-surface: #f8f9fa; /* Fondo de secciones */
+            --color-text-dark: #212529; /* Texto principal muy oscuro */
+            --color-text-secondary: #6c757d; /* Texto secundario gris */
             --color-border: #e9ecef; /* Líneas divisorias sutiles */
             --color-shadow: rgba(0, 0, 0, 0.08);
-            --font-main: 'Poppins', sans-serif;
-            --header-height: 75px;
+            --font-primary: 'Outfit', sans-serif; /* Más audaz para títulos */
+            --font-secondary: 'Instrument Sans', sans-serif; /* Para párrafos y UI */
+            --header-height: 80px;
         }
 
         /* Base Reset y Tipografía */
@@ -29,8 +30,8 @@
         }
 
         body {
-            font-family: var(--font-main);
-            color: var(--color-text-dark);
+            font-family: var(--font-secondary);
+            color: var(--color-text-secondary);
             background-color: var(--color-background);
             line-height: 1.6;
             overflow-x: hidden;
@@ -40,11 +41,15 @@
             padding-top: var(--header-height);
         }
 
+        h1, h2, h3 {
+            font-family: var(--font-primary);
+            color: var(--color-text-dark);
+        }
+
         /* --- ESTILOS DEL HEADER --- */
         header {
-            position: fixed;
+            position: sticky; /* Sticky para que se quede arriba al hacer scroll */
             top: 0;
-            left: 0;
             width: 100%;
             height: var(--header-height);
             display: flex;
@@ -52,7 +57,7 @@
             align-items: center;
             padding: 0 5%;
             background-color: var(--color-background);
-            box-shadow: 0 2px 10px var(--color-shadow);
+            box-shadow: 0 1px 10px var(--color-shadow);
             z-index: 1000;
         }
 
@@ -63,18 +68,17 @@
         }
 
         .logo-img {
-            /* Usamos el logo a color pero si el logo B/N está mejor para fondo blanco, podemos cambiarlo */
-            height: 45px; 
+            height: 40px;
             margin-right: 10px;
         }
 
         .site-name {
             font-size: 1.6rem;
             font-weight: 800;
-            color: var(--color-primary); /* Nombre con color primario */
+            color: var(--color-text-dark);
         }
 
-        /* Navegación (Nav) - Más limpia */
+        /* Navegación */
         nav ul {
             list-style: none;
             display: flex;
@@ -89,16 +93,33 @@
             text-decoration: none;
             color: var(--color-text-dark);
             font-weight: 600;
-            padding: 25px 0;
+            padding: 10px 0;
             display: block;
             transition: color 0.2s;
+            position: relative;
         }
 
         nav ul li > a:hover, nav ul li > a.active {
             color: var(--color-primary);
         }
 
-        /* Submenú */
+        nav ul li > a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--color-primary);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        nav ul li > a:hover::after {
+            width: 100%;
+        }
+
         .dropdown {
             display: none;
             position: absolute;
@@ -113,22 +134,24 @@
             border-radius: 0 0 8px 8px;
         }
 
-        .dropdown a {
-            padding: 10px 20px;
+        /* Controles de la Derecha del Header */
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .header-icon-button {
             color: var(--color-text-dark);
-            transition: background-color 0.2s, color 0.2s;
+            font-size: 1.2rem;
+            transition: color 0.2s, transform 0.2s;
         }
 
-        .dropdown a:hover {
-            background-color: var(--color-surface);
+        .header-icon-button:hover {
             color: var(--color-primary);
+            transform: scale(1.1);
         }
 
-        nav ul li:hover .dropdown {
-            display: block;
-        }
-
-        /* Botón de Ingresar en el Header */
         .header-button {
             padding: 10px 20px;
             background-color: var(--color-primary);
@@ -139,7 +162,8 @@
             font-weight: 600;
             font-size: 0.95rem;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
         }
 
         .header-button:hover {
@@ -147,7 +171,7 @@
             transform: translateY(-1px);
         }
 
-        /* --- SECCIÓN PRINCIPAL (HERO) - Estilo UPSTUDY (image_f98f79.jpg) --- */
+        /* --- SECCIÓN PRINCIPAL (HERO) - Estilo Parallax y Moderno --- */
         .hero {
             min-height: calc(100vh - var(--header-height));
             display: flex;
@@ -156,127 +180,208 @@
             padding: 80px 5%;
             position: relative;
             background-color: var(--color-background);
+            overflow: hidden;
         }
 
         .hero-text-content {
             max-width: 50%;
             text-align: left;
             padding-right: 40px;
+            z-index: 10;
         }
 
         .hero-text-content .tag {
+            font-family: var(--font-secondary);
             font-size: 1rem;
             font-weight: 600;
             color: var(--color-primary);
             margin-bottom: 10px;
+            animation: fadeIn 0.8s ease-out;
         }
 
         .hero-text-content h1 {
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-weight: 800;
             line-height: 1.1;
             margin-bottom: 20px;
-            color: var(--color-text-dark);
+            animation: slideInLeft 1s ease-out;
         }
 
         .hero-text-content h1 span.highlight {
-            background-color: var(--color-secondary); /* Resaltado amarillo/naranja */
-            padding: 0 8px;
+            background-color: var(--color-secondary);
+            color: var(--color-text-dark);
+            padding: 0 10px;
+            border-radius: 5px;
             line-height: 1.5;
             box-decoration-break: clone;
         }
 
         .hero-text-content .subtitle {
             font-size: 1.1rem;
-            color: #6c757d;
-            margin-bottom: 30px;
+            color: var(--color-text-secondary);
+            margin-bottom: 40px;
+            animation: fadeIn 1.2s ease-out 0.3s forwards;
+            opacity: 0;
         }
 
         .main-cta-button {
-            display: inline-block;
             padding: 15px 35px;
             font-size: 1.1rem;
             font-weight: 700;
-            background-color: var(--color-primary);
-            color: var(--color-text-light);
-            border-radius: 8px;
-            text-decoration: none;
-            transition: background-color 0.3s, box-shadow 0.3s;
-            box-shadow: 0 8px 15px rgba(0, 123, 255, 0.3);
-        }
-
-        .main-cta-button:hover {
-            background-color: #0056b3;
-            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.5);
-        }
-
-        .hero-image-content {
-            max-width: 50%;
-            position: relative;
-            /* Placeholder simple para el área de imagen/ilustración */
-            height: 450px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 15px;
+            transition: all 0.3s ease;
+            animation: popIn 0.8s ease-out 0.6s forwards;
+            opacity: 0;
         }
         
-        .hero-image-placeholder {
-            /* Simula el área de imagen compleja de la referencia */
+        /* Contenedor de Imágenes Parallax */
+        .hero-image-content {
+            max-width: 50%;
+            height: 500px;
+            position: relative;
+            z-index: 5;
+            perspective: 1000px; /* Para efecto 3D */
+        }
+        
+        .parallax-elements {
+            position: absolute;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, var(--color-primary) 10%, #4a90e2 100%);
-            border-radius: 20px;
-            box-shadow: 0 15px 30px var(--color-shadow);
-            opacity: 0.1;
+            transition: transform 0.1s linear; /* Para la reacción al mouse */
         }
 
-        /* --- SECCIÓN DE PRODUCTOS --- */
-        .tendencia-section {
+        .p-image {
+            position: absolute;
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Movimiento continuo y suave */
+        }
+        
+        /* Imagen Principal (Grande) */
+        .p-image-1 {
+            width: 60%;
+            height: 80%;
+            top: 10%;
+            right: 15%;
+            background-image: url('https://i.postimg.cc/9F7QdM5M/marketing-digital.jpg'); /* Imagen relacionada al tema */
+            z-index: 3;
+            animation: float 15s ease-in-out infinite;
+        }
+
+        /* Imagen Secundaria (Arriba a la izquierda) */
+        .p-image-2 {
+            width: 30%;
+            height: 40%;
+            top: 0;
+            left: 0;
+            background-image: url('https://i.postimg.cc/8z72qV0Y/design-figma.jpg');
+            z-index: 4;
+            animation: float 18s ease-in-out infinite reverse;
+        }
+
+        /* Imagen Terciaria (Abajo a la derecha) */
+        .p-image-3 {
+            width: 40%;
+            height: 50%;
+            bottom: 0;
+            right: 0;
+            background-image: url('https://i.postimg.cc/j5G5Wb2X/python-ml.jpg');
+            z-index: 2;
+            animation: float 12s ease-in-out infinite;
+        }
+
+
+        /* --- SECCIÓN DE CATEGORÍAS (TOP CATEGORIES) --- */
+        .categories-section {
+            padding: 60px 5%;
+            background-color: var(--color-background);
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .section-subtitle-line {
+            display: inline-block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--color-secondary);
+            margin-bottom: 50px;
+            border-radius: 2px;
+        }
+
+        .categories-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .category-card {
+            background-color: var(--color-surface);
+            padding: 20px;
+            width: 250px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid var(--color-border);
+        }
+
+        .category-card:hover {
+            background-color: #e6f2ff;
+            border-color: var(--color-primary);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 123, 255, 0.1);
+        }
+
+        .category-icon {
+            font-size: 2rem;
+            color: var(--color-primary);
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+
+        .category-card h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--color-text-dark);
+        }
+
+        /* --- SECCIÓN POPULAR COURSES (MÓDULOS EN TENDENCIA) --- */
+        .popular-courses-section {
             padding: 80px 5%;
             background-color: var(--color-surface);
             text-align: center;
         }
 
-        .tendencia-section h2 {
-            font-size: 2.5rem;
-            color: var(--color-text-dark);
-            margin-bottom: 5px;
-            font-weight: 700;
-        }
-
-        .tendencia-section .subtitle-line {
-            display: inline-block;
-            width: 80px;
-            height: 4px;
-            background-color: var(--color-secondary);
-            margin-bottom: 50px;
-            border-radius: 2px;
-        }
-        
+        /* Estilo de la Tarjeta del Producto (image_f98cb1.jpg) */
         .products-grid {
-            display: flex;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
-            flex-wrap: wrap;
+            margin-top: 40px;
+            text-align: left;
         }
 
-        /* Estilo de la Tarjeta del Producto (Inspirado en image_f98cb1.jpg) */
         .product-card {
             background-color: var(--color-background);
             border-radius: 12px;
             border: 1px solid var(--color-border);
             box-shadow: 0 4px 15px var(--color-shadow);
             overflow: hidden;
-            width: 320px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-align: left;
-            position: relative;
+            display: flex;
+            flex-direction: column;
         }
 
         .product-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 123, 255, 0.1);
+            box-shadow: 0 15px 30px rgba(0, 123, 255, 0.1);
         }
 
         .card-image-container {
@@ -308,27 +413,29 @@
             border-radius: 4px;
             z-index: 2;
         }
-
+        
         .card-content {
-            padding: 20px;
+            padding: 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .card-title {
-            font-size: 1.15rem;
-            font-weight: 600;
+            font-size: 1.1rem;
+            font-weight: 700;
             color: var(--color-text-dark);
             margin-bottom: 10px;
-            height: 50px;
-            overflow: hidden;
         }
 
         .card-meta {
             display: flex;
             align-items: center;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #6c757d;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed var(--color-border);
         }
 
         .card-meta span {
@@ -338,56 +445,63 @@
         }
 
         .card-meta i {
-            color: var(--color-primary); /* Iconos de color principal */
+            color: var(--color-primary);
             margin-right: 5px;
         }
         
         .card-meta .rating-star {
-            color: var(--color-secondary); /* Estrellas de rating amarillas */
+            color: var(--color-secondary);
         }
 
         .card-footer {
+            margin-top: auto; /* Empuja el footer hacia abajo */
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding-top: 15px;
-            border-top: 1px solid var(--color-border);
         }
 
         .card-price {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: var(--color-primary);
         }
         
         .card-price.free {
-            color: #28a745; /* Verde para GRATIS */
+            color: #28a745;
         }
 
         .card-link {
             text-decoration: none;
             color: var(--color-primary);
             font-weight: 600;
+            font-size: 0.9rem;
             transition: color 0.2s;
         }
 
-        .card-link:hover {
-            color: #0056b3;
-        }
-        
-        .db-status {
-            position: fixed; /* Mantenemos el estado de la DB visible en la esquina inferior */
-            bottom: 10px;
-            left: 10px;
-            font-size: 0.8rem;
-            color: var(--color-text-dark);
-            background-color: var(--color-surface);
-            padding: 5px 10px;
-            border-radius: 5px;
-            z-index: 1001;
+        /* --- KEYFRAMES --- */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        /* Media Queries para Responsiveness */
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(5px, -5px) rotate(1deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        /* Media Queries */
         @media (max-width: 992px) {
             .hero {
                 flex-direction: column;
@@ -399,13 +513,13 @@
                 padding-right: 0;
             }
             .hero-text-content h1 {
-                font-size: 2.5rem;
+                font-size: 3rem;
             }
             .hero-image-content {
+                height: 400px;
                 margin-top: 40px;
             }
             nav ul { display: none; }
-            .product-card { width: 90%; max-width: 400px; }
         }
     </style>
 </head>
@@ -433,77 +547,163 @@
             </ul>
         </nav>
 
-        <a href="#" class="header-button">Ingresar</a>
+        <div class="header-controls">
+            <a href="#" class="header-icon-button" title="Carrito de Compras">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </a>
+            <a href="#" class="header-button">Ingresar</a>
+        </div>
     </header>
 
     <main>
-        <section class="hero">
+        <section class="hero" id="hero-section">
             <div class="hero-text-content">
-                <p class="tag">💡 Aprende de +20,000 Módulos de Calidad</p>
+                <p class="tag">💡 Más de 20,000 Módulos de Calidad</p>
                 <h1>
                     Descubre los
                     <span class="highlight">Ilimitados</span>
                     Módulos Educativos de Calidad
                 </h1>
-                <p class="subtitle">Módulos educativos virtuales ultra profesionales, con soluciones flexibles para instituciones y particulares.</p>
+                <p class="subtitle">Diseño ultra profesional y moderno, con soluciones flexibles para instituciones y particulares.</p>
                 
                 <a href="#" class="main-cta-button">Ingresar Ahora</a>
-                <p style="font-size: 0.9rem; color: #adb5bd; margin-top: 10px;">No se requiere tarjeta de crédito. Simplemente haz clic en "Ingresar Ahora".</p>
             </div>
 
             <div class="hero-image-content">
-                <div class="hero-image-placeholder"></div>
+                <div class="parallax-elements" id="parallax-container">
+                    <div class="p-image p-image-1" style="transform: translateZ(0);"></div>
+                    <div class="p-image p-image-2" style="transform: translateZ(20px);"></div>
+                    <div class="p-image p-image-3" style="transform: translateZ(10px);"></div>
+                </div>
             </div>
         </section>
 
-        <section class="tendencia-section">
-            <h2>Módulos en tendencia</h2>
-            <div class="subtitle-line"></div>
+        <section class="categories-section">
+            <h2 class="section-title">Top Categories</h2>
+            <div class="section-subtitle-line"></div>
 
+            <div class="categories-grid">
+                <div class="category-card">
+                    <i class="fa-solid fa-calculator category-icon"></i>
+                    <h4>Matemáticas</h4>
+                </div>
+                <div class="category-card">
+                    <i class="fa-solid fa-pen-to-square category-icon"></i>
+                    <h4>Español</h4>
+                </div>
+                <div class="category-card">
+                    <i class="fa-solid fa-language category-icon"></i>
+                    <h4>Inglés</h4>
+                </div>
+                <div class="category-card">
+                    <i class="fa-solid fa-earth-americas category-icon"></i>
+                    <h4>Sociales</h4>
+                </div>
+                <a href="#" class="category-card" style="background-color: var(--color-primary); color: var(--color-text-light); border: none;">
+                    <i class="fa-solid fa-book-open-reader category-icon" style="color: var(--color-text-light);"></i>
+                    <h4 style="color: var(--color-text-light);">+2440 Módulos</h4>
+                    <span style="font-size: 0.9rem; font-weight: 400;">Explorar Todos &rarr;</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="popular-courses-section">
+            <h2 class="section-title">Popular Courses</h2>
+            <div class="section-subtitle-line"></div>
+            
             <div class="products-grid">
-                {% for producto in productos %}
                 <div class="product-card">
                     <div class="card-image-container">
-                        <img src="{{ producto.imagen_url }}" alt="Imagen del curso {{ producto.nombre }}" class="card-image">
-                        <span class="card-category">{{ producto.categoria }}</span>
+                        <img src="https://i.postimg.cc/8z72qV0Y/design-figma.jpg" alt="Diseño UI/UX" class="card-image">
+                        <span class="card-category">DISEÑO</span>
                     </div>
-                    
                     <div class="card-content">
-                        <h3 class="card-title">{{ producto.nombre }}</h3>
-
+                        <h3 class="card-title">Diseño UI/UX con Figma: De Cero a Experto</h3>
                         <div class="card-meta">
-                            <span><i class="fa-solid fa-graduation-cap"></i> {{ producto.instructor }}</span>
-                            <span>
-                                <i class="fa-solid fa-user-group"></i> {{ producto.estudiantes }} Est.
-                            </span>
-                            <span>
-                                <i class="fa-solid fa-star rating-star"></i> {{ "%.1f" | format(producto.rating) }}
-                            </span>
+                            <span><i class="fa-solid fa-graduation-cap"></i> Laura M.</span>
+                            <span><i class="fa-solid fa-user-group"></i> 150 Est.</span>
+                            <span><i class="fa-solid fa-star rating-star"></i> 4.8</span>
                         </div>
-
                         <div class="card-footer">
-                            {% if producto.precio == 0 %}
-                                <span class="card-price free">GRATIS</span>
-                            {% else %}
-                                <span class="card-price">${{ "%.2f" | format(producto.precio) }}</span>
-                            {% endif %}
+                            <span class="card-price">$49.99</span>
                             <a href="#" class="card-link">Explorar Ahora <i class="fa-solid fa-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
-                {% else %}
-                <p style="color: #6c757d; font-size: 1.2rem; margin-top: 30px;">
-                    No hay módulos disponibles en este momento. Ejecute el script SQL y verifique la base de datos.
-                </p>
-                {% endfor %}
+
+                <div class="product-card">
+                    <div class="card-image-container">
+                        <img src="https://i.postimg.cc/j5G5Wb2X/python-ml.jpg" alt="Python Machine Learning" class="card-image">
+                        <span class="card-category">PROGRAMACIÓN</span>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Introducción a Python y Machine Learning</h3>
+                        <div class="card-meta">
+                            <span><i class="fa-solid fa-graduation-cap"></i> Andrés C.</span>
+                            <span><i class="fa-solid fa-user-group"></i> 280 Est.</span>
+                            <span><i class="fa-solid fa-star rating-star"></i> 5.0</span>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-price">$99.99</span>
+                            <a href="#" class="card-link">Explorar Ahora <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="card-image-container">
+                        <img src="https://i.postimg.cc/9F7QdM5M/marketing-digital.jpg" alt="Marketing Digital" class="card-image">
+                        <span class="card-category">MARKETING</span>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Estrategias de Marketing Digital 2024</h3>
+                        <div class="card-meta">
+                            <span><i class="fa-solid fa-graduation-cap"></i> Sofía R.</span>
+                            <span><i class="fa-solid fa-user-group"></i> 120 Est.</span>
+                            <span><i class="fa-solid fa-star rating-star"></i> 4.5</span>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-price">$75.00</span>
+                            <a href="#" class="card-link">Explorar Ahora <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
         </section>
 
     </main>
     
-    <div class="db-status">
-        DB Status: **{{ db_status }}**
-    </div>
+    <script>
+        document.addEventListener('mousemove', (e) => {
+            const parallaxContainer = document.getElementById('parallax-container');
+            const heroSection = document.getElementById('hero-section');
+            if (!parallaxContainer || !heroSection) return;
+
+            // Obtener el centro del contenedor Hero
+            const rect = heroSection.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            // Calcular el desplazamiento del mouse (-1 a 1)
+            const offsetX = (e.clientX - centerX) / (rect.width / 2);
+            const offsetY = (e.clientY - centerY) / (rect.height / 2);
+
+            // Coeficientes de movimiento (cuanto mayor el valor, más se mueve)
+            const moveX = offsetX * 20; // 20px máximo
+            const moveY = offsetY * 20;
+
+            // Aplicar el movimiento a los elementos parallax
+            const elements = parallaxContainer.querySelectorAll('.p-image');
+            
+            elements.forEach((el, index) => {
+                // Mover los elementos con diferente profundidad (índice) para crear el efecto 3D
+                const depth = (index + 1) * 0.5; // Profundidad de 0.5, 1.0, 1.5
+                
+                el.style.transform = `translate(${moveX * depth}px, ${moveY * depth}px)`;
+            });
+        });
+    </script>
 
 </body>
 </html>
