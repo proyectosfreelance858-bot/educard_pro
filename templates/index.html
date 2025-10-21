@@ -4,385 +4,474 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Educard - Módulos Educativos Virtuales</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Estilos Globales y Reset */
+        /* Variables CSS */
         :root {
-            --color-primario: #00c49f; /* Verde Menta (similar al diseño) */
-            --color-secundario: #5c62d0; /* Azul/Púrpura */
-            --color-acento: #ff6f61; /* Color vibrante para el botón */
-            --color-texto-oscuro: #333;
-            --color-texto-claro: #fff;
-            --color-fondo-claro: #f8faff;
-            --color-fondo-oscuro: #1d2c4d;
+            --color-primary: #5c67ff; /* Azul vibrante para el botón principal y acentos */
+            --color-secondary: #ffc107; /* Naranja/Amarillo para acentos sutiles */
+            --color-background: #0d1117; /* Fondo oscuro y profesional */
+            --color-surface: #161b22; /* Superficies más claras dentro del fondo */
+            --color-card: #1f242d; /* Fondo de tarjeta ligeramente más claro que surface */
+            --color-text-light: #f0f6fcd1; /* Texto claro */
+            --color-text-dark: #c9d1d9; /* Texto secundario */
+            --font-main: 'Poppins', sans-serif;
+            --header-height: 80px;
         }
 
+        /* Base Reset y Tipografía */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif; /* Fuente moderna, asume que está disponible o se importa */
         }
-
-        /* Importar fuente Poppins para un look moderno */
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
         body {
+            font-family: var(--font-main);
+            color: var(--color-text-dark);
+            background-color: var(--color-background);
             line-height: 1.6;
-            color: var(--color-texto-oscuro);
-            background-color: var(--color-fondo-claro);
-            overflow-x: hidden; /* Previene scroll horizontal por animaciones */
+            overflow-x: hidden;
+        }
+        
+        /* Contenedor Principal para el Contenido bajo el Header */
+        main {
+            padding-top: var(--header-height);
         }
 
-        /* Encabezado (Header) */
-        .header {
-            background: var(--color-fondo-claro);
-            padding: 15px 5%;
+        /* --- ESTILOS DEL HEADER (SIN CAMBIOS SIGNIFICATIVOS) --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            position: sticky;
-            top: 0;
+            padding: 0 4%;
+            background-color: var(--color-surface);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
             z-index: 1000;
+            transition: background-color 0.3s ease;
         }
 
         .logo-container {
             display: flex;
             align-items: center;
+            text-decoration: none;
         }
 
-        .logo-container img {
-            height: 35px; /* Ajusta el tamaño del logo */
+        .logo-img {
+            height: 40px;
             margin-right: 10px;
+            transition: transform 0.3s ease;
         }
 
-        .logo-container .brand-name {
-            font-size: 1.8em;
+        .logo-container:hover .logo-img {
+            transform: rotate(5deg) scale(1.05);
+        }
+
+        .site-name {
+            font-size: 1.5rem;
             font-weight: 700;
-            color: var(--color-secundario);
+            color: var(--color-text-light);
+            letter-spacing: 1px;
         }
 
-        /* Navegación (Nav) */
-        .nav-menu ul {
+        nav ul {
             list-style: none;
             display: flex;
-            gap: 25px;
         }
 
-        .nav-menu ul li a {
+        nav ul li {
+            margin-left: 30px;
+            position: relative;
+        }
+
+        nav ul li > a {
             text-decoration: none;
-            color: var(--color-texto-oscuro);
+            color: var(--color-text-dark);
             font-weight: 600;
-            padding: 5px 0;
-            transition: color 0.3s ease, border-bottom 0.3s ease;
+            padding: 10px 0;
+            display: block;
             position: relative;
-        }
-        
-        /* Efecto de 'hover' moderno */
-        .nav-menu ul li a:hover {
-            color: var(--color-primario);
+            transition: color 0.3s ease;
         }
 
-        .nav-menu ul li a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 3px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--color-primario);
-            transition: width 0.3s ease;
+        nav ul li > a:hover {
+            color: var(--color-primary);
         }
 
-        .nav-menu ul li a:hover::after {
-            width: 100%;
+        nav ul li:hover .dropdown {
+            display: block;
         }
 
-        /* Submenú (Dropdown) */
         .dropdown {
-            position: relative;
-        }
-
-        .dropdown-content {
             display: none;
             position: absolute;
-            background-color: var(--color-texto-claro);
+            top: 100%;
+            left: 0;
+            background-color: var(--color-surface);
             min-width: 200px;
-            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.1);
-            z-index: 1;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            border-top: 2px solid var(--color-primary);
+            z-index: 10;
             padding: 10px 0;
-            border-radius: 5px;
-            margin-top: 10px;
+            border-radius: 0 0 8px 8px;
         }
 
-        .dropdown:hover .dropdown-content {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .dropdown-content a {
-            color: var(--color-texto-oscuro);
-            padding: 10px 15px;
+        .dropdown a {
+            padding: 10px 20px;
+            color: var(--color-text-dark);
             text-decoration: none;
             display: block;
             font-weight: 400;
+            transition: background-color 0.2s, color 0.2s;
         }
 
-        .dropdown-content a:hover {
-            background-color: var(--color-primario);
-            color: var(--color-texto-claro);
+        .dropdown a:hover {
+            background-color: rgba(92, 103, 255, 0.1);
+            color: var(--color-primary);
         }
         
-        /* Botón de Ingresar */
-        .btn-ingresar {
-            background-color: var(--color-acento);
-            color: var(--color-texto-claro);
-            padding: 10px 20px;
+        .header-button {
+            padding: 8px 18px;
+            background-color: var(--color-primary);
+            color: var(--color-text-light);
             border: none;
-            border-radius: 50px;
-            font-weight: 700;
-            text-transform: uppercase;
-            cursor: pointer;
+            border-radius: 6px;
             text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 111, 97, 0.4); /* Sombra para resaltar */
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
-        .btn-ingresar:hover {
-            background-color: #e65c50; /* Tono más oscuro al pasar el ratón */
-            box-shadow: 0 6px 20px rgba(255, 111, 97, 0.6);
-            transform: translateY(-2px); /* Pequeño levantamiento */
+        .header-button:hover {
+            background-color: #4a55d4;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(92, 103, 255, 0.4);
         }
         
-        /* Contenedor Principal con Diseño Dinámico */
-        .hero-section {
+        /* Hero Section (Banner) */
+        .hero {
+            height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
-            min-height: 80vh;
+            justify-content: center;
+            padding-top: var(--header-height);
             text-align: center;
             position: relative;
             overflow: hidden;
-            background: linear-gradient(135deg, var(--color-primario) 0%, #a0ffec 100%); /* Degradado suave */
         }
 
-        /* Animación de fondo (efecto de movimiento y profesionalismo) */
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 300%;
-            height: 300%;
-            background: repeating-linear-gradient(
-                -45deg,
-                rgba(255, 255, 255, 0.05),
-                rgba(255, 255, 255, 0.05) 50px,
-                transparent 50px,
-                transparent 100px
-            );
-            transform: translate(-50%, -50%) rotate(45deg);
-            animation: moveBackground 20s linear infinite; /* Animación de movimiento sutil */
-            opacity: 0.5;
-            pointer-events: none;
-        }
-
-        @keyframes moveBackground {
-            0% {
-                transform: translate(-50%, -50%) rotate(45deg);
-            }
-            100% {
-                transform: translate(0%, 0%) rotate(45deg);
-            }
-        }
-        
-        /* Contenido Principal */
         .hero-content {
-            z-index: 10;
+            z-index: 5;
             max-width: 900px;
-            padding: 20px;
+            padding: 0 20px;
         }
 
         .hero-content h1 {
-            font-size: 3.5em;
+            font-size: 3.5rem;
             font-weight: 700;
-            color: var(--color-fondo-oscuro);
+            color: var(--color-text-light);
             margin-bottom: 20px;
-            line-height: 1.2;
         }
-
+        
         .hero-content p {
-            font-size: 1.3em;
-            color: var(--color-fondo-oscuro);
-            margin-bottom: 30px;
-            font-weight: 400;
-        }
-        
-        /* Botón Ingresar Llamativo en el Hero */
-        .btn-hero {
-            font-size: 1.2em;
-            padding: 15px 35px;
-            animation: pulse 2s infinite; /* Efecto de 'latido' para captar la atención */
+            font-size: 1.3rem;
+            color: var(--color-text-dark);
+            margin-bottom: 40px;
         }
 
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(255, 111, 97, 0.7);
-            }
-            70% {
-                box-shadow: 0 0 0 15px rgba(255, 111, 97, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(255, 111, 97, 0);
-            }
+        .main-cta-button {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            background-color: var(--color-primary);
+            color: var(--color-text-light);
+            border-radius: 8px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
         }
         
-        /* Estilos para el banner de los logos LMS (simulando la imagen de referencia) */
-        .lms-logos {
-            background-color: var(--color-texto-claro);
-            padding: 40px 5%;
+        /* Animación de fondo */
+        .bg-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            background: var(--color-primary);
+            opacity: 0.15;
+            border-radius: 50%;
+            animation: moveShape 20s infinite ease-in-out;
+        }
+        /* ... Estilos para .shape nth-child(1) a (4) sin cambios ... */
+        .shape:nth-child(1) { width: 150px; height: 150px; top: 10%; left: 5%; background: var(--color-primary); animation-duration: 25s; }
+        .shape:nth-child(2) { width: 250px; height: 250px; bottom: 5%; right: 10%; background: var(--color-secondary); animation-duration: 30s; animation-delay: -5s; }
+        .shape:nth-child(3) { width: 100px; height: 100px; top: 30%; right: 5%; background: var(--color-primary); animation-duration: 18s; animation-delay: -10s; }
+        .shape:nth-child(4) { width: 200px; height: 200px; bottom: 20%; left: 15%; background: var(--color-secondary); animation-duration: 35s; animation-delay: -15s; }
+
+        /* Keyframes para Animaciones (sin cambios) */
+        @keyframes moveShape {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(100px, 50px) scale(1.1); }
+            50% { transform: translate(-50px, -80px) scale(0.9); }
+            75% { transform: translate(80px, -30px) scale(1.05); }
+        }
+        /* ... otros keyframes ... */
+
+        /* --- NUEVOS ESTILOS PARA LA SECCIÓN DE PRODUCTOS --- */
+        .tendencia-section {
+            padding: 80px 4%;
             text-align: center;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05) inset;
-        }
-        
-        .lms-logos h2 {
-            font-size: 1.8em;
-            color: var(--color-secundario);
-            margin-bottom: 30px;
-            font-weight: 600;
         }
 
-        .logos-grid {
+        .tendencia-section h2 {
+            font-size: 2.5rem;
+            color: var(--color-text-light);
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .tendencia-section .subtitle-line {
+            display: inline-block;
+            width: 100px;
+            height: 4px;
+            background-color: var(--color-secondary);
+            margin-bottom: 50px;
+            border-radius: 2px;
+        }
+        
+        .products-grid {
             display: flex;
             justify-content: center;
-            gap: 40px;
+            gap: 30px;
             flex-wrap: wrap;
         }
 
-        .logo-item {
-            width: 120px;
-            text-align: center;
-            transition: transform 0.3s ease;
+        /* Estilo de la Tarjeta del Producto (Inspirado en image_f98cb1.jpg) */
+        .product-card {
+            background-color: var(--color-card);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            width: 320px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(92, 103, 255, 0.2);
+        }
+
+        .card-image-container {
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
         }
         
-        .logo-item:hover {
-            transform: scale(1.05) translateY(-5px); /* Efecto de levantamiento al pasar el ratón */
+        .product-card:hover .card-image {
+            transform: scale(1.05);
         }
 
-        .logo-item img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin-bottom: 10px;
-            object-fit: contain;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            background-color: var(--color-fondo-claro);
-            padding: 10px;
-        }
-
-        .logo-item p {
-            font-size: 0.9em;
+        .card-category {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--color-primary);
+            color: var(--color-text-light);
+            padding: 4px 10px;
+            font-size: 0.75rem;
             font-weight: 600;
-            color: var(--color-texto-oscuro);
-            margin-top: 5px;
+            border-radius: 4px;
+            z-index: 2;
         }
-        
-        .logo-item .status {
-            font-size: 0.75em;
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--color-text-light);
+            margin-bottom: 10px;
+            height: 50px; /* Altura fija para alineación */
+            overflow: hidden;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--color-text-dark);
+            margin-bottom: 15px;
+        }
+
+        .card-meta span {
+            margin-right: 15px;
+        }
+
+        .card-meta i {
+            color: var(--color-secondary);
+            margin-right: 5px;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .card-price {
+            font-size: 1.4rem;
             font-weight: 700;
-            padding: 3px 10px;
-            border-radius: 15px;
-            display: inline-block;
-            margin-bottom: 8px;
+            color: var(--color-primary);
         }
 
-        .status.released {
-            background-color: #6a8af0;
-            color: var(--color-texto-claro);
+        .card-link {
+            text-decoration: none;
+            color: var(--color-primary);
+            font-weight: 600;
+            transition: color 0.2s;
         }
 
-        .status.releasing-soon {
-            background-color: #ffc107;
-            color: var(--color-texto-claro);
+        .card-link:hover {
+            color: var(--color-secondary);
         }
 
-        .status.coming-soon {
-            background-color: var(--color-primario);
-            color: var(--color-texto-claro);
+        /* Estilo para el estado de la base de datos (debugging) */
+        .db-status {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            font-size: 0.8rem;
+            color: var(--color-text-dark);
+            z-index: 50;
         }
 
+        @media (max-width: 900px) {
+             /* Ocultar la navegación principal en móviles */
+            nav ul { display: none; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .product-card { width: 90%; }
+            .products-grid { gap: 20px; }
+        }
     </style>
 </head>
 <body>
 
-    <header class="header">
-        <div class="logo-container">
-            <img src="https://i.postimg.cc/gJQF9CnH/54c82322-2df7-4887-abc0-da706407fcd4.png" alt="Logo Educard">
-            <span class="brand-name">Educard</span>
-        </div>
-        
-        <nav class="nav-menu">
+    <header>
+        <a href="#" class="logo-container">
+            <img src="https://i.postimg.cc/gJQF9CnH/54c82322-2df7-4887-abc0-da706407fcd4.png" alt="Logo Educard" class="logo-img">
+            <span class="site-name">Educard</span>
+        </a>
+
+        <nav>
             <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li class="dropdown">
+                <li><a href="#" class="active">Inicio</a></li>
+                <li>
                     <a href="#">Nosotros</a>
-                    <div class="dropdown-content">
-                        <a href="#quienes-somos">Quienes Somos</a>
-                        <a href="#terminos">Términos y Condiciones</a>
-                        <a href="#preguntas">Preguntas y Respuestas</a>
-                    </div>
+                    <ul class="dropdown">
+                        <li><a href="#">Quienes Somos</a></li>
+                        <li><a href="#">Términos y Condiciones</a></li>
+                        <li><a href="#">Preguntas y Respuestas</a></li>
+                    </ul>
                 </li>
-                <li><a href="#planes">Planes</a></li>
-                <li><a href="#contactanos">Contáctanos</a></li>
+                <li><a href="#">Planes</a></li>
+                <li><a href="#">Contáctanos</a></li>
             </ul>
         </nav>
-        
-        <a href="#ingresar" class="btn-ingresar">Ingresar</a>
+
+        <a href="#" class="header-button">Ingresar</a>
     </header>
 
-    <section id="inicio" class="hero-section">
-        <div class="hero-content">
-            <h1>Avanza tu carrera con más de <br> <span style="color: var(--color-secundario);">7,000 cursos</span> y módulos de élite</h1>
-            <p>La plataforma definitiva para instituciones y profesionales que buscan la **excelencia educativa virtual**.</p>
-            <a href="#ingresar-hero" class="btn-ingresar btn-hero">Ingresar</a>
-        </div>
-    </section>
+    <main>
+        <section class="hero">
+            <div class="bg-shapes">
+                <div class="shape"></div>
+                <div class="shape"></div>
+                <div class="shape"></div>
+                <div class="shape"></div>
+            </div>
 
-    <section class="lms-logos">
-        <h2>Impulsado por la compatibilidad con los mejores LMS</h2>
-        <div class="logos-grid">
-            <div class="logo-item">
-                <p class="status released">Released</p>
-                <img src="https://i.postimg.cc/KjBW6RXh/image-2-removebg-preview.png" alt="Tutor LMS">
-                <p>tutor LMS</p>
+            <div class="hero-content">
+                <h1>La Plataforma Definitiva para Módulos Educativos Virtuales</h1>
+                <p>Diseño ultra profesional y moderno, con soluciones flexibles para instituciones y particulares.</p>
+                
+                <a href="#" class="main-cta-button">Ingresar</a>
             </div>
-            <div class="logo-item">
-                <p class="status released">Released</p>
-                 <img src="https://i.postimg.cc/KjBW6RXh/image-2-removebg-preview.png" alt="LearnPress">
-                <p>LearnPress</p>
-            </div>
-            <div class="logo-item">
-                <p class="status released">Released</p>
-                 <img src="https://i.postimg.cc/KjBW6RXh/image-2-removebg-preview.png" alt="LearnDash">
-                <p>LearnDash</p>
-            </div>
-            <div class="logo-item">
-                <p class="status releasing-soon">Releasing Soon</p>
-                 <img src="https://i.postimg.cc/KjBW6RXh/image-2-removebg-preview.png" alt="MasterStudy">
-                <p>MASTER STUDY</p>
-            </div>
-             <div class="logo-item">
-                <p class="status coming-soon">Coming Soon</p>
-                 <img src="https://i.postimg.cc/KjBW6RXh/image-2-removebg-preview.png" alt="Sensei">
-                <p>sensei</p>
-            </div>
-             <div class="logo-item">
-                <p class="status coming-soon">Coming Soon</p>
-                 <img src="https://i.postimg.cc/KjBW6RXh/image-2-removebg-preview.png" alt="LifterLMS">
-                <p>LifterLMS</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    </body>
+        <section class="tendencia-section">
+            <h2>Módulos en tendencia</h2>
+            <div class="subtitle-line"></div>
+
+            <div class="products-grid">
+                {% for producto in productos %}
+                <div class="product-card">
+                    <div class="card-image-container">
+                        <img src="{{ producto.imagen_url }}" alt="Imagen del curso {{ producto.nombre }}" class="card-image">
+                        <span class="card-category">{{ producto.categoria }}</span>
+                    </div>
+                    
+                    <div class="card-content">
+                        <h3 class="card-title">{{ producto.nombre }}</h3>
+
+                        <div class="card-meta">
+                            <span><i class="fa-solid fa-graduation-cap"></i> {{ producto.instructor }}</span>
+                            <span>
+                                <i class="fa-solid fa-user-group"></i> {{ producto.estudiantes }}
+                            </span>
+                            <span>
+                                <i class="fa-solid fa-star"></i> {{ "%.1f" | format(producto.rating) }}
+                            </span>
+                        </div>
+
+                        <div class="card-footer">
+                            <span class="card-price">${{ "%.2f" | format(producto.precio) }}</span>
+                            <a href="#" class="card-link">Explorar Ahora <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <p style="color: var(--color-text-dark); font-size: 1.2rem; margin-top: 30px;">
+                    No hay módulos disponibles en este momento. Verifique la conexión a la base de datos.
+                </p>
+                {% endfor %}
+            </div>
+        </section>
+
+    </main>
+    
+    <div class="db-status">
+        DB Status: {{ db_status }}
+    </div>
+
+</body>
 </html>

@@ -42,35 +42,46 @@ def get_db_connection():
 @app.route('/')
 def index():
     db_status = "Desconectado"
+    productos = [] # Lista para almacenar los módulos
     
     conn = get_db_connection()
 
     if conn:
         try:
-            # Si la conexión fue exitosa, probamos una consulta simple.
             cur = conn.cursor()
 
-            # Obtener la versión de PostgreSQL para confirmar que la DB está viva.
+            # 3.1. Consulta de Módulos en Tendencia
+            # Obtenemos los 3 productos con el mayor rating o id para la sección de tendencia
+            cur.execute('SELECT nombre, categoria, instructor, imagen_url, precio, estudiantes, rating FROM productos ORDER BY rating DESC, id DESC LIMIT 3;')
+            
+            # Mapear los resultados a una lista de diccionarios para fácil uso en Jinja
+            productos_data = cur.fetchall()
+            productos = [{
+                'nombre': p[0],
+                'categoria': p[1],
+                'instructor': p[2],
+                'imagen_url': p[3],
+                'precio': p[4],
+                'estudiantes': p[5],
+                'rating': p[6]
+            } for p in productos_data]
+
+            # 3.2. Verificación de Conexión (opcional, pero útil)
             cur.execute('SELECT version();')
             data = cur.fetchone()
-            
-            # Mensaje de estado de conexión exitosa
             db_status = f"✅ Conectado y versión de PostgreSQL: {data[0][:30]}..."
 
             cur.close()
 
         except Exception as e:
-            # Manejar errores durante la ejecución de la consulta.
-            db_status = f"⚠️ Conectado, pero la consulta falló: {e}"
+            db_status = f"⚠️ Error en DB/Consulta (Tabla 'productos' podría no existir): {e}"
         finally:
-            # Asegurarse de cerrar la conexión siempre.
             conn.close()
     else:
-        # Mensaje de error si la conexión inicial falló.
         db_status = "❌ Fallo Crítico de Conexión. Revisa la DATABASE_URL."
     
-    # Renderizar la plantilla HTML
-    return render_template('index.html', db_status=db_status)
+    # Renderizar la plantilla HTML, pasando el estado de la DB y la lista de productos
+    return render_template('index.html', db_status=db_status, productos=productos)
 
 # --- 4. INICIO DEL SERVIDOR ---
 if __name__ == '__main__':
