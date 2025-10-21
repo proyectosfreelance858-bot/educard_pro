@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Educard - Módulos Educativos Virtuales</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* Variables CSS */
+        /* Variables CSS (Adaptadas a Diseño Claro) */
         :root {
-            --color-primary: #5c67ff; /* Azul vibrante para el botón principal y acentos */
-            --color-secondary: #ffc107; /* Naranja/Amarillo para acentos sutiles */
-            --color-background: #0d1117; /* Fondo oscuro y profesional */
-            --color-surface: #161b22; /* Superficies más claras dentro del fondo */
-            --color-card: #1f242d; /* Fondo de tarjeta ligeramente más claro que surface */
-            --color-text-light: #f0f6fcd1; /* Texto claro */
-            --color-text-dark: #c9d1d9; /* Texto secundario */
+            --color-primary: #007bff; /* Azul brillante, típico de diseños modernos */
+            --color-secondary: #ffc107; /* Amarillo/Naranja para acentos de calidad/rating */
+            --color-background: #ffffff; /* Fondo Blanco Puro */
+            --color-surface: #f8f9fa; /* Superficies o fondos de secciones */
+            --color-text-dark: #343a40; /* Texto principal oscuro */
+            --color-text-light: #ffffff; /* Texto claro para botones/fondos oscuros */
+            --color-border: #e9ecef; /* Líneas divisorias sutiles */
+            --color-shadow: rgba(0, 0, 0, 0.08);
             --font-main: 'Poppins', sans-serif;
-            --header-height: 80px;
+            --header-height: 75px;
         }
 
         /* Base Reset y Tipografía */
@@ -35,12 +36,11 @@
             overflow-x: hidden;
         }
         
-        /* Contenedor Principal para el Contenido bajo el Header */
         main {
             padding-top: var(--header-height);
         }
 
-        /* --- ESTILOS DEL HEADER (SIN CAMBIOS SIGNIFICATIVOS) --- */
+        /* --- ESTILOS DEL HEADER --- */
         header {
             position: fixed;
             top: 0;
@@ -50,11 +50,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 4%;
-            background-color: var(--color-surface);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            padding: 0 5%;
+            background-color: var(--color-background);
+            box-shadow: 0 2px 10px var(--color-shadow);
             z-index: 1000;
-            transition: background-color 0.3s ease;
         }
 
         .logo-container {
@@ -64,29 +63,25 @@
         }
 
         .logo-img {
-            height: 40px;
+            /* Usamos el logo a color pero si el logo B/N está mejor para fondo blanco, podemos cambiarlo */
+            height: 45px; 
             margin-right: 10px;
-            transition: transform 0.3s ease;
-        }
-
-        .logo-container:hover .logo-img {
-            transform: rotate(5deg) scale(1.05);
         }
 
         .site-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--color-text-light);
-            letter-spacing: 1px;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--color-primary); /* Nombre con color primario */
         }
 
+        /* Navegación (Nav) - Más limpia */
         nav ul {
             list-style: none;
             display: flex;
         }
 
         nav ul li {
-            margin-left: 30px;
+            margin-left: 25px;
             position: relative;
         }
 
@@ -94,29 +89,25 @@
             text-decoration: none;
             color: var(--color-text-dark);
             font-weight: 600;
-            padding: 10px 0;
+            padding: 25px 0;
             display: block;
-            position: relative;
-            transition: color 0.3s ease;
+            transition: color 0.2s;
         }
 
-        nav ul li > a:hover {
+        nav ul li > a:hover, nav ul li > a.active {
             color: var(--color-primary);
         }
 
-        nav ul li:hover .dropdown {
-            display: block;
-        }
-
+        /* Submenú */
         .dropdown {
             display: none;
             position: absolute;
             top: 100%;
             left: 0;
-            background-color: var(--color-surface);
+            background-color: var(--color-background);
             min-width: 200px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-            border-top: 2px solid var(--color-primary);
+            box-shadow: 0 4px 15px var(--color-shadow);
+            border-top: 3px solid var(--color-primary);
             z-index: 10;
             padding: 10px 0;
             border-radius: 0 0 8px 8px;
@@ -125,130 +116,138 @@
         .dropdown a {
             padding: 10px 20px;
             color: var(--color-text-dark);
-            text-decoration: none;
-            display: block;
-            font-weight: 400;
             transition: background-color 0.2s, color 0.2s;
         }
 
         .dropdown a:hover {
-            background-color: rgba(92, 103, 255, 0.1);
+            background-color: var(--color-surface);
             color: var(--color-primary);
         }
-        
+
+        nav ul li:hover .dropdown {
+            display: block;
+        }
+
+        /* Botón de Ingresar en el Header */
         .header-button {
-            padding: 8px 18px;
+            padding: 10px 20px;
             background-color: var(--color-primary);
             color: var(--color-text-light);
             border: none;
             border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            transition: background-color 0.3s, transform 0.2s;
         }
 
         .header-button:hover {
-            background-color: #4a55d4;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(92, 103, 255, 0.4);
+            background-color: #0056b3;
+            transform: translateY(-1px);
         }
-        
-        /* Hero Section (Banner) */
+
+        /* --- SECCIÓN PRINCIPAL (HERO) - Estilo UPSTUDY (image_f98f79.jpg) --- */
         .hero {
-            height: 100vh;
+            min-height: calc(100vh - var(--header-height));
             display: flex;
             align-items: center;
-            justify-content: center;
-            padding-top: var(--header-height);
-            text-align: center;
+            justify-content: space-between;
+            padding: 80px 5%;
             position: relative;
-            overflow: hidden;
+            background-color: var(--color-background);
         }
 
-        .hero-content {
-            z-index: 5;
-            max-width: 900px;
-            padding: 0 20px;
+        .hero-text-content {
+            max-width: 50%;
+            text-align: left;
+            padding-right: 40px;
         }
 
-        .hero-content h1 {
+        .hero-text-content .tag {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 10px;
+        }
+
+        .hero-text-content h1 {
             font-size: 3.5rem;
-            font-weight: 700;
-            color: var(--color-text-light);
+            font-weight: 800;
+            line-height: 1.1;
             margin-bottom: 20px;
-        }
-        
-        .hero-content p {
-            font-size: 1.3rem;
             color: var(--color-text-dark);
-            margin-bottom: 40px;
+        }
+
+        .hero-text-content h1 span.highlight {
+            background-color: var(--color-secondary); /* Resaltado amarillo/naranja */
+            padding: 0 8px;
+            line-height: 1.5;
+            box-decoration-break: clone;
+        }
+
+        .hero-text-content .subtitle {
+            font-size: 1.1rem;
+            color: #6c757d;
+            margin-bottom: 30px;
         }
 
         .main-cta-button {
-            padding: 15px 40px;
-            font-size: 1.2rem;
+            display: inline-block;
+            padding: 15px 35px;
+            font-size: 1.1rem;
             font-weight: 700;
             background-color: var(--color-primary);
             color: var(--color-text-light);
             border-radius: 8px;
             text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 8px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        .main-cta-button:hover {
+            background-color: #0056b3;
+            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.5);
+        }
+
+        .hero-image-content {
+            max-width: 50%;
             position: relative;
-            overflow: hidden;
-            z-index: 1;
+            /* Placeholder simple para el área de imagen/ilustración */
+            height: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
         }
         
-        /* Animación de fondo */
-        .bg-shapes {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .hero-image-placeholder {
+            /* Simula el área de imagen compleja de la referencia */
             width: 100%;
             height: 100%;
-            overflow: hidden;
+            background: linear-gradient(135deg, var(--color-primary) 10%, #4a90e2 100%);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px var(--color-shadow);
+            opacity: 0.1;
         }
 
-        .shape {
-            position: absolute;
-            background: var(--color-primary);
-            opacity: 0.15;
-            border-radius: 50%;
-            animation: moveShape 20s infinite ease-in-out;
-        }
-        /* ... Estilos para .shape nth-child(1) a (4) sin cambios ... */
-        .shape:nth-child(1) { width: 150px; height: 150px; top: 10%; left: 5%; background: var(--color-primary); animation-duration: 25s; }
-        .shape:nth-child(2) { width: 250px; height: 250px; bottom: 5%; right: 10%; background: var(--color-secondary); animation-duration: 30s; animation-delay: -5s; }
-        .shape:nth-child(3) { width: 100px; height: 100px; top: 30%; right: 5%; background: var(--color-primary); animation-duration: 18s; animation-delay: -10s; }
-        .shape:nth-child(4) { width: 200px; height: 200px; bottom: 20%; left: 15%; background: var(--color-secondary); animation-duration: 35s; animation-delay: -15s; }
-
-        /* Keyframes para Animaciones (sin cambios) */
-        @keyframes moveShape {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(100px, 50px) scale(1.1); }
-            50% { transform: translate(-50px, -80px) scale(0.9); }
-            75% { transform: translate(80px, -30px) scale(1.05); }
-        }
-        /* ... otros keyframes ... */
-
-        /* --- NUEVOS ESTILOS PARA LA SECCIÓN DE PRODUCTOS --- */
+        /* --- SECCIÓN DE PRODUCTOS --- */
         .tendencia-section {
-            padding: 80px 4%;
+            padding: 80px 5%;
+            background-color: var(--color-surface);
             text-align: center;
         }
 
         .tendencia-section h2 {
             font-size: 2.5rem;
-            color: var(--color-text-light);
+            color: var(--color-text-dark);
             margin-bottom: 5px;
             font-weight: 700;
         }
 
         .tendencia-section .subtitle-line {
             display: inline-block;
-            width: 100px;
+            width: 80px;
             height: 4px;
             background-color: var(--color-secondary);
             margin-bottom: 50px;
@@ -264,9 +263,10 @@
 
         /* Estilo de la Tarjeta del Producto (Inspirado en image_f98cb1.jpg) */
         .product-card {
-            background-color: var(--color-card);
+            background-color: var(--color-background);
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--color-border);
+            box-shadow: 0 4px 15px var(--color-shadow);
             overflow: hidden;
             width: 320px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -275,8 +275,8 @@
         }
 
         .product-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 30px rgba(92, 103, 255, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 123, 255, 0.1);
         }
 
         .card-image-container {
@@ -316,28 +316,34 @@
         .card-title {
             font-size: 1.15rem;
             font-weight: 600;
-            color: var(--color-text-light);
+            color: var(--color-text-dark);
             margin-bottom: 10px;
-            height: 50px; /* Altura fija para alineación */
+            height: 50px;
             overflow: hidden;
         }
 
         .card-meta {
             display: flex;
-            justify-content: space-between;
             align-items: center;
             font-size: 0.9rem;
-            color: var(--color-text-dark);
+            color: #6c757d;
             margin-bottom: 15px;
+            flex-wrap: wrap;
         }
 
         .card-meta span {
             margin-right: 15px;
+            display: flex;
+            align-items: center;
         }
 
         .card-meta i {
-            color: var(--color-secondary);
+            color: var(--color-primary); /* Iconos de color principal */
             margin-right: 5px;
+        }
+        
+        .card-meta .rating-star {
+            color: var(--color-secondary); /* Estrellas de rating amarillas */
         }
 
         .card-footer {
@@ -345,13 +351,17 @@
             justify-content: space-between;
             align-items: center;
             padding-top: 15px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid var(--color-border);
         }
 
         .card-price {
             font-size: 1.4rem;
             font-weight: 700;
             color: var(--color-primary);
+        }
+        
+        .card-price.free {
+            color: #28a745; /* Verde para GRATIS */
         }
 
         .card-link {
@@ -362,25 +372,40 @@
         }
 
         .card-link:hover {
-            color: var(--color-secondary);
+            color: #0056b3;
         }
-
-        /* Estilo para el estado de la base de datos (debugging) */
+        
         .db-status {
-            position: absolute;
+            position: fixed; /* Mantenemos el estado de la DB visible en la esquina inferior */
             bottom: 10px;
             left: 10px;
             font-size: 0.8rem;
             color: var(--color-text-dark);
-            z-index: 50;
+            background-color: var(--color-surface);
+            padding: 5px 10px;
+            border-radius: 5px;
+            z-index: 1001;
         }
 
-        @media (max-width: 900px) {
-             /* Ocultar la navegación principal en móviles */
+        /* Media Queries para Responsiveness */
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                min-height: auto;
+            }
+            .hero-text-content, .hero-image-content {
+                max-width: 100%;
+                padding-right: 0;
+            }
+            .hero-text-content h1 {
+                font-size: 2.5rem;
+            }
+            .hero-image-content {
+                margin-top: 40px;
+            }
             nav ul { display: none; }
-            .hero-content h1 { font-size: 2.5rem; }
-            .product-card { width: 90%; }
-            .products-grid { gap: 20px; }
+            .product-card { width: 90%; max-width: 400px; }
         }
     </style>
 </head>
@@ -388,7 +413,7 @@
 
     <header>
         <a href="#" class="logo-container">
-            <img src="https://i.postimg.cc/gJQF9CnH/54c82322-2df7-4887-abc0-da706407fcd4.png" alt="Logo Educard" class="logo-img">
+            <img src="https://i.postimg.cc/KjBW6RXh/image-2-removebg-preview.png" alt="Logo Educard" class="logo-img">
             <span class="site-name">Educard</span>
         </a>
 
@@ -413,18 +438,21 @@
 
     <main>
         <section class="hero">
-            <div class="bg-shapes">
-                <div class="shape"></div>
-                <div class="shape"></div>
-                <div class="shape"></div>
-                <div class="shape"></div>
+            <div class="hero-text-content">
+                <p class="tag">💡 Aprende de +20,000 Módulos de Calidad</p>
+                <h1>
+                    Descubre los
+                    <span class="highlight">Ilimitados</span>
+                    Módulos Educativos de Calidad
+                </h1>
+                <p class="subtitle">Módulos educativos virtuales ultra profesionales, con soluciones flexibles para instituciones y particulares.</p>
+                
+                <a href="#" class="main-cta-button">Ingresar Ahora</a>
+                <p style="font-size: 0.9rem; color: #adb5bd; margin-top: 10px;">No se requiere tarjeta de crédito. Simplemente haz clic en "Ingresar Ahora".</p>
             </div>
 
-            <div class="hero-content">
-                <h1>La Plataforma Definitiva para Módulos Educativos Virtuales</h1>
-                <p>Diseño ultra profesional y moderno, con soluciones flexibles para instituciones y particulares.</p>
-                
-                <a href="#" class="main-cta-button">Ingresar</a>
+            <div class="hero-image-content">
+                <div class="hero-image-placeholder"></div>
             </div>
         </section>
 
@@ -446,22 +474,26 @@
                         <div class="card-meta">
                             <span><i class="fa-solid fa-graduation-cap"></i> {{ producto.instructor }}</span>
                             <span>
-                                <i class="fa-solid fa-user-group"></i> {{ producto.estudiantes }}
+                                <i class="fa-solid fa-user-group"></i> {{ producto.estudiantes }} Est.
                             </span>
                             <span>
-                                <i class="fa-solid fa-star"></i> {{ "%.1f" | format(producto.rating) }}
+                                <i class="fa-solid fa-star rating-star"></i> {{ "%.1f" | format(producto.rating) }}
                             </span>
                         </div>
 
                         <div class="card-footer">
-                            <span class="card-price">${{ "%.2f" | format(producto.precio) }}</span>
+                            {% if producto.precio == 0 %}
+                                <span class="card-price free">GRATIS</span>
+                            {% else %}
+                                <span class="card-price">${{ "%.2f" | format(producto.precio) }}</span>
+                            {% endif %}
                             <a href="#" class="card-link">Explorar Ahora <i class="fa-solid fa-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
                 {% else %}
-                <p style="color: var(--color-text-dark); font-size: 1.2rem; margin-top: 30px;">
-                    No hay módulos disponibles en este momento. Verifique la conexión a la base de datos.
+                <p style="color: #6c757d; font-size: 1.2rem; margin-top: 30px;">
+                    No hay módulos disponibles en este momento. Ejecute el script SQL y verifique la base de datos.
                 </p>
                 {% endfor %}
             </div>
@@ -470,7 +502,7 @@
     </main>
     
     <div class="db-status">
-        DB Status: {{ db_status }}
+        DB Status: **{{ db_status }}**
     </div>
 
 </body>
