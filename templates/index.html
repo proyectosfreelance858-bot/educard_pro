@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask + Render + Postgres</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Usando una fuente moderna de Tailwind */
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+
+    <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-lg">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+            🚀 Despliegue Exitoso
+        </h1>
+        
+        <div class="space-y-4">
+            <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                <p class="text-lg font-medium text-blue-800">Estado de la Aplicación (Flask)</p>
+                <p class="text-gray-600">La aplicación principal está funcionando correctamente.</p>
+            </div>
+
+            <!-- Sección de la Conexión a la Base de Datos -->
+            <div class="p-4 rounded-lg 
+                {% if 'Conectado' in db_status %}
+                    bg-green-50 border-l-4 border-green-500
+                {% else %}
+                    bg-red-50 border-l-4 border-red-500
+                {% endif %}
+            ">
+                <p class="text-lg font-medium 
+                    {% if 'Conectado' in db_status %}
+                        text-green-800
+                    {% else %}
+                        text-red-800
+                    {% endif %}
+                ">
+                    Estado de la Conexión a PostgreSQL:
+                </p>
+                <p class="mt-1 text-sm text-gray-700 font-mono break-words">
+                    {{ db_status }}
+                </p>
+                
+                {% if 'Conectado' in db_status %}
+                    <p class="mt-2 text-sm text-green-700">
+                        ¡Felicidades! Se pudo verificar la versión de la base de datos.
+                    </p>
+                {% else %}
+                    <p class="mt-2 text-sm text-red-700">
+                        Revisa la variable DATABASE_URL en Render y el archivo .env local.
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+
+        <p class="mt-8 text-center text-sm text-gray-500">
+            Desarrollado con Flask y PostgreSQL en Render.com
+        </p>
+    </div>
+
+</body>
+</html>
