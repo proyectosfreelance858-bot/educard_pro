@@ -3,63 +3,386 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flask + Render + Postgres</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Educard - Módulos Educativos Virtuales</title>
     <style>
-        /* Usando una fuente moderna de Tailwind */
-        body { font-family: 'Inter', sans-serif; }
+        /* Estilos Globales y Reset */
+        :root {
+            --color-primario: #00c49f; /* Verde Menta (similar al diseño) */
+            --color-secundario: #5c62d0; /* Azul/Púrpura */
+            --color-acento: #ff6f61; /* Color vibrante para el botón */
+            --color-texto-oscuro: #333;
+            --color-texto-claro: #fff;
+            --color-fondo-claro: #f8faff;
+            --color-fondo-oscuro: #1d2c4d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif; /* Fuente moderna, asume que está disponible o se importa */
+        }
+
+        /* Importar fuente Poppins para un look moderno */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        body {
+            line-height: 1.6;
+            color: var(--color-texto-oscuro);
+            background-color: var(--color-fondo-claro);
+            overflow-x: hidden; /* Previene scroll horizontal por animaciones */
+        }
+
+        /* Encabezado (Header) */
+        .header {
+            background: var(--color-fondo-claro);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-container img {
+            height: 35px; /* Ajusta el tamaño del logo */
+            margin-right: 10px;
+        }
+
+        .logo-container .brand-name {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--color-secundario);
+        }
+
+        /* Navegación (Nav) */
+        .nav-menu ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-menu ul li a {
+            text-decoration: none;
+            color: var(--color-texto-oscuro);
+            font-weight: 600;
+            padding: 5px 0;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+            position: relative;
+        }
+        
+        /* Efecto de 'hover' moderno */
+        .nav-menu ul li a:hover {
+            color: var(--color-primario);
+        }
+
+        .nav-menu ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--color-primario);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Submenú (Dropdown) */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--color-texto-claro);
+            min-width: 200px;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.1);
+            z-index: 1;
+            padding: 10px 0;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .dropdown-content a {
+            color: var(--color-texto-oscuro);
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+            font-weight: 400;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--color-primario);
+            color: var(--color-texto-claro);
+        }
+        
+        /* Botón de Ingresar */
+        .btn-ingresar {
+            background-color: var(--color-acento);
+            color: var(--color-texto-claro);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 111, 97, 0.4); /* Sombra para resaltar */
+        }
+
+        .btn-ingresar:hover {
+            background-color: #e65c50; /* Tono más oscuro al pasar el ratón */
+            box-shadow: 0 6px 20px rgba(255, 111, 97, 0.6);
+            transform: translateY(-2px); /* Pequeño levantamiento */
+        }
+        
+        /* Contenedor Principal con Diseño Dinámico */
+        .hero-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--color-primario) 0%, #a0ffec 100%); /* Degradado suave */
+        }
+
+        /* Animación de fondo (efecto de movimiento y profesionalismo) */
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 300%;
+            height: 300%;
+            background: repeating-linear-gradient(
+                -45deg,
+                rgba(255, 255, 255, 0.05),
+                rgba(255, 255, 255, 0.05) 50px,
+                transparent 50px,
+                transparent 100px
+            );
+            transform: translate(-50%, -50%) rotate(45deg);
+            animation: moveBackground 20s linear infinite; /* Animación de movimiento sutil */
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        @keyframes moveBackground {
+            0% {
+                transform: translate(-50%, -50%) rotate(45deg);
+            }
+            100% {
+                transform: translate(0%, 0%) rotate(45deg);
+            }
+        }
+        
+        /* Contenido Principal */
+        .hero-content {
+            z-index: 10;
+            max-width: 900px;
+            padding: 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            color: var(--color-fondo-oscuro);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.3em;
+            color: var(--color-fondo-oscuro);
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+        
+        /* Botón Ingresar Llamativo en el Hero */
+        .btn-hero {
+            font-size: 1.2em;
+            padding: 15px 35px;
+            animation: pulse 2s infinite; /* Efecto de 'latido' para captar la atención */
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 111, 97, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(255, 111, 97, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 111, 97, 0);
+            }
+        }
+        
+        /* Estilos para el banner de los logos LMS (simulando la imagen de referencia) */
+        .lms-logos {
+            background-color: var(--color-texto-claro);
+            padding: 40px 5%;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05) inset;
+        }
+        
+        .lms-logos h2 {
+            font-size: 1.8em;
+            color: var(--color-secundario);
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .logos-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .logo-item {
+            width: 120px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-item:hover {
+            transform: scale(1.05) translateY(-5px); /* Efecto de levantamiento al pasar el ratón */
+        }
+
+        .logo-item img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            object-fit: contain;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background-color: var(--color-fondo-claro);
+            padding: 10px;
+        }
+
+        .logo-item p {
+            font-size: 0.9em;
+            font-weight: 600;
+            color: var(--color-texto-oscuro);
+            margin-top: 5px;
+        }
+        
+        .logo-item .status {
+            font-size: 0.75em;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 15px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        .status.released {
+            background-color: #6a8af0;
+            color: var(--color-texto-claro);
+        }
+
+        .status.releasing-soon {
+            background-color: #ffc107;
+            color: var(--color-texto-claro);
+        }
+
+        .status.coming-soon {
+            background-color: var(--color-primario);
+            color: var(--color-texto-claro);
+        }
+
     </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+<body>
 
-    <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-lg">
-        <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">
-            🚀 Despliegue Exitoso
-        </h1>
+    <header class="header">
+        <div class="logo-container">
+            <img src="https://i.postimg.cc/gJQF9CnH/54c82322-2df7-4887-abc0-da706407fcd4.png" alt="Logo Educard">
+            <span class="brand-name">Educard</span>
+        </div>
         
-        <div class="space-y-4">
-            <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-                <p class="text-lg font-medium text-blue-800">Estado de la Aplicación (Flask)</p>
-                <p class="text-gray-600">La aplicación principal está funcionando correctamente.</p>
-            </div>
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li class="dropdown">
+                    <a href="#">Nosotros</a>
+                    <div class="dropdown-content">
+                        <a href="#quienes-somos">Quienes Somos</a>
+                        <a href="#terminos">Términos y Condiciones</a>
+                        <a href="#preguntas">Preguntas y Respuestas</a>
+                    </div>
+                </li>
+                <li><a href="#planes">Planes</a></li>
+                <li><a href="#contactanos">Contáctanos</a></li>
+            </ul>
+        </nav>
+        
+        <a href="#ingresar" class="btn-ingresar">Ingresar</a>
+    </header>
 
-            <!-- Sección de la Conexión a la Base de Datos -->
-            <div class="p-4 rounded-lg 
-                {% if 'Conectado' in db_status %}
-                    bg-green-50 border-l-4 border-green-500
-                {% else %}
-                    bg-red-50 border-l-4 border-red-500
-                {% endif %}
-            ">
-                <p class="text-lg font-medium 
-                    {% if 'Conectado' in db_status %}
-                        text-green-800
-                    {% else %}
-                        text-red-800
-                    {% endif %}
-                ">
-                    Estado de la Conexión a PostgreSQL:
-                </p>
-                <p class="mt-1 text-sm text-gray-700 font-mono break-words">
-                    {{ db_status }}
-                </p>
-                
-                {% if 'Conectado' in db_status %}
-                    <p class="mt-2 text-sm text-green-700">
-                        ¡Felicidades! Se pudo verificar la versión de la base de datos.
-                    </p>
-                {% else %}
-                    <p class="mt-2 text-sm text-red-700">
-                        Revisa la variable DATABASE_URL en Render y el archivo .env local.
-                    </p>
-                {% endif %}
+    <section id="inicio" class="hero-section">
+        <div class="hero-content">
+            <h1>Avanza tu carrera con más de <br> <span style="color: var(--color-secundario);">7,000 cursos</span> y módulos de élite</h1>
+            <p>La plataforma definitiva para instituciones y profesionales que buscan la **excelencia educativa virtual**.</p>
+            <a href="#ingresar-hero" class="btn-ingresar btn-hero">Ingresar</a>
+        </div>
+    </section>
+
+    <section class="lms-logos">
+        <h2>Impulsado por la compatibilidad con los mejores LMS</h2>
+        <div class="logos-grid">
+            <div class="logo-item">
+                <p class="status released">Released</p>
+                <img src="https://i.postimg.cc/KjBW6RXh/image-2-removebg-preview.png" alt="Tutor LMS">
+                <p>tutor LMS</p>
+            </div>
+            <div class="logo-item">
+                <p class="status released">Released</p>
+                 <img src="https://i.postimg.cc/KjBW6RXh/image-2-removebg-preview.png" alt="LearnPress">
+                <p>LearnPress</p>
+            </div>
+            <div class="logo-item">
+                <p class="status released">Released</p>
+                 <img src="https://i.postimg.cc/KjBW6RXh/image-2-removebg-preview.png" alt="LearnDash">
+                <p>LearnDash</p>
+            </div>
+            <div class="logo-item">
+                <p class="status releasing-soon">Releasing Soon</p>
+                 <img src="https://i.postimg.cc/KjBW6RXh/image-2-removebg-preview.png" alt="MasterStudy">
+                <p>MASTER STUDY</p>
+            </div>
+             <div class="logo-item">
+                <p class="status coming-soon">Coming Soon</p>
+                 <img src="https://i.postimg.cc/KjBW6RXh/image-2-removebg-preview.png" alt="Sensei">
+                <p>sensei</p>
+            </div>
+             <div class="logo-item">
+                <p class="status coming-soon">Coming Soon</p>
+                 <img src="https://i.postimg.cc/KjBW6RXh/image-2-removebg-preview.png" alt="LifterLMS">
+                <p>LifterLMS</p>
             </div>
         </div>
+    </section>
 
-        <p class="mt-8 text-center text-sm text-gray-500">
-            Desarrollado con Flask y PostgreSQL en Render.com
-        </p>
-    </div>
-
-</body>
+    </body>
 </html>
