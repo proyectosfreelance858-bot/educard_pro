@@ -8,16 +8,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
     <style>
-        /* Variables CSS (Ultra Minimalista) */
+        /* Variables CSS (Ultra Minimalista con Énfasis en Verde Financiero) */
         :root {
-            --color-primary: #007bff; /* Azul brillante (CTA) */
-            --color-secondary: #004d40; /* Verde oscuro/Esmeralda (Énfasis en Finanzas) */
+            --color-primary: #007bff; /* Azul secundario para CTA */
+            --color-accent: #008f73; /* Verde Esmeralda (Finanzas) */
             --color-background: #ffffff;
-            --color-surface: #f8f9fa; /* Fondo de secciones limpias */
-            --color-text-dark: #212529;
-            --color-text-subtle: #6c757d;
+            --color-surface: #f8f9fa;
+            --color-text-dark: #1a1a1a; /* Negro profundo */
+            --color-text-subtle: #495057;
             --color-border: #e9ecef;
-            --color-shadow: rgba(0, 0, 0, 0.05);
+            --color-shadow: rgba(0, 0, 0, 0.08);
             --font-heading: 'Outfit', sans-serif;
             --font-body: 'Instrument Sans', sans-serif;
             --header-height: 70px;
@@ -35,26 +35,26 @@
         }
         main { padding-top: var(--header-height); }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
-        section { padding: 90px 0; }
+        section { padding: 100px 0; }
+        .text-center { text-align: center; }
 
-        /* Títulos de Sección */
+        /* Títulos de Sección (Minimalista) */
         .section-title {
             font-family: var(--font-heading);
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             font-weight: 700;
-            color: var(--color-text-dark);
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
         .section-subtitle {
             font-size: 1.1rem;
             color: var(--color-text-subtle);
-            margin-bottom: 60px;
+            margin-bottom: 50px;
+            display: block;
         }
-        .text-center { text-align: center; }
-
-        /* --- ENCABEZADO (HEADER) --- */
+        
+        /* --- ENCABEZADO (STICKY & CLEAN) --- */
         header {
-            position: sticky;
+            position: fixed; /* Cambiado a fixed para mejor efecto de transparencia/scroll */
             top: 0;
             width: 100%;
             height: var(--header-height);
@@ -66,182 +66,170 @@
             z-index: 1000;
             padding: 0 5%;
         }
-        .logo-container { text-decoration: none; display: flex; align-items: center; }
-        .site-name {
-            font-family: var(--font-heading);
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: var(--color-secondary);
-        }
-        nav ul { list-style: none; display: flex; }
-        nav ul li { margin-left: 30px; }
-        nav ul li a {
-            text-decoration: none;
-            color: var(--color-text-dark);
-            font-weight: 600;
-            transition: color 0.2s;
-        }
-        nav ul li a:hover, nav ul li a.active { color: var(--color-primary); }
-
-        .header-actions { display: flex; align-items: center; gap: 15px; }
-        .icon-button { color: var(--color-text-subtle); font-size: 1.1rem; transition: color 0.2s; }
-        .icon-button:hover { color: var(--color-primary); }
+        .site-name { color: var(--color-accent); font-size: 1.6rem; }
+        nav ul li a:hover, nav ul li a.active { color: var(--color-accent); }
+        
         .header-button {
-            padding: 8px 16px;
-            background-color: var(--color-primary);
+            background-color: var(--color-accent);
             color: var(--color-text-light);
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s;
         }
-        .header-button:hover { background-color: #0056b3; }
+        .header-button:hover { background-color: #005a49; transform: scale(1.05); }
 
-        /* --- SECCIÓN HERO (BANNER) --- */
+        /* --- SECCIÓN HERO (BANNER CON MOVIMIENTO PARALLAX Y IMAGEN) --- */
         .hero {
-            min-height: 85vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             position: relative;
-            background-color: var(--color-surface);
             overflow: hidden;
             padding: 0;
+            color: var(--color-background); /* Texto blanco sobre la imagen */
         }
         
-        .hero-text-content {
-            max-width: 50%;
-            padding: 80px 5%;
-            z-index: 2;
+        /* Contenedor de Imagen de Fondo con Efecto de Movimiento */
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            filter: brightness(0.4); /* Oscurecer la imagen para el texto */
+            transition: filter 0.5s ease;
+        }
+        .hero-bg-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* La transformación es controlada por JS para el efecto parallax */
+            transform: translateY(0); 
         }
 
-        .hero-text-content .tag {
-            font-size: 1rem;
+        /* Contenido del Texto con Efecto de Movimiento */
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+            text-align: center;
+            margin: 0 auto;
+            padding: 0 5%;
+            /* Animación inicial sutil */
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-content .tag {
+            font-size: 1.1rem;
             font-weight: 600;
-            color: var(--color-secondary);
-            margin-bottom: 10px;
+            color: var(--color-accent); /* Etiqueta de color esmeralda */
+            margin-bottom: 15px;
+            display: inline-block;
+            border: 1px solid rgba(0, 143, 115, 0.5);
+            padding: 5px 15px;
+            border-radius: 20px;
+            background-color: rgba(0, 143, 115, 0.1);
+            backdrop-filter: blur(2px);
         }
 
-        .hero-text-content h1 {
+        .hero-content h1 {
             font-family: var(--font-heading);
-            font-size: 3.8rem;
+            font-size: 4.5rem;
             font-weight: 800;
             line-height: 1.1;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
         }
 
-        .hero-text-content .subtitle {
-            font-size: 1.2rem;
-            color: var(--color-text-subtle);
-            margin-bottom: 40px;
-            line-height: 1.5;
+        .hero-content .subtitle {
+            font-family: var(--font-body);
+            font-size: 1.3rem;
+            color: #ccc;
+            margin-bottom: 50px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .main-cta-button {
-            display: inline-block;
-            padding: 14px 30px;
-            font-size: 1.05rem;
-            font-weight: 700;
+            padding: 18px 40px;
+            font-size: 1.15rem;
             background-color: var(--color-primary);
-            color: var(--color-text-light);
-            border-radius: 6px;
-            text-decoration: none;
-            transition: transform 0.2s, box-shadow 0.3s;
-            box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
         }
-
         .main-cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.4);
+            background-color: #0056b3;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 123, 255, 0.6);
         }
 
-        /* Hero Visual (Minimalista) */
-        .hero-visual {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 50%;
-            height: 100%;
+        /* --- NUEVA SECCIÓN: MÉTRICAS CLAVE (Stats) --- */
+        .stats-section {
             background-color: var(--color-background);
+            border-bottom: 1px solid var(--color-border);
+        }
+        .stats-grid {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            border-left: 1px solid var(--color-border);
-            z-index: 1;
+            justify-content: space-around;
+            padding: 40px 0;
         }
-        
-        .graphic-grid {
-            width: 100%;
-            height: 100%;
-            background: 
-                linear-gradient(90deg, var(--color-border) 1px, transparent 1px) 0 0,
-                linear-gradient(var(--color-border) 1px, transparent 1px) 0 0;
-            background-size: 30px 30px;
-            opacity: 0.5;
-            animation: moveGrid 60s linear infinite;
-            position: absolute;
+        .stat-item {
+            text-align: center;
+            animation: bounceIn 1s ease-out;
         }
-        
-        @keyframes moveGrid {
-            from { background-position: 0 0; }
-            to { background-position: 30px 30px; }
+        .stat-item h3 {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--color-accent);
+            line-height: 1;
         }
-
-        .center-graphic {
-            font-size: 8rem;
-            color: var(--color-secondary);
-            opacity: 0.9;
-            z-index: 3;
-            animation: slowFloat 8s ease-in-out infinite alternate;
-        }
-
-        @keyframes slowFloat {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-15px); }
+        .stat-item p {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-text-subtle);
         }
 
         /* --- SECCIÓN VENTAJAS (Advantages) --- */
         .advantages-section {
-            background-color: var(--color-background);
+            background-color: var(--color-surface);
         }
-
         .advantages-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 40px;
             margin-top: 40px;
         }
-
         .advantage-card {
             padding: 30px;
             border-radius: 12px;
             border: 1px solid var(--color-border);
-            transition: box-shadow 0.3s, transform 0.3s;
-            text-align: left;
+            transition: box-shadow 0.3s, background-color 0.3s;
         }
-        
         .advantage-card:hover {
-            box-shadow: 0 8px 20px var(--color-shadow);
-            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 143, 115, 0.1);
+            background-color: rgba(0, 143, 115, 0.03); /* Sutil fondo al hacer hover */
         }
-
         .advantage-card i {
-            font-size: 2rem;
-            color: var(--color-primary);
+            font-size: 2.2rem;
+            color: var(--color-accent);
             margin-bottom: 20px;
         }
-
         .advantage-card h4 {
             font-family: var(--font-heading);
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 700;
             margin-bottom: 10px;
         }
-        
+
         /* --- SECCIÓN MÓDULOS (Modules) --- */
         .modules-section {
-            background-color: var(--color-surface);
+            background-color: var(--color-background);
         }
 
         .modules-grid {
@@ -252,106 +240,121 @@
         }
 
         .module-card {
-            background-color: var(--color-background);
+            background-color: var(--color-surface);
             border-radius: 12px;
-            overflow: hidden;
             box-shadow: 0 4px 10px var(--color-shadow);
-            transition: box-shadow 0.3s, transform 0.3s;
-            text-align: left;
-            border-top: 5px solid var(--color-secondary);
+            transition: transform 0.3s;
+            border-left: 5px solid var(--color-accent);
         }
-        
         .module-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0, 77, 64, 0.15); /* Sombra de color secundario sutil */
+            box-shadow: 0 10px 20px var(--color-shadow);
         }
         
         .card-content { padding: 25px; }
 
         .card-tag {
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             font-weight: 600;
             color: var(--color-primary);
             margin-bottom: 8px;
             display: block;
         }
-
+        
         .card-title {
             font-family: var(--font-heading);
-            font-size: 1.25rem;
+            font-size: 1.35rem;
             font-weight: 700;
-            margin-bottom: 15px;
-            height: 60px; /* Altura fija */
-            overflow: hidden;
+            margin-bottom: 10px;
+            height: 50px;
         }
-        
-        .card-description {
+
+        .card-topics {
             font-size: 0.95rem;
             color: var(--color-text-subtle);
             margin-bottom: 20px;
-            height: 40px; /* Altura fija */
-            overflow: hidden;
         }
 
         .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             padding-top: 15px;
             border-top: 1px solid var(--color-border);
         }
 
         .card-price {
             font-family: var(--font-heading);
-            font-size: 1.5rem;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--color-accent);
+        }
+        
+        /* --- NUEVA SECCIÓN: TESTIMONIOS (Social Proof) --- */
+        .testimonials-section {
+            background-color: var(--color-surface);
+        }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .testimonial-card {
+            background-color: var(--color-background);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px var(--color-shadow);
+            border: 1px solid var(--color-border);
+            text-align: center;
+        }
+        .testimonial-card p {
+            font-style: italic;
+            color: var(--color-text-dark);
+            margin-bottom: 20px;
+        }
+        .client-info {
+            font-family: var(--font-heading);
             font-weight: 700;
             color: var(--color-primary);
         }
-
-        .explore-link {
-            font-weight: 600;
-            color: var(--color-secondary);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        .explore-link:hover {
-            color: var(--color-primary);
+        .client-role {
+            font-size: 0.9rem;
+            color: var(--color-text-subtle);
         }
 
-        /* --- SECCIÓN CTA FINAL --- */
-        .cta-section {
-            background-color: var(--color-primary);
-            padding: 80px 0;
-            color: var(--color-text-light);
+        /* --- PIE DE PÁGINA (FOOTER) --- */
+        footer {
+            background-color: #1a1a1a;
+            color: #ddd;
+            padding: 60px 0;
+            font-size: 0.9rem;
         }
-        .cta-section h2 {
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+        }
+        footer .site-name {
+            color: var(--color-accent);
+            font-size: 1.8rem;
+            display: block;
+            margin-bottom: 15px;
+        }
+        footer h5 {
             font-family: var(--font-heading);
-            font-size: 2.8rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-        .cta-section p {
             font-size: 1.1rem;
-            margin-bottom: 40px;
+            color: var(--color-background);
+            margin-bottom: 15px;
+            font-weight: 700;
         }
-        .cta-section .main-cta-button {
-            background-color: var(--color-secondary); /* Botón de color de contraste */
-            box-shadow: none;
-        }
-        .cta-section .main-cta-button:hover {
-            background-color: #008f73;
-            transform: scale(1.05);
-        }
-
+        footer ul { list-style: none; }
+        footer ul li { margin-bottom: 8px; }
+        footer ul li a { color: #aaa; text-decoration: none; transition: color 0.2s; }
+        footer ul li a:hover { color: var(--color-accent); }
+        
         /* Media Queries */
         @media (max-width: 992px) {
-            .hero { flex-direction: column; min-height: auto; }
-            .hero-text-content { max-width: 100%; padding-bottom: 40px; }
-            .hero-visual { position: relative; width: 100%; height: 250px; border-left: none; }
-            nav ul { display: none; }
-            .hero-text-content h1 { font-size: 2.8rem; }
-            .section-title { font-size: 2rem; }
+            .hero-content h1 { font-size: 3rem; }
+            .stats-grid { flex-direction: column; gap: 30px; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .footer-grid .site-name { text-align: center; }
         }
     </style>
 </head>
@@ -367,6 +370,7 @@
                 <li><a href="#" class="active">Inicio</a></li>
                 <li><a href="#ventajas">Ventajas</a></li>
                 <li><a href="#modulos">Módulos</a></li>
+                <li><a href="#testimonios">Testimonios</a></li>
                 <li><a href="#">Contacto</a></li>
             </ul>
         </nav>
@@ -379,46 +383,67 @@
 
     <main>
         <section class="hero" id="hero-section">
-            <div class="hero-text-content container">
-                <p class="tag">🎓 Certifícate en la Ciencia del Dinero</p>
+            <div class="hero-bg">
+                <img src="https://i.postimg.cc/Nj4zLdJ2/finance-background.jpg" alt="Gráficos y datos financieros" class="hero-bg-img" id="hero-bg-img">
+            </div>
+            <div class="hero-content">
+                <span class="tag">🚀 La plataforma #1 en Educación Financiera</span>
                 <h1>
-                    Domina las 
-                    <span style="color: var(--color-secondary);">Matemáticas</span> 
-                    Financieras
+                    Conquista tu
+                    <span style="color: var(--color-accent);">Libertad</span>
+                    Financiera con Módulos Exclusivos.
                 </h1>
                 <p class="subtitle">
-                    Aprende los modelos y fórmulas clave desde los fundamentos hasta la valoración de proyectos de inversión.
+                    Programa curricular completo de Matemáticas Financieras, diseñado de 6° a 11° grado, para el éxito en el mundo real.
                 </p>
                 
-                <a href="#modulos" class="main-cta-button">Ver Módulos</a>
+                <a href="#modulos" class="main-cta-button">Ver Plan de Estudios</a>
             </div>
+        </section>
 
-            <div class="hero-visual">
-                <div class="graphic-grid"></div>
-                <i class="fa-solid fa-chart-line center-graphic" aria-hidden="true"></i>
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h3>+15k</h3>
+                        <p>Estudiantes Graduados</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>6</h3>
+                        <p>Módulos de Dominio</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>98%</h3>
+                        <p>Tasa de Satisfacción</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>4.9/5</h3>
+                        <p>Valoración Promedio</p>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section class="advantages-section" id="ventajas">
             <div class="container text-center">
-                <h2 class="section-title">¿Por qué invertir en tu educación financiera?</h2>
-                <p class="section-subtitle">Conviértete en el arquitecto de tu futuro financiero con habilidades tangibles.</p>
+                <h2 class="section-title">Tu camino hacia la inteligencia financiera</h2>
+                <span class="section-subtitle">Aprende los modelos matemáticos que rigen el mundo del dinero.</span>
 
                 <div class="advantages-grid">
                     <div class="advantage-card">
-                        <i class="fa-solid fa-hand-holding-dollar"></i>
-                        <h4>Control Total</h4>
-                        <p>Toma decisiones informadas sobre créditos, inversiones y planificación de retiro.</p>
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <h4>Currículo Progresivo</h4>
+                        <p>Estructura de aprendizaje diseñada para crecer contigo desde conceptos básicos hasta análisis avanzado.</p>
                     </div>
                     <div class="advantage-card">
-                        <i class="fa-solid fa-building-columns"></i>
-                        <h4>Oportunidades Laborales</h4>
-                        <p>Abre puertas en el sector bancario, de inversiones y análisis de riesgo empresarial.</p>
+                        <i class="fa-solid fa-chart-simple"></i>
+                        <h4>Casos de Estudio Reales</h4>
+                        <p>Aplicación de fórmulas de Interés Compuesto y VPN en escenarios de mercado actualizados.</p>
                     </div>
                     <div class="advantage-card">
-                        <i class="fa-solid fa-calculator"></i>
-                        <h4>Dominio de Modelos</h4>
-                        <p>Aprende a calcular VPN, TIR, anualidades e intereses compuestos como un experto.</p>
+                        <i class="fa-solid fa-certificate"></i>
+                        <h4>Certificación de Alto Nivel</h4>
+                        <p>Obtén un certificado que valida tu dominio en el análisis y la toma de decisiones financieras complejas.</p>
                     </div>
                 </div>
             </div>
@@ -426,26 +451,32 @@
 
         <section class="modules-section" id="modulos">
             <div class="container text-center">
-                <h2 class="section-title">Estructura Curricular por Nivel</h2>
-                <p class="section-subtitle">Módulos diseñados para un aprendizaje progresivo y sólido, de 6to a 11vo grado.</p>
+                <h2 class="section-title">Domina cada nivel curricular</h2>
+                <span class="section-subtitle">Módulos de 6to a 11vo grado, con un enfoque 100% en el cálculo financiero.</span>
 
                 <div class="modules-grid">
                     {% for producto in productos %}
                     <div class="module-card">
                         <div class="card-content">
-                            <span class="card-tag">{{ producto.categoria.split(" ")[0] }} | Grado {{ producto.categoria.split(" ")[1].replace("(", "").replace(")", "").replace("°", "") }}</span>
+                            <span class="card-tag">{{ producto.categoria }}</span>
                             <h3 class="card-title">{{ producto.nombre }}</h3>
-                            <p class="card-description">
-                                Instructor: {{ producto.instructor }}. Temas clave: {{ producto.tema_1 }} y {{ producto.tema_2 }}.
-                            </p>
+                            
+                            <div class="card-topics">
+                                <p>🔑 **Temas clave:** {{ producto.tema_1 }} / {{ producto.tema_2 }}.</p>
+                                <p>🎓 **Instructor:** {{ producto.instructor }}.</p>
+                            </div>
                             
                             <div class="card-footer">
-                                {% if producto.precio == 0 %}
-                                    <span class="card-price" style="color: #28a745;">GRATIS</span>
-                                {% else %}
-                                    <span class="card-price">${{ "%.2f" | format(producto.precio) }}</span>
-                                {% endif %}
-                                <a href="#" class="explore-link">Detalles <i class="fa-solid fa-arrow-right"></i></a>
+                                <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                                    {% if producto.precio == 0 %}
+                                        <span class="card-price" style="color: var(--color-accent);">GRATIS</span>
+                                    {% else %}
+                                        <span class="card-price">${{ "%.2f" | format(producto.precio) }}</span>
+                                    {% endif %}
+                                    <a href="#" class="explore-link" style="color: var(--color-primary); font-weight: 700;">
+                                        Explorar <i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -458,15 +489,102 @@
             </div>
         </section>
 
+        <section class="testimonials-section" id="testimonios">
+            <div class="container text-center">
+                <h2 class="section-title">Lo que dicen nuestros estudiantes</h2>
+                <span class="section-subtitle">Historias reales de transformación financiera.</span>
+
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <i class="fa-solid fa-quote-left" style="color: var(--color-accent); font-size: 1.5rem; margin-bottom: 15px;"></i>
+                        <p>"El módulo de Anualidades me ayudó a entender mi plan de hipoteca. Es el curso de matemáticas más útil que he tomado."</p>
+                        <div class="client-info">Andrés R.</div>
+                        <div class="client-role">Estudiante, Grado 10</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <i class="fa-solid fa-quote-left" style="color: var(--color-accent); font-size: 1.5rem; margin-bottom: 15px;"></i>
+                        <p>"Pasé de no entender el interés a calcular proyecciones de inversión. La estructura por grados es excelente y clara."</p>
+                        <div class="client-info">Laura M.</div>
+                        <div class="client-role">Estudiante, Grado 9</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <i class="fa-solid fa-quote-left" style="color: var(--color-accent); font-size: 1.5rem; margin-bottom: 15px;"></i>
+                        <p>"Un enfoque profesional y moderno. El módulo de VPN es perfecto para iniciar en la evaluación de proyectos de negocio."</p>
+                        <div class="client-info">Carlos P.</div>
+                        <div class="client-role">Estudiante, Grado 11</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section class="cta-section text-center">
             <div class="container">
-                <h2>¿Listo para el dominio financiero?</h2>
-                <p>No pospongas el crecimiento de tus habilidades. Inscríbete hoy y transforma tu futuro.</p>
-                <a href="#modulos" class="main-cta-button">Empezar Ahora</a>
+                <h2 style="color: var(--color-background);">Tu inversión más inteligente es en ti mismo</h2>
+                <p style="color: #eee;">Empieza hoy con el módulo que se adapte a tu nivel y construye una base financiera sólida.</p>
+                <a href="#modulos" class="main-cta-button" style="background-color: var(--color-accent); border: 2px solid var(--color-background); box-shadow: none;">
+                    Explorar Módulos
+                </a>
             </div>
         </section>
 
     </main>
 
-    </body>
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <span class="site-name">FINANZAS.PRO</span>
+                <p style="margin-top: 15px;">Dominando las Matemáticas Financieras. Cursos de 6° a 11°.</p>
+                <div style="margin-top: 20px;">
+                    <a href="#" style="color: #aaa; margin-right: 15px;"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" style="color: #aaa; margin-right: 15px;"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#" style="color: #aaa;"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+            <div>
+                <h5>Recursos</h5>
+                <ul>
+                    <li><a href="#">Simuladores</a></li>
+                    <li><a href="#">Glosario Financiero</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5>Compañía</h5>
+                <ul>
+                    <li><a href="#">Sobre Nosotros</a></li>
+                    <li><a href="#">Términos de Servicio</a></li>
+                    <li><a href="#">Política de Privacidad</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5>Contacto</h5>
+                <p>Email: info@finanzas.pro</p>
+                <p>Tel: +57 300 123 4567</p>
+            </div>
+        </div>
+        <div class="container" style="text-align: center; margin-top: 30px; border-top: 1px solid #333; padding-top: 20px;">
+            <p>&copy; 2025 FINANZAS.PRO. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- JAVASCRIPT: EFECTO PARALLAX EN EL HERO ---
+        const heroBgImg = document.getElementById('hero-bg-img');
+        const heroContent = document.querySelector('.hero-content');
+        
+        window.addEventListener('scroll', () => {
+            // Calcula la posición vertical de scroll
+            const scrollY = window.scrollY;
+            
+            // Efecto Parallax en la imagen de fondo (movimiento más lento)
+            // La imagen se mueve hacia arriba 1/3 de la distancia de scroll
+            heroBgImg.style.transform = `translateY(${scrollY * 0.3}px)`;
+
+            // Efecto de atenuación/desenfoque sutil en el texto al hacer scroll
+            // El texto se mueve hacia arriba (para separarse del fondo) y reduce un poco la opacidad
+            heroContent.style.opacity = 1 - (scrollY / 700);
+            heroContent.style.transform = `translateY(${scrollY * 0.2}px)`;
+        });
+    </script>
+</body>
 </html>
