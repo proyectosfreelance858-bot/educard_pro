@@ -3,523 +3,355 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Educard - Módulos Educativos Virtuales</title>
+    <title>Dominio Financiero | Cursos de Matemáticas Financieras</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Instrument+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Instrument+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        /* Variables CSS (Diseño Ultra Moderno y Minimalista) */
+        /* Variables CSS (Ultra Minimalista) */
         :root {
-            --color-primary: #007bff; /* Azul vibrante (botones, títulos) */
-            --color-secondary: #ffc107; /* Amarillo/Naranja (resaltado, rating) */
-            --color-background: #ffffff; /* Fondo Blanco Puro */
-            --color-surface: #f8f9fa; /* Fondo de secciones */
-            --color-text-dark: #212529; /* Texto principal muy oscuro */
-            --color-text-secondary: #6c757d; /* Texto secundario gris */
-            --color-border: #e9ecef; /* Líneas divisorias sutiles */
-            --color-shadow: rgba(0, 0, 0, 0.08);
-            --font-primary: 'Outfit', sans-serif; /* Más audaz para títulos */
-            --font-secondary: 'Instrument Sans', sans-serif; /* Para párrafos y UI */
-            --header-height: 80px;
+            --color-primary: #007bff; /* Azul brillante (CTA) */
+            --color-secondary: #004d40; /* Verde oscuro/Esmeralda (Énfasis en Finanzas) */
+            --color-background: #ffffff;
+            --color-surface: #f8f9fa; /* Fondo de secciones limpias */
+            --color-text-dark: #212529;
+            --color-text-subtle: #6c757d;
+            --color-border: #e9ecef;
+            --color-shadow: rgba(0, 0, 0, 0.05);
+            --font-heading: 'Outfit', sans-serif;
+            --font-body: 'Instrument Sans', sans-serif;
+            --header-height: 70px;
         }
 
-        /* Base Reset y Tipografía */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* Base & Resets */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
-            font-family: var(--font-secondary);
-            color: var(--color-text-secondary);
+            font-family: var(--font-body);
+            color: var(--color-text-dark);
             background-color: var(--color-background);
             line-height: 1.6;
             overflow-x: hidden;
         }
-        
-        main {
-            padding-top: var(--header-height);
-        }
+        main { padding-top: var(--header-height); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
+        section { padding: 90px 0; }
 
-        h1, h2, h3 {
-            font-family: var(--font-primary);
+        /* Títulos de Sección */
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            font-weight: 700;
             color: var(--color-text-dark);
+            margin-bottom: 20px;
         }
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--color-text-subtle);
+            margin-bottom: 60px;
+        }
+        .text-center { text-align: center; }
 
-        /* --- ESTILOS DEL HEADER --- */
+        /* --- ENCABEZADO (HEADER) --- */
         header {
-            position: sticky; /* Sticky para que se quede arriba al hacer scroll */
+            position: sticky;
             top: 0;
             width: 100%;
             height: var(--header-height);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 5%;
             background-color: var(--color-background);
-            box-shadow: 0 1px 10px var(--color-shadow);
+            box-shadow: 0 1px 5px var(--color-shadow);
             z-index: 1000;
+            padding: 0 5%;
         }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-        }
-
-        .logo-img {
-            height: 40px;
-            margin-right: 10px;
-        }
-
+        .logo-container { text-decoration: none; display: flex; align-items: center; }
         .site-name {
-            font-size: 1.6rem;
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
             font-weight: 800;
-            color: var(--color-text-dark);
+            color: var(--color-secondary);
         }
-
-        /* Navegación */
-        nav ul {
-            list-style: none;
-            display: flex;
-        }
-
-        nav ul li {
-            margin-left: 25px;
-            position: relative;
-        }
-
-        nav ul li > a {
+        nav ul { list-style: none; display: flex; }
+        nav ul li { margin-left: 30px; }
+        nav ul li a {
             text-decoration: none;
             color: var(--color-text-dark);
             font-weight: 600;
-            padding: 10px 0;
-            display: block;
             transition: color 0.2s;
-            position: relative;
         }
+        nav ul li a:hover, nav ul li a.active { color: var(--color-primary); }
 
-        nav ul li > a:hover, nav ul li > a.active {
-            color: var(--color-primary);
-        }
-
-        nav ul li > a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 3px;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: var(--color-primary);
-            transition: width 0.3s ease;
-            border-radius: 2px;
-        }
-
-        nav ul li > a:hover::after {
-            width: 100%;
-        }
-
-        .dropdown {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: var(--color-background);
-            min-width: 200px;
-            box-shadow: 0 4px 15px var(--color-shadow);
-            border-top: 3px solid var(--color-primary);
-            z-index: 10;
-            padding: 10px 0;
-            border-radius: 0 0 8px 8px;
-        }
-
-        /* Controles de la Derecha del Header */
-        .header-controls {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .header-icon-button {
-            color: var(--color-text-dark);
-            font-size: 1.2rem;
-            transition: color 0.2s, transform 0.2s;
-        }
-
-        .header-icon-button:hover {
-            color: var(--color-primary);
-            transform: scale(1.1);
-        }
-
+        .header-actions { display: flex; align-items: center; gap: 15px; }
+        .icon-button { color: var(--color-text-subtle); font-size: 1.1rem; transition: color 0.2s; }
+        .icon-button:hover { color: var(--color-primary); }
         .header-button {
-            padding: 10px 20px;
+            padding: 8px 16px;
             background-color: var(--color-primary);
             color: var(--color-text-light);
-            border: none;
-            border-radius: 6px;
+            border-radius: 4px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
-            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
         }
+        .header-button:hover { background-color: #0056b3; }
 
-        .header-button:hover {
-            background-color: #0056b3;
-            transform: translateY(-1px);
-        }
-
-        /* --- SECCIÓN PRINCIPAL (HERO) - Estilo Parallax y Moderno --- */
+        /* --- SECCIÓN HERO (BANNER) --- */
         .hero {
-            min-height: calc(100vh - var(--header-height));
+            min-height: 85vh;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 80px 5%;
             position: relative;
-            background-color: var(--color-background);
+            background-color: var(--color-surface);
             overflow: hidden;
+            padding: 0;
         }
-
+        
         .hero-text-content {
             max-width: 50%;
-            text-align: left;
-            padding-right: 40px;
-            z-index: 10;
+            padding: 80px 5%;
+            z-index: 2;
         }
 
         .hero-text-content .tag {
-            font-family: var(--font-secondary);
             font-size: 1rem;
             font-weight: 600;
-            color: var(--color-primary);
+            color: var(--color-secondary);
             margin-bottom: 10px;
-            animation: fadeIn 0.8s ease-out;
         }
 
         .hero-text-content h1 {
-            font-size: 4rem;
+            font-family: var(--font-heading);
+            font-size: 3.8rem;
             font-weight: 800;
             line-height: 1.1;
-            margin-bottom: 20px;
-            animation: slideInLeft 1s ease-out;
-        }
-
-        .hero-text-content h1 span.highlight {
-            background-color: var(--color-secondary);
-            color: var(--color-text-dark);
-            padding: 0 10px;
-            border-radius: 5px;
-            line-height: 1.5;
-            box-decoration-break: clone;
+            margin-bottom: 25px;
         }
 
         .hero-text-content .subtitle {
-            font-size: 1.1rem;
-            color: var(--color-text-secondary);
+            font-size: 1.2rem;
+            color: var(--color-text-subtle);
             margin-bottom: 40px;
-            animation: fadeIn 1.2s ease-out 0.3s forwards;
-            opacity: 0;
+            line-height: 1.5;
         }
 
         .main-cta-button {
-            padding: 15px 35px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            animation: popIn 0.8s ease-out 0.6s forwards;
-            opacity: 0;
-        }
-        
-        /* Contenedor de Imágenes Parallax */
-        .hero-image-content {
-            max-width: 50%;
-            height: 500px;
-            position: relative;
-            z-index: 5;
-            perspective: 1000px; /* Para efecto 3D */
-        }
-        
-        .parallax-elements {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.1s linear; /* Para la reacción al mouse */
-        }
-
-        .p-image {
-            position: absolute;
-            background-size: cover;
-            background-position: center;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Movimiento continuo y suave */
-        }
-        
-        /* Imagen Principal (Grande) */
-        .p-image-1 {
-            width: 60%;
-            height: 80%;
-            top: 10%;
-            right: 15%;
-            background-image: url('https://i.postimg.cc/9F7QdM5M/marketing-digital.jpg'); /* Imagen relacionada al tema */
-            z-index: 3;
-            animation: float 15s ease-in-out infinite;
-        }
-
-        /* Imagen Secundaria (Arriba a la izquierda) */
-        .p-image-2 {
-            width: 30%;
-            height: 40%;
-            top: 0;
-            left: 0;
-            background-image: url('https://i.postimg.cc/8z72qV0Y/design-figma.jpg');
-            z-index: 4;
-            animation: float 18s ease-in-out infinite reverse;
-        }
-
-        /* Imagen Terciaria (Abajo a la derecha) */
-        .p-image-3 {
-            width: 40%;
-            height: 50%;
-            bottom: 0;
-            right: 0;
-            background-image: url('https://i.postimg.cc/j5G5Wb2X/python-ml.jpg');
-            z-index: 2;
-            animation: float 12s ease-in-out infinite;
-        }
-
-
-        /* --- SECCIÓN DE CATEGORÍAS (TOP CATEGORIES) --- */
-        .categories-section {
-            padding: 60px 5%;
-            background-color: var(--color-background);
-            text-align: center;
-        }
-        
-        .section-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .section-subtitle-line {
             display: inline-block;
-            width: 60px;
-            height: 3px;
-            background-color: var(--color-secondary);
-            margin-bottom: 50px;
-            border-radius: 2px;
-        }
-
-        .categories-grid {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .category-card {
-            background-color: var(--color-surface);
-            padding: 20px;
-            width: 250px;
-            border-radius: 12px;
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: 1px solid var(--color-border);
-        }
-
-        .category-card:hover {
-            background-color: #e6f2ff;
-            border-color: var(--color-primary);
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 123, 255, 0.1);
-        }
-
-        .category-icon {
-            font-size: 2rem;
-            color: var(--color-primary);
-            margin-bottom: 10px;
-            transition: color 0.3s;
-        }
-
-        .category-card h4 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--color-text-dark);
-        }
-
-        /* --- SECCIÓN POPULAR COURSES (MÓDULOS EN TENDENCIA) --- */
-        .popular-courses-section {
-            padding: 80px 5%;
-            background-color: var(--color-surface);
-            text-align: center;
-        }
-
-        /* Estilo de la Tarjeta del Producto (image_f98cb1.jpg) */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-            text-align: left;
-        }
-
-        .product-card {
-            background-color: var(--color-background);
-            border-radius: 12px;
-            border: 1px solid var(--color-border);
-            box-shadow: 0 4px 15px var(--color-shadow);
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 123, 255, 0.1);
-        }
-
-        .card-image-container {
-            height: 180px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .card-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .product-card:hover .card-image {
-            transform: scale(1.05);
-        }
-
-        .card-category {
-            position: absolute;
-            top: 15px;
-            left: 15px;
+            padding: 14px 30px;
+            font-size: 1.05rem;
+            font-weight: 700;
             background-color: var(--color-primary);
             color: var(--color-text-light);
-            padding: 4px 10px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            border-radius: 4px;
-            z-index: 2;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.3s;
+            box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        .main-cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.4);
+        }
+
+        /* Hero Visual (Minimalista) */
+        .hero-visual {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background-color: var(--color-background);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-left: 1px solid var(--color-border);
+            z-index: 1;
         }
         
-        .card-content {
-            padding: 15px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
+        .graphic-grid {
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, var(--color-border) 1px, transparent 1px) 0 0,
+                linear-gradient(var(--color-border) 1px, transparent 1px) 0 0;
+            background-size: 30px 30px;
+            opacity: 0.5;
+            animation: moveGrid 60s linear infinite;
+            position: absolute;
+        }
+        
+        @keyframes moveGrid {
+            from { background-position: 0 0; }
+            to { background-position: 30px 30px; }
+        }
+
+        .center-graphic {
+            font-size: 8rem;
+            color: var(--color-secondary);
+            opacity: 0.9;
+            z-index: 3;
+            animation: slowFloat 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes slowFloat {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-15px); }
+        }
+
+        /* --- SECCIÓN VENTAJAS (Advantages) --- */
+        .advantages-section {
+            background-color: var(--color-background);
+        }
+
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .advantage-card {
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--color-border);
+            transition: box-shadow 0.3s, transform 0.3s;
+            text-align: left;
+        }
+        
+        .advantage-card:hover {
+            box-shadow: 0 8px 20px var(--color-shadow);
+            transform: translateY(-5px);
+        }
+
+        .advantage-card i {
+            font-size: 2rem;
+            color: var(--color-primary);
+            margin-bottom: 20px;
+        }
+
+        .advantage-card h4 {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        /* --- SECCIÓN MÓDULOS (Modules) --- */
+        .modules-section {
+            background-color: var(--color-surface);
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .module-card {
+            background-color: var(--color-background);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px var(--color-shadow);
+            transition: box-shadow 0.3s, transform 0.3s;
+            text-align: left;
+            border-top: 5px solid var(--color-secondary);
+        }
+        
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 77, 64, 0.15); /* Sombra de color secundario sutil */
+        }
+        
+        .card-content { padding: 25px; }
+
+        .card-tag {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 8px;
+            display: block;
         }
 
         .card-title {
-            font-size: 1.1rem;
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
             font-weight: 700;
-            color: var(--color-text-dark);
-            margin-bottom: 10px;
-        }
-
-        .card-meta {
-            display: flex;
-            align-items: center;
-            font-size: 0.85rem;
-            color: #6c757d;
-            margin-bottom: 10px;
-            padding-bottom: 10px;
-            border-bottom: 1px dashed var(--color-border);
-        }
-
-        .card-meta span {
-            margin-right: 15px;
-            display: flex;
-            align-items: center;
-        }
-
-        .card-meta i {
-            color: var(--color-primary);
-            margin-right: 5px;
+            margin-bottom: 15px;
+            height: 60px; /* Altura fija */
+            overflow: hidden;
         }
         
-        .card-meta .rating-star {
-            color: var(--color-secondary);
+        .card-description {
+            font-size: 0.95rem;
+            color: var(--color-text-subtle);
+            margin-bottom: 20px;
+            height: 40px; /* Altura fija */
+            overflow: hidden;
         }
 
         .card-footer {
-            margin-top: auto; /* Empuja el footer hacia abajo */
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding-top: 15px;
+            border-top: 1px solid var(--color-border);
         }
 
         .card-price {
-            font-size: 1.3rem;
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--color-primary);
         }
-        
-        .card-price.free {
-            color: #28a745;
-        }
 
-        .card-link {
-            text-decoration: none;
-            color: var(--color-primary);
+        .explore-link {
             font-weight: 600;
-            font-size: 0.9rem;
+            color: var(--color-secondary);
+            text-decoration: none;
             transition: color 0.2s;
         }
-
-        /* --- KEYFRAMES --- */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .explore-link:hover {
+            color: var(--color-primary);
         }
 
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
+        /* --- SECCIÓN CTA FINAL --- */
+        .cta-section {
+            background-color: var(--color-primary);
+            padding: 80px 0;
+            color: var(--color-text-light);
         }
-
-        @keyframes popIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
+        .cta-section h2 {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
         }
-
-        @keyframes float {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(5px, -5px) rotate(1deg); }
-            100% { transform: translate(0, 0) rotate(0deg); }
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+        .cta-section .main-cta-button {
+            background-color: var(--color-secondary); /* Botón de color de contraste */
+            box-shadow: none;
+        }
+        .cta-section .main-cta-button:hover {
+            background-color: #008f73;
+            transform: scale(1.05);
         }
 
         /* Media Queries */
         @media (max-width: 992px) {
-            .hero {
-                flex-direction: column;
-                text-align: center;
-                min-height: auto;
-            }
-            .hero-text-content, .hero-image-content {
-                max-width: 100%;
-                padding-right: 0;
-            }
-            .hero-text-content h1 {
-                font-size: 3rem;
-            }
-            .hero-image-content {
-                height: 400px;
-                margin-top: 40px;
-            }
+            .hero { flex-direction: column; min-height: auto; }
+            .hero-text-content { max-width: 100%; padding-bottom: 40px; }
+            .hero-visual { position: relative; width: 100%; height: 250px; border-left: none; }
             nav ul { display: none; }
+            .hero-text-content h1 { font-size: 2.8rem; }
+            .section-title { font-size: 2rem; }
         }
     </style>
 </head>
@@ -527,183 +359,114 @@
 
     <header>
         <a href="#" class="logo-container">
-            <img src="https://i.postimg.cc/KjBW6RXh/image-2-removebg-preview.png" alt="Logo Educard" class="logo-img">
-            <span class="site-name">Educard</span>
+            <span class="site-name">FINANZAS.PRO</span>
         </a>
 
         <nav>
             <ul>
                 <li><a href="#" class="active">Inicio</a></li>
-                <li>
-                    <a href="#">Nosotros</a>
-                    <ul class="dropdown">
-                        <li><a href="#">Quienes Somos</a></li>
-                        <li><a href="#">Términos y Condiciones</a></li>
-                        <li><a href="#">Preguntas y Respuestas</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Planes</a></li>
-                <li><a href="#">Contáctanos</a></li>
+                <li><a href="#ventajas">Ventajas</a></li>
+                <li><a href="#modulos">Módulos</a></li>
+                <li><a href="#">Contacto</a></li>
             </ul>
         </nav>
 
-        <div class="header-controls">
-            <a href="#" class="header-icon-button" title="Carrito de Compras">
-                <i class="fa-solid fa-cart-shopping"></i>
-            </a>
+        <div class="header-actions">
+            <a href="#" class="icon-button" title="Carrito de Compras"><i class="fa-solid fa-cart-shopping"></i></a>
             <a href="#" class="header-button">Ingresar</a>
         </div>
     </header>
 
     <main>
         <section class="hero" id="hero-section">
-            <div class="hero-text-content">
-                <p class="tag">💡 Más de 20,000 Módulos de Calidad</p>
+            <div class="hero-text-content container">
+                <p class="tag">🎓 Certifícate en la Ciencia del Dinero</p>
                 <h1>
-                    Descubre los
-                    <span class="highlight">Ilimitados</span>
-                    Módulos Educativos de Calidad
+                    Domina las 
+                    <span style="color: var(--color-secondary);">Matemáticas</span> 
+                    Financieras
                 </h1>
-                <p class="subtitle">Diseño ultra profesional y moderno, con soluciones flexibles para instituciones y particulares.</p>
+                <p class="subtitle">
+                    Aprende los modelos y fórmulas clave desde los fundamentos hasta la valoración de proyectos de inversión.
+                </p>
                 
-                <a href="#" class="main-cta-button">Ingresar Ahora</a>
+                <a href="#modulos" class="main-cta-button">Ver Módulos</a>
             </div>
 
-            <div class="hero-image-content">
-                <div class="parallax-elements" id="parallax-container">
-                    <div class="p-image p-image-1" style="transform: translateZ(0);"></div>
-                    <div class="p-image p-image-2" style="transform: translateZ(20px);"></div>
-                    <div class="p-image p-image-3" style="transform: translateZ(10px);"></div>
+            <div class="hero-visual">
+                <div class="graphic-grid"></div>
+                <i class="fa-solid fa-chart-line center-graphic" aria-hidden="true"></i>
+            </div>
+        </section>
+
+        <section class="advantages-section" id="ventajas">
+            <div class="container text-center">
+                <h2 class="section-title">¿Por qué invertir en tu educación financiera?</h2>
+                <p class="section-subtitle">Conviértete en el arquitecto de tu futuro financiero con habilidades tangibles.</p>
+
+                <div class="advantages-grid">
+                    <div class="advantage-card">
+                        <i class="fa-solid fa-hand-holding-dollar"></i>
+                        <h4>Control Total</h4>
+                        <p>Toma decisiones informadas sobre créditos, inversiones y planificación de retiro.</p>
+                    </div>
+                    <div class="advantage-card">
+                        <i class="fa-solid fa-building-columns"></i>
+                        <h4>Oportunidades Laborales</h4>
+                        <p>Abre puertas en el sector bancario, de inversiones y análisis de riesgo empresarial.</p>
+                    </div>
+                    <div class="advantage-card">
+                        <i class="fa-solid fa-calculator"></i>
+                        <h4>Dominio de Modelos</h4>
+                        <p>Aprende a calcular VPN, TIR, anualidades e intereses compuestos como un experto.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="categories-section">
-            <h2 class="section-title">Top Categories</h2>
-            <div class="section-subtitle-line"></div>
+        <section class="modules-section" id="modulos">
+            <div class="container text-center">
+                <h2 class="section-title">Estructura Curricular por Nivel</h2>
+                <p class="section-subtitle">Módulos diseñados para un aprendizaje progresivo y sólido, de 6to a 11vo grado.</p>
 
-            <div class="categories-grid">
-                <div class="category-card">
-                    <i class="fa-solid fa-calculator category-icon"></i>
-                    <h4>Matemáticas</h4>
+                <div class="modules-grid">
+                    {% for producto in productos %}
+                    <div class="module-card">
+                        <div class="card-content">
+                            <span class="card-tag">{{ producto.categoria.split(" ")[0] }} | Grado {{ producto.categoria.split(" ")[1].replace("(", "").replace(")", "").replace("°", "") }}</span>
+                            <h3 class="card-title">{{ producto.nombre }}</h3>
+                            <p class="card-description">
+                                Instructor: {{ producto.instructor }}. Temas clave: {{ producto.tema_1 }} y {{ producto.tema_2 }}.
+                            </p>
+                            
+                            <div class="card-footer">
+                                {% if producto.precio == 0 %}
+                                    <span class="card-price" style="color: #28a745;">GRATIS</span>
+                                {% else %}
+                                    <span class="card-price">${{ "%.2f" | format(producto.precio) }}</span>
+                                {% endif %}
+                                <a href="#" class="explore-link">Detalles <i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <p style="color: var(--color-text-subtle); font-size: 1.2rem; margin-top: 30px; text-align: center; width: 100%;">
+                        No hay módulos disponibles en la base de datos.
+                    </p>
+                    {% endfor %}
                 </div>
-                <div class="category-card">
-                    <i class="fa-solid fa-pen-to-square category-icon"></i>
-                    <h4>Español</h4>
-                </div>
-                <div class="category-card">
-                    <i class="fa-solid fa-language category-icon"></i>
-                    <h4>Inglés</h4>
-                </div>
-                <div class="category-card">
-                    <i class="fa-solid fa-earth-americas category-icon"></i>
-                    <h4>Sociales</h4>
-                </div>
-                <a href="#" class="category-card" style="background-color: var(--color-primary); color: var(--color-text-light); border: none;">
-                    <i class="fa-solid fa-book-open-reader category-icon" style="color: var(--color-text-light);"></i>
-                    <h4 style="color: var(--color-text-light);">+2440 Módulos</h4>
-                    <span style="font-size: 0.9rem; font-weight: 400;">Explorar Todos &rarr;</span>
-                </a>
             </div>
         </section>
 
-        <section class="popular-courses-section">
-            <h2 class="section-title">Popular Courses</h2>
-            <div class="section-subtitle-line"></div>
-            
-            <div class="products-grid">
-                <div class="product-card">
-                    <div class="card-image-container">
-                        <img src="https://i.postimg.cc/8z72qV0Y/design-figma.jpg" alt="Diseño UI/UX" class="card-image">
-                        <span class="card-category">DISEÑO</span>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Diseño UI/UX con Figma: De Cero a Experto</h3>
-                        <div class="card-meta">
-                            <span><i class="fa-solid fa-graduation-cap"></i> Laura M.</span>
-                            <span><i class="fa-solid fa-user-group"></i> 150 Est.</span>
-                            <span><i class="fa-solid fa-star rating-star"></i> 4.8</span>
-                        </div>
-                        <div class="card-footer">
-                            <span class="card-price">$49.99</span>
-                            <a href="#" class="card-link">Explorar Ahora <i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="card-image-container">
-                        <img src="https://i.postimg.cc/j5G5Wb2X/python-ml.jpg" alt="Python Machine Learning" class="card-image">
-                        <span class="card-category">PROGRAMACIÓN</span>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Introducción a Python y Machine Learning</h3>
-                        <div class="card-meta">
-                            <span><i class="fa-solid fa-graduation-cap"></i> Andrés C.</span>
-                            <span><i class="fa-solid fa-user-group"></i> 280 Est.</span>
-                            <span><i class="fa-solid fa-star rating-star"></i> 5.0</span>
-                        </div>
-                        <div class="card-footer">
-                            <span class="card-price">$99.99</span>
-                            <a href="#" class="card-link">Explorar Ahora <i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="product-card">
-                    <div class="card-image-container">
-                        <img src="https://i.postimg.cc/9F7QdM5M/marketing-digital.jpg" alt="Marketing Digital" class="card-image">
-                        <span class="card-category">MARKETING</span>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Estrategias de Marketing Digital 2024</h3>
-                        <div class="card-meta">
-                            <span><i class="fa-solid fa-graduation-cap"></i> Sofía R.</span>
-                            <span><i class="fa-solid fa-user-group"></i> 120 Est.</span>
-                            <span><i class="fa-solid fa-star rating-star"></i> 4.5</span>
-                        </div>
-                        <div class="card-footer">
-                            <span class="card-price">$75.00</span>
-                            <a href="#" class="card-link">Explorar Ahora <i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
+        <section class="cta-section text-center">
+            <div class="container">
+                <h2>¿Listo para el dominio financiero?</h2>
+                <p>No pospongas el crecimiento de tus habilidades. Inscríbete hoy y transforma tu futuro.</p>
+                <a href="#modulos" class="main-cta-button">Empezar Ahora</a>
             </div>
         </section>
 
     </main>
-    
-    <script>
-        document.addEventListener('mousemove', (e) => {
-            const parallaxContainer = document.getElementById('parallax-container');
-            const heroSection = document.getElementById('hero-section');
-            if (!parallaxContainer || !heroSection) return;
 
-            // Obtener el centro del contenedor Hero
-            const rect = heroSection.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-
-            // Calcular el desplazamiento del mouse (-1 a 1)
-            const offsetX = (e.clientX - centerX) / (rect.width / 2);
-            const offsetY = (e.clientY - centerY) / (rect.height / 2);
-
-            // Coeficientes de movimiento (cuanto mayor el valor, más se mueve)
-            const moveX = offsetX * 20; // 20px máximo
-            const moveY = offsetY * 20;
-
-            // Aplicar el movimiento a los elementos parallax
-            const elements = parallaxContainer.querySelectorAll('.p-image');
-            
-            elements.forEach((el, index) => {
-                // Mover los elementos con diferente profundidad (índice) para crear el efecto 3D
-                const depth = (index + 1) * 0.5; // Profundidad de 0.5, 1.0, 1.5
-                
-                el.style.transform = `translate(${moveX * depth}px, ${moveY * depth}px)`;
-            });
-        });
-    </script>
-
-</body>
+    </body>
 </html>
