@@ -8,18 +8,19 @@ from dotenv import load_dotenv
 load_dotenv()
 app = Flask(__name__)
 
-# Lista de Categorías y Temas
+# Lista de Módulos y Temas CLAVE: Refuerzo de Matemática Grado Sexto
 MODULOS_INFO = [
-    {"grado": "MÓDULO INICIAL (6°)", "categoria": "FUNDAMENTOS", "tema_1": "El Origen del Dinero y el Trueque", "tema_2": "Presupuesto Personal Básico"},
-    {"grado": "MÓDULO BÁSICO (7°)", "categoria": "AHORRO Y CRÉDITO", "tema_1": "La Cuenta de Ahorros", "tema_2": "Préstamo vs. Deuda"},
-    {"grado": "MÓDULO INTERMEDIO (8°)", "categoria": "CÁLCULO DE INTERÉS", "tema_1": "Porcentajes Aplicados a la Banca", "tema_2": "Fórmula del Interés Simple"},
-    {"grado": "MÓDULO AVANZADO (9°)", "categoria": "INTERÉS COMPUESTO", "tema_1": "El Poder del Interés Compuesto", "tema_2": "Valor Futuro (VF) y Presente (VP)"},
-    {"grado": "MÓDULO SUPERIOR (10°)", "categoria": "ANUALIDADES", "tema_1": "Cálculo de Anualidades", "tema_2": "Amortización de Deudas"},
-    {"grado": "MÓDULO PROFESIONAL (11°)", "categoria": "MODELOS AVANZADOS", "tema_1": "VPN (Valor Presente Neto) y TIR", "tema_2": "Flujos de Caja Descontados"},
+    {"grado": "MÓDULO 1 (6°)", "categoria": "NÚMEROS Y OPERACIONES", "tema_1": "Valor Posicional y Descomposición", "tema_2": "Suma y Resta de Polinomios Aritméticos"},
+    {"grado": "MÓDULO 2 (6°)", "categoria": "FRACCIONES Y DECIMALES", "tema_1": "Conversión Fracción-Decimal", "tema_2": "Operaciones Básicas con Fracciones"},
+    {"grado": "MÓDULO 3 (6°)", "categoria": "MÚLTIPLOS Y DIVISORES", "tema_1": "Criterios de Divisibilidad", "tema_2": "M.C.M. y M.C.D. Aplicado a Problemas"},
+    {"grado": "MÓDULO 4 (6°)", "categoria": "GEOMETRÍA EUCLIDIANA", "tema_1": "Cálculo de Área y Perímetro de Figuras", "tema_2": "Clasificación de Ángulos y Triángulos"},
+    {"grado": "MÓDULO 5 (6°)", "categoria": "ESTADÍSTICA Y AZAR", "tema_1": "Tablas de Frecuencia y Gráficos", "tema_2": "Conceptos Fundamentales de Probabilidad"},
+    {"grado": "MÓDULO 6 (6°)", "categoria": "RAZONES Y PROPORCIONES", "tema_1": "Introducción a las Razones (Comparación)", "tema_2": "Regla de Tres Simple y Aplicaciones"},
 ]
 
 # --- 2. GESTIÓN DE LA CONEXIÓN A LA BASE DE DATOS ---
 def get_db_connection():
+    # ... (Se mantiene la lógica de conexión a la DB)
     DATABASE_URL = os.environ.get('DATABASE_URL')
     if not DATABASE_URL:
         print("ERROR: La variable DATABASE_URL no está definida.")
@@ -42,30 +43,28 @@ def index():
     if conn:
         try:
             cur = conn.cursor()
-
-            # Consultamos los módulos limitados por la cantidad de grados
+            # Consultamos los módulos (limitados para llenar los 6 espacios de la estructura)
             cur.execute('SELECT nombre, instructor, imagen_url, precio, estudiantes, rating FROM productos ORDER BY id ASC LIMIT 6;')
-            
             productos_data = cur.fetchall()
             
             for i, p in enumerate(productos_data):
+                # Asignamos el contenido específico de refuerzo de 6to grado
                 info = MODULOS_INFO[i % len(MODULOS_INFO)] 
                 
                 productos.append({
-                    'nombre': p[0],
-                    'instructor': p[1],
-                    # Usar una imagen de placeholder si no hay URL en la DB
-                    'imagen_url': p[2] if p[2] else "https://i.postimg.cc/QtxK54zN/placeholder-finance.jpg", 
-                    'precio': p[3],
-                    'estudiantes': p[4],
-                    'rating': p[5],
+                    'nombre': p[0] if p[0] else info["categoria"],
+                    'instructor': p[1] if p[1] else "Experto en Didáctica",
+                    'imagen_url': p[2], 
+                    # Definimos precios de ejemplo, con algunos gratis para refuerzo
+                    'precio': p[3] if p[3] is not None else (0 if i == 0 else 19.99), 
+                    'estudiantes': p[4] if p[4] is not None else 850,
+                    'rating': p[5] if p[5] is not None else 4.7,
                     'categoria': info["grado"], 
                     'tema_1': info["tema_1"],
                     'tema_2': info["tema_2"]
                 })
 
             cur.close()
-
         except Exception as e:
             print(f"Error al obtener productos: {e}") 
         finally:
