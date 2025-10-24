@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
     <style>
-        /* Variables CSS - Adaptadas al diseño Limpio/UPSTUDY (Fondo Claro) */
+        /* Variables CSS - Adaptadas al diseño Limpio/Wited (Fondo Claro) */
         :root {
-            --color-primary: #5c67ff; /* Azul Vibrante (Educard) */
+            --color-primary: #5c67ff; /* Azul Vibrante */
             --color-secondary: #ffc107; /* Amarillo de Resalte */
             --color-background: #f8f9fa; /* Fondo muy claro (casi blanco) */
             --color-surface: #ffffff; /* Superficies blancas */
@@ -29,50 +29,32 @@
         body {
             font-family: var(--font-body);
             color: var(--color-text-dark);
-            background-color: var(--color-background);
+            background-color: var(--color-surface); /* Usamos fondo blanco en el body */
             line-height: 1.6;
             overflow-x: hidden;
         }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
-        section { padding: 90px 0; position: relative; }
+        section { padding: 90px 0; position: relative; background-color: var(--color-background); } /* Las secciones usan el fondo gris claro */
         
-        /* General Typography */
-        .section-header { text-align: center; margin-bottom: 70px; }
-        .section-title {
-            font-family: var(--font-heading);
-            font-size: 2.5rem; 
-            font-weight: 800;
-            margin-bottom: 15px;
-            color: var(--color-text-dark);
-        }
-        .section-title span.underline {
-            display: inline-block;
-            position: relative;
-        }
-        .section-title span.underline::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 5%;
-            width: 90%;
-            height: 4px;
-            background-color: var(--color-secondary);
-            border-radius: 5px;
-            opacity: 0.7;
-            transform: translateY(5px);
-        }
-
-        /* --- ENCABEZADO (HEADER) - Estilo Limpio --- */
+        /* --- ENCABEZADO (HEADER) - Estilo Limpio Wited --- */
         header {
-            position: sticky; top: 0; left: 0; width: 100%; height: var(--header-height);
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 0 5%; background-color: var(--color-surface);
-            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05); z-index: 1000;
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            background-color: var(--color-surface);
+            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
         }
 
         .logo-container { text-decoration: none; display: flex; align-items: center; }
         .logo-img { height: 35px; margin-right: 10px; }
-        .site-name { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 700; color: var(--color-primary); }
+        .site-name { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 700; color: var(--color-text-dark); }
 
         nav ul { list-style: none; display: flex; }
         nav ul li { margin-left: 35px; }
@@ -80,218 +62,356 @@
         nav ul li a:hover, nav ul li a.active { color: var(--color-primary); }
 
         .header-button {
-            padding: 10px 20px; background-color: var(--color-primary); color: white;
-            border-radius: 8px; text-decoration: none; font-weight: 600;
-            font-size: 0.95rem; transition: background-color 0.3s, transform 0.2s;
+            padding: 10px 20px;
+            background-color: var(--color-primary);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: background-color 0.3s, transform 0.2s;
         }
         .header-button:hover { background-color: #4b54ff; transform: translateY(-1px); }
 
-        /* --- SECCIÓN HERO (Banner) - Diseño Wited/Minimalista --- */
+        /* --- SECCIÓN HERO (Banner) - Diseño de Referencia --- */
         .hero {
-            min-height: 80vh; display: flex; align-items: center;
-            padding-top: var(--header-height); background-color: var(--color-surface);
-            position: relative; overflow: hidden;
+            min-height: 85vh; 
+            display: flex;
+            align-items: center;
+            padding-top: var(--header-height);
+            background-color: var(--color-surface); /* Fondo blanco */
+            position: relative;
+            overflow: hidden;
         }
         
         .hero-grid {
-            display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px;
-            align-items: center; padding: 50px 0;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 20px;
+            align-items: center;
+            padding: 50px 0;
         }
 
-        .hero-text-col { padding-right: 40px; }
+        .hero-text-col {
+            padding-right: 40px;
+        }
         
-        .tag-line { font-size: 1.1rem; font-weight: 600; color: var(--color-primary); margin-bottom: 25px; font-family: var(--font-body); }
-        .tag-line i { margin-right: 8px; color: var(--color-secondary); }
+        .tag-line {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--color-primary); 
+            margin-bottom: 25px;
+            font-family: var(--font-body);
+        }
 
         .hero-text-col h1 {
-            font-family: var(--font-heading); font-size: 3.8rem; font-weight: 800; line-height: 1.1;
-            margin-bottom: 25px; color: var(--color-text-dark); letter-spacing: -1.5px;
+            font-family: var(--font-heading);
+            font-size: 3.8rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            color: var(--color-text-dark);
+            letter-spacing: -1.5px;
+        }
+        
+        /* Corrección de Negritas para que se vean correctamente */
+        .hero-text-col h1 strong,
+        .hero-text-col .subtitle strong {
+            font-weight: 700; /* Asegurar la negrita si se usa la etiqueta */
         }
 
         .hero-text-col h1 .highlight {
-            background-color: var(--color-secondary); color: var(--color-text-dark);
-            padding: 0 12px; border-radius: 6px; box-decoration-break: clone;
+            background-color: var(--color-secondary);
+            color: var(--color-text-dark);
+            padding: 0 12px;
+            border-radius: 6px;
+            box-decoration-break: clone;
         }
 
         .hero-text-col .subtitle {
-            font-size: 1.15rem; color: var(--color-text-subtle); margin-bottom: 35px;
-        }
-
-        /* Corrección de Negrillas */
-        .hero-text-col .subtitle strong {
-            color: var(--color-text-dark); 
-            font-weight: 700;
+            font-size: 1.15rem;
+            color: var(--color-text-subtle);
+            margin-bottom: 35px;
         }
         
         .main-cta-button {
-            padding: 18px 45px; font-size: 1.1rem; font-weight: 700;
-            background-color: var(--color-primary); color: white; border-radius: 10px;
+            display: inline-block;
+            padding: 18px 45px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            background-color: var(--color-primary);
+            color: white;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.2s;
             box-shadow: 0 8px 25px rgba(92, 103, 255, 0.4);
         }
 
         /* --- COLUMNA DE ANIMACIÓN (WebM) --- */
         .hero-animation-col {
-            position: relative; height: 450px; display: flex; align-items: center; justify-content: center;
+            position: relative;
+            height: 450px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .phone-frame {
-            position: relative; width: 100%; height: 100%; max-width: 300px;
-            border: 4px solid var(--color-secondary); border-radius: 30px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); overflow: hidden;
-            background-color: white; z-index: 10;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            max-width: 300px;
+            border: 4px solid var(--color-secondary); 
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            background-color: white;
+            z-index: 10;
         }
 
+        /* Optimización del video para funcionar como GIF */
         .phone-video {
-            width: 100%; height: 100%; object-fit: cover; border-radius: 26px;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 26px;
         }
         
         .phone-frame::after {
-            content: ''; position: absolute; top: -20px; right: -20px;
-            width: 50px; height: 50px;
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 50px;
+            height: 50px;
             background: radial-gradient(circle, var(--color-secondary) 10%, transparent 70%);
-            opacity: 0.7; animation: pulseLight 2s infinite alternate;
+            opacity: 0.7;
+            animation: pulseLight 2s infinite alternate;
         }
         
-        @keyframes pulseLight { from { transform: scale(0.9); opacity: 0.7; } to { transform: scale(1.1); opacity: 1; } }
+        @keyframes pulseLight {
+            from { transform: scale(0.9); opacity: 0.7; }
+            to { transform: scale(1.1); opacity: 1; }
+        }
+        
+        /* --- NUEVA SECCIÓN: MÓDULOS POPULARES (Diseño de Tarjetas) --- */
+        .popular-modules { background-color: var(--color-surface); padding-top: 120px; }
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-title { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
+        .section-subtitle { font-size: 1.1rem; color: var(--color-text-subtle); max-width: 700px; margin: 0 auto; }
+        
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .module-card {
+            background-color: var(--color-surface);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px var(--color-shadow-light);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-image-wrapper {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .card-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .module-card:hover .card-image-wrapper img {
+            transform: scale(1.05);
+        }
+        
+        .card-tag {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: #5b55e8; /* Azul oscuro para la etiqueta */
+            color: white;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .card-content {
+            padding: 20px;
+            flex-grow: 1;
+        }
+        
+        .card-title {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            min-height: 50px;
+        }
+        
+        .card-instructor {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .instructor-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+            border: 2px solid var(--color-primary);
+        }
+        
+        .instructor-name {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--color-text-dark);
+        }
+        
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--color-border);
+            padding-top: 15px;
+            margin-top: auto; /* Empuja la meta al fondo */
+        }
+        
+        .meta-item {
+            font-size: 0.9rem;
+            color: var(--color-text-subtle);
+            display: flex;
+            align-items: center;
+        }
+        
+        .meta-item i {
+            margin-right: 5px;
+            color: var(--color-primary);
+        }
+        
+        .card-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 10px;
+        }
+        
+        .card-price {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--color-text-dark);
+        }
+        
+        .card-price .free { color: #28a745; } /* Color verde para GRATIS */
+        
+        .explore-button {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .explore-button:hover {
+            background-color: var(--color-primary);
+            color: white;
+        }
 
-
-        /* --- NUEVA SECCIÓN: CATEGORÍAS (TOP CATEGORIES STYLE) --- */
-        .categories-section {
-            background-color: var(--color-surface); 
+        /* --- SECCIÓN 3: OTRAS MATERIAS / ASISTENCIA IA --- */
+        .extra-sections {
+            background-color: var(--color-background); /* Gris claro */
+            padding-bottom: 0;
+        }
+        
+        .subjects-grid {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            gap: 20px;
             padding-bottom: 50px;
         }
 
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4 columnas para categorías */
-            gap: 20px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        
-        .category-card {
-            background-color: var(--color-background);
+        .subject-card {
+            background: var(--color-surface);
             padding: 25px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            transition: all 0.3s;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            font-family: var(--font-heading);
-            font-weight: 600;
-            color: var(--color-text-dark);
-        }
-
-        .category-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-icon {
-            width: 40px;
-            height: 40px;
-            background-color: var(--color-primary);
-            color: var(--color-surface);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            flex-shrink: 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            width: 30%;
+            text-align: center;
         }
         
-        /* Estilo para las categorías "Próximamente" (más claras) */
-        .category-card.soon {
-            opacity: 0.6;
-            background-color: #eef2f5;
-            color: var(--color-text-subtle);
+        .subject-card i {
+            font-size: 2.5rem;
+            color: var(--color-primary);
+            margin-bottom: 15px;
         }
-        .category-card.soon .card-icon {
-            background-color: #adb5bd;
-        }
-        .category-card.soon:hover {
-            transform: none;
-            box-shadow: none;
-            cursor: not-allowed;
-        }
-
-        /* Tarjeta de Resumen (Similar a la oscura de UPSTUDY) */
-        .summary-card {
-            grid-column: span 2; /* Ocupa dos espacios */
-            background-color: #162a5b; /* Azul oscuro */
-            color: white;
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .summary-card-icon {
-            font-size: 3rem;
-            color: var(--color-secondary);
+        
+        .subject-card h4 {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
             margin-bottom: 10px;
         }
-        
-        .summary-card h3 {
-            font-family: var(--font-heading);
-            font-size: 1.5rem;
-            margin: 10px 0;
+
+        .subject-card.future {
+            opacity: 0.5; /* Opacidad para indicar que son futuros */
         }
 
-        .summary-card a {
-            color: white;
-            font-weight: 600;
-            text-decoration: none;
-            margin-top: 10px;
-            transition: color 0.3s;
-        }
-        .summary-card a:hover {
-            color: var(--color-secondary);
-        }
-
-        /* Estilo para la asistencia IA */
-        .ia-assistance-card {
+        /* Asistencia IA Banner */
+        .ai-banner {
             background-color: var(--color-primary);
             color: white;
-            padding: 25px;
-            border-radius: 10px;
+            padding: 50px;
+            border-radius: 12px;
+            margin-top: 50px;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(92, 103, 255, 0.3);
-            transition: transform 0.3s;
         }
-        .ia-assistance-card:hover {
-            transform: scale(1.02);
-        }
-        .ia-assistance-card i {
-            font-size: 2rem;
-            color: var(--color-secondary);
-            margin-bottom: 10px;
-        }
-        .ia-assistance-card h4 {
+        .ai-banner h3 {
             font-family: var(--font-heading);
-            font-size: 1.2rem;
-            margin-bottom: 5px;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
         }
-
-        /* SCROLL REVEAL (Movimiento) */
+        .ai-banner p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+        
+        /* SCROLL REVEAL (Movimiento al Scroll) */
         .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* Media Queries para Responsiveness */
+        /* Media Queries */
         @media (max-width: 900px) {
             .hero-grid { grid-template-columns: 1fr; text-align: center; }
             .hero-text-col { padding-right: 0; }
             .hero-text-col h1 { font-size: 2.8rem; }
             .hero-animation-col { margin-top: 40px; height: 350px; }
             .phone-frame { max-width: 250px; }
-
-            .categories-grid { grid-template-columns: repeat(2, 1fr); }
-            .summary-card { grid-column: span 2; }
             nav ul { display: none; }
+            .subjects-grid { flex-direction: column; align-items: center; }
+            .subject-card { width: 80%; margin-bottom: 20px; }
         }
     </style>
 </head>
@@ -306,13 +426,13 @@
         <nav>
             <ul>
                 <li><a href="#hero-section" class="active">Inicio</a></li>
-                <li><a href="#categorias">Refuerzos (6°)</a></li>
+                <li><a href="#modulos">Refuerzos (6°)</a></li>
                 <li><a href="#">Planes</a></li>
                 <li><a href="#">Contáctanos</a></li>
             </ul>
         </nav>
 
-        <a href="#" class="header-button">Ingresar</a>
+        <a href="#" class="header-button">Acceder</a>
     </header>
 
     <main>
@@ -329,10 +449,10 @@
                         a un clic de distancia
                     </h1>
                     <p class="subtitle">
-                        Módulos de **<strong style="color: var(--color-text-dark); font-weight: 700;">Matemática Grado Sexto</strong>** con soluciones ultra profesionales para garantizar el dominio de los temas esenciales y asegurar el éxito.
+                        Módulos de <span style="font-weight: 700;">Matemática Grado Sexto</span> con soluciones ultra profesionales para garantizar el dominio de los temas esenciales y asegurar el éxito.
                     </p>
                     
-                    <a href="#categorias" class="main-cta-button">Empezar Refuerzo Ahora</a>
+                    <a href="#modulos" class="main-cta-button">Empezar Refuerzo Ahora</a>
                     <p class="cta-info">
                         No se requiere tarjeta de crédito. Simplemente haz clic en "Empezar Refuerzo Ahora" y accede al primer módulo.
                     </p>
@@ -340,7 +460,7 @@
 
                 <div class="hero-animation-col reveal" style="transition-delay: 0.2s;">
                     <div class="phone-frame">
-                        <video class="phone-video" autoplay loop muted playsinline controlsList="nodownload nofullscreen noremoteplayback">
+                        <video class="phone-video" autoplay loop muted playsinline controls=false>
                             <source src="https://www.wited.com/wp-content/uploads/2025/06/Animacion_01_crop.webm" type="video/webm">
                             Tu navegador no soporta el formato de video WebM.
                         </video>
@@ -348,74 +468,108 @@
                 </div>
             </div>
         </section>
-
-        <section class="categories-section" id="categorias">
+        
+        <section class="popular-modules" id="modulos">
             <div class="container">
                 <div class="section-header reveal">
-                    <h2 class="section-title">Nuestros Módulos <span class="underline">Disponibles</span></h2>
+                    <h2 class="section-title">Módulos Clave de Matemática para Grado Sexto</h2>
                     <p class="section-subtitle">
-                        Refuerzo especializado en las áreas más críticas de la matemática de Grado Sexto.
+                        {{ productos | length }} módulos disponibles, creados por expertos en didáctica y obtenidos directamente de la base de datos de EDUCARD SAS.
                     </p>
                 </div>
 
-                <div class="categories-grid">
-                    
-                    <div class="ia-assistance-card reveal">
-                        <i class="fa-solid fa-robot"></i>
-                        <h4>Asistencia por IA</h4>
-                        <p style="font-size: 0.9rem; color: rgba(255, 255, 255, 0.9);">
-                            Resuelve dudas, obtén explicaciones y genera ejercicios al instante con nuestra IA.
-                        </p>
-                    </div>
+                <div class="module-grid">
+                    {% for producto in productos %}
+                    <div class="module-card reveal" style="transition-delay: {{ loop.index * 0.1 }}s;">
+                        <div class="card-image-wrapper">
+                            <img src="{{ producto.imagen_url if producto.imagen_url else 'https://i.postimg.cc/85zK6v2N/main-student.jpg' }}" alt="Imagen del Módulo">
+                            <span class="card-tag">{{ producto.categoria | default('REFUERZO') }}</span>
+                        </div>
+                        
+                        <div class="card-content">
+                            <div class="card-instructor">
+                                <img src="https://i.postimg.cc/50tFh3sQ/designer-3.jpg" alt="Avatar Instructor" class="instructor-avatar">
+                                <span class="instructor-name">{{ producto.instructor | default('Experto en Didáctica') }}</span>
+                            </div>
+                            
+                            <h3 class="card-title">{{ producto.nombre | default('Módulo Temático Principal') }}</h3>
+                            
+                            <p style="font-size: 0.9rem; color: var(--color-text-dark);">
+                                **Tópicos:** {{ producto.tema_1 }} y {{ producto.tema_2 }}.
+                            </p>
 
-                    {% for producto in productos | slice(5) %}
-                    <div class="category-card reveal" style="transition-delay: {{ loop.index * 0.1 }}s;">
-                        <div class="card-icon">
-                            {% if loop.index == 1 %}<i class="fa-solid fa-calculator"></i>
-                            {% elif loop.index == 2 %}<i class="fa-solid fa-percent"></i>
-                            {% elif loop.index == 3 %}<i class="fa-solid fa-dna"></i>
-                            {% elif loop.index == 4 %}<i class="fa-solid fa-draw-polygon"></i>
-                            {% else %}<i class="fa-solid fa-table-list"></i>
-                            {% endif %}
                         </div>
-                        <div>
-                            <p style="font-weight: 700; color: var(--color-primary); margin-bottom: 2px;">
-                                {{ producto.categoria | default('Matemática') }}
-                            </p>
-                            <p style="font-size: 0.9rem; color: var(--color-text-subtle);">
-                                {{ producto.nombre | default(producto.tema_1) }}
-                            </p>
+
+                        <div class="card-meta">
+                            <div class="meta-item">
+                                <i class="fa-solid fa-users"></i>
+                                <span>{{ producto.estudiantes | default(850) | int }} Estudiantes</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fa-solid fa-star"></i>
+                                <span>{{ "%.1f" | format(producto.rating | default(4.7)) }}</span>
+                            </div>
+                        </div>
+
+                        <div class="card-actions card-content">
+                            <span class="card-price">
+                                {% if producto.precio == 0 or producto.precio is none %}
+                                    <span class="free">GRATIS</span>
+                                {% else %}
+                                    ${{ "%.2f" | format(producto.precio) }}
+                                {% endif %}
+                            </span>
+                            <a href="#" class="explore-button">Ver Detalles</a>
                         </div>
                     </div>
+                    {% else %}
+                    <p style="color: var(--color-text-subtle); font-size: 1.2rem; text-align: center; width: 100%;">
+                        No hay módulos de refuerzo disponibles. La base de datos no arrojó resultados para la tabla "productos".
+                    </p>
                     {% endfor %}
-
-                    <div class="category-card soon reveal" style="transition-delay: 0.5s;">
-                        <div class="card-icon"><i class="fa-solid fa-book-open"></i></div>
-                        Lenguaje (Próx.)
-                    </div>
-                    <div class="category-card soon reveal" style="transition-delay: 0.6s;">
-                        <div class="card-icon"><i class="fa-solid fa-flask"></i></div>
-                        Ciencias (Próx.)
-                    </div>
-                    <div class="category-card soon reveal" style="transition-delay: 0.7s;">
-                        <div class="card-icon"><i class="fa-solid fa-globe"></i></div>
-                        Sociales (Próx.)
-                    </div>
-
-                    <div class="summary-card reveal" style="transition-delay: 0.8s;">
-                        <i class="fa-solid fa-arrow-circle-right summary-card-icon"></i>
-                        <h3 style="font-weight: 800;">{{ productos | length }}+ Módulos de Refuerzo</h3>
-                        <p style="font-size: 0.95rem; margin-bottom: 15px;">Explora todos los temas disponibles de Grado Sexto y asegura la base académica.</p>
-                        <a href="#">Ver Catálogo Completo <i class="fa-solid fa-arrow-right"></i></a>
-                    </div>
                 </div>
             </div>
         </section>
 
+        <section class="extra-sections">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2 class="section-title">Soluciones Adicionales de Refuerzo</h2>
+                    <p class="section-subtitle">Accede a asistencia inmediata y conoce las próximas áreas de refuerzo.</p>
+                </div>
+
+                <div class="ai-banner reveal">
+                    <i class="fa-solid fa-robot" style="font-size: 3rem; margin-bottom: 10px;"></i>
+                    <h3>Asistencia por IA 24/7</h3>
+                    <p>Resuelve dudas, obtén explicaciones paso a paso y practica ejercicios al instante con nuestro asistente inteligente.</p>
+                    <a href="#" class="main-cta-button" style="background-color: white; color: var(--color-primary); box-shadow: none;">Probar Asistencia IA</a>
+                </div>
+
+                <h3 class="section-title" style="margin-top: 80px;">Próximamente en EDUCARD SAS:</h3>
+                <div class="subjects-grid">
+                    <div class="subject-card future reveal">
+                        <i class="fa-solid fa-flask"></i>
+                        <h4>Ciencias Naturales (6°)</h4>
+                        <p style="font-size: 0.9rem;">Refuerzo de Biología, Química y Física básica.</p>
+                    </div>
+                    <div class="subject-card future reveal" style="transition-delay: 0.1s;">
+                        <i class="fa-solid fa-book-open"></i>
+                        <h4>Lenguaje y Literatura (6°)</h4>
+                        <p style="font-size: 0.9rem;">Mejora de gramática, ortografía y comprensión lectora.</p>
+                    </div>
+                    <div class="subject-card future reveal" style="transition-delay: 0.2s;">
+                        <i class="fa-solid fa-earth-americas"></i>
+                        <h4>Ciencias Sociales (6°)</h4>
+                        <p style="font-size: 0.9rem;">Tópicos de Historia, Geografía y Cívica.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
     </main>
     
-    <footer style="background-color: var(--color-background); padding: 25px 0; text-align: center; font-size: 0.9rem;">
-        <p style="color: var(--color-text-dark);">&copy; 2025 EDUCARD SAS. Refuerzos Educativos de Matemática Grado Sexto. Estado DB: {{ db_status }}</p>
+    <footer style="background-color: var(--color-text-dark); color: white; padding: 25px 0; text-align: center; font-size: 0.9rem;">
+        <p>&copy; 2025 EDUCARD SAS. Refuerzos Educativos de Matemática Grado Sexto.</p>
     </footer>
 
     <script>
@@ -427,7 +581,7 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
-                    observer.unobserve(entry.target);
+                    // Opcional: observer.unobserve(entry.target); para que solo se anime una vez
                 }
             });
         }, { root: null, rootMargin: '0px', threshold: 0.1 });
@@ -435,6 +589,7 @@
         reveals.forEach(reveal => {
             observer.observe(reveal);
         });
+        
     </script>
 
 </body>
