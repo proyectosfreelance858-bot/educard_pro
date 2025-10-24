@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EDUCARD SAS | Refuerzos de Matemática Grado Sexto - Profesional</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Instrument+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>EDUCARD SAS | Refuerzos de Matemática Grado Sexto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
     <style>
-        /* Variables CSS - Estilo UPSTUDY Brillante/Profesional */
+        /* Variables CSS - Adaptadas al diseño Limpio/UPSTUDY (Fondo Claro) */
         :root {
-            --color-primary: #5c67ff; /* Azul Vibrante (Educard) */
-            --color-secondary: #ffc107; /* Amarillo para resaltar */
-            --color-background: #ffffff;
-            --color-surface: #f4f7f9; /* Fondo claro para secciones */
-            --color-text-dark: #212529;
-            --color-text-subtle: #6c757d;
+            --color-primary: #5c67ff; /* Azul Vibrante */
+            --color-secondary: #ffc107; /* Amarillo de Resalte */
+            --color-background: #f8f9fa; /* Fondo muy claro (casi blanco) */
+            --color-surface: #ffffff; /* Superficies blancas */
+            --color-text-dark: #212529; /* Texto Principal Oscuro */
+            --color-text-subtle: #6c757d; /* Texto Secundario */
             --color-border: #e9ecef;
-            --color-shadow: rgba(0, 0, 0, 0.1);
+            --color-shadow-light: rgba(0, 0, 0, 0.08);
             --font-heading: 'Outfit', sans-serif;
             --font-body: 'Instrument Sans', sans-serif;
-            --header-height: 70px;
+            --header-height: 80px;
         }
 
-        /* Base & Resets */
+        /* Base Reset y Tipografía */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body {
@@ -34,226 +34,260 @@
             overflow-x: hidden;
         }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
-        section { padding: 100px 0; position: relative; }
+        section { padding: 90px 0; position: relative; }
         
-        /* General Typography */
-        .section-header { text-align: center; margin-bottom: 70px; }
-        .section-title {
-            font-family: var(--font-heading);
-            font-size: 2.8rem; 
-            font-weight: 800;
-            margin-bottom: 15px;
+        /* --- ENCABEZADO (HEADER) - Estilo Limpio --- */
+        header {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            background-color: var(--color-surface);
+            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+        }
+
+        .logo-container { text-decoration: none; display: flex; align-items: center; }
+        .logo-img { height: 35px; margin-right: 10px; }
+        .site-name { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 700; color: var(--color-primary); }
+
+        /* Navegación (Nav) */
+        nav ul { list-style: none; display: flex; }
+        nav ul li { margin-left: 35px; }
+        nav ul li a {
+            text-decoration: none;
             color: var(--color-text-dark);
+            font-weight: 500;
+            padding: 10px 0;
+            display: block;
+            transition: color 0.3s ease;
         }
-        .section-subtitle {
-            font-size: 1.15rem;
-            color: var(--color-text-subtle);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        .main-cta-button {
-            display: inline-block;
-            padding: 15px 35px;
-            font-size: 1.05rem;
-            font-weight: 600;
+        nav ul li a:hover, nav ul li a.active { color: var(--color-primary); }
+
+        .header-button {
+            padding: 10px 20px;
             background-color: var(--color-primary);
             color: white;
             border-radius: 8px;
             text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
             transition: background-color 0.3s, transform 0.2s;
-            box-shadow: 0 5px 15px rgba(92, 103, 255, 0.3);
         }
-        .main-cta-button:hover { background-color: #4b54ff; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(92, 103, 255, 0.4); }
+        .header-button:hover { background-color: #4b54ff; transform: translateY(-1px); }
 
-        /* --- HEADER (Pegajoso y Limpio) --- */
-        header {
-            position: sticky; top: 0; width: 100%; height: var(--header-height);
-            display: flex; justify-content: space-between; align-items: center;
-            background-color: var(--color-background);
-            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05); z-index: 1000; padding: 0 5%;
+        /* --- SECCIÓN HERO (Banner) - Diseño de Referencia --- */
+        .hero {
+            min-height: 80vh; 
+            display: flex;
+            align-items: center;
+            padding-top: var(--header-height);
+            background-color: var(--color-surface);
+            position: relative;
+            overflow: hidden;
         }
-        .site-name { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; color: var(--color-primary); }
-        /* ... Estilos de navegación y botones se mantienen limpios ... */
-
-        /* --- SECCIÓN HERO (Alto Dinamismo - Parallax Light) --- */
-        .hero { min-height: 90vh; display: flex; align-items: center; padding: 40px 0; position: relative; overflow: hidden; }
-        .hero-content-wrapper { display: flex; justify-content: space-between; align-items: center; padding-top: 50px; }
-        .hero-text-col { max-width: 50%; }
-        .hero-text-col h1 { font-size: 3.8rem; }
-        .hero-text-col h1 .highlight { background-color: var(--color-secondary); padding: 0 12px; border-radius: 6px; }
         
-        .hero-image-col { position: relative; width: 45%; height: 500px; }
-        .main-image { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); position: absolute; right: 0; top: 0; z-index: 5; }
-        .overlay-image-1, .overlay-image-2 { 
-            object-fit: cover; border: 5px solid white; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2); z-index: 6; 
-            transition: transform 0.2s; /* Para el efecto Parallax del mouse */
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr; /* Texto más ancho que la imagen */
+            gap: 20px;
+            align-items: center;
+            padding: 50px 0;
         }
-        .overlay-image-1 { position: absolute; width: 200px; height: 200px; border-radius: 50%; top: 15%; left: 0; animation: slowFloat 10s ease-in-out infinite alternate; }
-        .overlay-image-2 { position: absolute; width: 150px; height: 150px; border-radius: 50%; bottom: 5%; left: 20%; animation: slowFloat 12s ease-in-out infinite reverse; }
-        @keyframes slowFloat { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(-15px) rotate(1deg); } }
-        /* Background Shapes (para el movimiento de fondo) */
-        .bg-pattern div { position: absolute; opacity: 0.05; background: var(--color-primary); border-radius: 50%; animation: moveShapes 20s linear infinite; }
-        .bg-pattern .shape-1 { width: 400px; height: 400px; top: -50px; left: -200px; }
-        .bg-pattern .shape-2 { width: 150px; height: 150px; bottom: 50px; right: 100px; background: var(--color-secondary); }
-        @keyframes moveShapes { 0% { transform: translate(0, 0) rotate(0deg); } 100% { transform: translate(20px, 20px) rotate(360deg); } }
 
-        /* --- SECCIÓN 2: VENTAJAS CLAVE (Nueva) --- */
-        .advantages-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; margin-top: 40px; }
-        .advantage-card { padding: 30px; border-radius: 12px; border: 1px solid var(--color-border); transition: all 0.3s; text-align: center; }
-        .advantage-card:hover { box-shadow: 0 10px 25px var(--color-shadow); transform: translateY(-5px) scale(1.02); }
-        .advantage-card i { font-size: 2.5rem; color: var(--color-primary); margin-bottom: 20px; }
-        .advantage-card h4 { font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 10px; }
+        .hero-text-col {
+            padding-right: 40px;
+        }
+        
+        .tag-line {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--color-primary); 
+            margin-bottom: 25px;
+            font-family: var(--font-body);
+        }
+        .tag-line i { margin-right: 8px; color: var(--color-secondary); }
 
-        /* --- SECCIÓN 3: MÓDULOS DE REFUERZO (TimeLine) --- */
-        .modules-section { background-color: var(--color-surface); }
+        .hero-text-col h1 {
+            font-family: var(--font-heading);
+            font-size: 3.8rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            color: var(--color-text-dark);
+            letter-spacing: -1.5px;
+        }
+
+        .hero-text-col h1 .highlight {
+            background-color: var(--color-secondary);
+            color: var(--color-text-dark);
+            padding: 0 12px;
+            border-radius: 6px;
+            box-decoration-break: clone;
+        }
+
+        .hero-text-col .subtitle {
+            font-size: 1.15rem;
+            color: var(--color-text-subtle);
+            margin-bottom: 35px;
+        }
+        
+        .main-cta-button {
+            display: inline-block;
+            padding: 18px 45px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            background-color: var(--color-primary);
+            color: white;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 8px 25px rgba(92, 103, 255, 0.4);
+        }
+        .main-cta-button:hover { background-color: #4b54ff; transform: translateY(-3px); box-shadow: 0 12px 30px rgba(92, 103, 255, 0.5); }
+
+        .cta-info {
+            font-size: 0.9rem;
+            color: var(--color-text-subtle);
+            margin-top: 15px;
+        }
+        .cta-info strong { color: var(--color-text-dark); }
+
+        /* --- COLUMNA DE ANIMACIÓN (GIF/WebM) --- */
+        .hero-animation-col {
+            position: relative;
+            height: 450px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .phone-frame {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            max-width: 300px;
+            border: 4px solid var(--color-secondary); 
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            background-color: white;
+            z-index: 10;
+        }
+
+        .phone-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 26px; /* Para que encaje dentro del marco */
+        }
+        
+        /* Animación de la Luz / Resplandor (Similar a la imagen Wited) */
+        .phone-frame::after {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, var(--color-secondary) 10%, transparent 70%);
+            opacity: 0.7;
+            animation: pulseLight 2s infinite alternate;
+        }
+        
+        @keyframes pulseLight {
+            from { transform: scale(0.9); opacity: 0.7; }
+            to { transform: scale(1.1); opacity: 1; }
+        }
+
+        /* --- SECCIÓN 2: MÓDULOS DE REFUERZO (TimeLine) --- */
+        .modules-section { background-color: var(--color-background); }
+        .section-header { text-align: center; margin-bottom: 70px; }
+        .section-title { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; margin-bottom: 15px; }
+        .section-subtitle { font-size: 1.1rem; color: var(--color-text-subtle); max-width: 700px; margin: 0 auto; }
+
         .modules-timeline { display: grid; grid-template-columns: 1fr; gap: 30px; max-width: 900px; margin: 0 auto; }
-        .module-step { display: flex; align-items: flex-start; text-align: left; background: var(--color-background); padding: 25px; border-radius: 10px; border-left: 5px solid var(--color-primary); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); transition: transform 0.3s; }
-        .module-step:hover { transform: translateX(5px); }
+        .module-step { 
+            display: flex; align-items: flex-start; text-align: left; 
+            background: var(--color-surface); padding: 25px; border-radius: 12px; 
+            border-left: 5px solid var(--color-primary); 
+            box-shadow: 0 4px 15px var(--color-shadow-light); 
+            transition: transform 0.3s; 
+        }
+        .module-step:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); }
         .step-icon { flex-shrink: 0; width: 40px; height: 40px; background: var(--color-primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-heading); font-weight: 600; font-size: 1.2rem; margin-right: 20px; }
-        .step-content h4 { font-family: var(--font-heading); font-size: 1.2rem; margin-bottom: 5px; color: var(--color-primary); }
-
-        /* --- SECCIÓN 4: PROCESO DE REFUERZO (Nueva - TimeLine Horizontal) --- */
-        .process-section { background-color: var(--color-background); }
-        .process-timeline { display: flex; justify-content: space-between; position: relative; margin-top: 60px; padding: 0 20px; }
-        .process-timeline::before { content: ''; position: absolute; top: 15px; left: 0; right: 0; height: 2px; background: var(--color-border); z-index: 1; }
-        .process-step { width: 30%; text-align: center; position: relative; z-index: 2; }
-        .process-step-icon { width: 30px; height: 30px; background: var(--color-primary); color: white; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; border: 4px solid var(--color-background); }
-        .process-step h5 { font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 10px; }
+        .step-content h4 { font-family: var(--font-heading); font-size: 1.2rem; margin-bottom: 5px; color: var(--color-text-dark); }
+        .module-price { font-weight: 700; color: var(--color-primary); font-size: 1.1rem; }
         
-        /* --- SECCIÓN 5: TESTIMONIOS (Nueva) --- */
-        .testimonials-section { background-color: var(--color-surface); }
-        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
-        .testimonial-card { background: var(--color-background); padding: 25px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); border-top: 3px solid var(--color-secondary); }
-        .testimonial-card p { font-style: italic; margin-bottom: 15px; }
-        .testimonial-stars i { color: var(--color-secondary); margin-right: 2px; }
-        .testimonial-author { font-weight: 600; margin-top: 10px; display: block; }
-        
-        /* --- SCROLL REVEAL ANIMATION (Para el movimiento) --- */
+        /* SCROLL REVEAL ANIMATION (Para el movimiento) */
         .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* Media Queries (Mantener responsividad) */
-        @media (max-width: 992px) {
-            .hero-content-wrapper { flex-direction: column; text-align: center; }
-            .hero-text-col { max-width: 100%; margin-bottom: 40px; }
+        /* Media Queries para Responsiveness */
+        @media (max-width: 900px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .hero-text-col { padding-right: 0; }
             .hero-text-col h1 { font-size: 2.8rem; }
-            .hero-image-col { width: 100%; height: 350px; justify-content: center; }
-            .main-image { position: relative; width: 80%; }
-            .overlay-image-1, .overlay-image-2, .bg-pattern { display: none; }
-            .process-timeline { flex-direction: column; align-items: center; }
-            .process-timeline::before { display: none; }
-            .process-step { width: 100%; margin-bottom: 30px; }
-            .module-step:hover { transform: none; }
+            .hero-animation-col { margin-top: 40px; height: 350px; }
+            .phone-frame { max-width: 250px; }
+            nav ul { display: none; } /* Ocultar nav en móvil para simplificar */
         }
     </style>
 </head>
 <body>
-    
-    <div class="top-bar">
-        EDUCARD SAS: ¡Refuerza las bases de Matemática del Grado Sexto y asegura el éxito!
-    </div>
 
     <header>
         <a href="#" class="logo-container">
-            <span class="site-name">EDUCARD SAS</span>
+            <img src="https://i.postimg.cc/t4tVr741/54c82322-2df7-4887-abc0-da706407fcd4-2.png" alt="Logo Educard" class="logo-img">
+            <span class="site-name">Educard</span>
         </a>
 
         <nav>
             <ul>
                 <li><a href="#hero-section" class="active">Inicio</a></li>
-                <li><a href="#ventajas">Ventajas</a></li>
                 <li><a href="#modulos">Refuerzos (6°)</a></li>
-                <li><a href="#testimonios">Testimonios</a></li>
+                <li><a href="#">Planes</a></li>
+                <li><a href="#">Contáctanos</a></li>
             </ul>
         </nav>
 
-        <div class="header-actions">
-            <a href="#" class="icon-link"><i class="fa-solid fa-user"></i> Login</a>
-            <a href="#" class="header-button">Empezar Refuerzo</a>
-        </div>
+        <a href="#" class="header-button">Ingresar</a>
     </header>
 
     <main>
         <section class="hero" id="hero-section">
-            <div class="bg-pattern">
-                <div class="shape-1"></div>
-                <div class="shape-2"></div>
-            </div>
-
-            <div class="container hero-content-wrapper">
+            <div class="container hero-grid">
+                
                 <div class="hero-text-col reveal">
-                    <p class="tag-line"><i class="fa-solid fa-square-root-variable"></i> La Base para Toda la Educación Secundaria</p>
+                    <p class="tag-line">
+                        <i class="fa-solid fa-square-root-variable"></i> Refuerzo Académico Nivel Sexto
+                    </p>
                     <h1>
-                        Domina la Matemática 
-                        <span class="highlight">Clave</span>
-                        del Grado Sexto
+                        Aprendizaje 
+                        <span class="highlight">Inteligente</span>
+                        a un clic de distancia
                     </h1>
                     <p class="subtitle">
-                        La plataforma de EDUCARD SAS con módulos interactivos y personalizados para asegurar la comprensión de Números, Fracciones y Geometría.
+                        Módulos de **Matemática Grado Sexto** con soluciones ultra profesionales para garantizar el dominio de los temas esenciales y asegurar el éxito.
                     </p>
                     
-                    <a href="#modulos" class="main-cta-button">Ver Módulos de Refuerzo</a>
-                    <p class="trial-info">Comienza con nuestro primer módulo GRATIS (si el precio es 0).</p>
+                    <a href="#modulos" class="main-cta-button">Empezar Refuerzo Ahora</a>
+                    <p class="cta-info">
+                        No se requiere tarjeta de crédito. Simplemente haz clic en "Empezar Refuerzo Ahora" y accede al primer módulo.
+                    </p>
                 </div>
 
-                <div class="hero-image-col" id="hero-image-col">
-                    <img src="https://i.postimg.cc/Nj0Wq1x9/advisor-2.jpg" alt="Profesor o mentor sonriendo" class="main-image">
-                    
-                    <img src="https://i.postimg.cc/85zK6v2N/main-student.jpg" alt="Estudiante concentrado" class="overlay-image-1">
-                    <img src="https://i.postimg.cc/50tFh3sQ/designer-3.jpg" alt="Gráficos de barras y cálculos" class="overlay-image-2">
-                </div>
-            </div>
-        </section>
-
-        <section class="advantages-section" id="ventajas">
-            <div class="container">
-                <div class="section-header reveal">
-                    <h2 class="section-title">¿Por qué Elegir EDUCARD SAS?</h2>
-                    <p class="section-subtitle">Garantizamos una comprensión profunda con metodología probada en el refuerzo de Grado Sexto.</p>
-                </div>
-
-                <div class="advantages-grid">
-                    <div class="advantage-card reveal">
-                        <i class="fa-solid fa-brain"></i>
-                        <h4>Aprendizaje Personalizado</h4>
-                        <p>Detección de puntos débiles y rutas de refuerzo adaptadas a la necesidad de cada estudiante.</p>
-                    </div>
-                    <div class="advantage-card reveal" style="transition-delay: 0.1s;">
-                        <i class="fa-solid fa-chart-line"></i>
-                        <h4>Reportes Detallados</h4>
-                        <p>Seguimiento constante del progreso y áreas de mejora con reportes claros para padres y docentes.</p>
-                    </div>
-                    <div class="advantage-card reveal" style="transition-delay: 0.2s;">
-                        <i class="fa-solid fa-graduation-cap"></i>
-                        <h4>Éxito Garantizado</h4>
-                        <p>Construye la base matemática esencial para un rendimiento superior en grados superiores (7° en adelante).</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="process-section">
-            <div class="container">
-                <div class="section-header reveal">
-                    <h2 class="section-title">Nuestro Proceso de Refuerzo en 3 Pasos</h2>
-                    <p class="section-subtitle">Simple, efectivo y diseñado para una asimilación rápida de los conceptos.</p>
-                </div>
-                
-                <div class="process-timeline">
-                    <div class="process-step reveal" style="transition-delay: 0.1s;">
-                        <div class="process-step-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
-                        <h5>1. Diagnóstico Inicial</h5>
-                        <p>Evaluamos el nivel actual del estudiante en las áreas clave de Grado Sexto.</p>
-                    </div>
-                    <div class="process-step reveal" style="transition-delay: 0.3s;">
-                        <div class="process-step-icon"><i class="fa-solid fa-book-open"></i></div>
-                        <h5>2. Módulos Enfocados</h5>
-                        <p>Asignación de módulos de refuerzo interactivos basados en los resultados del diagnóstico.</p>
-                    </div>
-                    <div class="process-step reveal" style="transition-delay: 0.5s;">
-                        <div class="process-step-icon"><i class="fa-solid fa-medal"></i></div>
-                        <h5>3. Certificación y Avance</h5>
-                        <p>Confirmación del dominio de los temas y preparación exitosa para el siguiente nivel.</p>
+                <div class="hero-animation-col reveal" style="transition-delay: 0.2s;">
+                    <div class="phone-frame">
+                        <video class="phone-video" autoplay loop muted playsinline>
+                            <source src="https://www.wited.com/wp-content/uploads/2025/06/Animacion_01_crop.webm" type="video/webm">
+                            Tu navegador no soporta el formato de video WebM.
+                        </video>
                     </div>
                 </div>
             </div>
@@ -262,8 +296,10 @@
         <section class="modules-section" id="modulos">
             <div class="container">
                 <div class="section-header reveal">
-                    <h2 class="section-title">Módulos de Refuerzo de Matemática 6°</h2>
-                    <p class="section-subtitle">Contenido obtenido directamente de la base de datos de EDUCARD SAS. {{ productos | length }} módulos listados.</p>
+                    <h2 class="section-title">Módulos Clave de Matemática para Grado Sexto</h2>
+                    <p class="section-subtitle">
+                        Contenido obtenido directamente de la base de datos de EDUCARD SAS. {{ productos | length }} módulos listados.
+                    </p>
                 </div>
 
                 <div class="modules-timeline">
@@ -277,14 +313,14 @@
                                 <span style="font-style: italic; color: #a0a0a0; margin-left: 10px;">(Rating: {{ producto.rating }} / Estudiantes: {{ producto.estudiantes }})</span>
                             </p>
                             <div style="margin-top: 10px;">
-                                <span style="font-weight: 700; color: var(--color-primary); font-size: 1.1rem;">
+                                <span class="module-price">
                                     {% if producto.precio == 0 or producto.precio is none %}
                                         GRATIS
                                     {% else %}
                                         ${{ "%.2f" | format(producto.precio) }}
                                     {% endif %}
                                 </span>
-                                <a href="#" class="main-cta-button" style="padding: 8px 15px; font-size: 0.95rem; margin-left: 20px;">Acceder</a>
+                                <a href="#" class="header-button" style="padding: 8px 15px; font-size: 0.95rem; margin-left: 20px;">Acceder</a>
                             </div>
                         </div>
                     </div>
@@ -296,52 +332,16 @@
                 </div>
             </div>
         </section>
-        
-        <section class="testimonials-section" id="testimonios">
-            <div class="container">
-                <div class="section-header reveal">
-                    <h2 class="section-title">Historias de Éxito de Nuestros Refuerzos</h2>
-                    <p class="section-subtitle">Padres y estudiantes confirman la efectividad de la metodología EDUCARD SAS.</p>
-                </div>
-                
-                <div class="testimonials-grid">
-                    <div class="testimonial-card reveal">
-                        <div class="testimonial-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                        <p>"Mi hijo pasó de tener C en matemáticas a A en tres semanas. El módulo de Fracciones fue increíblemente claro y práctico."</p>
-                        <div class="testimonial-author">— Carolina G. (Madre de Estudiante)</div>
-                    </div>
-                    <div class="testimonial-card reveal" style="transition-delay: 0.1s;">
-                        <div class="testimonial-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
-                        <p>"Los ejercicios de M.C.M. y M.C.D. fueron esenciales. El formato interactivo realmente ayuda a mantener la atención."</p>
-                        <div class="testimonial-author">— Daniel S. (Estudiante Grado 6°)</div>
-                    </div>
-                    <div class="testimonial-card reveal" style="transition-delay: 0.2s;">
-                        <div class="testimonial-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                        <p>"EDUCARD SAS nos proporcionó una herramienta efectiva y económica. Vimos resultados tangibles en el manejo de porcentajes y decimales."</p>
-                        <div class="testimonial-author">— Ricardo P. (Docente de Primaria)</div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <section class="cta-section text-center" style="background-color: var(--color-primary); padding: 80px 0;">
-            <div class="container reveal">
-                <h2 style="color: white; font-size: 2.5rem; margin-bottom: 20px;">No Dejes que las Dudas se Acumulen.</h2>
-                <p style="color: rgba(255, 255, 255, 0.8); font-size: 1.1rem; margin-bottom: 40px;">Empieza hoy mismo el refuerzo que transformará el futuro académico de tu hijo/a.</p>
-                <a href="#modulos" class="main-cta-button" style="background-color: var(--color-secondary); color: var(--color-text-dark); box-shadow: none;">¡Empezar Mi Refuerzo!</a>
-            </div>
-        </section>
-
-    </main>
+        </main>
     
     <footer style="background-color: var(--color-text-dark); color: white; padding: 25px 0; text-align: center; font-size: 0.9rem;">
-        <p>&copy; 2025 EDUCARD SAS. Elaboración y Comercialización de Refuerzos Educativos.</p>
+        <p>&copy; 2025 EDUCARD SAS. Refuerzos Educativos de Matemática Grado Sexto.</p>
     </footer>
 
     <script>
-        // --- JAVASCRIPT: MOVIMIENTO AVANZADO Y SCROLL EFFECTS ---
+        // --- JAVASCRIPT: SCROLL REVEAL (Movimiento al Scroll) ---
 
-        // 1. Scroll Reveal: Aparición de Elementos al Hacer Scroll
         const reveals = document.querySelectorAll('.reveal');
 
         const observer = new IntersectionObserver((entries, observer) => {
@@ -356,29 +356,6 @@
         reveals.forEach(reveal => {
             observer.observe(reveal);
         });
-        
-        // 2. Efecto Parallax / Mouse Follow en Hero Visual
-        const heroImageCol = document.getElementById('hero-image-col');
-        const overlay1 = document.querySelector('.overlay-image-1');
-        const overlay2 = document.querySelector('.overlay-image-2');
-
-        if (heroImageCol) {
-            heroImageCol.addEventListener('mousemove', (e) => {
-                const rect = heroImageCol.getBoundingClientRect();
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const mouseX = e.clientX - rect.left;
-                const mouseY = e.clientY - rect.top;
-
-                const moveX = (mouseX - centerX) / 30; 
-                const moveY = (mouseY - centerY) / 30;
-
-                // Aplicar movimiento inverso a las imágenes superpuestas (efecto de profundidad)
-                if (overlay1) overlay1.style.transform = `translate(${-moveX * 1.5}px, ${-moveY * 1.5}px)`;
-                if (overlay2) overlay2.style.transform = `translate(${-moveX * 0.8}px, ${-moveY * 0.8}px)`;
-            });
-        }
         
     </script>
 
