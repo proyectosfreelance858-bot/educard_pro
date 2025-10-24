@@ -8,19 +8,20 @@ from dotenv import load_dotenv
 load_dotenv()
 app = Flask(__name__)
 
-# Lista de Módulos y Temas CLAVE: Refuerzo de Matemática Grado Sexto
-MODULOS_INFO = [
-    {"grado": "MÓDULO 1 (6°)", "categoria": "NÚMEROS Y OPERACIONES", "tema_1": "Valor Posicional y Descomposición", "tema_2": "Suma y Resta de Polinomios Aritméticos"},
-    {"grado": "MÓDULO 2 (6°)", "categoria": "FRACCIONES Y DECIMALES", "tema_1": "Conversión Fracción-Decimal", "tema_2": "Operaciones Básicas con Fracciones"},
-    {"grado": "MÓDULO 3 (6°)", "categoria": "MÚLTIPLOS Y DIVISORES", "tema_1": "Criterios de Divisibilidad", "tema_2": "M.C.M. y M.C.D. Aplicado a Problemas"},
-    {"grado": "MÓDULO 4 (6°)", "categoria": "GEOMETRÍA EUCLIDIANA", "tema_1": "Cálculo de Área y Perímetro de Figuras", "tema_2": "Clasificación de Ángulos y Triángulos"},
-    {"grado": "MÓDULO 5 (6°)", "categoria": "ESTADÍSTICA Y AZAR", "tema_1": "Tablas de Frecuencia y Gráficos", "tema_2": "Conceptos Fundamentales de Probabilidad"},
-    {"grado": "MÓDULO 6 (6°)", "categoria": "RAZONES Y PROPORCIONES", "tema_1": "Introducción a las Razones (Comparación)", "tema_2": "Regla de Tres Simple y Aplicaciones"},
+# --- NOTA CRÍTICA: ELIMINAMOS MODULOS_INFO ---
+# Definimos una lista de temas genéricos SÓLO para asegurar que los productos tengan contexto
+# si la base de datos sólo contiene los campos básicos (nombre, precio, etc.)
+GENERIC_MATH_TOPICS = [
+    ("MÓDULO NÚMEROS (6°)", "NÚMEROS Y OPERACIONES", "Valor Posicional", "Polinomios Aritméticos"),
+    ("MÓDULO FRACCIONES (6°)", "FRACCIONES Y DECIMALES", "Operaciones Básicas", "Conversión Decimal"),
+    ("MÓDULO DIVISIBILIDAD (6°)", "MÚLTIPLOS Y DIVISORES", "M.C.M. y M.C.D.", "Criterios de Divisibilidad"),
+    ("MÓDULO GEOMETRÍA (6°)", "GEOMETRÍA BÁSICA", "Área y Perímetro", "Clasificación de Figuras"),
+    ("MÓDULO ESTADÍSTICA (6°)", "ESTADÍSTICA Y AZAR", "Tablas de Frecuencia", "Probabilidad Elemental"),
+    ("MÓDULO PROPORCIONES (6°)", "RAZONES Y PROPORCIONES", "Regla de Tres", "Escalas y Mapas"),
 ]
 
 # --- 2. GESTIÓN DE LA CONEXIÓN A LA BASE DE DATOS ---
 def get_db_connection():
-    # ... (Se mantiene la lógica de conexión a la DB)
     DATABASE_URL = os.environ.get('DATABASE_URL')
     if not DATABASE_URL:
         print("ERROR: La variable DATABASE_URL no está definida.")
@@ -43,32 +44,36 @@ def index():
     if conn:
         try:
             cur = conn.cursor()
-            # Consultamos los módulos (limitados para llenar los 6 espacios de la estructura)
-            cur.execute('SELECT nombre, instructor, imagen_url, precio, estudiantes, rating FROM productos ORDER BY id ASC LIMIT 6;')
+
+            # Consultamos hasta 10 productos para llenar la página ampliada
+            # La página tendrá 6 módulos como sección principal y 4 más en una vista expandida
+            cur.execute('SELECT nombre, instructor, imagen_url, precio, estudiantes, rating FROM productos ORDER BY id ASC LIMIT 10;')
             productos_data = cur.fetchall()
             
             for i, p in enumerate(productos_data):
-                # Asignamos el contenido específico de refuerzo de 6to grado
-                info = MODULOS_INFO[i % len(MODULOS_INFO)] 
+                # Asignamos contexto temático CÍCLICAMENTE si la base de datos es genérica
+                topic_index = i % len(GENERIC_MATH_TOPICS)
+                info = GENERIC_MATH_TOPICS[topic_index]
                 
                 productos.append({
-                    'nombre': p[0] if p[0] else info["categoria"],
-                    'instructor': p[1] if p[1] else "Experto en Didáctica",
+                    'nombre': p[0] if p[0] else info[1], # Priorizamos nombre de DB
+                    'instructor': p[1] if p[1] else "Docente Experto", # Priorizamos instructor de DB
                     'imagen_url': p[2], 
-                    # Definimos precios de ejemplo, con algunos gratis para refuerzo
-                    'precio': p[3] if p[3] is not None else (0 if i == 0 else 19.99), 
+                    'precio': p[3] if p[3] is not None else (0.0 if i == 0 else 19.99), # Priorizamos precio de DB
                     'estudiantes': p[4] if p[4] is not None else 850,
                     'rating': p[5] if p[5] is not None else 4.7,
-                    'categoria': info["grado"], 
-                    'tema_1': info["tema_1"],
-                    'tema_2': info["tema_2"]
+                    'categoria': info[0], # e.g., "MÓDULO NÚMEROS (6°)"
+                    'tema_1': info[2],
+                    'tema_2': info[3]
                 })
 
             cur.close()
+
         except Exception as e:
-            print(f"Error al obtener productos: {e}") 
+            print(f"Error al obtener productos de la base de datos: {e}") 
         finally:
-            conn.close()
+            if conn:
+                conn.close()
     
     return render_template('index.html', productos=productos)
 
