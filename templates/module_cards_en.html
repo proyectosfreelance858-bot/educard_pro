@@ -1,0 +1,30 @@
+<div class="module-grid">
+    {% for producto in productos %}
+    <div class="module-card reveal" style="transition-delay: {{ loop.index * 0.1 }}s;">
+        <div class="card-image-wrapper">
+            <img src="{{ producto.imagen_url if producto.imagen_url else 'https://i.postimg.cc/85zK6v2N/main-student.jpg' }}" alt="Module Image">
+            <span class="card-tag">{{ producto.categoria | default('REINFORCEMENT') }}</span>
+        </div>
+        <div class="card-content">
+            <div class="card-instructor">
+                <img src="https://i.postimg.cc/50tFh3sQ/designer-3.jpg" alt="Instructor Avatar" class="instructor-avatar">
+                <span class="instructor-name">{{ producto.instructor | default('Didactic Expert') }}</span>
+            </div>
+            <h3 class="card-title">{{ producto.nombre | default('Main Thematic Module') }}</h3>
+            <p style="font-size: 0.9rem; color: var(--color-text-dark);">**Topics:** {{ producto.tema_1 }} and {{ producto.tema_2 }}.</p>
+        </div>
+        <div class="card-meta">
+            <div class="meta-item"><i class="fa-solid fa-users"></i><span>{{ producto.estudiantes | default(850) | int }} Students</span></div>
+            <div class="meta-item"><i class="fa-solid fa-star"></i><span>{{ "%.1f" | format(producto.rating | default(4.7)) }}</span></div>
+        </div>
+        <div class="card-actions card-content">
+            <span class="card-price">
+                {% if producto.precio == 0 or producto.precio is none %}<span class="free">FREE</span>{% else %}${{ "%.2f" | format(producto.precio) }}{% endif %}
+            </span>
+            <a href="#" class="explore-button">View Details</a>
+        </div>
+    </div>
+    {% else %}
+    <p style="color: var(--color-text-subtle); font-size: 1.2rem; text-align: center; width: 100%;">No reinforcement modules available. The database returned no results for the "productos" table.</p>
+    {% endfor %}
+</div>
