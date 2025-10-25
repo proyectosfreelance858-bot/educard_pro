@@ -34,7 +34,7 @@
         header {
             position: sticky; top: 0; left: 0; width: 100%; height: var(--header-height);
             display: flex; justify-content: space-between; align-items: center;
-            padding: 0 3%; /* Menos padding horizontal para incluir la bandera */
+            padding: 0 3%; 
             background-color: var(--color-surface);
             box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05); z-index: 1000;
         }
@@ -108,62 +108,55 @@
             border: 1px solid var(--color-border);
         }
         
-        /* Estilos Hero y Módulos (Se mantienen) */
-        .hero { background-color: var(--color-surface); }
-        .module-card { border: 1px solid var(--color-border); }
-        .explore-button { border: 2px solid var(--color-primary); }
+        /* --- Estilos Hero (se mantienen) --- */
+        .hero { min-height: 85vh; display: flex; align-items: center; padding-top: var(--header-height); background-color: var(--color-surface); position: relative; overflow: hidden; }
+        .hero-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; align-items: center; padding: 50px 0; }
+        .hero-text-col h1 { font-family: var(--font-heading); font-size: 3.8rem; font-weight: 800; line-height: 1.1; margin-bottom: 25px; color: var(--color-text-dark); letter-spacing: -1.5px; }
+        .hero-text-col h1 .highlight { background-color: var(--color-secondary); color: var(--color-text-dark); padding: 0 12px; border-radius: 6px; box-decoration-break: clone; }
+        .hero-animation-col { position: relative; height: 450px; display: flex; align-items: center; justify-content: center; }
+        .phone-frame { position: relative; width: 100%; height: 100%; max-width: 300px; border: 4px solid var(--color-secondary); border-radius: 30px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); overflow: hidden; background-color: white; z-index: 10; }
+        .phone-video { width: 100%; height: 100%; object-fit: cover; border-radius: 26px; }
 
-        /* --- PIE DE PÁGINA (FOOTER) MEJORADO --- */
-        footer {
-            background-color: var(--color-text-dark); /* Fondo oscuro para contraste */
-            color: white;
-            padding: 50px 0;
-            font-size: 0.9rem;
-        }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 40px;
-        }
-        .footer-about h5, .footer-links h5 {
-            font-family: var(--font-heading);
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            font-weight: 700;
-            color: var(--color-secondary);
-        }
-        .footer-about p {
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 20px;
-        }
-        .footer-links ul {
-            list-style: none;
-        }
-        .footer-links ul li {
-            margin-bottom: 10px;
-        }
-        .footer-links ul li a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        .footer-links ul li a:hover {
-            color: white;
-        }
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 30px;
-            padding-top: 20px;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.8rem;
-        }
+        /* --- Estilos Módulos (se mantienen) --- */
+        .popular-modules { background-color: var(--color-surface); padding-top: 120px; }
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-title { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
+        .section-subtitle { font-size: 1.1rem; color: var(--color-text-subtle); max-width: 700px; margin: 0 auto; }
+        .module-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
+        .module-card { background-color: var(--color-surface); border-radius: 12px; box-shadow: 0 4px 15px var(--color-shadow-light); overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; border: 1px solid var(--color-border); }
+        .card-image-wrapper { position: relative; height: 200px; overflow: hidden; }
+        .card-tag { position: absolute; top: 15px; left: 15px; background-color: #5b55e8; color: white; padding: 5px 12px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; }
+        .card-content { padding: 20px; flex-grow: 1; }
+        .card-title { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; min-height: 50px; }
+        .card-price .free { color: #28a745; }
+        .explore-button { padding: 8px 15px; font-size: 0.9rem; font-weight: 600; color: var(--color-primary); border: 2px solid var(--color-primary); border-radius: 6px; text-decoration: none; transition: all 0.3s; }
+        .explore-button:hover { background-color: var(--color-primary); color: white; }
+
+        /* --- Estilos Secciones Adicionales --- */
+        .extra-sections { background-color: var(--color-background); padding-bottom: 90px; }
+        .subjects-grid { display: flex; justify-content: space-between; margin-top: 40px; gap: 20px; padding-top: 30px; }
+        .subject-card { background: var(--color-surface); padding: 25px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); width: 30%; text-align: center; }
+        .subject-card i { font-size: 2.5rem; color: var(--color-primary); margin-bottom: 15px; }
+        .subject-card h4 { font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 10px; }
+        .subject-card.future { opacity: 0.5; }
+
+        /* Asistencia IA Banner */
+        .ai-banner { background-color: var(--color-primary); color: white; padding: 50px; border-radius: 12px; margin-top: 50px; text-align: center; }
+        .ai-banner h3 { font-family: var(--font-heading); font-size: 2.2rem; margin-bottom: 15px; }
+        .ai-banner p { font-size: 1.1rem; opacity: 0.8; margin-bottom: 20px; }
         
-        /* SCROLL REVEAL (Se mantiene) */
-        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
-        /* Media Queries */
+        /* --- PIE DE PÁGINA (FOOTER) MEJORADO --- */
+        footer { background-color: var(--color-text-dark); color: white; padding: 50px 0; font-size: 0.9rem; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
+        .footer-about h5, .footer-links h5 { font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 20px; font-weight: 700; color: var(--color-secondary); }
+        .footer-about p { color: rgba(255, 255, 255, 0.7); margin-bottom: 20px; }
+        .footer-links ul { list-style: none; }
+        .footer-links ul li { margin-bottom: 10px; }
+        .footer-links ul li a { color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s; }
+        .footer-links ul li a:hover { color: white; }
+        .footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.1); margin-top: 30px; padding-top: 20px; text-align: center; color: rgba(255, 255, 255, 0.5); font-size: 0.8rem; }
+        
+        /* Media Queries (se mantienen) */
         @media (max-width: 900px) {
             .hero-grid { grid-template-columns: 1fr; text-align: center; }
             .hero-text-col h1 { font-size: 2.8rem; }
@@ -171,12 +164,15 @@
             .footer-grid { grid-template-columns: 1fr; text-align: center; }
             .language-dropdown { right: -30px; }
             nav ul { display: none; }
+            .subjects-grid { flex-direction: column; align-items: center; }
+            .subject-card { width: 80%; margin-bottom: 20px; }
         }
     </style>
 </head>
 <body>
 
     <main id="language-content">
+        
         <div id="lang-es" data-lang="es">
             <header>
                 <a href="#" class="logo-container">
@@ -219,6 +215,7 @@
                         <div class="phone-frame">
                             <video class="phone-video" autoplay loop muted playsinline controls=false>
                                 <source src="https://www.wited.com/wp-content/uploads/2025/06/Animacion_01_crop.webm" type="video/webm">
+                                Tu navegador no soporta el formato de video WebM.
                             </video>
                         </div>
                     </div>
@@ -235,7 +232,11 @@
                     <div class="module-grid">
                         {% for producto in productos %}
                         <div class="module-card reveal" style="transition-delay: {{ loop.index * 0.1 }}s;">
-                            <div class="card-image-wrapper"><img src="{{ producto.imagen_url if producto.imagen_url else 'https://i.postimg.cc/85zK6v2N/main-student.jpg' }}" alt="Módulo"><span class="card-tag">{{ producto.categoria | default('REFUERZO') }}</span></div>
+                            <div class="card-image-wrapper">
+                                <img src="{{ producto.imagen_url if producto.imagen_url else 'https://i.postimg.cc/85zK6v2N/main-student.jpg' }}" alt="Módulo">
+                                <span class="card-tag">{{ producto.categoria | default('REFUERZO') }}</span>
+                            </div>
+                            
                             <div class="card-content">
                                 <div class="card-instructor">
                                     <img src="https://i.postimg.cc/50tFh3sQ/designer-3.jpg" alt="Avatar Instructor" class="instructor-avatar">
@@ -244,6 +245,7 @@
                                 <h3 class="card-title">{{ producto.nombre | default('Módulo Temático Principal') }}</h3>
                                 <p style="font-size: 0.9rem; color: var(--color-text-dark);">**Tópicos:** {{ producto.tema_1 }} y {{ producto.tema_2 }}.</p>
                             </div>
+
                             <div class="card-meta">
                                 <div class="meta-item"><i class="fa-solid fa-users"></i><span>{{ producto.estudiantes | default(850) | int }} Estudiantes</span></div>
                                 <div class="meta-item"><i class="fa-solid fa-star"></i><span>{{ "%.1f" | format(producto.rating | default(4.7)) }}</span></div>
@@ -258,19 +260,43 @@
                         {% else %}
                         <p style="color: var(--color-text-subtle); font-size: 1.2rem; text-align: center; width: 100%;">No hay módulos de refuerzo disponibles. La base de datos no arrojó resultados para la tabla "productos".</p>
                         {% endfor %}
-                    </div>
+                        </div>
                 </div>
             </section>
             
             <section class="extra-sections">
                 <div class="container">
+                    <div class="section-header reveal">
+                        <h2 class="section-title">Soluciones Adicionales de Refuerzo</h2>
+                        <p class="section-subtitle">Accede a asistencia inmediata y conoce las próximas áreas de refuerzo.</p>
+                    </div>
+
                     <div class="ai-banner reveal">
                         <i class="fa-solid fa-robot" style="font-size: 3rem; margin-bottom: 10px;"></i>
                         <h3>Asistencia por IA 24/7</h3>
                         <p>Resuelve dudas, obtén explicaciones paso a paso y practica ejercicios al instante con nuestro asistente inteligente.</p>
                         <a href="#" class="main-cta-button" style="background-color: white; color: var(--color-primary); box-shadow: none;">Probar Asistencia IA</a>
                     </div>
+
+                    <h3 class="section-title" style="margin-top: 80px;">Próximamente en EDUCARD SAS:</h3>
+                    <div class="subjects-grid">
+                        <div class="subject-card future reveal">
+                            <i class="fa-solid fa-flask"></i>
+                            <h4>Ciencias Naturales (6°)</h4>
+                            <p style="font-size: 0.9rem;">Refuerzo de Biología, Química y Física básica.</p>
+                        </div>
+                        <div class="subject-card future reveal" style="transition-delay: 0.1s;">
+                            <i class="fa-solid fa-book-open"></i>
+                            <h4>Lenguaje y Literatura (6°)</h4>
+                            <p style="font-size: 0.9rem;">Mejora de gramática, ortografía y comprensión lectora.</p>
+                        </div>
+                        <div class="subject-card future reveal" style="transition-delay: 0.2s;">
+                            <i class="fa-solid fa-earth-americas"></i>
+                            <h4>Ciencias Sociales (6°)</h4>
+                            <p style="font-size: 0.9rem;">Tópicos de Historia, Geografía y Cívica.</p>
+                        </div>
                     </div>
+                </div>
             </section>
         </div>
         
@@ -281,7 +307,7 @@
                 <div class="header-actions">
                     <a href="#" class="header-button">Login</a>
                     <div class="language-selector">
-                        <img id="current-flag-en" src="https://flagcdn.com/co.svg" alt="Colombia Flag" class="flag">
+                        <img id="current-flag-en" src="https://flagcdn.com/us.svg" alt="US Flag" class="flag">
                         <div class="language-dropdown">
                             <a href="#" data-lang="es"><img src="https://flagcdn.com/co.svg" alt="Colombia Flag"> Español</a>
                             <a href="#" data-lang="en"><img src="https://flagcdn.com/us.svg" alt="US Flag"> English</a>
@@ -305,7 +331,82 @@
                     </div>
                 </div>
             </section>
-            </div>
+
+            <section class="popular-modules" id="modulos">
+                <div class="container">
+                    <div class="section-header reveal">
+                        <h2 class="section-title">Key Mathematics Modules for Sixth Grade</h2>
+                        <p class="section-subtitle">{{ productos | length }} modules available, created by didactic experts and obtained directly from the EDUCARD SAS database.</p>
+                    </div>
+
+                    <div class="module-grid">
+                        {% for producto in productos %}
+                        <div class="module-card reveal" style="transition-delay: {{ loop.index * 0.1 }}s;">
+                            <div class="card-image-wrapper">
+                                <img src="{{ producto.imagen_url if producto.imagen_url else 'https://i.postimg.cc/85zK6v2N/main-student.jpg' }}" alt="Module Image">
+                                <span class="card-tag">{{ producto.categoria | default('REINFORCEMENT') }}</span>
+                            </div>
+                            
+                            <div class="card-content">
+                                <div class="card-instructor">
+                                    <img src="https://i.postimg.cc/50tFh3sQ/designer-3.jpg" alt="Instructor Avatar" class="instructor-avatar">
+                                    <span class="instructor-name">{{ producto.instructor | default('Didactic Expert') }}</span>
+                                </div>
+                                <h3 class="card-title">{{ producto.nombre | default('Main Thematic Module') }}</h3>
+                                <p style="font-size: 0.9rem; color: var(--color-text-dark);">**Topics:** {{ producto.tema_1 }} and {{ producto.tema_2 }}.</p>
+                            </div>
+
+                            <div class="card-meta">
+                                <div class="meta-item"><i class="fa-solid fa-users"></i><span>{{ producto.estudiantes | default(850) | int }} Students</span></div>
+                                <div class="meta-item"><i class="fa-solid fa-star"></i><span>{{ "%.1f" | format(producto.rating | default(4.7)) }}</span></div>
+                            </div>
+                            <div class="card-actions card-content">
+                                <span class="card-price">
+                                    {% if producto.precio == 0 or producto.precio is none %}<span class="free">FREE</span>{% else %}${{ "%.2f" | format(producto.precio) }}{% endif %}
+                                </span>
+                                <a href="#" class="explore-button">View Details</a>
+                            </div>
+                        </div>
+                        {% else %}
+                        <p style="color: var(--color-text-subtle); font-size: 1.2rem; text-align: center; width: 100%;">No reinforcement modules available. The database returned no results for the "productos" table.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+
+            <section class="extra-sections">
+                <div class="container">
+                    <div class="section-header reveal">
+                        <h2 class="section-title">Additional Reinforcement Solutions</h2>
+                        <p class="section-subtitle">Access immediate assistance and discover upcoming reinforcement areas.</p>
+                    </div>
+                    <div class="ai-banner reveal">
+                        <i class="fa-solid fa-robot" style="font-size: 3rem; margin-bottom: 10px;"></i>
+                        <h3>24/7 AI Assistance</h3>
+                        <p>Resolve doubts, get step-by-step explanations, and practice exercises instantly with our intelligent assistant.</p>
+                        <a href="#" class="main-cta-button" style="background-color: white; color: var(--color-primary); box-shadow: none;">Try AI Assistance</a>
+                    </div>
+                    <h3 class="section-title" style="margin-top: 80px;">Coming Soon to EDUCARD SAS:</h3>
+                    <div class="subjects-grid">
+                        <div class="subject-card future reveal">
+                            <i class="fa-solid fa-flask"></i>
+                            <h4>Natural Sciences (6th)</h4>
+                            <p style="font-size: 0.9rem;">Reinforcement in Biology, Chemistry, and basic Physics.</p>
+                        </div>
+                        <div class="subject-card future reveal" style="transition-delay: 0.1s;">
+                            <i class="fa-solid fa-book-open"></i>
+                            <h4>Language and Literature (6th)</h4>
+                            <p style="font-size: 0.9rem;">Improvement of grammar, spelling, and reading comprehension.</p>
+                        </div>
+                        <div class="subject-card future reveal" style="transition-delay: 0.2s;">
+                            <i class="fa-solid fa-earth-americas"></i>
+                            <h4>Social Sciences (6th)</h4>
+                            <p style="font-size: 0.9rem;">Topics in History, Geography, and Civics.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
         
         <div id="lang-de" data-lang="de" style="display: none;">
             <header>
@@ -314,7 +415,7 @@
                 <div class="header-actions">
                     <a href="#" class="header-button">Anmelden</a>
                     <div class="language-selector">
-                        <img id="current-flag-de" src="https://flagcdn.com/co.svg" alt="Kolumbien Flagge" class="flag">
+                        <img id="current-flag-de" src="https://flagcdn.com/de.svg" alt="Deutschland Flagge" class="flag">
                         <div class="language-dropdown">
                             <a href="#" data-lang="es"><img src="https://flagcdn.com/co.svg" alt="Kolumbien Flagge"> Español</a>
                             <a href="#" data-lang="en"><img src="https://flagcdn.com/us.svg" alt="USA Flagge"> English</a>
@@ -338,29 +439,77 @@
                     </div>
                 </div>
             </section>
-            </div>
-        
-        <div id="shared-sections">
-            <div id="modules-section-container">
-                {% include 'module_cards.html' %} 
-                </div>
-             <section class="extra-sections">
+
+            <section class="popular-modules" id="modulos">
                 <div class="container">
+                    <div class="section-header reveal">
+                        <h2 class="section-title">Schlüsselmodule für Mathematik der 6. Klasse</h2>
+                        <p class="section-subtitle">{{ productos | length }} verfügbare Module, erstellt von Didaktikexperten und direkt aus der EDUCARD SAS Datenbank bezogen.</p>
+                    </div>
+
+                    <div class="module-grid">
+                        {% for producto in productos %}
+                        <div class="module-card reveal" style="transition-delay: {{ loop.index * 0.1 }}s;">
+                            <div class="card-image-wrapper">
+                                <img src="{{ producto.imagen_url if producto.imagen_url else 'https://i.postimg.cc/85zK6v2N/main-student.jpg' }}" alt="Modulbild">
+                                <span class="card-tag">{{ producto.categoria | default('FÖRDERUNG') }}</span>
+                            </div>
+                            
+                            <div class="card-content">
+                                <div class="card-instructor">
+                                    <img src="https://i.postimg.cc/50tFh3sQ/designer-3.jpg" alt="Avatar Ausbilder" class="instructor-avatar">
+                                    <span class="instructor-name">{{ producto.instructor | default('Didaktikexperte') }}</span>
+                                </div>
+                                <h3 class="card-title">{{ producto.nombre | default('Thematisches Hauptmodul') }}</h3>
+                                <p style="font-size: 0.9rem; color: var(--color-text-dark);">**Themen:** {{ producto.tema_1 }} und {{ producto.tema_2 }}.</p>
+                            </div>
+
+                            <div class="card-meta">
+                                <div class="meta-item"><i class="fa-solid fa-users"></i><span>{{ producto.estudiantes | default(850) | int }} Studenten</span></div>
+                                <div class="meta-item"><i class="fa-solid fa-star"></i><span>{{ "%.1f" | format(producto.rating | default(4.7)) }}</span></div>
+                            </div>
+                            <div class="card-actions card-content">
+                                <span class="card-price">
+                                    {% if producto.precio == 0 or producto.precio is none %}<span class="free">KOSTENLOS</span>{% else %}${{ "%.2f" | format(producto.precio) }}{% endif %}
+                                </span>
+                                <a href="#" class="explore-button">Details ansehen</a>
+                            </div>
+                        </div>
+                        {% else %}
+                        <p style="color: var(--color-text-subtle); font-size: 1.2rem; text-align: center; width: 100%;">Keine Nachhilfemodule verfügbar. Die Datenbank lieferte keine Ergebnisse für die Tabelle "productos".</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+
+            <section class="extra-sections">
+                <div class="container">
+                    <div class="section-header reveal">
+                        <h2 class="section-title">Zusätzliche Förderlösungen</h2>
+                        <p class="section-subtitle">Erhalten Sie sofortige Unterstützung und entdecken Sie die nächsten Förderbereiche.</p>
+                    </div>
+                    <div class="ai-banner reveal">
+                        <i class="fa-solid fa-robot" style="font-size: 3rem; margin-bottom: 10px;"></i>
+                        <h3>24/7 KI-Unterstützung</h3>
+                        <p>Lösen Sie Zweifel, erhalten Sie Schritt-für-Schritt-Erklärungen und üben Sie sofort mit unserem intelligenten Assistenten.</p>
+                        <a href="#" class="main-cta-button" style="background-color: white; color: var(--color-primary); box-shadow: none;">KI-Unterstützung testen</a>
+                    </div>
+                    <h3 class="section-title" style="margin-top: 80px;">Demnächst bei EDUCARD SAS:</h3>
                     <div class="subjects-grid">
                         <div class="subject-card future reveal">
                             <i class="fa-solid fa-flask"></i>
-                            <h4>Ciencias Naturales (6°)</h4>
-                            <p style="font-size: 0.9rem;">Refuerzo de Biología, Química y Física básica.</p>
+                            <h4>Naturwissenschaften (6. Klasse)</h4>
+                            <p style="font-size: 0.9rem;">Förderung in Biologie, Chemie und grundlegender Physik.</p>
                         </div>
                         <div class="subject-card future reveal" style="transition-delay: 0.1s;">
                             <i class="fa-solid fa-book-open"></i>
-                            <h4>Lenguaje y Literatura (6°)</h4>
-                            <p style="font-size: 0.9rem;">Mejora de gramática, ortografía y comprensión lectora.</p>
+                            <h4>Sprache und Literatur (6. Klasse)</h4>
+                            <p style="font-size: 0.9rem;">Verbesserung von Grammatik, Rechtschreibung und Leseverständnis.</p>
                         </div>
                         <div class="subject-card future reveal" style="transition-delay: 0.2s;">
                             <i class="fa-solid fa-earth-americas"></i>
-                            <h4>Ciencias Sociales (6°)</h4>
-                            <p style="font-size: 0.9rem;">Tópicos de Historia, Geografía y Cívica.</p>
+                            <h4>Gesellschaftswissenschaften (6. Klasse)</h4>
+                            <p style="font-size: 0.9rem;">Themen in Geschichte, Geographie und Staatsbürgerkunde.</p>
                         </div>
                     </div>
                 </div>
@@ -413,7 +562,7 @@
     <script>
         // --- JAVASCRIPT: LÓGICA DE IDIOMA Y SCROLL REVEAL ---
         
-        // 1. DICCIONARIO DE TRADUCCIONES (Solo para el Footer y Títulos Estáticos)
+        // 1. DICCIONARIO DE TRADUCCIONES (Para el Footer y Títulos Estáticos)
         const translations = {
             'es': {
                 'pageTitle': 'EDUCARD SAS | Refuerzos de Matemática Grado Sexto',
@@ -457,15 +606,26 @@
         };
 
         const flags = {
-            'es': 'https://flagcdn.com/co.svg',
-            'en': 'https://flagcdn.com/us.svg',
-            'de': 'https://flagcdn.com/de.svg'
+            'es': 'https://flagcdn.com/co.svg', // Bandera Colombia
+            'en': 'https://flagcdn.com/us.svg', // Bandera EE.UU.
+            'de': 'https://flagcdn.com/de.svg'  // Bandera Alemania
+        };
+        const langHeaders = {
+            'es': ['co.svg', 'Español'],
+            'en': ['us.svg', 'English'],
+            'de': ['de.svg', 'Deutsch']
         };
 
         function applyTranslation(lang) {
-            // A. Cambiar la visualización de las secciones Hero/Header
+            // A. Cambiar la visualización de las secciones Hero/Header/Sections
             document.querySelectorAll('[data-lang]').forEach(section => {
                 section.style.display = section.dataset.lang === lang ? 'block' : 'none';
+                
+                // Asegurar que el header correcto esté visible (está dentro del div de idioma)
+                const header = section.querySelector('header');
+                if (header) {
+                    header.style.display = section.dataset.lang === lang ? 'flex' : 'none';
+                }
             });
 
             // B. Aplicar traducciones del Footer y Títulos (contenidos estáticos)
@@ -479,9 +639,12 @@
                 }
             }
             
-            // C. Actualizar bandera principal (solo en el header que esté activo)
-            document.querySelectorAll('.flag').forEach(flagElement => {
-                flagElement.src = flags[lang];
+            // C. Actualizar bandera principal para el idioma activo (el que está visible)
+            // Esto solo es necesario si se usa el selector de bandera dentro de cada header
+            document.querySelectorAll('.language-selector .flag').forEach(flagElement => {
+                 // La lógica actual ya lo hace al tener el selector dentro de cada bloque de idioma.
+                 // Solo actualizamos la fuente de la imagen del flag principal.
+                 flagElement.src = flags[lang];
             });
 
             // D. Guardar la preferencia
@@ -497,6 +660,9 @@
             document.querySelectorAll('.language-selector').forEach(selector => {
                 selector.addEventListener('click', (e) => {
                     const dropdown = selector.querySelector('.language-dropdown');
+                    // Ocultar todos los dropdowns primero
+                    document.querySelectorAll('.language-dropdown').forEach(d => d.classList.remove('active'));
+                    // Mostrar solo el actual
                     dropdown.classList.toggle('active');
                     e.stopPropagation();
                 });
@@ -508,6 +674,7 @@
                     e.preventDefault();
                     const newLang = link.dataset.lang;
                     applyTranslation(newLang);
+                    // Ocultar todos los dropdowns después de la selección
                     document.querySelectorAll('.language-dropdown').forEach(d => d.classList.remove('active'));
                 });
             });
@@ -523,7 +690,7 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
-                        observer.unobserve(entry.target);
+                        // observer.unobserve(entry.target); // Dejar comentado si quieres que se anime cada vez que entre en el viewport
                     }
                 });
             }, { root: null, rootMargin: '0px', threshold: 0.1 });
