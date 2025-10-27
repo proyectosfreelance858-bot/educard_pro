@@ -20,7 +20,10 @@
             --color-shadow-light: rgba(0, 0, 0, 0.08);
             --font-heading: 'Outfit', sans-serif;
             --font-body: 'Instrument Sans', sans-serif;
-            --header-height: 80px;
+            --header-height: 60px; /* Reducida a 60px */
+            --wited-blue: #5c67ff;
+            --wited-pink: #eb549e;
+            --wited-orange: #ffc107;
         }
 
         /* Base Reset y Tipografía */
@@ -30,53 +33,87 @@
         .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
         section { padding: 90px 0; position: relative; background-color: var(--color-background); } 
         
-        /* --- ENCABEZADO (HEADER) MEJORADO --- */
+        /* --- ENCABEZADO (HEADER) NUEVO ESTILO WITED --- */
         header {
             position: sticky; top: 0; left: 0; width: 100%; height: var(--header-height);
-            display: flex; justify-content: space-between; align-items: center;
+            display: flex; justify-content: center; /* Centrar contenido para la estructura interna */
             padding: 0 3%; 
             background-color: var(--color-surface);
-            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05); z-index: 1000;
+            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.00); /* Sin sombra por defecto */
+            z-index: 1000;
+        }
+        
+        /* Contenedor principal dentro del header para alinear */
+        .header-inner {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .logo-container { text-decoration: none; display: flex; align-items: center; }
-        .logo-img { height: 35px; margin-right: 10px; }
-        .site-name { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 700; color: var(--color-text-dark); }
+        .logo-img { height: 40px; margin-right: 10px; /* Logo más grande */ }
+        .site-name { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 700; color: var(--color-text-dark); display: none; /* Ocultar el nombre para replicar la imagen */ }
 
-        nav ul { list-style: none; display: flex; }
-        nav ul li { margin-left: 35px; }
-        nav ul li a { text-decoration: none; color: var(--color-text-dark); font-weight: 500; padding: 10px 0; display: block; transition: color 0.3s ease; }
-        nav ul li a:hover, nav ul li a.active { color: var(--color-primary); }
+        /* Navegación al estilo de la imagen */
+        nav ul { list-style: none; display: flex; margin-left: 40px; gap: 10px;}
+        nav ul li { margin-left: 20px; }
+        nav ul li a { text-decoration: none; color: var(--color-text-dark); font-weight: 500; padding: 10px 12px; display: block; transition: color 0.3s ease; border-radius: 8px; font-size: 0.95rem; }
+        nav ul li a:hover, nav ul li a.active { color: var(--wited-blue); background-color: #f0f4ff; }
+        nav ul li a.active { font-weight: 600; }
 
         .header-actions {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 15px;
+        }
+        
+        .header-contact {
+            padding: 8px 16px; 
+            color: var(--wited-blue);
+            border: 1px solid var(--wited-blue);
+            border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 0.9rem;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .header-contact:hover { 
+            background-color: var(--wited-blue); 
+            color: white; 
         }
 
         .header-button {
-            padding: 10px 20px; background-color: var(--color-primary); color: white;
-            border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.95rem;
+            padding: 8px 16px; background-color: var(--wited-blue); color: white;
+            border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 0.9rem;
             transition: background-color 0.3s, transform 0.2s;
         }
         .header-button:hover { background-color: #4b54ff; transform: translateY(-1px); }
 
-        /* --- Selector de Idioma (Bandera) --- */
+        /* --- Selector de Idioma (Bandera) MEJORADO --- */
         .language-selector {
             position: relative;
             cursor: pointer;
-            padding: 5px;
+            padding: 5px 10px; /* Espacio para el selector */
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            border-radius: 20px;
+            transition: background-color 0.2s;
         }
+        .language-selector:hover {
+             background-color: #f0f4ff; 
+        }
+
         .flag {
-            width: 30px;
-            height: 30px;
+            width: 25px; /* Bandera más pequeña */
+            height: 25px;
             border-radius: 50%;
             object-fit: cover;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.0);
+            border: 1px solid var(--color-border);
         }
         .language-dropdown {
             position: absolute;
-            top: 40px;
+            top: 45px;
             right: 0;
             background-color: var(--color-surface);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -89,6 +126,7 @@
         .language-dropdown.active {
             display: block;
         }
+        /* El resto de estilos del dropdown se mantienen */
         .language-dropdown a {
             display: flex;
             align-items: center;
@@ -108,7 +146,7 @@
             border: 1px solid var(--color-border);
         }
         
-        /* --- Estilos Hero (se mantienen) --- */
+        /* --- Estilos Hero (MANTENIDOS) --- */
         .hero { min-height: 85vh; display: flex; align-items: center; padding-top: var(--header-height); background-color: var(--color-surface); position: relative; overflow: hidden; }
         .hero-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; align-items: center; padding: 50px 0; }
         .hero-text-col h1 { font-family: var(--font-heading); font-size: 3.8rem; font-weight: 800; line-height: 1.1; margin-bottom: 25px; color: var(--color-text-dark); letter-spacing: -1.5px; }
@@ -116,9 +154,88 @@
         .hero-animation-col { position: relative; height: 450px; display: flex; align-items: center; justify-content: center; }
         .phone-frame { position: relative; width: 100%; height: 100%; max-width: 300px; border: 4px solid var(--color-secondary); border-radius: 30px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); overflow: hidden; background-color: white; z-index: 10; }
         .phone-video { width: 100%; height: 100%; object-fit: cover; border-radius: 26px; }
+        
+        /* Estilos para el nuevo CTA */
+        .main-cta-button {
+            padding: 12px 25px;
+            background-color: var(--wited-blue);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            display: inline-block;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        .main-cta-button:hover { background-color: #4b54ff; }
+        .cta-info { font-size: 0.9rem; color: var(--color-text-subtle); margin-top: 15px; }
 
-        /* --- Estilos Módulos (se mantienen) --- */
-        .popular-modules { background-color: var(--color-surface); padding-top: 120px; }
+
+        /* --- Sección: ¿Buscas mejores resultados? (NUEVA) --- */
+        .better-results-section {
+            background-color: white; /* Asumiendo fondo blanco como el Hero */
+            padding: 90px 0;
+        }
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 50px;
+            align-items: center;
+        }
+        .results-video-col {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            background-color: #f0f4ff; /* Color de fondo claro para el contenedor */
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+        .results-video-col video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .results-text-col h2 {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+        .results-text-col h2 .highlight-blue {
+            color: var(--wited-blue);
+        }
+        .results-text-col p {
+            font-size: 1.1rem;
+            color: var(--color-text-dark);
+            margin-bottom: 30px;
+        }
+        .results-button-group a {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-right: 15px;
+            border-radius: 25px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        .results-button-group a:first-child { /* Refuerzo */
+            background-color: var(--wited-pink);
+            color: white;
+        }
+        .results-button-group a:last-child { /* Homeschool */
+            background-color: var(--wited-blue);
+            color: white;
+        }
+
+
+        /* --- Estilos Módulos (MANTENIDOS) --- */
+        .popular-modules { background-color: var(--color-background); padding-top: 120px; }
         .section-header { text-align: center; margin-bottom: 50px; }
         .section-title { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
         .section-subtitle { font-size: 1.1rem; color: var(--color-text-subtle); max-width: 700px; margin: 0 auto; }
@@ -132,7 +249,7 @@
         .explore-button { padding: 8px 15px; font-size: 0.9rem; font-weight: 600; color: var(--color-primary); border: 2px solid var(--color-primary); border-radius: 6px; text-decoration: none; transition: all 0.3s; }
         .explore-button:hover { background-color: var(--color-primary); color: white; }
 
-        /* --- Estilos Secciones Adicionales --- */
+        /* --- Estilos Secciones Adicionales (MANTENIDOS) --- */
         .extra-sections { background-color: var(--color-background); padding-bottom: 90px; }
         .subjects-grid { display: flex; justify-content: space-between; margin-top: 40px; gap: 20px; padding-top: 30px; }
         .subject-card { background: var(--color-surface); padding: 25px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); width: 30%; text-align: center; }
@@ -145,7 +262,7 @@
         .ai-banner h3 { font-family: var(--font-heading); font-size: 2.2rem; margin-bottom: 15px; }
         .ai-banner p { font-size: 1.1rem; opacity: 0.8; margin-bottom: 20px; }
         
-        /* --- PIE DE PÁGINA (FOOTER) MEJORADO --- */
+        /* --- PIE DE PÁGINA (FOOTER) MEJORADO (MANTENIDO) --- */
         footer { background-color: var(--color-text-dark); color: white; padding: 50px 0; font-size: 0.9rem; }
         .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
         .footer-about h5, .footer-links h5 { font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 20px; font-weight: 700; color: var(--color-secondary); }
@@ -156,7 +273,7 @@
         .footer-links ul li a:hover { color: white; }
         .footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.1); margin-top: 30px; padding-top: 20px; text-align: center; color: rgba(255, 255, 255, 0.5); font-size: 0.8rem; }
         
-        /* Media Queries (se mantienen) */
+        /* Media Queries (MANTENIDOS y ajustados) */
         @media (max-width: 900px) {
             .hero-grid { grid-template-columns: 1fr; text-align: center; }
             .hero-text-col h1 { font-size: 2.8rem; }
@@ -166,6 +283,7 @@
             nav ul { display: none; }
             .subjects-grid { flex-direction: column; align-items: center; }
             .subject-card { width: 80%; margin-bottom: 20px; }
+            .results-grid { grid-template-columns: 1fr; text-align: center; }
         }
     </style>
 </head>
@@ -175,28 +293,30 @@
         
         <div id="lang-es" data-lang="es">
             <header>
-                <a href="#" class="logo-container">
-                    <img src="https://i.postimg.cc/t4tVr741/54c82322-2df7-4887-abc0-da706407fcd4-2.png" alt="Logo Educard" class="logo-img">
-                    <span class="site-name">Educard</span>
-                </a>
-
-                <nav>
-                    <ul>
-                        <li><a href="#hero-section" class="active">Inicio</a></li>
-                        <li><a href="#modulos">Refuerzos (6°)</a></li>
-                        <li><a href="#">Planes</a></li>
-                        <li><a href="#">Contáctanos</a></li>
-                    </ul>
-                </nav>
-
-                <div class="header-actions">
-                    <a href="#" class="header-button">Acceder</a>
-                    <div class="language-selector">
-                        <img id="current-flag-es" src="https://flagcdn.com/co.svg" alt="Bandera de Colombia" class="flag">
-                        <div class="language-dropdown">
-                            <a href="#" data-lang="es"><img src="https://flagcdn.com/co.svg" alt="Bandera Colombia"> Español</a>
-                            <a href="#" data-lang="en"><img src="https://flagcdn.com/us.svg" alt="Bandera EE.UU."> English</a>
-                            <a href="#" data-lang="de"><img src="https://flagcdn.com/de.svg" alt="Bandera Alemania"> Deutsch</a>
+                <div class="header-inner">
+                    <a href="#" class="logo-container">
+                        <img src="https://i.postimg.cc/t4tVr741/54c82322-2df7-4887-abc0-da706407fcd4-2.png" alt="Logo Educard" class="logo-img">
+                        <span class="site-name">Educard</span>
+                    </a>
+    
+                    <nav>
+                        <ul>
+                            <li><a href="#hero-section" class="active">Reforzamiento</a></li>
+                            <li><a href="#">Colegio Online</a></li>
+                            <li><a href="#">Empresas</a></li>
+                        </ul>
+                    </nav>
+    
+                    <div class="header-actions">
+                        <a href="#" class="header-contact">Contacto</a>
+                        <a href="#" class="header-button">Acceder</a>
+                        <div class="language-selector">
+                            <img id="current-flag-es" src="https://flagcdn.com/co.svg" alt="Bandera de Colombia" class="flag">
+                            <div class="language-dropdown">
+                                <a href="#" data-lang="es"><img src="https://flagcdn.com/co.svg" alt="Bandera Colombia"> Español</a>
+                                <a href="#" data-lang="en"><img src="https://flagcdn.com/us.svg" alt="Bandera EE.UU."> English</a>
+                                <a href="#" data-lang="de"><img src="https://flagcdn.com/de.svg" alt="Bandera Alemania"> Deutsch</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -217,6 +337,23 @@
                                 <source src="https://www.wited.com/wp-content/uploads/2025/06/Animacion_01_crop.webm" type="video/webm">
                                 Tu navegador no soporta el formato de video WebM.
                             </video>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="better-results-section">
+                <div class="container results-grid">
+                    <div class="results-video-col reveal">
+                        <video src="https://www.wited.com/wp-content/uploads/2025/06/Animacion_03_Mp4.mp4" autoplay loop muted playsinline></video>
+                    </div>
+                    <div class="results-text-col reveal" style="transition-delay: 0.2s;">
+                        <h2>¿Buscas <span class="highlight-blue">mejores resultados?</span></h2>
+                        <p>Nuestra metodología de aprendizaje en capas garantiza el éxito académico. Hoy más de **40.000 estudiantes** en Latinoamérica aprenden con Wited.</p>
+                        <p>Conoce nuestros planes y precios. ¿Qué opción necesitas?</p>
+                        <div class="results-button-group">
+                            <a href="#">Reforzamiento</a>
+                            <a href="#">Homeschool</a>
                         </div>
                     </div>
                 </div>
@@ -302,16 +439,28 @@
         
         <div id="lang-en" data-lang="en" style="display: none;">
             <header>
-                <a href="#" class="logo-container"><img src="https://i.postimg.cc/t4tVr741/54c82322-2df7-4887-abc0-da706407fcd4-2.png" alt="Educard Logo" class="logo-img"><span class="site-name">Educard</span></a>
-                <nav><ul><li><a href="#hero-section" class="active">Home</a></li><li><a href="#modulos">Reinforcements (6th)</a></li><li><a href="#">Plans</a></li><li><a href="#">Contact Us</a></li></ul></nav>
-                <div class="header-actions">
-                    <a href="#" class="header-button">Login</a>
-                    <div class="language-selector">
-                        <img id="current-flag-en" src="https://flagcdn.com/us.svg" alt="US Flag" class="flag">
-                        <div class="language-dropdown">
-                            <a href="#" data-lang="es"><img src="https://flagcdn.com/co.svg" alt="Colombia Flag"> Español</a>
-                            <a href="#" data-lang="en"><img src="https://flagcdn.com/us.svg" alt="US Flag"> English</a>
-                            <a href="#" data-lang="de"><img src="https://flagcdn.com/de.svg" alt="Germany Flag"> Deutsch</a>
+                <div class="header-inner">
+                    <a href="#" class="logo-container">
+                        <img src="https://i.postimg.cc/t4tVr741/54c82322-2df7-4887-abc0-da706407fcd4-2.png" alt="Educard Logo" class="logo-img">
+                        <span class="site-name">Educard</span>
+                    </a>
+                    <nav>
+                        <ul>
+                            <li><a href="#hero-section" class="active">Reinforcement</a></li>
+                            <li><a href="#">Online School</a></li>
+                            <li><a href="#">Business</a></li>
+                        </ul>
+                    </nav>
+                    <div class="header-actions">
+                        <a href="#" class="header-contact">Contact</a>
+                        <a href="#" class="header-button">Login</a>
+                        <div class="language-selector">
+                            <img id="current-flag-en" src="https://flagcdn.com/us.svg" alt="US Flag" class="flag">
+                            <div class="language-dropdown">
+                                <a href="#" data-lang="es"><img src="https://flagcdn.com/co.svg" alt="Colombia Flag"> Español</a>
+                                <a href="#" data-lang="en"><img src="https://flagcdn.com/us.svg" alt="US Flag"> English</a>
+                                <a href="#" data-lang="de"><img src="https://flagcdn.com/de.svg" alt="Germany Flag"> Deutsch</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -328,6 +477,23 @@
                     </div>
                     <div class="hero-animation-col reveal" style="transition-delay: 0.2s;">
                         <div class="phone-frame"><video class="phone-video" autoplay loop muted playsinline controls=false><source src="https://www.wited.com/wp-content/uploads/2025/06/Animacion_01_crop.webm" type="video/webm"></video></div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="better-results-section">
+                <div class="container results-grid">
+                    <div class="results-video-col reveal">
+                        <video src="https://www.wited.com/wp-content/uploads/2025/06/Animacion_03_Mp4.mp4" autoplay loop muted playsinline></video>
+                    </div>
+                    <div class="results-text-col reveal" style="transition-delay: 0.2s;">
+                        <h2>Looking for <span class="highlight-blue">better results?</span></h2>
+                        <p>Our layered learning methodology guarantees academic success. Today, more than **40,000 students** in Latin America learn with Wited.</p>
+                        <p>Know our plans and prices. Which option do you need?</p>
+                        <div class="results-button-group">
+                            <a href="#">Reinforcement</a>
+                            <a href="#">Homeschool</a>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -410,16 +576,28 @@
         
         <div id="lang-de" data-lang="de" style="display: none;">
             <header>
-                <a href="#" class="logo-container"><img src="https://i.postimg.cc/t4tVr741/54c82322-2df7-4887-abc0-da706407fcd4-2.png" alt="Educard Logo" class="logo-img"><span class="site-name">Educard</span></a>
-                <nav><ul><li><a href="#hero-section" class="active">Startseite</a></li><li><a href="#modulos">Förderung (6. Klasse)</a></li><li><a href="#">Pläne</a></li><li><a href="#">Kontakt</a></li></ul></nav>
-                <div class="header-actions">
-                    <a href="#" class="header-button">Anmelden</a>
-                    <div class="language-selector">
-                        <img id="current-flag-de" src="https://flagcdn.com/de.svg" alt="Deutschland Flagge" class="flag">
-                        <div class="language-dropdown">
-                            <a href="#" data-lang="es"><img src="https://flagcdn.com/co.svg" alt="Kolumbien Flagge"> Español</a>
-                            <a href="#" data-lang="en"><img src="https://flagcdn.com/us.svg" alt="USA Flagge"> English</a>
-                            <a href="#" data-lang="de"><img src="https://flagcdn.com/de.svg" alt="Deutschland Flagge"> Deutsch</a>
+                <div class="header-inner">
+                    <a href="#" class="logo-container">
+                        <img src="https://i.postimg.cc/t4tVr741/54c82322-2df7-4887-abc0-da706407fcd4-2.png" alt="Educard Logo" class="logo-img">
+                        <span class="site-name">Educard</span>
+                    </a>
+                    <nav>
+                        <ul>
+                            <li><a href="#hero-section" class="active">Förderung</a></li>
+                            <li><a href="#">Online Schule</a></li>
+                            <li><a href="#">Unternehmen</a></li>
+                        </ul>
+                    </nav>
+                    <div class="header-actions">
+                        <a href="#" class="header-contact">Kontakt</a>
+                        <a href="#" class="header-button">Anmelden</a>
+                        <div class="language-selector">
+                            <img id="current-flag-de" src="https://flagcdn.com/de.svg" alt="Deutschland Flagge" class="flag">
+                            <div class="language-dropdown">
+                                <a href="#" data-lang="es"><img src="https://flagcdn.com/co.svg" alt="Kolumbien Flagge"> Español</a>
+                                <a href="#" data-lang="en"><img src="https://flagcdn.com/us.svg" alt="USA Flagge"> English</a>
+                                <a href="#" data-lang="de"><img src="https://flagcdn.com/de.svg" alt="Deutschland Flagge"> Deutsch</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -436,6 +614,23 @@
                     </div>
                     <div class="hero-animation-col reveal" style="transition-delay: 0.2s;">
                         <div class="phone-frame"><video class="phone-video" autoplay loop muted playsinline controls=false><source src="https://www.wited.com/wp-content/uploads/2025/06/Animacion_01_crop.webm" type="video/webm"></video></div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="better-results-section">
+                <div class="container results-grid">
+                    <div class="results-video-col reveal">
+                        <video src="https://www.wited.com/wp-content/uploads/2025/06/Animacion_03_Mp4.mp4" autoplay loop muted playsinline></video>
+                    </div>
+                    <div class="results-text-col reveal" style="transition-delay: 0.2s;">
+                        <h2>Suchen Sie nach <span class="highlight-blue">besseren Ergebnissen?</span></h2>
+                        <p>Unsere mehrschichtige Lernmethodik garantiert akademischen Erfolg. Heute lernen mehr als **40.000 Studenten** in Lateinamerika mit Wited.</p>
+                        <p>Informieren Sie sich über unsere Pläne und Preise. Welche Option benötigen Sie?</p>
+                        <div class="results-button-group">
+                            <a href="#">Förderung</a>
+                            <a href="#">Homeschooling</a>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -560,7 +755,7 @@
     </footer>
 
     <script>
-        // --- JAVASCRIPT: LÓGICA DE IDIOMA Y SCROLL REVEAL ---
+        // --- JAVASCRIPT: LÓGICA DE IDIOMA Y SCROLL REVEAL (MANTENIDO) ---
         
         // 1. DICCIONARIO DE TRADUCCIONES (Para el Footer y Títulos Estáticos)
         const translations = {
@@ -610,20 +805,17 @@
             'en': 'https://flagcdn.com/us.svg', // Bandera EE.UU.
             'de': 'https://flagcdn.com/de.svg'  // Bandera Alemania
         };
-        const langHeaders = {
-            'es': ['co.svg', 'Español'],
-            'en': ['us.svg', 'English'],
-            'de': ['de.svg', 'Deutsch']
-        };
 
         function applyTranslation(lang) {
             // A. Cambiar la visualización de las secciones Hero/Header/Sections
             document.querySelectorAll('[data-lang]').forEach(section => {
+                // Alternar la visualización del bloque de idioma principal
                 section.style.display = section.dataset.lang === lang ? 'block' : 'none';
                 
                 // Asegurar que el header correcto esté visible (está dentro del div de idioma)
                 const header = section.querySelector('header');
                 if (header) {
+                    // El header debe ser 'flex' para que funcione el justify-content: center;
                     header.style.display = section.dataset.lang === lang ? 'flex' : 'none';
                 }
             });
@@ -639,11 +831,8 @@
                 }
             }
             
-            // C. Actualizar bandera principal para el idioma activo (el que está visible)
-            // Esto solo es necesario si se usa el selector de bandera dentro de cada header
+            // C. Actualizar bandera principal para el idioma activo (dentro de cada header)
             document.querySelectorAll('.language-selector .flag').forEach(flagElement => {
-                 // La lógica actual ya lo hace al tener el selector dentro de cada bloque de idioma.
-                 // Solo actualizamos la fuente de la imagen del flag principal.
                  flagElement.src = flags[lang];
             });
 
