@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">EDUCARD SAS | Beneficios y Resultados</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <style>
+        /* Variables CSS - Diseño Limpio Minimalista (Consistente) */
+        :root {
+            --color-primary: #5c67ff; /* Azul Educard */
+            --color-secondary: #ffc107; /* Amarillo Destacado */
+            --color-background: #f8f9fa; /* Fondo Suave */
+            --color-surface: #ffffff; /* Superficie Blanca */
+            --color-text-dark: #212529; /* Texto Principal */
+            --color-text-subtle: #6c757d; /* Texto Secundario */
+            --color-border: #e9ecef;
+            --color-shadow-light: rgba(0, 0, 0, 0.08);
+            --font-heading: 'Outfit', sans-serif;
+            --font-body: 'Instrument Sans', sans-serif;
+            --header-height: 80px;
+        }
+
+        /* Base Reset y Tipografía */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); color: var(--color-text-dark); background-color: var(--color-background); line-height: 1.6; overflow-x: hidden; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
+        section { padding: 90px 0; position: relative; } 
+        
+        /* Estilos de botones generales */
+        .main-cta-button {
+            display: inline-block; padding: 15px 30px; background-color: var(--color-primary); color: white;
+            border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 1rem; margin-top: 30px;
+            transition: background-color 0.3s ease, transform 0.2s; box-shadow: 0 8px 15px rgba(92, 103, 255, 0.3);
+        }
+        .main-cta-button:hover { background-color: #4b54ff; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(92, 103, 255, 0.4); }
+
+        /* --- ENCABEZADO (HEADER) COPIA EXACTA --- */
+        header {
+            position: sticky; top: 0; left: 0; width: 100%; height: var(--header-height);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 3%; 
+            background-color: var(--color-surface);
+            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05); z-index: 1000;
+        }
+
+        .logo-container { text-decoration: none; display: flex; align-items: center; }
+        .logo-img { height: 35px; margin-right: 10px; }
+        .site-name { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 700; color: var(--color-text-dark); }
+
+        nav ul { list-style: none; display: flex; }
+        nav ul li { margin-left: 35px; }
+        nav ul li a { text-decoration: none; color: var(--color-text-dark); font-weight: 500; padding: 10px 0; display: block; transition: color 0.3s ease; }
+        nav ul li a:hover, nav ul li a.active { color: var(--color-primary); }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-button {
+            padding: 10px 20px; background-color: var(--color-primary); color: white;
+            border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.95rem;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .header-button:hover { background-color: #4b54ff; transform: translateY(-1px); }
+
+        /* Selector de Idioma (Bandera) */
+        .language-selector {
+            position: relative;
+            cursor: pointer;
+            padding: 5px;
+        }
+        .flag {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .language-dropdown {
+            position: absolute;
+            top: 40px;
+            right: 0;
+            background-color: var(--color-surface);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            overflow: hidden;
+            width: 150px;
+            z-index: 1001;
+            display: none;
+        }
+        .language-dropdown.active {
+            display: block;
+        }
+        .language-dropdown a {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: var(--color-text-dark);
+            font-size: 0.9rem;
+        }
+        .language-dropdown a:hover {
+            background-color: var(--color-background);
+            color: var(--color-primary);
+        }
+        .language-dropdown img {
+            width: 20px;
+            height: 15px;
+            margin-right: 10px;
+            border: 1px solid var(--color-border);
+        }
+
+        /* Estilos Generales de Sección */
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-title { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
+        .section-subtitle { font-size: 1.1rem; color: var(--color-text-subtle); max-width: 700px; margin: 0 auto; }
+        
+        /* --- ESTILOS ESPECÍFICOS DE LA PÁGINA BENEFICIOS (NUEVO DISEÑO) --- */
+        
+        /* Nuevo estilo para Hero - Línea inferior distintiva */
+        .hero-beneficios {
+            background-color: var(--color-surface); 
+            padding: 120px 0 80px;
+            text-align: center;
+            margin-bottom: 0;
+            border-bottom: 6px solid var(--color-primary); 
+        }
+        .hero-beneficios h1 {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+            color: var(--color-text-dark);
+        }
+        .hero-beneficios p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--color-text-subtle);
+        }
+
+        /* Nuevo estilo para Stats - Contraste alto con el color secundario */
+        .stats-section {
+            background: var(--color-secondary); 
+            color: var(--color-text-dark);
+            padding: 50px 0;
+            margin-top: 0;
+            border-radius: 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-section h2 {
+            color: var(--color-text-dark);
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+
+        .stats-grid {
+            display: flex;
+            justify-content: space-around;
+            gap: 30px;
+        }
+
+        .stat-item {
+            flex-basis: 30%;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.85); /* Fondo blanco semi-transparente */
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .stat-item h4 {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            color: var(--color-primary); /* Azul en el amarillo */
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+        .stat-item p {
+            font-size: 1rem;
+            color: var(--color-text-dark);
+            font-weight: 500;
+        }
+
+        /* Nuevo estilo para Beneficios Clave (Alternating Feature Blocks) */
+        .key-benefits-container {
+            padding-top: 60px;
+        }
+        .benefit-feature-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 60px;
+            background-color: var(--color-surface);
+            padding: 40px 60px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+        
+        .benefit-feature-row:nth-child(even) {
+            background-color: #f0f3ff; /* Fondo azul claro para alternar */
+            direction: rtl; /* Invertir orden en filas pares (CSS trick) */
+            box-shadow: none;
+        }
+        
+        .benefit-feature-row:nth-child(even) > * {
+            direction: ltr; /* Corregir el orden del texto */
+        }
+
+        .feature-icon-wrapper {
+            text-align: center;
+        }
+        .feature-icon-wrapper i {
+            font-size: 5rem;
+            color: var(--color-primary);
+            opacity: 0.8;
+            transition: transform 0.3s;
+        }
+        .benefit-feature-row:hover .feature-icon-wrapper i {
+            transform: scale(1.05);
+            color: var(--color-secondary);
+        }
+
+        .feature-content h3 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--color-primary);
+        }
+        .feature-content p {
+            font-size: 1.05rem;
+            color: var(--color-text-dark);
+        }
+
+
+        /* --- PIE DE PÁGINA (FOOTER) COPIA EXACTA --- */
+        footer { background-color: var(--color-text-dark); color: white; padding: 50px 0; font-size: 0.9rem; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
+        .footer-about h5, .footer-links h5 { font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 20px; font-weight: 700; color: var(--color-secondary); }
+        .footer-about p { color: rgba(255, 255, 255, 0.7); margin-bottom: 20px; }
+        .footer-links ul { list-style: none; }
+        .footer-links ul li { margin-bottom: 10px; }
+        .footer-links ul li a { color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s; }
+        .footer-links ul li a:hover { color: white; }
+        .footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.1); margin-top: 30px; padding-top: 20px; text-align: center; color: rgba(255, 255, 255, 0.5); font-size: 0.8rem; }
+        
+        /* Media Queries (Responsive) */
+        @media (max-width: 900px) {
+            nav ul { display: none; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .language-dropdown { right: -30px; }
+            
+            .hero-beneficios h1 { font-size: 2.2rem; }
+            .hero-beneficios p { font-size: 1rem; }
+
+            .stats-grid {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .stats-section {
+                padding: 40px 20px;
+            }
+            
+            .benefit-feature-row {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding: 30px;
+                direction: ltr !important; /* Deshabilitar truco RTL en móvil */
+            }
+            .benefit-feature-row:nth-child(even) > * {
+                direction: ltr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <main id="language-content">
+        
+        <div id="lang-es" data-lang="es">
+            <header>
+                <a href="index.html" class="logo-container">
+                    <img src="https://i.postimg.cc/t4tVr741/54c82322-2df7-4887-abc0-da706407fcd4-2.png" alt="Logo Educard" class="logo-img">
+                    <span class="site-name">Educard SAS</span>
+                </a>
+
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="refuerzos.html">Refuerzos</a></li>
+                        <li><a href="nosotros.html">Nosotros</a></li>
+                        <li><a href="#" class="active">Beneficios</a></li>
+                        <li><a href="index.html#faq">FAQ</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="#" class="header-button">Acceder</a>
+                    <div class="language-selector">
+                        <img id="current-flag-es" src="https://flagcdn.com/co.svg" alt="Bandera de Colombia" class="flag">
+                        <div class="language-dropdown">
+                            <a href="#" data-lang="es"><img src="https://flagcdn.com/co.svg" alt="Bandera Colombia"> Español</a>
+                            <a href="#" data-lang="en"><img src="https://flagcdn.com/us.svg" alt="Bandera EE.UU."> English</a>
+                            <a href="#" data-lang="de"><img src="https://flagcdn.com/de.svg" alt="Bandera Alemania"> Deutsch</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="hero-beneficios">
+                <div class="container">
+                    <h1><strong>Beneficios Inmediatos</strong> de Elegir EDUCARD S.A.S.</h1>
+                    <p>Transformamos el reto de las Matemáticas de Grado Sexto en una oportunidad. Nuestros beneficios están diseñados para generar un impacto real y medible en el rendimiento académico y la confianza de su hijo.</p>
+                </div>
+            </section>
+
+            <section class="stats-section reveal">
+                <div class="container">
+                    <h2>Nuestra Propuesta de Valor, Basada en la Necesidad Real</h2>
+                    <p>Las cifras de nuestra investigación demuestran la urgente necesidad de un refuerzo focalizado y de calidad. EDUCARD S.A.S. es la respuesta a esta brecha educativa.</p>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <h4>76,5%</h4>
+                            <p>de los encuestados reportó <strong>desconocimiento matemático</strong> aplicado a la vida diaria. <em>Nuestro foco es la utilidad práctica.</em></p>
+                        </div>
+                        <div class="stat-item">
+                            <h4>88,2%</h4>
+                            <p>manifestó un <strong>alto interés en fortalecer</strong> sus conocimientos matemáticos. <em>Demuestra la receptividad al refuerzo.</em></p>
+                        </div>
+                        <div class="stat-item">
+                            <h4>41,1%</h4>
+                            <p>calificó la calidad de su aprendizaje formal como <strong>media o baja</strong> (4 o 5). <em>Garantizamos excelencia pedagógica y tecnológica.</em></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section style="background-color: var(--color-background);">
+                <div class="container key-benefits-container">
+                    <div class="section-header">
+                        <i class="fa-solid fa-check-double fa-2x" style="color: var(--color-primary); margin-bottom: 10px;"></i>
+                        <h2 class="section-title">Pilares de Nuestro Éxito Pedagógico</h2>
+                    </div>
+
+                    <div class="benefit-feature-row reveal">
+                        <div class="feature-content">
+                            <h3>1. Aprendizaje <strong>Personalizado</strong></h3>
+                            <p>Nuestros módulos se adaptan al ritmo y las necesidades específicas del estudiante, garantizando que cada vacío conceptual sea abordado antes de avanzar, logrando un dominio integral del tema.</p>
+                        </div>
+                        <div class="feature-icon-wrapper">
+                            <i class="fa-solid fa-user-check"></i>
+                        </div>
+                    </div>
+
+                    <div class="benefit-feature-row reveal">
+                        <div class="feature-content">
+                            <h3>2. Foco en la <strong>Aplicación Práctica</strong></h3>
+                            <p>Basamos nuestro refuerzo en la resolución de problemas de la vida diaria, tal como exige la necesidad real (76,5%), para que el conocimiento matemático sea útil y relevante, eliminando la frustración.</p>
+                        </div>
+                        <div class="feature-icon-wrapper">
+                            <i class="fa-solid fa-puzzle-piece"></i>
+                        </div>
+                    </div>
+
+                    <div class="benefit-feature-row reveal">
+                        <div class="feature-content">
+                            <h3>3. <strong>Herramientas Tecnológicas</strong> Interactivas</h3>
+                            <p>Utilizamos plataformas virtuales y recursos digitales innovadores que mantienen al estudiante comprometido y convierten la experiencia de aprendizaje en un proceso dinámico y moderno.</p>
+                        </div>
+                        <div class="feature-icon-wrapper">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                    </div>
+
+                    <div class="benefit-feature-row reveal">
+                        <div class="feature-content">
+                            <h3>4. Desarrollo del <strong>Pensamiento Crítico</strong></h3>
+                            <p>Más allá de las operaciones, promovemos el pensamiento lógico y la autonomía en la resolución de problemas, sentando bases sólidas para el éxito en cursos superiores de Álgebra y Geometría.</p>
+                        </div>
+                        <div class="feature-icon-wrapper">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer>
+                <div class="container footer-grid">
+                    <div class="footer-about">
+                        <h5>EDUCARD S.A.S.</h5>
+                        <p>Slogan: "<strong>Aprender con tecnología, crecer con conocimiento</strong>". Somos una empresa de servicios educativos que transforma el aprendizaje con herramientas digitales y tecnológicas.</p>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <h5>Compañía</h5>
+                        <ul>
+                            <li><a href="nosotros.html">Sobre Nosotros (Misión/Visión)</a></li>
+                            <li><a href="#">Estadísticas y Beneficios</a></li>
+                            <li><a href="#">Trabaja con Nosotros</a></li>
+                            <li><a href="#">Términos y Condiciones</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links">
+                        <h5>Soporte</h5>
+                        <ul>
+                            <li><a href="index.html#faq">Preguntas Frecuentes</a></li>
+                            <li><a href="#">Contacto</a></li>
+                            <li><a href="#">Ayuda y Tutoriales</a></li>
+                            <li><a href="#">Política de Privacidad</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links">
+                        <h5>Recursos</h5>
+                        <ul>
+                            <li><a href="refuerzos.html">Catálogo de Módulos</a></li>
+                            <li><a href="#">Blog (Próximamente)</a></li>
+                            <li><a href="#">Capacitación Docente</a></li>
+                            <li><a href="#">Mapa del Sitio</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    &copy; 2025 EDUCARD S.A.S. Todos los derechos reservados.
+                </div>
+            </footer>
+        </div>
+
+        <div id="lang-en" data-lang="en" style="display: none;">
+            <header>
+                <a href="index.html" class="logo-container">
+                    <img src="https://i.postimg.cc/t4tVr741/54c82322-2df7-4887-abc0-da706407fcd4-2.png" alt="Educard Logo" class="logo-img">
+                    <span class="site-name">Educard SAS</span>
+                </a>
+
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="refuerzos.html">Reinforcements</a></li>
+                        <li><a href="nosotros.html">About Us</a></li>
+                        <li><a href="#" class="active">Benefits</a></li>
+                        <li><a href="index.html#faq">FAQ</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="#" class="header-button">Log In</a>
+                    <div class="language-selector">
+                        <img id="current-flag-en" src="https://flagcdn.com/us.svg" alt="USA Flag" class="flag">
+                        <div class="language-dropdown">
+                            <a href="#" data-lang="es"><img src="https://flagcdn.com/co.svg" alt="Colombia Flag"> Español</a>
+                            <a href="#" data-lang="en"><img src="https://flagcdn.com/us.svg" alt="USA Flag"> English</a>
+                            <a href="#" data-lang="de"><img src="https://flagcdn.com/de.svg" alt="Germany Flag"> Deutsch</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="hero-beneficios">
+                <div class="container">
+                    <h1><strong>Immediate Benefits</strong> of Choosing EDUCARD S.A.S.</h1>
+                    <p>We transform the challenge of Grade Six Mathematics into an opportunity. Our benefits are designed to generate a real and measurable impact on your child's academic performance and confidence.</p>
+                </div>
+            </section>
+
+            <section class="stats-section reveal">
+                <div class="container">
+                    <h2>Our Value Proposition, Based on Real Need</h2>
+                    <p>The figures from our research demonstrate the urgent need for focused, high-quality reinforcement. EDUCARD S.A.S. is the answer to this educational gap.</p>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <h4>76.5%</h4>
+                            <p>of respondents reported <strong>mathematical knowledge gaps</strong> applied to daily life. <em>Our focus is practical utility.</em></p>
+                        </div>
+                        <div class="stat-item">
+                            <h4>88.2%</h4>
+                            <p>expressed a <strong>high interest in strengthening</strong> their mathematical knowledge. <em>Demonstrates receptiveness to reinforcement.</em></p>
+                        </div>
+                        <div class="stat-item">
+                            <h4>41.1%</h4>
+                            <p>rated the quality of their formal learning as <strong>medium or low</strong> (4 or 5). <em>We guarantee pedagogical and technological excellence.</em></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section style="background-color: var(--color-background);">
+                <div class="container key-benefits-container">
+                    <div class="section-header">
+                        <i class="fa-solid fa-check-double fa-2x" style="color: var(--color-primary); margin-bottom: 10px;"></i>
+                        <h2 class="section-title">Pillars of Our Pedagogical Success</h2>
+                    </div>
+
+                    <div class="benefit-feature-row reveal">
+                        <div class="feature-content">
+                            <h3>1. <strong>Personalized</strong> Learning</h3>
+                            <p>Our modules adapt to the student's pace and specific needs, ensuring every conceptual gap is addressed before moving on, achieving comprehensive mastery of the topic.</p>
+                        </div>
+                        <div class="feature-icon-wrapper">
+                            <i class="fa-solid fa-user-check"></i>
+                        </div>
+                    </div>
+
+                    <div class="benefit-feature-row reveal">
+                        <div class="feature-content">
+                            <h3>2. Focus on <strong>Practical Application</strong></h3>
+                            <p>We base our reinforcement on solving real-life problems, as demanded by the genuine need (76.5%), so that mathematical knowledge is useful and relevant, eliminating frustration.</p>
+                        </div>
+                        <div class="feature-icon-wrapper">
+                            <i class="fa-solid fa-puzzle-piece"></i>
+                        </div>
+                    </div>
+
+                    <div class="benefit-feature-row reveal">
+                        <div class="feature-content">
+                            <h3>3. Interactive <strong>Technological Tools</strong></h3>
+                            <p>We use innovative virtual platforms and digital resources that keep the student engaged and turn the learning experience into a dynamic and modern process.</p>
+                        </div>
+                        <div class="feature-icon-wrapper">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                    </div>
+
+                    <div class="benefit-feature-row reveal">
+                        <div class="feature-content">
+                            <h3>4. Development of <strong>Critical Thinking</strong></h3>
+                            <p>Beyond operations, we promote logical thinking and autonomy in problem-solving, laying solid foundations for success in higher-level courses in Algebra and Geometry.</p>
+                        </div>
+                        <div class="feature-icon-wrapper">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <footer>
+                <div class="container footer-grid">
+                    <div class="footer-about">
+                        <h5>EDUCARD S.A.S.</h5>
+                        <p>Slogan: "<strong>Learn with technology, grow with knowledge</strong>". We are an educational services company that transforms learning with digital and technological tools.</p>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <h5>Company</h5>
+                        <ul>
+                            <li><a href="nosotros.html">About Us (Mission/Vision)</a></li>
+                            <li><a href="#">Statistics and Benefits</a></li>
+                            <li><a href="#">Work with Us</a></li>
+                            <li><a href="#">Terms and Conditions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links">
+                        <h5>Support</h5>
+                        <ul>
+                            <li><a href="index.html#faq">Frequently Asked Questions</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Help and Tutorials</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links">
+                        <h5>Resources</h5>
+                        <ul>
+                            <li><a href="refuerzos.html">Module Catalog</a></li>
+                            <li><a href="#">Blog (Coming Soon)</a></li>
+                            <li><a href="#">Teacher Training</a></li>
+                            <li><a href="#">Site Map</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    &copy; 2025 EDUCARD S.A.S. All rights reserved.
+                </div>
+            </footer>
+        </div>
+
+
+        <div id="lang-de" data-lang="de" style="display: none;">
+            <header>
+                <a href="index.html" class="logo-container">
+                    <img src="https://i.postimg.cc/t4tVr741/54c82322-2df7-4887-abc0-da706407fcd4-2.png" alt="Educard Logo" class="logo-img">
+                    <span class="site-name">Educard SAS</span>
+                </a>
+
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Startseite</a></li>
+                        <li><a href="refuerzos.html">Förderung</a></li>
+                        <li><a href="nosotros.html">Über Uns</a></li>
+                        <li><a href="#" class="active">Vorteile</a></li>
+                        <li><a href="index.html#faq">FAQ</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="#" class="header-button">Anmelden</a>
+                    <div class="language-selector">
+                        <img id="current-flag-de" src="https://flagcdn.com/de.svg" alt="Deutschland Flagge" class="flag">
+                        <div class="language-dropdown">
+                            <a href="#" data-lang="es"><img src="https://flagcdn.com/co.svg" alt="Kolumbien Flagge"> Español</a>
+                            <a href="#" data-lang="en"><img src="https://flagcdn.com/us.svg" alt="USA Flagge"> English</a>
+                            <a href="#" data-lang="de"><img src="https://flagcdn.com/de.svg" alt="Deutschland Flagge"> Deutsch</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="hero-beneficios">
+                <div class="container">
+                    <h1><strong>Sofortige Vorteile</strong> von EDUCARD S.A.S.</h1>
+                    <p>Wir verwandeln die Herausforderung der Mathematik in der Sechsten Klasse in eine Chance. Unsere Vorteile sind darauf ausgelegt, eine echte und messbare Wirkung auf die akademische Leistung und das Selbstvertrauen Ihres Kindes zu erzielen.</p>
+                </div>
+            </section>
+
+            <section class="stats-section reveal">
+                <div class="container">
+                    <h2>Unser Wertversprechen, basierend auf realem Bedarf</h2>
+                    <p>Die Zahlen aus unserer Forschung belegen den dringenden Bedarf an gezielter, qualitativ hochwertiger Förderung. EDUCARD S.A.S. ist die Antwort auf diese Bildungslücke.</p>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <h4>76.5%</h4>
+                            <p>der Befragten berichteten von <strong>mangelnden Mathematikkenntnissen</strong> im Alltag. <em>Unser Fokus liegt auf dem praktischen Nutzen.</em></p>
+                        </div>
+                        <div class="stat-item">
+                            <h4>88.2%</h4>
+                            <p>zeigten ein <strong>hohes Interesse an der Stärkung</strong> ihrer mathematischen Kenntnisse. <em>Bestätigt die Offenheit für Fördermaßnahmen.</em></p>
+                        </div>
+                        <div class="stat-item">
+                            <h4>41.1%</h4>
+                            <p>bewerteten die Qualität ihres formalen Lernens als <strong>mittel oder niedrig</strong> (4 oder 5). <em>Wir garantieren pädagogische und technologische Exzellenz.</em></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section style="background-color: var(--color-background);">
+                <div class="container key-benefits-container">
+                    <div class="section-header">
+                        <i class="fa-solid fa-check-double fa-2x" style="color: var(--color-primary); margin-bottom: 10px;"></i>
+                        <h2 class="section-title">Säulen Unseres Pädagogischen Erfolgs</h2>
+                    </div>
+
+                    <div class="benefit-feature-row reveal">
+                        <div class="feature-content">
+                            <h3>1. <strong>Personalisiertes</strong> Lernen</h3>
+                            <p>Unsere Module passen sich dem Tempo und den spezifischen Bedürfnissen des Schülers an, um sicherzustellen, dass jede Wissenslücke geschlossen wird, bevor fortgefahren wird, wodurch eine umfassende Beherrschung des Themas erreicht wird.</p>
+                        </div>
+                        <div class="feature-icon-wrapper">
+                            <i class="fa-solid fa-user-check"></i>
+                        </div>
+                    </div>
+
+                    <div class="benefit-feature-row reveal">
+                        <div class="feature-content">
+                            <h3>2. Fokus auf <strong>Praktische Anwendung</strong></h3>
+                            <p>Wir stützen unsere Förderung auf die Lösung von Problemen des täglichen Lebens, wie es der reale Bedarf erfordert (76,5%), damit mathematisches Wissen nützlich und relevant ist und Frustration beseitigt wird.</p>
+                        </div>
+                        <div class="feature-icon-wrapper">
+                            <i class="fa-solid fa-puzzle-piece"></i>
+                        </div>
+                    </div>
+
+                    <div class="benefit-feature-row reveal">
+                        <div class="feature-content">
+                            <h3>3. Interaktive <strong>Technologische Werkzeuge</strong></h3>
+                            <p>Wir verwenden innovative virtuelle Plattformen und digitale Ressourcen, die den Schüler engagiert halten und das Lernerlebnis zu einem dynamischen und modernen Prozess machen.</p>
+                        </div>
+                        <div class="feature-icon-wrapper">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                    </div>
+
+                    <div class="benefit-feature-row reveal">
+                        <div class="feature-content">
+                            <h3>4. Entwicklung <strong>Kritischen Denkens</strong></h3>
+                            <p>Über die Operationen hinaus fördern wir logisches Denken und Autonomie bei der Problemlösung und legen so solide Grundlagen für den Erfolg in höheren Kursen der Algebra und Geometrie.</p>
+                        </div>
+                        <div class="feature-icon-wrapper">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer>
+                <div class="container footer-grid">
+                    <div class="footer-about">
+                        <h5>EDUCARD S.A.S.</h5>
+                        <p>Slogan: "<strong>Mit Technologie lernen, mit Wissen wachsen</strong>". Wir sind ein Bildungsdienstleistungsunternehmen, das Lernen mit digitalen und technologischen Werkzeugen transformiert.</p>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <h5>Unternehmen</h5>
+                        <ul>
+                            <li><a href="nosotros.html">Über Uns (Mission/Vision)</a></li>
+                            <li><a href="#">Statistiken und Vorteile</a></li>
+                            <li><a href="#">Arbeiten Sie mit uns</a></li>
+                            <li><a href="#">Allgemeine Geschäftsbedingungen</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links">
+                        <h5>Support</h5>
+                        <ul>
+                            <li><a href="index.html#faq">Häufig gestellte Fragen</a></li>
+                            <li><a href="#">Kontakt</a></li>
+                            <li><a href="#">Hilfe und Tutorials</a></li>
+                            <li><a href="#">Datenschutzrichtlinie</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links">
+                        <h5>Ressourcen</h5>
+                        <ul>
+                            <li><a href="refuerzos.html">Modulkatalog</a></li>
+                            <li><a href="#">Blog (Bald verfügbar)</a></li>
+                            <li><a href="#">Lehrerschulung</a></li>
+                            <li><a href="#">Seitenübersicht</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    &copy; 2025 EDUCARD S.A.S. Alle Rechte vorbehalten.
+                </div>
+            </footer>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // 1. Funcionalidad del Selector de Idioma
+            const langContent = {
+                'es': document.getElementById('lang-es'),
+                'en': document.getElementById('lang-en'),
+                'de': document.getElementById('lang-de')
+            };
+
+            const languageSelectors = document.querySelectorAll('.language-selector');
+
+            const applyTranslation = (newLang) => {
+                Object.values(langContent).forEach(block => {
+                    if (block) block.style.display = 'none';
+                });
+
+                if (langContent[newLang]) {
+                    langContent[newLang].style.display = 'block';
+                    const titleMap = {
+                        'es': 'EDUCARD SAS | Beneficios y Resultados',
+                        'en': 'EDUCARD SAS | Benefits and Results',
+                        'de': 'EDUCARD SAS | Vorteile und Ergebnisse'
+                    };
+                    document.getElementById('pageTitle').textContent = titleMap[newLang] || titleMap['es'];
+                    
+                    const newFlagSrc = document.querySelector(`.language-dropdown a[data-lang="${newLang}"] img`).src;
+                    document.querySelectorAll('img[id^="current-flag-"]').forEach(img => {
+                        if (img.id === `current-flag-${newLang}`) {
+                            img.src = newFlagSrc;
+                        }
+                    });
+                }
+            };
+
+            applyTranslation('es'); 
+
+            languageSelectors.forEach(selector => {
+                selector.addEventListener('click', (e) => {
+                    e.stopPropagation(); 
+                    const dropdown = selector.querySelector('.language-dropdown');
+                    document.querySelectorAll('.language-dropdown').forEach(d => d.classList.remove('active'));
+                    if (dropdown) dropdown.classList.toggle('active');
+                });
+                
+                selector.querySelectorAll('.language-dropdown a').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const newLang = link.dataset.lang;
+                        applyTranslation(newLang);
+                        document.querySelectorAll('.language-dropdown').forEach(d => d.classList.remove('active'));
+                    });
+                });
+            });
+
+            document.addEventListener('click', () => {
+                document.querySelectorAll('.language-dropdown').forEach(d => d.classList.remove('active'));
+            });
+
+            // 2. Scroll Reveal (Movimiento al Scroll)
+            const reveals = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { root: null, rootMargin: '0px', threshold: 0.1 });
+
+            reveals.forEach(reveal => {
+                observer.observe(reveal);
+            });
+        });
+    </script>
+
+</body>
+</html>

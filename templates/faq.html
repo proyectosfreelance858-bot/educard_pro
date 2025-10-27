@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">EDUCARD SAS | Preguntas Frecuentes (FAQ)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <style>
+        /* Variables CSS - Diseño Limpio Minimalista (Consistente) */
+        :root {
+            --color-primary: #5c67ff; /* Azul Educard */
+            --color-secondary: #ffc107; /* Amarillo Destacado */
+            --color-background: #f8f9fa; /* Fondo Suave */
+            --color-surface: #ffffff; /* Superficie Blanca */
+            --color-text-dark: #212529; /* Texto Principal */
+            --color-text-subtle: #6c757d; /* Texto Secundario */
+            --color-border: #e9ecef;
+            --color-shadow-light: rgba(0, 0, 0, 0.08);
+            --font-heading: 'Outfit', sans-serif;
+            --font-body: 'Instrument Sans', sans-serif;
+            --header-height: 80px;
+        }
+
+        /* Base Reset y Tipografía */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); color: var(--color-text-dark); background-color: var(--color-background); line-height: 1.6; overflow-x: hidden; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
+        section { padding: 90px 0; position: relative; } 
+        
+        /* Estilos de botones generales */
+        .main-cta-button {
+            display: inline-block; padding: 15px 30px; background-color: var(--color-primary); color: white;
+            border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 1rem; margin-top: 30px;
+            transition: background-color 0.3s ease, transform 0.2s; box-shadow: 0 8px 15px rgba(92, 103, 255, 0.3);
+        }
+        .main-cta-button:hover { background-color: #4b54ff; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(92, 103, 255, 0.4); }
+
+        /* --- ENCABEZADO (HEADER) COPIA EXACTA --- */
+        header {
+            position: sticky; top: 0; left: 0; width: 100%; height: var(--header-height);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 3%; 
+            background-color: var(--color-surface);
+            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05); z-index: 1000;
+        }
+
+        .logo-container { text-decoration: none; display: flex; align-items: center; }
+        .logo-img { height: 35px; margin-right: 10px; }
+        .site-name { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 700; color: var(--color-text-dark); }
+
+        nav ul { list-style: none; display: flex; }
+        nav ul li { margin-left: 35px; }
+        nav ul li a { text-decoration: none; color: var(--color-text-dark); font-weight: 500; padding: 10px 0; display: block; transition: color 0.3s ease; }
+        nav ul li a:hover, nav ul li a.active { color: var(--color-primary); }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-button {
+            padding: 10px 20px; background-color: var(--color-primary); color: white;
+            border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.95rem;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .header-button:hover { background-color: #4b54ff; transform: translateY(-1px); }
+
+        /* Selector de Idioma (Bandera) */
+        .language-selector {
+            position: relative;
+            cursor: pointer;
+            padding: 5px;
+        }
+        .flag {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .language-dropdown {
+            position: absolute;
+            top: 40px;
+            right: 0;
+            background-color: var(--color-surface);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            overflow: hidden;
+            width: 150px;
+            z-index: 1001;
+            display: none;
+        }
+        .language-dropdown.active {
+            display: block;
+        }
+        .language-dropdown a {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: var(--color-text-dark);
+            font-size: 0.9rem;
+        }
+        .language-dropdown a:hover {
+            background-color: var(--color-background);
+            color: var(--color-primary);
+        }
+        .language-dropdown img {
+            width: 20px;
+            height: 15px;
+            margin-right: 10px;
+            border: 1px solid var(--color-border);
+        }
+
+        /* Estilos Generales de Sección */
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-title { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
+        .section-subtitle { font-size: 1.1rem; color: var(--color-text-subtle); max-width: 700px; margin: 0 auto; }
+        
+        /* --- ESTILOS ESPECÍFICOS DE LA PÁGINA FAQ --- */
+        .hero-faq {
+            background: linear-gradient(135deg, var(--color-primary) 0%, #4b54ff 100%);
+            color: white;
+            padding: 120px 0 60px;
+            text-align: center;
+        }
+        .hero-faq h1 {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+        .hero-faq p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* Estilo de Acordeón (FAQ) */
+        .faq-container {
+            max-width: 900px;
+            margin: 50px auto 0;
+        }
+
+        .faq-item {
+            background-color: var(--color-surface);
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+            cursor: pointer;
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--color-text-dark);
+            transition: background-color 0.2s;
+        }
+
+        .faq-question:hover {
+            background-color: var(--color-background);
+        }
+
+        .faq-question i {
+            color: var(--color-primary);
+            transition: transform 0.3s;
+        }
+
+        .faq-item.open .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            padding: 0 25px;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+            border-top: 1px solid transparent;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 500px; /* Suficiente para expandir el contenido */
+            padding: 15px 25px 30px;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .faq-answer p {
+            color: var(--color-text-subtle);
+            margin: 0;
+            font-size: 1rem;
+        }
+        
+        /* --- PIE DE PÁGINA (FOOTER) COPIA EXACTA --- */
+        footer { background-color: var(--color-text-dark); color: white; padding: 50px 0; font-size: 0.9rem; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
+        .footer-about h5, .footer-links h5 { font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 20px; font-weight: 700; color: var(--color-secondary); }
+        .footer-about p { color: rgba(255, 255, 255, 0.7); margin-bottom: 20px; }
+        .footer-links ul { list-style: none; }
+        .footer-links ul li { margin-bottom: 10px; }
+        .footer-links ul li a { color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s; }
+        .footer-links ul li a:hover { color: white; }
+        .footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.1); margin-top: 30px; padding-top: 20px; text-align: center; color: rgba(255, 255, 255, 0.5); font-size: 0.8rem; }
+        
+        /* Media Queries (Responsive) */
+        @media (max-width: 900px) {
+            nav ul { display: none; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .language-dropdown { right: -30px; }
+            
+            .hero-faq h1 { font-size: 2.5rem; }
+            .hero-faq p { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <main id="language-content">
+        
+        <div id="lang-es" data-lang="es">
+            <header>
+                <a href="index.html" class="logo-container">
+                    <img src="https://i.postimg.cc/t4tVr741/54c82322-2df7-4887-abc0-da706407fcd4-2.png" alt="Logo Educard" class="logo-img">
+                    <span class="site-name">Educard SAS</span>
+                </a>
+
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="refuerzos.html">Refuerzos</a></li>
+                        <li><a href="nosotros.html">Nosotros</a></li>
+                        <li><a href="beneficios.html">Beneficios</a></li>
+                        <li><a href="#" class="active">FAQ</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="#" class="header-button">Acceder</a>
+                    <div class="language-selector">
+                        <img id="current-flag-es" src="https://flagcdn.com/co.svg" alt="Bandera de Colombia" class="flag">
+                        <div class="language-dropdown">
+                            <a href="#" data-lang="es"><img src="https://flagcdn.com/co.svg" alt="Bandera Colombia"> Español</a>
+                            <a href="#" data-lang="en"><img src="https://flagcdn.com/us.svg" alt="Bandera EE.UU."> English</a>
+                            <a href="#" data-lang="de"><img src="https://flagcdn.com/de.svg" alt="Bandera Alemania"> Deutsch</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="hero-faq">
+                <div class="container">
+                    <h1>¿Cómo podemos ayudarte?</h1>
+                    <p>Encuentra aquí las respuestas a las preguntas más frecuentes sobre nuestra metodología, servicios y enfoque tecnológico.</p>
+                </div>
+            </section>
+            
+            <section style="padding-top: 50px;">
+                <div class="container faq-container reveal">
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>¿Qué es <strong>EDUCARD S.A.S.</strong> y cuál es su objetivo?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p><strong>EDUCARD S.A.S.</strong> es un proyecto enfocado en apoyar currículos personalizados dentro del área de <strong>Matemáticas</strong>, dirigido específicamente a estudiantes de grado sexto. Su principal objetivo es prestar servicios de refuerzos educativos en áreas como Matemáticas, Español, Sociales y Biología para estudiantes de grados sexto a once, utilizando herramientas digitales y tecnológicas.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>¿Cuál es el público objetivo al que están dirigidos los refuerzos?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>El enfoque principal de nuestros servicios de refuerzo es para estudiantes de <strong>grados sexto a once</strong>. Inicialmente, el proyecto se centró en estudiantes de grado sexto en el área de Matemáticas.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>¿Qué materias académicas cubre EDUCARD S.A.S.?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Actualmente, el objeto social de la empresa es ofrecer servicios de refuerzo en <strong>Matemáticas, Español, Sociales y Biología</strong>, todas asistidas por herramientas digitales y tecnológicas.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>¿Qué metodología utilizan para el aprendizaje y cómo garantizan la eficiencia?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Utilizamos una metodología <strong>práctica y dinámica</strong> con currículos totalmente <strong>personalizados</strong>, basada en la innovación tecnológica. Implementamos plataformas virtuales interactivas y ejercicios prácticos, que, según nuestras encuestas, son el método preferido por los estudiantes para un aprendizaje eficiente.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>¿Cuál es la visión a largo plazo de EDUCARD S.A.S.?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Nuestra visión es ser reconocida a <strong>nivel nacional</strong> como pionera en soluciones tecnológicas aplicadas a la educación, con un modelo escalable que impacte a estudiantes en todo el territorio colombiano.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <footer>
+                <div class="container footer-grid">
+                    <div class="footer-about">
+                        <h5>EDUCARD S.A.S.</h5>
+                        <p>Slogan: "<strong>Aprender con tecnología, crecer con conocimiento</strong>". Somos una empresa de servicios educativos que transforma el aprendizaje con herramientas digitales y tecnológicas.</p>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <h5>Compañía</h5>
+                        <ul>
+                            <li><a href="nosotros.html">Sobre Nosotros (Misión/Visión)</a></li>
+                            <li><a href="beneficios.html">Estadísticas y Beneficios</a></li>
+                            <li><a href="#">Trabaja con Nosotros</a></li>
+                            <li><a href="#">Términos y Condiciones</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links">
+                        <h5>Soporte</h5>
+                        <ul>
+                            <li><a href="#">Preguntas Frecuentes</a></li>
+                            <li><a href="#">Contacto</a></li>
+                            <li><a href="#">Ayuda y Tutoriales</a></li>
+                            <li><a href="#">Política de Privacidad</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links">
+                        <h5>Recursos</h5>
+                        <ul>
+                            <li><a href="refuerzos.html">Catálogo de Módulos</a></li>
+                            <li><a href="#">Blog (Próximamente)</a></li>
+                            <li><a href="#">Capacitación Docente</a></li>
+                            <li><a href="#">Mapa del Sitio</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    &copy; 2025 EDUCARD S.A.S. Todos los derechos reservados.
+                </div>
+            </footer>
+        </div>
+
+        <div id="lang-en" data-lang="en" style="display: none;">
+            <header>
+                <a href="index.html" class="logo-container">
+                    <img src="https://i.postimg.cc/t4tVr741/54c82322-2df7-4887-abc0-da706407fcd4-2.png" alt="Educard Logo" class="logo-img">
+                    <span class="site-name">Educard SAS</span>
+                </a>
+
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="refuerzos.html">Reinforcements</a></li>
+                        <li><a href="nosotros.html">About Us</a></li>
+                        <li><a href="beneficios.html">Benefits</a></li>
+                        <li><a href="#" class="active">FAQ</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="#" class="header-button">Log In</a>
+                    <div class="language-selector">
+                        <img id="current-flag-en" src="https://flagcdn.com/us.svg" alt="USA Flag" class="flag">
+                        <div class="language-dropdown">
+                            <a href="#" data-lang="es"><img src="https://flagcdn.com/co.svg" alt="Colombia Flag"> Español</a>
+                            <a href="#" data-lang="en"><img src="https://flagcdn.com/us.svg" alt="USA Flag"> English</a>
+                            <a href="#" data-lang="de"><img src="https://flagcdn.com/de.svg" alt="Germany Flag"> Deutsch</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="hero-faq">
+                <div class="container">
+                    <h1>How can we help you?</h1>
+                    <p>Find here the answers to the most frequently asked questions about our methodology, services, and technological focus.</p>
+                </div>
+            </section>
+            
+            <section style="padding-top: 50px;">
+                <div class="container faq-container reveal">
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>What is <strong>EDUCARD S.A.S.</strong> and what is its objective?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p><strong>EDUCARD S.A.S.</strong> is a project focused on supporting personalized curricula within the <strong>Mathematics</strong> area, specifically aimed at sixth-grade students. Its main objective is to provide educational reinforcement services in areas such as Mathematics, Spanish, Social Studies, and Biology for students from sixth to eleventh grade, using digital and technological tools.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>What is the target audience for the reinforcement services?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>The main focus of our reinforcement services is for students from <strong>sixth to eleventh grade</strong>. Initially, the project focused on sixth-grade students in the Mathematics area.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>What academic subjects does EDUCARD S.A.S. cover?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>The company's social objective is to offer reinforcement services in <strong>Mathematics, Spanish, Social Studies, and Biology</strong>, all supported by digital and technological tools.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>What methodology do you use for learning and how do you guarantee efficiency?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We use a <strong>practical and dynamic</strong> methodology with completely <strong>personalized</strong> curricula, based on technological innovation. We implement interactive virtual platforms and practical exercises, the latter being the preferred method for efficient learning according to our surveys.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>What is the long-term vision of EDUCARD S.A.S.?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Our vision is to be recognized <strong>nationally</strong> as a pioneer in technological solutions applied to education, with a scalable model that impacts students throughout the Colombian territory.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <footer>
+                <div class="container footer-grid">
+                    <div class="footer-about">
+                        <h5>EDUCARD S.A.S.</h5>
+                        <p>Slogan: "<strong>Learn with technology, grow with knowledge</strong>". We are an educational services company that transforms learning with digital and technological tools.</p>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <h5>Company</h5>
+                        <ul>
+                            <li><a href="nosotros.html">About Us (Mission/Vision)</a></li>
+                            <li><a href="beneficios.html">Statistics and Benefits</a></li>
+                            <li><a href="#">Work with Us</a></li>
+                            <li><a href="#">Terms and Conditions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links">
+                        <h5>Support</h5>
+                        <ul>
+                            <li><a href="#">Frequently Asked Questions</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Help and Tutorials</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links">
+                        <h5>Resources</h5>
+                        <ul>
+                            <li><a href="refuerzos.html">Module Catalog</a></li>
+                            <li><a href="#">Blog (Coming Soon)</a></li>
+                            <li><a href="#">Teacher Training</a></li>
+                            <li><a href="#">Site Map</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    &copy; 2025 EDUCARD S.A.S. All rights reserved.
+                </div>
+            </footer>
+        </div>
+
+
+        <div id="lang-de" data-lang="de" style="display: none;">
+            <header>
+                <a href="index.html" class="logo-container">
+                    <img src="https://i.postimg.cc/t4tVr741/54c82322-2df7-4887-abc0-da706407fcd4-2.png" alt="Educard Logo" class="logo-img">
+                    <span class="site-name">Educard SAS</span>
+                </a>
+
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Startseite</a></li>
+                        <li><a href="refuerzos.html">Förderung</a></li>
+                        <li><a href="nosotros.html">Über Uns</a></li>
+                        <li><a href="beneficios.html">Vorteile</a></li>
+                        <li><a href="#" class="active">FAQ</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="#" class="header-button">Anmelden</a>
+                    <div class="language-selector">
+                        <img id="current-flag-de" src="https://flagcdn.com/de.svg" alt="Deutschland Flagge" class="flag">
+                        <div class="language-dropdown">
+                            <a href="#" data-lang="es"><img src="https://flagcdn.com/co.svg" alt="Kolumbien Flagge"> Español</a>
+                            <a href="#" data-lang="en"><img src="https://flagcdn.com/us.svg" alt="USA Flagge"> English</a>
+                            <a href="#" data-lang="de"><img src="https://flagcdn.com/de.svg" alt="Deutschland Flagge"> Deutsch</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="hero-faq">
+                <div class="container">
+                    <h1>Wie können wir Ihnen helfen?</h1>
+                    <p>Hier finden Sie die Antworten auf die am häufigsten gestellten Fragen zu unserer Methodik, unseren Dienstleistungen und unserem technologischen Fokus.</p>
+                </div>
+            </section>
+            
+            <section style="padding-top: 50px;">
+                <div class="container faq-container reveal">
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Was ist <strong>EDUCARD S.A.S.</strong> und was ist das Ziel?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p><strong>EDUCARD S.A.S.</strong> ist ein Projekt, das sich auf die Unterstützung personalisierter Lehrpläne im Bereich <strong>Mathematik</strong> konzentriert und sich speziell an Schüler der sechsten Klasse richtet. Das Hauptziel ist die Bereitstellung von Bildungsförderungsdiensten in Fächern wie Mathematik, Spanisch, Sozialkunde und Biologie für Schüler der sechsten bis elften Klasse unter Verwendung digitaler und technologischer Werkzeuge.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Was ist die Zielgruppe für die Förderungsdienste?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Der Hauptfokus unserer Förderungsdienste liegt auf Schülern der <strong>sechsten bis elften Klasse</strong>. Das Projekt konzentrierte sich anfänglich auf Schüler der sechsten Klasse im Fachbereich Mathematik.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Welche akademischen Fächer deckt EDUCARD S.A.S. ab?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Das Geschäftsziel des Unternehmens ist es, Förderungsdienste in <strong>Mathematik, Spanisch, Sozialkunde und Biologie</strong> anzubieten, die alle durch digitale und technologische Werkzeuge unterstützt werden.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Welche Methodik verwenden Sie zum Lernen und wie gewährleisten Sie Effizienz?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Wir verwenden eine <strong>praktische und dynamische</strong> Methodik mit vollständig <strong>personalisierten</strong> Lehrplänen, basierend auf technologischer Innovation. Wir implementieren interaktive virtuelle Plattformen und praktische Übungen, wobei letztere laut unseren Umfragen die von den Schülern bevorzugte Methode für effizientes Lernen darstellen.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Was ist die langfristige Vision von EDUCARD S.A.S.?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Unsere Vision ist es, <strong>landesweit</strong> als Pionier für technologische Lösungen im Bildungsbereich anerkannt zu werden, mit einem skalierbaren Modell, das Schüler im gesamten kolumbianischen Gebiet beeinflusst.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <footer>
+                <div class="container footer-grid">
+                    <div class="footer-about">
+                        <h5>EDUCARD S.A.S.</h5>
+                        <p>Slogan: "<strong>Mit Technologie lernen, mit Wissen wachsen</strong>". Wir sind ein Bildungsdienstleistungsunternehmen, das Lernen mit digitalen und technologischen Werkzeugen transformiert.</p>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <h5>Unternehmen</h5>
+                        <ul>
+                            <li><a href="nosotros.html">Über Uns (Mission/Vision)</a></li>
+                            <li><a href="beneficios.html">Statistiken und Vorteile</a></li>
+                            <li><a href="#">Arbeiten Sie mit uns</a></li>
+                            <li><a href="#">Allgemeine Geschäftsbedingungen</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links">
+                        <h5>Support</h5>
+                        <ul>
+                            <li><a href="#">Häufig gestellte Fragen</a></li>
+                            <li><a href="#">Kontakt</a></li>
+                            <li><a href="#">Hilfe und Tutorials</a></li>
+                            <li><a href="#">Datenschutzrichtlinie</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links">
+                        <h5>Ressourcen</h5>
+                        <ul>
+                            <li><a href="refuerzos.html">Modulkatalog</a></li>
+                            <li><a href="#">Blog (Bald verfügbar)</a></li>
+                            <li><a href="#">Lehrerschulung</a></li>
+                            <li><a href="#">Seitenübersicht</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    &copy; 2025 EDUCARD S.A.S. Alle Rechte vorbehalten.
+                </div>
+            </footer>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // 1. Funcionalidad del Selector de Idioma (Copia Exacta)
+            const langContent = {
+                'es': document.getElementById('lang-es'),
+                'en': document.getElementById('lang-en'),
+                'de': document.getElementById('lang-de')
+            };
+
+            const languageSelectors = document.querySelectorAll('.language-selector');
+
+            const applyTranslation = (newLang) => {
+                Object.values(langContent).forEach(block => {
+                    if (block) block.style.display = 'none';
+                });
+
+                if (langContent[newLang]) {
+                    langContent[newLang].style.display = 'block';
+                    const titleMap = {
+                        'es': 'EDUCARD SAS | Preguntas Frecuentes (FAQ)',
+                        'en': 'EDUCARD SAS | Frequently Asked Questions (FAQ)',
+                        'de': 'EDUCARD SAS | Häufig gestellte Fragen (FAQ)'
+                    };
+                    document.getElementById('pageTitle').textContent = titleMap[newLang] || titleMap['es'];
+                    
+                    const newFlagSrc = document.querySelector(`.language-dropdown a[data-lang="${newLang}"] img`).src;
+                    document.querySelectorAll('img[id^="current-flag-"]').forEach(img => {
+                        if (img.id === `current-flag-${newLang}`) {
+                            img.src = newFlagSrc;
+                        }
+                    });
+                }
+            };
+
+            applyTranslation('es'); 
+
+            languageSelectors.forEach(selector => {
+                selector.addEventListener('click', (e) => {
+                    e.stopPropagation(); 
+                    const dropdown = selector.querySelector('.language-dropdown');
+                    document.querySelectorAll('.language-dropdown').forEach(d => d.classList.remove('active'));
+                    if (dropdown) dropdown.classList.toggle('active');
+                });
+                
+                selector.querySelectorAll('.language-dropdown a').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const newLang = link.dataset.lang;
+                        applyTranslation(newLang);
+                        document.querySelectorAll('.language-dropdown').forEach(d => d.classList.remove('active'));
+                    });
+                });
+            });
+
+            document.addEventListener('click', () => {
+                document.querySelectorAll('.language-dropdown').forEach(d => d.classList.remove('active'));
+            });
+
+            // 2. Funcionalidad de Acordeón (FAQ)
+            const faqQuestions = document.querySelectorAll('.faq-question');
+
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const parentItem = question.closest('.faq-item');
+                    const isOpen = parentItem.classList.contains('open');
+
+                    // Cierra todos los demás
+                    document.querySelectorAll('.faq-item.open').forEach(item => {
+                        if (item !== parentItem) {
+                            item.classList.remove('open');
+                        }
+                    });
+
+                    // Abre o cierra el actual
+                    if (!isOpen) {
+                        parentItem.classList.add('open');
+                    } else {
+                        parentItem.classList.remove('open');
+                    }
+                });
+            });
+            
+            // 3. Scroll Reveal (Copia Exacta)
+            const reveals = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { root: null, rootMargin: '0px', threshold: 0.1 });
+
+            reveals.forEach(reveal => {
+                observer.observe(reveal);
+            });
+        });
+    </script>
+
+</body>
+</html>
