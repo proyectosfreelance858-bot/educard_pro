@@ -20,10 +20,7 @@
             --color-shadow-light: rgba(0, 0, 0, 0.08);
             --font-heading: 'Outfit', sans-serif;
             --font-body: 'Instrument Sans', sans-serif;
-            --header-height: 60px; /* Reducida a 60px */
-            --wited-blue: #5c67ff;
-            --wited-pink: #eb549e;
-            --wited-orange: #ffc107;
+            --header-height: 80px;
         }
 
         /* Base Reset y Tipografía */
@@ -31,92 +28,55 @@
         html { scroll-behavior: smooth; }
         body { font-family: var(--font-body); color: var(--color-text-dark); background-color: var(--color-surface); line-height: 1.6; overflow-x: hidden; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
-        /* Ajuste la sección para usar diferentes colores de fondo */
-        .section-primary { padding: 90px 0; position: relative; background-color: var(--color-surface); } 
-        .section-secondary { padding: 90px 0; position: relative; background-color: var(--color-background); } 
-
+        section { padding: 90px 0; position: relative; background-color: var(--color-background); } 
         
-        /* --- ENCABEZADO (HEADER) NUEVO ESTILO WITED --- */
+        /* --- ENCABEZADO (HEADER) MEJORADO --- */
         header {
             position: sticky; top: 0; left: 0; width: 100%; height: var(--header-height);
-            display: flex; justify-content: center;
+            display: flex; justify-content: space-between; align-items: center;
             padding: 0 3%; 
             background-color: var(--color-surface);
-            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.00);
-            z-index: 1000;
-        }
-        
-        /* Contenedor principal dentro del header para alinear */
-        .header-inner {
-            width: 100%;
-            max-width: 1200px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05); z-index: 1000;
         }
 
         .logo-container { text-decoration: none; display: flex; align-items: center; }
-        .logo-img { height: 40px; margin-right: 10px; /* Logo más grande */ }
-        .site-name { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 700; color: var(--color-text-dark); display: none; }
+        .logo-img { height: 35px; margin-right: 10px; }
+        .site-name { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 700; color: var(--color-text-dark); }
 
-        /* Navegación al estilo de la imagen */
-        nav ul { list-style: none; display: flex; margin-left: 40px; gap: 10px;}
-        nav ul li { margin-left: 20px; }
-        nav ul li a { text-decoration: none; color: var(--color-text-dark); font-weight: 500; padding: 10px 12px; display: block; transition: color 0.3s ease; border-radius: 8px; font-size: 0.95rem; }
-        nav ul li a:hover, nav ul li a.active { color: var(--wited-blue); background-color: #f0f4ff; }
-        nav ul li a.active { font-weight: 600; }
+        nav ul { list-style: none; display: flex; }
+        nav ul li { margin-left: 35px; }
+        nav ul li a { text-decoration: none; color: var(--color-text-dark); font-weight: 500; padding: 10px 0; display: block; transition: color 0.3s ease; }
+        nav ul li a:hover, nav ul li a.active { color: var(--color-primary); }
 
         .header-actions {
             display: flex;
             align-items: center;
-            gap: 15px;
-        }
-        
-        .header-contact {
-            padding: 8px 16px; 
-            color: var(--wited-blue);
-            border: 1px solid var(--wited-blue);
-            border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 0.9rem;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        .header-contact:hover { 
-            background-color: var(--wited-blue); 
-            color: white; 
+            gap: 20px;
         }
 
         .header-button {
-            padding: 8px 16px; background-color: var(--wited-blue); color: white;
-            border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 0.9rem;
+            padding: 10px 20px; background-color: var(--color-primary); color: white;
+            border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.95rem;
             transition: background-color 0.3s, transform 0.2s;
         }
         .header-button:hover { background-color: #4b54ff; transform: translateY(-1px); }
 
-        /* Selector de Idioma (Bandera) */
+        /* --- Selector de Idioma (Bandera) --- */
         .language-selector {
             position: relative;
             cursor: pointer;
-            padding: 5px 10px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            border-radius: 20px;
-            transition: background-color 0.2s;
+            padding: 5px;
         }
-        .language-selector:hover {
-             background-color: #f0f4ff; 
-        }
-
         .flag {
-            width: 25px;
-            height: 25px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             object-fit: cover;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.0);
-            border: 1px solid var(--color-border);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
         }
         .language-dropdown {
             position: absolute;
-            top: 45px;
+            top: 40px;
             right: 0;
             background-color: var(--color-surface);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -129,7 +89,6 @@
         .language-dropdown.active {
             display: block;
         }
-        /* Estilos del dropdown se mantienen */
         .language-dropdown a {
             display: flex;
             align-items: center;
@@ -149,7 +108,7 @@
             border: 1px solid var(--color-border);
         }
         
-        /* --- Estilos Hero (MANTENIDOS) --- */
+        /* --- Estilos Hero (se mantienen) --- */
         .hero { min-height: 85vh; display: flex; align-items: center; padding-top: var(--header-height); background-color: var(--color-surface); position: relative; overflow: hidden; }
         .hero-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; align-items: center; padding: 50px 0; }
         .hero-text-col h1 { font-family: var(--font-heading); font-size: 3.8rem; font-weight: 800; line-height: 1.1; margin-bottom: 25px; color: var(--color-text-dark); letter-spacing: -1.5px; }
@@ -157,165 +116,8 @@
         .hero-animation-col { position: relative; height: 450px; display: flex; align-items: center; justify-content: center; }
         .phone-frame { position: relative; width: 100%; height: 100%; max-width: 300px; border: 4px solid var(--color-secondary); border-radius: 30px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); overflow: hidden; background-color: white; z-index: 10; }
         .phone-video { width: 100%; height: 100%; object-fit: cover; border-radius: 26px; }
-        
-        /* Estilos para el nuevo CTA */
-        .main-cta-button {
-            padding: 12px 25px;
-            background-color: var(--wited-blue);
-            color: white;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            display: inline-block;
-            margin-top: 20px;
-            transition: background-color 0.3s;
-        }
-        .main-cta-button:hover { background-color: #4b54ff; }
-        .cta-info { font-size: 0.9rem; color: var(--color-text-subtle); margin-top: 15px; }
 
-
-        /* --- NUEVA SECCIÓN 2: Metodología y Fundamentos --- */
-        .features-section {
-            padding: 90px 0;
-            background-color: var(--color-background);
-        }
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-top: 50px;
-        }
-        .feature-card {
-            background-color: var(--color-surface);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            border-top: 5px solid var(--wited-blue);
-        }
-        .feature-card i {
-            font-size: 2.5rem;
-            color: var(--wited-blue);
-            margin-bottom: 15px;
-        }
-        .feature-card h4 {
-            font-family: var(--font-heading);
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-        .feature-card p {
-            font-size: 1rem;
-            color: var(--color-text-dark);
-        }
-
-        /* --- SECCIÓN 3: ¿Buscas mejores resultados? (NUEVA POSICIÓN) --- */
-        .better-results-section {
-            background-color: white;
-            padding: 90px 0;
-        }
-        .results-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 50px;
-            align-items: center;
-        }
-        .results-video-col {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            background-color: #f0f4ff;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        }
-        .results-video-col video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .results-text-col h2 {
-            font-family: var(--font-heading);
-            font-size: 3rem;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 20px;
-        }
-        .results-text-col h2 .highlight-blue {
-            color: var(--wited-blue);
-        }
-        .results-text-col p {
-            font-size: 1.1rem;
-            color: var(--color-text-dark);
-            margin-bottom: 30px;
-        }
-        .results-button-group a {
-            display: inline-block;
-            padding: 10px 20px;
-            margin-right: 15px;
-            border-radius: 25px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: opacity 0.3s;
-        }
-        .results-button-group a:first-child {
-            background-color: var(--wited-pink);
-            color: white;
-        }
-        .results-button-group a:last-child {
-            background-color: var(--wited-blue);
-            color: white;
-        }
-
-        /* --- SECCIÓN 6: Preguntas Frecuentes (FAQ) --- */
-        .faq-section {
-            background-color: var(--color-background);
-            padding: 90px 0;
-        }
-        .faq-item {
-            background-color: var(--color-surface);
-            margin-bottom: 15px;
-            border-radius: 8px;
-            border: 1px solid var(--color-border);
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-        }
-        .faq-question {
-            padding: 18px 25px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: var(--color-text-dark);
-        }
-        .faq-question i {
-            transition: transform 0.3s ease;
-        }
-        .faq-answer {
-            padding: 0 25px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
-            color: var(--color-text-subtle);
-        }
-        .faq-answer p {
-            padding-bottom: 18px;
-            line-height: 1.5;
-        }
-        .faq-item.active .faq-answer {
-            max-height: 200px; /* Suficiente para el contenido */
-            padding-bottom: 18px;
-        }
-        .faq-item.active .faq-question i {
-            transform: rotate(180deg);
-        }
-
-        /* --- Estilos Módulos y Adicionales (MANTENIDOS) --- */
+        /* --- Estilos Módulos (se mantienen) --- */
         .popular-modules { background-color: var(--color-surface); padding-top: 120px; }
         .section-header { text-align: center; margin-bottom: 50px; }
         .section-title { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
@@ -330,6 +132,7 @@
         .explore-button { padding: 8px 15px; font-size: 0.9rem; font-weight: 600; color: var(--color-primary); border: 2px solid var(--color-primary); border-radius: 6px; text-decoration: none; transition: all 0.3s; }
         .explore-button:hover { background-color: var(--color-primary); color: white; }
 
+        /* --- Estilos Secciones Adicionales --- */
         .extra-sections { background-color: var(--color-background); padding-bottom: 90px; }
         .subjects-grid { display: flex; justify-content: space-between; margin-top: 40px; gap: 20px; padding-top: 30px; }
         .subject-card { background: var(--color-surface); padding: 25px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); width: 30%; text-align: center; }
@@ -342,10 +145,9 @@
         .ai-banner h3 { font-family: var(--font-heading); font-size: 2.2rem; margin-bottom: 15px; }
         .ai-banner p { font-size: 1.1rem; opacity: 0.8; margin-bottom: 20px; }
         
-        /* --- PIE DE PÁGINA (FOOTER) MEJORADO - REMOVIDAS REDES SOCIALES --- */
+        /* --- PIE DE PÁGINA (FOOTER) MEJORADO --- */
         footer { background-color: var(--color-text-dark); color: white; padding: 50px 0; font-size: 0.9rem; }
-        /* Grid de 3 columnas: About | Compañía | Ayuda */
-        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
         .footer-about h5, .footer-links h5 { font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 20px; font-weight: 700; color: var(--color-secondary); }
         .footer-about p { color: rgba(255, 255, 255, 0.7); margin-bottom: 20px; }
         .footer-links ul { list-style: none; }
@@ -354,19 +156,16 @@
         .footer-links ul li a:hover { color: white; }
         .footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.1); margin-top: 30px; padding-top: 20px; text-align: center; color: rgba(255, 255, 255, 0.5); font-size: 0.8rem; }
         
-        /* Media Queries */
+        /* Media Queries (se mantienen) */
         @media (max-width: 900px) {
             .hero-grid { grid-template-columns: 1fr; text-align: center; }
             .hero-text-col h1 { font-size: 2.8rem; }
             .hero-animation-col { margin-top: 40px; height: 350px; }
-            /* Footer de 1 columna */
             .footer-grid { grid-template-columns: 1fr; text-align: center; }
             .language-dropdown { right: -30px; }
             nav ul { display: none; }
             .subjects-grid { flex-direction: column; align-items: center; }
             .subject-card { width: 80%; margin-bottom: 20px; }
-            .results-grid { grid-template-columns: 1fr; text-align: center; }
-            .features-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -376,36 +175,34 @@
         
         <div id="lang-es" data-lang="es">
             <header>
-                <div class="header-inner">
-                    <a href="#" class="logo-container">
-                        <img src="https://i.postimg.cc/t4tVr741/54c82322-2df7-4887-abc0-da706407fcd4-2.png" alt="Logo Educard" class="logo-img">
-                        <span class="site-name">Educard</span>
-                    </a>
-    
-                    <nav>
-                        <ul>
-                            <li><a href="#hero-section" class="active">Reforzamiento</a></li>
-                            <li><a href="#">Colegio Online</a></li>
-                            <li><a href="#">Empresas</a></li>
-                        </ul>
-                    </nav>
-    
-                    <div class="header-actions">
-                        <a href="#" class="header-contact">Contacto</a>
-                        <a href="#" class="header-button">Acceder</a>
-                        <div class="language-selector">
-                            <img id="current-flag-es" src="https://flagcdn.com/co.svg" alt="Bandera de Colombia" class="flag">
-                            <div class="language-dropdown">
-                                <a href="#" data-lang="es"><img src="https://flagcdn.com/co.svg" alt="Bandera Colombia"> Español</a>
-                                <a href="#" data-lang="en"><img src="https://flagcdn.com/us.svg" alt="Bandera EE.UU."> English</a>
-                                <a href="#" data-lang="de"><img src="https://flagcdn.com/de.svg" alt="Bandera Alemania"> Deutsch</a>
-                            </div>
+                <a href="#" class="logo-container">
+                    <img src="https://i.postimg.cc/t4tVr741/54c82322-2df7-4887-abc0-da706407fcd4-2.png" alt="Logo Educard" class="logo-img">
+                    <span class="site-name">Educard</span>
+                </a>
+
+                <nav>
+                    <ul>
+                        <li><a href="#hero-section" class="active">Inicio</a></li>
+                        <li><a href="#modulos">Refuerzos (6°)</a></li>
+                        <li><a href="#">Planes</a></li>
+                        <li><a href="#">Contáctanos</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="#" class="header-button">Acceder</a>
+                    <div class="language-selector">
+                        <img id="current-flag-es" src="https://flagcdn.com/co.svg" alt="Bandera de Colombia" class="flag">
+                        <div class="language-dropdown">
+                            <a href="#" data-lang="es"><img src="https://flagcdn.com/co.svg" alt="Bandera Colombia"> Español</a>
+                            <a href="#" data-lang="en"><img src="https://flagcdn.com/us.svg" alt="Bandera EE.UU."> English</a>
+                            <a href="#" data-lang="de"><img src="https://flagcdn.com/de.svg" alt="Bandera Alemania"> Deutsch</a>
                         </div>
                     </div>
                 </div>
             </header>
             
-            <section class="hero section-primary" id="hero-section">
+            <section class="hero" id="hero-section">
                 <div class="container hero-grid">
                     <div class="hero-text-col reveal">
                         <p class="tag-line"><i class="fa-solid fa-square-root-variable"></i> Refuerzo Académico Nivel Sexto</p>
@@ -424,51 +221,8 @@
                     </div>
                 </div>
             </section>
-
-            <section class="features-section section-secondary" id="metodologia">
-                <div class="container">
-                    <div class="section-header reveal">
-                        <h2 class="section-title" id="features-title">Nuestra Metodología y Fundamentos</h2>
-                        [cite_start]<p class="section-subtitle" id="features-subtitle">Fortalecemos la competencia académica con un enfoque personalizado, dinámico y totalmente digital. [cite: 14, 19]</p>
-                    </div>
-                    <div class="features-grid">
-                        <div class="feature-card reveal">
-                            <i class="fa-solid fa-users-gear"></i>
-                            <h4 id="feature-title-1">Currículos Personalizados</h4>
-                            [cite_start]<p id="feature-desc-1">Nos enfocamos en apoyar currículos personalizados dentro del área de Matemática, dirigido específicamente a estudiantes de grado sexto. [cite: 13, 18]</p>
-                        </div>
-                        <div class="feature-card reveal" style="transition-delay: 0.1s;">
-                            <i class="fa-solid fa-puzzle-piece"></i>
-                            <h4 id="feature-title-2">Aprendizaje Práctico y Dinámico</h4>
-                            [cite_start]<p id="feature-desc-2">Nuestro objetivo es fortalecer la competencia académica mediante un método práctico y dinámico, adaptado a las necesidades individuales. [cite: 14, 19]</p>
-                        </div>
-                        <div class="feature-card reveal" style="transition-delay: 0.2s;">
-                            <i class="fa-solid fa-tablet-screen-button"></i>
-                            <h4 id="feature-title-3">Soluciones Tecnológicas Innovadoras</h4>
-                            [cite_start]<p id="feature-desc-3">Utilizamos plataformas virtuales interactivas, módulos didácticos y herramientas digitales de apoyo para enriquecer el proceso. [cite: 15, 20]</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="better-results-section section-primary" id="mejores-resultados">
-                <div class="container results-grid">
-                    <div class="results-video-col reveal">
-                        <video src="https://www.wited.com/wp-content/uploads/2025/06/Animacion_03_Mp4.mp4" autoplay loop muted playsinline></video>
-                    </div>
-                    <div class="results-text-col reveal" style="transition-delay: 0.2s;">
-                        <h2>¿Buscas <span class="highlight-blue">mejores resultados?</span></h2>
-                        <p>Nuestra metodología de aprendizaje en capas garantiza el éxito académico. Hoy más de **40.000 estudiantes** en Latinoamérica aprenden con Wited.</p>
-                        <p>Conoce nuestros planes y precios. ¿Qué opción necesitas?</p>
-                        <div class="results-button-group">
-                            <a href="#">Reforzamiento</a>
-                            <a href="#">Homeschool</a>
-                        </div>
-                    </div>
-                </div>
-            </section>
             
-            <section class="popular-modules section-secondary" id="modulos">
+            <section class="popular-modules" id="modulos">
                 <div class="container">
                     <div class="section-header reveal">
                         <h2 class="section-title">Módulos Clave de Matemática para Grado Sexto</h2>
@@ -510,7 +264,7 @@
                 </div>
             </section>
             
-            <section class="extra-sections section-primary">
+            <section class="extra-sections">
                 <div class="container">
                     <div class="section-header reveal">
                         <h2 class="section-title">Soluciones Adicionales de Refuerzo</h2>
@@ -544,89 +298,26 @@
                     </div>
                 </div>
             </section>
-
-            <section class="faq-section section-secondary" id="faq">
-                <div class="container">
-                    <div class="section-header reveal">
-                        <h2 class="section-title" id="faq-title">Preguntas Frecuentes</h2>
-                        <p class="section-subtitle" id="faq-subtitle">Todo lo que necesitas saber sobre EDUCARD SAS y nuestra metodología.</p>
-                    </div>
-
-                    <div class="faq-list">
-                        <div class="faq-item reveal">
-                            <div class="faq-question">
-                                <span id="faq-q1">¿Cuál es el enfoque principal de EDUCARD SAS?</span>
-                                <i class="fa-solid fa-chevron-down"></i>
-                            </div>
-                            <div class="faq-answer">
-                                [cite_start]<p id="faq-a1">EDUCARD SAS es un proyecto enfocado en apoyar currículos personalizados dentro del área de Matemática, dirigido específicamente a estudiantes de grado sexto. [cite: 13, 18]</p>
-                            </div>
-                        </div>
-                        
-                        <div class="faq-item reveal" style="transition-delay: 0.1s;">
-                            <div class="faq-question">
-                                <span id="faq-q2">¿Qué metodologías de aprendizaje han demostrado ser más efectivas según su estudio?</span>
-                                <i class="fa-solid fa-chevron-down"></i>
-                            </div>
-                            <div class="faq-answer">
-                                [cite_start]<p id="faq-a2">La mayoría de los encuestados (58.8%) considera que los ejercicios prácticos son el método de aprendizaje más eficiente y de mejor calidad, seguido por los talleres (29.4%). [cite: 167, 168]</p>
-                            </div>
-                        </div>
-
-                        <div class="faq-item reveal" style="transition-delay: 0.2s;">
-                            <div class="faq-question">
-                                <span id="faq-q3">¿Existe una necesidad real de refuerzo académico en los estudiantes?</span>
-                                <i class="fa-solid fa-chevron-down"></i>
-                            </div>
-                            <div class="faq-answer">
-                                <p id="faq-a3">Sí. [cite_start]Un 76.5% de los encuestados ha experimentado desconocimiento matemático en temas que utiliza en su vida diaria, lo que justifica la necesidad de integrar el pensamiento cuantitativo y lógico en la formación práctica. [cite: 177, 179, 180]</p>
-                            </div>
-                        </div>
-                        
-                        <div class="faq-item reveal" style="transition-delay: 0.3s;">
-                            <div class="faq-question">
-                                <span id="faq-q4">¿Qué tipo de herramientas tecnológicas utiliza EDUCARD SAS?</span>
-                                <i class="fa-solid fa-chevron-down"></i>
-                            </div>
-                            <div class="faq-answer">
-                                [cite_start]<p id="faq-a4">Utilizamos soluciones tecnológicas innovadoras, plataformas virtuales interactivas, módulos didácticos integrados y ejercicios prácticos, promoviendo la autonomía y el pensamiento crítico. [cite: 15, 20]</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
         </div>
         
         <div id="lang-en" data-lang="en" style="display: none;">
             <header>
-                <div class="header-inner">
-                    <a href="#" class="logo-container">
-                        <img src="https://i.postimg.cc/t4tVr741/54c82322-2df7-4887-abc0-da706407fcd4-2.png" alt="Educard Logo" class="logo-img">
-                        <span class="site-name">Educard</span>
-                    </a>
-                    <nav>
-                        <ul>
-                            <li><a href="#hero-section" class="active">Reinforcement</a></li>
-                            <li><a href="#">Online School</a></li>
-                            <li><a href="#">Business</a></li>
-                        </ul>
-                    </nav>
-                    <div class="header-actions">
-                        <a href="#" class="header-contact">Contact</a>
-                        <a href="#" class="header-button">Login</a>
-                        <div class="language-selector">
-                            <img id="current-flag-en" src="https://flagcdn.com/us.svg" alt="US Flag" class="flag">
-                            <div class="language-dropdown">
-                                <a href="#" data-lang="es"><img src="https://flagcdn.com/co.svg" alt="Colombia Flag"> Español</a>
-                                <a href="#" data-lang="en"><img src="https://flagcdn.com/us.svg" alt="US Flag"> English</a>
-                                <a href="#" data-lang="de"><img src="https://flagcdn.com/de.svg" alt="Germany Flag"> Deutsch</a>
-                            </div>
+                <a href="#" class="logo-container"><img src="https://i.postimg.cc/t4tVr741/54c82322-2df7-4887-abc0-da706407fcd4-2.png" alt="Educard Logo" class="logo-img"><span class="site-name">Educard</span></a>
+                <nav><ul><li><a href="#hero-section" class="active">Home</a></li><li><a href="#modulos">Reinforcements (6th)</a></li><li><a href="#">Plans</a></li><li><a href="#">Contact Us</a></li></ul></nav>
+                <div class="header-actions">
+                    <a href="#" class="header-button">Login</a>
+                    <div class="language-selector">
+                        <img id="current-flag-en" src="https://flagcdn.com/us.svg" alt="US Flag" class="flag">
+                        <div class="language-dropdown">
+                            <a href="#" data-lang="es"><img src="https://flagcdn.com/co.svg" alt="Colombia Flag"> Español</a>
+                            <a href="#" data-lang="en"><img src="https://flagcdn.com/us.svg" alt="US Flag"> English</a>
+                            <a href="#" data-lang="de"><img src="https://flagcdn.com/de.svg" alt="Germany Flag"> Deutsch</a>
                         </div>
                     </div>
                 </div>
             </header>
             
-            <section class="hero section-primary" id="hero-section">
+            <section class="hero" id="hero-section">
                 <div class="container hero-grid">
                     <div class="hero-text-col reveal">
                         <p class="tag-line"><i class="fa-solid fa-square-root-variable"></i> Academic Reinforcement Grade Six</p>
@@ -640,51 +331,8 @@
                     </div>
                 </div>
             </section>
-            
-            <section class="features-section section-secondary" id="metodologia">
-                <div class="container">
-                    <div class="section-header reveal">
-                        <h2 class="section-title" id="features-title-en">Our Methodology and Fundamentals</h2>
-                        [cite_start]<p class="section-subtitle" id="features-subtitle-en">We strengthen academic competence with a personalized, dynamic, and fully digital approach. [cite: 14, 19]</p>
-                    </div>
-                    <div class="features-grid">
-                        <div class="feature-card reveal">
-                            <i class="fa-solid fa-users-gear"></i>
-                            <h4 id="feature-title-1-en">Personalized Curricula</h4>
-                            [cite_start]<p id="feature-desc-1-en">We focus on supporting personalized curricula in the area of Mathematics, specifically aimed at sixth-grade students. [cite: 13, 18]</p>
-                        </div>
-                        <div class="feature-card reveal" style="transition-delay: 0.1s;">
-                            <i class="fa-solid fa-puzzle-piece"></i>
-                            <h4 id="feature-title-2-en">Practical and Dynamic Learning</h4>
-                            [cite_start]<p id="feature-desc-2-en">Our objective is to strengthen academic competence through a practical and dynamic method, customized to individual needs. [cite: 14, 19]</p>
-                        </div>
-                        <div class="feature-card reveal" style="transition-delay: 0.2s;">
-                            <i class="fa-solid fa-tablet-screen-button"></i>
-                            <h4 id="feature-title-3-en">Innovative Technological Solutions</h4>
-                            [cite_start]<p id="feature-desc-3-en">We use interactive virtual platforms, teaching modules, and digital support tools to enrich the process. [cite: 15, 20]</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <section class="better-results-section section-primary" id="mejores-resultados">
-                <div class="container results-grid">
-                    <div class="results-video-col reveal">
-                        <video src="https://www.wited.com/wp-content/uploads/2025/06/Animacion_03_Mp4.mp4" autoplay loop muted playsinline></video>
-                    </div>
-                    <div class="results-text-col reveal" style="transition-delay: 0.2s;">
-                        <h2>Looking for <span class="highlight-blue">better results?</span></h2>
-                        <p>Our layered learning methodology guarantees academic success. Today, more than **40,000 students** in Latin America learn with Wited.</p>
-                        <p>Know our plans and prices. Which option do you need?</p>
-                        <div class="results-button-group">
-                            <a href="#">Reinforcement</a>
-                            <a href="#">Homeschool</a>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
-            <section class="popular-modules section-secondary" id="modulos">
+            <section class="popular-modules" id="modulos">
                 <div class="container">
                     <div class="section-header reveal">
                         <h2 class="section-title">Key Mathematics Modules for Sixth Grade</h2>
@@ -725,8 +373,8 @@
                     </div>
                 </div>
             </section>
-            
-            <section class="extra-sections section-primary">
+
+            <section class="extra-sections">
                 <div class="container">
                     <div class="section-header reveal">
                         <h2 class="section-title">Additional Reinforcement Solutions</h2>
@@ -758,89 +406,26 @@
                     </div>
                 </div>
             </section>
-            
-            <section class="faq-section section-secondary" id="faq-en">
-                <div class="container">
-                    <div class="section-header reveal">
-                        <h2 class="section-title" id="faq-title-en">Frequently Asked Questions</h2>
-                        <p class="section-subtitle" id="faq-subtitle-en">Everything you need to know about EDUCARD SAS and our methodology.</p>
-                    </div>
-
-                    <div class="faq-list">
-                        <div class="faq-item reveal">
-                            <div class="faq-question">
-                                <span id="faq-q1-en">What is the main focus of EDUCARD SAS?</span>
-                                <i class="fa-solid fa-chevron-down"></i>
-                            </div>
-                            <div class="faq-answer">
-                                [cite_start]<p id="faq-a1-en">EDUCARD SAS is a project focused on supporting personalized curricula in the area of Mathematics, specifically aimed at sixth-grade students. [cite: 13, 18]</p>
-                            </div>
-                        </div>
-                        
-                        <div class="faq-item reveal" style="transition-delay: 0.1s;">
-                            <div class="faq-question">
-                                <span id="faq-q2-en">What learning methodologies have proven most effective according to your study?</span>
-                                <i class="fa-solid fa-chevron-down"></i>
-                            </div>
-                            <div class="faq-answer">
-                                [cite_start]<p id="faq-a2-en">The majority of respondents (58.8%) consider practical exercises to be the most efficient and highest quality learning method, followed by workshops (29.4%). [cite: 167, 168]</p>
-                            </div>
-                        </div>
-
-                        <div class="faq-item reveal" style="transition-delay: 0.2s;">
-                            <div class="faq-question">
-                                <span id="faq-q3-en">Is there a real need for academic reinforcement among students?</span>
-                                <i class="fa-solid fa-chevron-down"></i>
-                            </div>
-                            <div class="faq-answer">
-                                <p id="faq-a3-en">Yes. [cite_start]76.5% of respondents have experienced mathematical ignorance on a topic they use in their daily lives, which justifies the need to integrate quantitative and logical thinking into practical training. [cite: 177, 179, 180]</p>
-                            </div>
-                        </div>
-                        
-                        <div class="faq-item reveal" style="transition-delay: 0.3s;">
-                            <div class="faq-question">
-                                <span id="faq-q4-en">What type of technological tools does EDUCARD SAS use?</span>
-                                <i class="fa-solid fa-chevron-down"></i>
-                            </div>
-                            <div class="faq-answer">
-                                [cite_start]<p id="faq-a4-en">We use innovative technological solutions, interactive virtual platforms, integrated teaching modules, and practical exercises, promoting autonomy and critical thinking. [cite: 15, 20]</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
         </div>
         
         <div id="lang-de" data-lang="de" style="display: none;">
             <header>
-                <div class="header-inner">
-                    <a href="#" class="logo-container">
-                        <img src="https://i.postimg.cc/t4tVr741/54c82322-2df7-4887-abc0-da706407fcd4-2.png" alt="Educard Logo" class="logo-img">
-                        <span class="site-name">Educard</span>
-                    </a>
-                    <nav>
-                        <ul>
-                            <li><a href="#hero-section" class="active">Förderung</a></li>
-                            <li><a href="#">Online Schule</a></li>
-                            <li><a href="#">Unternehmen</a></li>
-                        </ul>
-                    </nav>
-                    <div class="header-actions">
-                        <a href="#" class="header-contact">Kontakt</a>
-                        <a href="#" class="header-button">Anmelden</a>
-                        <div class="language-selector">
-                            <img id="current-flag-de" src="https://flagcdn.com/de.svg" alt="Deutschland Flagge" class="flag">
-                            <div class="language-dropdown">
-                                <a href="#" data-lang="es"><img src="https://flagcdn.com/co.svg" alt="Kolumbien Flagge"> Español</a>
-                                <a href="#" data-lang="en"><img src="https://flagcdn.com/us.svg" alt="USA Flagge"> English</a>
-                                <a href="#" data-lang="de"><img src="https://flagcdn.com/de.svg" alt="Deutschland Flagge"> Deutsch</a>
-                            </div>
+                <a href="#" class="logo-container"><img src="https://i.postimg.cc/t4tVr741/54c82322-2df7-4887-abc0-da706407fcd4-2.png" alt="Educard Logo" class="logo-img"><span class="site-name">Educard</span></a>
+                <nav><ul><li><a href="#hero-section" class="active">Startseite</a></li><li><a href="#modulos">Förderung (6. Klasse)</a></li><li><a href="#">Pläne</a></li><li><a href="#">Kontakt</a></li></ul></nav>
+                <div class="header-actions">
+                    <a href="#" class="header-button">Anmelden</a>
+                    <div class="language-selector">
+                        <img id="current-flag-de" src="https://flagcdn.com/de.svg" alt="Deutschland Flagge" class="flag">
+                        <div class="language-dropdown">
+                            <a href="#" data-lang="es"><img src="https://flagcdn.com/co.svg" alt="Kolumbien Flagge"> Español</a>
+                            <a href="#" data-lang="en"><img src="https://flagcdn.com/us.svg" alt="USA Flagge"> English</a>
+                            <a href="#" data-lang="de"><img src="https://flagcdn.com/de.svg" alt="Deutschland Flagge"> Deutsch</a>
                         </div>
                     </div>
                 </div>
             </header>
             
-            <section class="hero section-primary" id="hero-section">
+            <section class="hero" id="hero-section">
                 <div class="container hero-grid">
                     <div class="hero-text-col reveal">
                         <p class="tag-line"><i class="fa-solid fa-square-root-variable"></i> Nachhilfe für die 6. Klasse Mathematik</p>
@@ -854,51 +439,8 @@
                     </div>
                 </div>
             </section>
-            
-            <section class="features-section section-secondary" id="metodologia">
-                <div class="container">
-                    <div class="section-header reveal">
-                        <h2 class="section-title" id="features-title-de">Unsere Methodik und Grundlagen</h2>
-                        [cite_start]<p class="section-subtitle" id="features-subtitle-de">Wir stärken akademische Kompetenz mit einem personalisierten, dynamischen und vollständig digitalen Ansatz. [cite: 14, 19]</p>
-                    </div>
-                    <div class="features-grid">
-                        <div class="feature-card reveal">
-                            <i class="fa-solid fa-users-gear"></i>
-                            <h4 id="feature-title-1-de">Personalisierte Lehrpläne</h4>
-                            [cite_start]<p id="feature-desc-1-de">Wir konzentrieren uns auf die Unterstützung personalisierter Lehrpläne im Bereich Mathematik, die speziell auf Schüler der sechsten Klasse ausgerichtet sind. [cite: 13, 18]</p>
-                        </div>
-                        <div class="feature-card reveal" style="transition-delay: 0.1s;">
-                            <i class="fa-solid fa-puzzle-piece"></i>
-                            <h4 id="feature-title-2-de">Praktisches und Dynamisches Lernen</h4>
-                            [cite_start]<p id="feature-desc-2-de">Unser Ziel ist es, die akademische Kompetenz durch eine praktische und dynamische Methode zu stärken, die auf individuelle Bedürfnisse zugeschnitten ist. [cite: 14, 19]</p>
-                        </div>
-                        <div class="feature-card reveal" style="transition-delay: 0.2s;">
-                            <i class="fa-solid fa-tablet-screen-button"></i>
-                            <h4 id="feature-title-3-de">Innovative Technologische Lösungen</h4>
-                            [cite_start]<p id="feature-desc-3-de">Wir verwenden interaktive virtuelle Plattformen, didaktische Module und digitale Unterstützungstools, um den Prozess zu bereichern. [cite: 15, 20]</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
-            <section class="better-results-section section-primary" id="mejores-resultados">
-                <div class="container results-grid">
-                    <div class="results-video-col reveal">
-                        <video src="https://www.wited.com/wp-content/uploads/2025/06/Animacion_03_Mp4.mp4" autoplay loop muted playsinline></video>
-                    </div>
-                    <div class="results-text-col reveal" style="transition-delay: 0.2s;">
-                        <h2>Suchen Sie nach <span class="highlight-blue">besseren Ergebnissen?</span></h2>
-                        <p>Unsere mehrschichtige Lernmethodik garantiert akademischen Erfolg. Heute lernen mehr als **40.000 Studenten** in Lateinamerika mit Wited.</p>
-                        <p>Informieren Sie sich über unsere Pläne und Preise. Welche Option benötigen Sie?</p>
-                        <div class="results-button-group">
-                            <a href="#">Förderung</a>
-                            <a href="#">Homeschooling</a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="popular-modules section-secondary" id="modulos">
+            <section class="popular-modules" id="modulos">
                 <div class="container">
                     <div class="section-header reveal">
                         <h2 class="section-title">Schlüsselmodule für Mathematik der 6. Klasse</h2>
@@ -919,7 +461,7 @@
                                     <span class="instructor-name">{{ producto.instructor | default('Didaktikexperte') }}</span>
                                 </div>
                                 <h3 class="card-title">{{ producto.nombre | default('Thematisches Hauptmodul') }}</h3>
-                                <p style="font-size: 0.9rem; color: var(--color-text-dark);">**Themen:** {{ producto.tema_1 }} y {{ producto.tema_2 }}.</p>
+                                <p style="font-size: 0.9rem; color: var(--color-text-dark);">**Themen:** {{ producto.tema_1 }} und {{ producto.tema_2 }}.</p>
                             </div>
 
                             <div class="card-meta">
@@ -939,8 +481,8 @@
                     </div>
                 </div>
             </section>
-            
-            <section class="extra-sections section-primary">
+
+            <section class="extra-sections">
                 <div class="container">
                     <div class="section-header reveal">
                         <h2 class="section-title">Zusätzliche Förderlösungen</h2>
@@ -968,57 +510,6 @@
                             <i class="fa-solid fa-earth-americas"></i>
                             <h4>Gesellschaftswissenschaften (6. Klasse)</h4>
                             <p style="font-size: 0.9rem;">Themen in Geschichte, Geographie und Staatsbürgerkunde.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="faq-section section-secondary" id="faq-de">
-                <div class="container">
-                    <div class="section-header reveal">
-                        <h2 class="section-title" id="faq-title-de">Häufig gestellte Fragen</h2>
-                        <p class="section-subtitle" id="faq-subtitle-de">Alles, was Sie über EDUCARD SAS und unsere Methodik wissen müssen.</p>
-                    </div>
-
-                    <div class="faq-list">
-                        <div class="faq-item reveal">
-                            <div class="faq-question">
-                                <span id="faq-q1-de">Worauf liegt der Hauptfokus von EDUCARD SAS?</span>
-                                <i class="fa-solid fa-chevron-down"></i>
-                            </div>
-                            <div class="faq-answer">
-                                [cite_start]<p id="faq-a1-de">EDUCARD SAS ist ein Projekt zur Unterstützung personalisierter Lehrpläne im Bereich Mathematik, das speziell auf Schüler der sechsten Klasse ausgerichtet ist. [cite: 13, 18]</p>
-                            </div>
-                        </div>
-                        
-                        <div class="faq-item reveal" style="transition-delay: 0.1s;">
-                            <div class="faq-question">
-                                <span id="faq-q2-de">Welche Lernmethoden haben sich laut Ihrer Studie als am effektivsten erwiesen?</span>
-                                <i class="fa-solid fa-chevron-down"></i>
-                            </div>
-                            <div class="faq-answer">
-                                [cite_start]<p id="faq-a2-de">Die Mehrheit der Befragten (58,8 %) hält praktische Übungen für die effizienteste und qualitativ hochwertigste Lernmethode, gefolgt von Workshops (29,4 %). [cite: 167, 168]</p>
-                            </div>
-                        </div>
-
-                        <div class="faq-item reveal" style="transition-delay: 0.2s;">
-                            <div class="faq-question">
-                                <span id="faq-q3-de">Besteht ein tatsächlicher Bedarf an akademischer Förderung bei Schülern?</span>
-                                <i class="fa-solid fa-chevron-down"></i>
-                            </div>
-                            <div class="faq-answer">
-                                <p id="faq-a3-de">Ja. [cite_start]76,5 % der Befragten haben in einem Thema, das sie im Alltag verwenden, mathematische Unkenntnis erfahren, was die Notwendigkeit unterstreicht, quantitatives und logisches Denken in die praktische Ausbildung zu integrieren. [cite: 177, 179, 180]</p>
-                            </div>
-                        </div>
-                        
-                        <div class="faq-item reveal" style="transition-delay: 0.3s;">
-                            <div class="faq-question">
-                                <span id="faq-q4-de">Welche Arten von technologischen Werkzeugen verwendet EDUCARD SAS?</span>
-                                <i class="fa-solid fa-chevron-down"></i>
-                            </div>
-                            <div class="faq-answer">
-                                [cite_start]<p id="faq-a4-de">Wir verwenden innovative technologische Lösungen, interaktive virtuelle Plattformen, integrierte didaktische Module und praktische Übungen, die Autonomie und kritisches Denken fördern. [cite: 15, 20]</p>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -1052,7 +543,16 @@
                     <li><a href="#" id="footer-terms-link">Términos y Condiciones</a></li>
                 </ul>
             </div>
+
+            <div class="footer-links">
+                <h5 id="footer-social-title">Síguenos</h5>
+                <ul>
+                    <li><a href="#"><i class="fa-brands fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fa-brands fa-linkedin"></i> LinkedIn</a></li>
+                </ul>
             </div>
+        </div>
         
         <div class="footer-bottom">
             &copy; 2025 EDUCARD SAS. Todos los derechos reservados.
@@ -1060,9 +560,9 @@
     </footer>
 
     <script>
-        // --- JAVASCRIPT: LÓGICA DE IDIOMA Y SCROLL REVEAL (ACTUALIZADO) ---
+        // --- JAVASCRIPT: LÓGICA DE IDIOMA Y SCROLL REVEAL ---
         
-        // 1. DICCIONARIO DE TRADUCCIONES (Para nuevas secciones y Footer)
+        // 1. DICCIONARIO DE TRADUCCIONES (Para el Footer y Títulos Estáticos)
         const translations = {
             'es': {
                 'pageTitle': 'EDUCARD SAS | Refuerzos de Matemática Grado Sexto',
@@ -1075,28 +575,7 @@
                 'footer-faq-link': 'FAQ',
                 'footer-support-link': 'Soporte Técnico',
                 'footer-terms-link': 'Términos y Condiciones',
-                
-                // Nuevos IDs para Sección 2
-                'features-title': 'Nuestra Metodología y Fundamentos',
-                [cite_start]'features-subtitle': 'Fortalecemos la competencia académica con un enfoque personalizado, dinámico y totalmente digital. [cite: 14, 19]',
-                'feature-title-1': 'Currículos Personalizados',
-                [cite_start]'feature-desc-1': 'Nos enfocamos en apoyar currículos personalizados dentro del área de Matemática, dirigido específicamente a estudiantes de grado sexto. [cite: 13, 18]',
-                'feature-title-2': 'Aprendizaje Práctico y Dinámico',
-                [cite_start]'feature-desc-2': 'Nuestro objetivo es fortalecer la competencia académica mediante un método práctico y dinámico, adaptado a las necesidades individuales. [cite: 14, 19]',
-                'feature-title-3': 'Soluciones Tecnológicas Innovadoras',
-                [cite_start]'feature-desc-3': 'Utilizamos plataformas virtuales interactivas, módulos didácticos y herramientas digitales de apoyo para enriquecer el proceso. [cite: 15, 20]',
-                
-                // Nuevos IDs para Sección 6 FAQ
-                'faq-title': 'Preguntas Frecuentes',
-                'faq-subtitle': 'Todo lo que necesitas saber sobre EDUCARD SAS y nuestra metodología.',
-                'faq-q1': '¿Cuál es el enfoque principal de EDUCARD SAS?',
-                [cite_start]'faq-a1': 'EDUCARD SAS es un proyecto enfocado en apoyar currículos personalizados dentro del área de Matemática, dirigido específicamente a estudiantes de grado sexto. [cite: 13, 18]',
-                'faq-q2': '¿Qué metodologías de aprendizaje han demostrado ser más efectivas según su estudio?',
-                [cite_start]'faq-a2': 'La mayoría de los encuestados (58.8%) considera que los ejercicios prácticos son el método de aprendizaje más eficiente y de mejor calidad, seguido por los talleres (29.4%). [cite: 167, 168]',
-                'faq-q3': '¿Existe una necesidad real de refuerzo académico en los estudiantes?',
-                'faq-a3': 'Sí. [cite_start]Un 76.5% de los encuestados ha experimentado desconocimiento matemático en temas que utiliza en su vida diaria, lo que justifica la necesidad de integrar el pensamiento cuantitativo y lógico en la formación práctica. [cite: 177, 179, 180]',
-                'faq-q4': '¿Qué tipo de herramientas tecnológicas utiliza EDUCARD SAS?',
-                [cite_start]'faq-a4': 'Utilizamos soluciones tecnológicas innovadoras, plataformas virtuales interactivas, módulos didácticos integrados y ejercicios prácticos, promoviendo la autonomía y el pensamiento crítico. [cite: 15, 20]',
+                'footer-social-title': 'Síguenos'
             },
             'en': {
                 'pageTitle': 'EDUCARD SAS | Sixth Grade Math Reinforcements',
@@ -1109,28 +588,7 @@
                 'footer-faq-link': 'FAQ',
                 'footer-support-link': 'Technical Support',
                 'footer-terms-link': 'Terms and Conditions',
-                
-                // Nuevos IDs para Sección 2
-                'features-title-en': 'Our Methodology and Fundamentals',
-                [cite_start]'features-subtitle-en': 'We strengthen academic competence with a personalized, dynamic, and fully digital approach. [cite: 14, 19]',
-                'feature-title-1-en': 'Personalized Curricula',
-                [cite_start]'feature-desc-1-en': 'We focus on supporting personalized curricula in the area of Mathematics, specifically aimed at sixth-grade students. [cite: 13, 18]',
-                'feature-title-2-en': 'Practical and Dynamic Learning',
-                [cite_start]'feature-desc-2-en': 'Our objective is to strengthen academic competence through a practical and dynamic method, customized to individual needs. [cite: 14, 19]',
-                'feature-title-3-en': 'Innovative Technological Solutions',
-                [cite_start]'feature-desc-3-en': 'We use interactive virtual platforms, teaching modules, and digital support tools to enrich the process. [cite: 15, 20]',
-
-                // Nuevos IDs para Sección 6 FAQ
-                'faq-title-en': 'Frequently Asked Questions',
-                'faq-subtitle-en': 'Everything you need to know about EDUCARD SAS and our methodology.',
-                'faq-q1-en': 'What is the main focus of EDUCARD SAS?',
-                [cite_start]'faq-a1-en': 'EDUCARD SAS is a project focused on supporting personalized curricula in the area of Mathematics, specifically aimed at sixth-grade students. [cite: 13, 18]',
-                'faq-q2-en': 'What learning methodologies have proven most effective according to your study?',
-                [cite_start]'faq-a2-en': 'The majority of respondents (58.8%) consider practical exercises to be the most efficient and highest quality learning method, followed by workshops (29.4%). [cite: 167, 168]',
-                'faq-q3-en': 'Is there a real need for academic reinforcement among students?',
-                'faq-a3-en': 'Yes. [cite_start]76.5% of respondents have experienced mathematical ignorance on a topic they use in their daily lives, which justifies the need to integrate quantitative and logical thinking into practical training. [cite: 177, 179, 180]',
-                'faq-q4-en': 'What type of technological tools does EDUCARD SAS use?',
-                [cite_start]'faq-a4-en': 'We use innovative technological solutions, interactive virtual platforms, integrated teaching modules, and practical exercises, promoting autonomy and critical thinking. [cite: 15, 20]',
+                'footer-social-title': 'Follow Us'
             },
             'de': {
                 'pageTitle': 'EDUCARD SAS | Nachhilfe 6. Klasse Mathematik',
@@ -1143,28 +601,7 @@
                 'footer-faq-link': 'FAQ',
                 'footer-support-link': 'Technischer Support',
                 'footer-terms-link': 'Allgemeine Geschäftsbedingungen',
-                
-                // Nuevos IDs para Sección 2
-                'features-title-de': 'Unsere Methodik und Grundlagen',
-                [cite_start]'features-subtitle-de': 'Wir stärken akademische Kompetenz mit einem personalisierten, dynamischen und vollständig digitalen Ansatz. [cite: 14, 19]',
-                'feature-title-1-de': 'Personalisierte Lehrpläne',
-                [cite_start]'feature-desc-1-de': 'Wir konzentrieren uns auf die Unterstützung personalisierter Lehrpläne im Bereich Mathematik, die speziell auf Schüler der sechsten Klasse ausgerichtet sind. [cite: 13, 18]',
-                'feature-title-2-de': 'Praktisches und Dynamisches Lernen',
-                [cite_start]'feature-desc-2-de': 'Unser Ziel ist es, die akademische Kompetenz durch eine praktische und dynamische Methode zu stärken, die auf individuelle Bedürfnisse zugeschnitten ist. [cite: 14, 19]',
-                'feature-title-3-de': 'Innovative Technologische Lösungen',
-                [cite_start]'feature-desc-3-de': 'Wir verwenden interaktive virtuelle Plattformen, didaktische Module und digitale Unterstützungstools, um den Prozess zu bereichern. [cite: 15, 20]',
-
-                // Nuevos IDs para Sección 6 FAQ
-                'faq-title-de': 'Häufig gestellte Fragen',
-                'faq-subtitle-de': 'Alles, was Sie über EDUCARD SAS und unsere Methodik wissen müssen.',
-                'faq-q1-de': 'Worauf liegt der Hauptfokus von EDUCARD SAS?',
-                [cite_start]'faq-a1-de': 'EDUCARD SAS ist ein Projekt zur Unterstützung personalisierter Lehrpläne im Bereich Mathematik, das speziell auf Schüler der sechsten Klasse ausgerichtet ist. [cite: 13, 18]',
-                'faq-q2-de': 'Welche Lernmethoden haben sich laut Ihrer Studie als am effektivsten erwiesen?',
-                [cite_start]'faq-a2-de': 'Die Mehrheit der Befragten (58,8 %) hält praktische Übungen für die effizienteste und qualitativ hochwertigste Lernmethode, gefolgt von Workshops (29,4 %). [cite: 167, 168]',
-                'faq-q3-de': 'Besteht ein tatsächlicher Bedarf an akademischer Förderung bei Schülern?',
-                'faq-a3-de': 'Ja. [cite_start]76,5 % der Befragten haben in einem Thema, das sie im Alltag verwenden, mathematische Unkenntnis erfahren, was die Notwendigkeit unterstreicht, quantitatives und logisches Denken in die praktische Ausbildung zu integrieren. [cite: 177, 179, 180]',
-                'faq-q4-de': 'Welche Arten von technologischen Werkzeugen verwendet EDUCARD SAS?',
-                [cite_start]'faq-a4-de': 'Wir verwenden innovative technologische Lösungen, interaktive virtuelle Plattformen, integrierte didaktische Module und praktische Übungen, die Autonomie und kritisches Denken fördern. [cite: 15, 20]',
+                'footer-social-title': 'Folgen Sie uns'
             }
         };
 
@@ -1173,41 +610,40 @@
             'en': 'https://flagcdn.com/us.svg', // Bandera EE.UU.
             'de': 'https://flagcdn.com/de.svg'  // Bandera Alemania
         };
+        const langHeaders = {
+            'es': ['co.svg', 'Español'],
+            'en': ['us.svg', 'English'],
+            'de': ['de.svg', 'Deutsch']
+        };
 
         function applyTranslation(lang) {
             // A. Cambiar la visualización de las secciones Hero/Header/Sections
             document.querySelectorAll('[data-lang]').forEach(section => {
-                const isCurrentLang = section.dataset.lang === lang;
+                section.style.display = section.dataset.lang === lang ? 'block' : 'none';
                 
-                section.style.display = isCurrentLang ? 'block' : 'none';
-                
-                // Asegurar que el header correcto esté visible
+                // Asegurar que el header correcto esté visible (está dentro del div de idioma)
                 const header = section.querySelector('header');
                 if (header) {
-                    header.style.display = isCurrentLang ? 'flex' : 'none';
+                    header.style.display = section.dataset.lang === lang ? 'flex' : 'none';
                 }
             });
 
-            // B. Aplicar traducciones del Footer, Títulos Estáticos y nuevas secciones
+            // B. Aplicar traducciones del Footer y Títulos (contenidos estáticos)
             const dict = translations[lang] || translations['es'];
             document.getElementById('pageTitle').textContent = dict['pageTitle'];
             
             for (const key in dict) {
-                // Adaptado para buscar por ID dinámico para los 3 idiomas
-                let elementId = key.includes('-') ? key : key + (lang === 'es' ? '' : `-${lang}`);
-                const element = document.getElementById(elementId);
-                
+                const element = document.getElementById(key);
                 if (element) {
-                    element.innerHTML = dict[key]; // Usar innerHTML para mantener el tag [cite]
-                } else if (!key.includes('-')) {
-                    // Fallback para IDs sin sufijo (Footer y PageTitle)
-                    const fallbackElement = document.getElementById(key);
-                    if (fallbackElement) fallbackElement.innerHTML = dict[key];
+                    element.textContent = dict[key];
                 }
             }
             
-            // C. Actualizar bandera principal para el idioma activo (dentro de cada header)
+            // C. Actualizar bandera principal para el idioma activo (el que está visible)
+            // Esto solo es necesario si se usa el selector de bandera dentro de cada header
             document.querySelectorAll('.language-selector .flag').forEach(flagElement => {
+                 // La lógica actual ya lo hace al tener el selector dentro de cada bloque de idioma.
+                 // Solo actualizamos la fuente de la imagen del flag principal.
                  flagElement.src = flags[lang];
             });
 
@@ -1215,12 +651,12 @@
             localStorage.setItem('selectedLang', lang);
         }
 
-        // 2. Lógica del Selector de Idioma y FAQ
+        // 2. Lógica del Selector de Idioma
         document.addEventListener('DOMContentLoaded', () => {
             const currentLang = localStorage.getItem('selectedLang') || 'es'; // Por defecto Español
             applyTranslation(currentLang);
             
-            // --- Selector de Idioma ---
+            // Mostrar u ocultar el dropdown
             document.querySelectorAll('.language-selector').forEach(selector => {
                 selector.addEventListener('click', (e) => {
                     const dropdown = selector.querySelector('.language-dropdown');
@@ -1232,38 +668,21 @@
                 });
             });
 
+            // Seleccionar nuevo idioma
             document.querySelectorAll('.language-dropdown a').forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     const newLang = link.dataset.lang;
                     applyTranslation(newLang);
+                    // Ocultar todos los dropdowns después de la selección
                     document.querySelectorAll('.language-dropdown').forEach(d => d.classList.remove('active'));
                 });
             });
 
+            // Cerrar dropdown al hacer clic fuera
             document.addEventListener('click', () => {
                 document.querySelectorAll('.language-dropdown').forEach(d => d.classList.remove('active'));
             });
-            
-            // --- Lógica FAQ Accordion ---
-            document.querySelectorAll('.faq-question').forEach(question => {
-                question.addEventListener('click', () => {
-                    const parentItem = question.closest('.faq-item');
-                    // Toggle activo solo si no está activo, sino lo cierra
-                    const wasActive = parentItem.classList.contains('active');
-                    
-                    // Cierra todas las demás preguntas
-                    document.querySelectorAll('.faq-item').forEach(item => {
-                        item.classList.remove('active');
-                    });
-                    
-                    // Abre/Cierra la pregunta actual
-                    if (!wasActive) {
-                        parentItem.classList.add('active');
-                    }
-                });
-            });
-
 
             // 3. Scroll Reveal (Movimiento al Scroll)
             const reveals = document.querySelectorAll('.reveal');
@@ -1271,6 +690,7 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
+                        // observer.unobserve(entry.target); // Dejar comentado si quieres que se anime cada vez que entre en el viewport
                     }
                 });
             }, { root: null, rootMargin: '0px', threshold: 0.1 });
