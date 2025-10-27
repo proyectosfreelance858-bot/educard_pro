@@ -3,21 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="pageTitle">EDUCARD SAS | Soluciones Educativas y Tecnológicas</title>
+    <title id="pageTitle">EDUCARD SAS | Refuerzos de Matemática Grado Sexto</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
     <style>
-        /* ========================================================= */
-        /* --- ESTILOS BASE Y VARIABLES --- */
-        /* ========================================================= */
+        /* Variables CSS - Diseño Limpio Minimalista */
         :root {
-            --color-primary: #5c67ff; 
-            --color-secondary: #ffc107; 
-            --color-background: #f8f9fa; 
-            --color-surface: #ffffff; 
-            --color-text-dark: #212529; 
-            --color-text-subtle: #6c757d; 
+            --color-primary: #5c67ff; /* Azul Educard */
+            --color-secondary: #ffc107; /* Amarillo Destacado */
+            --color-background: #f8f9fa; /* Fondo Suave */
+            --color-surface: #ffffff; /* Superficie Blanca */
+            --color-text-dark: #212529; /* Texto Principal */
+            --color-text-subtle: #6c757d; /* Texto Secundario */
             --color-border: #e9ecef;
             --color-shadow-light: rgba(0, 0, 0, 0.08);
             --font-heading: 'Outfit', sans-serif;
@@ -31,27 +29,17 @@
         body { font-family: var(--font-body); color: var(--color-text-dark); background-color: var(--color-surface); line-height: 1.6; overflow-x: hidden; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
         section { padding: 90px 0; position: relative; } 
-        .section-light { background-color: var(--color-surface); }
-        .section-dark { background-color: var(--color-background); }
+        section:nth-child(even) { background-color: var(--color-background); } /* Alternar color de fondo */
         
-        /* Estilo para los botones principales */
+        /* Estilos de botones generales */
         .main-cta-button {
-            display: inline-block; padding: 15px 35px; background-color: var(--color-primary); color: white;
-            border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 1.05rem;
-            margin-top: 25px; transition: background-color 0.3s, transform 0.2s;
-            box-shadow: 0 6px 15px rgba(92, 103, 255, 0.3);
+            display: inline-block; padding: 15px 30px; background-color: var(--color-primary); color: white;
+            border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 1rem; margin-top: 30px;
+            transition: background-color 0.3s ease, transform 0.2s; box-shadow: 0 8px 15px rgba(92, 103, 255, 0.3);
         }
-        .main-cta-button:hover { background-color: #4b54ff; transform: translateY(-2px); }
-        .cta-info { font-size: 0.9rem; color: var(--color-text-subtle); margin-top: 15px; }
+        .main-cta-button:hover { background-color: #4b54ff; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(92, 103, 255, 0.4); }
 
-        /* Estilo de Revelado/Animación */
-        .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
-
-        /* ========================================================= */
-        /* --- ENCABEZADO (HEADER) --- */
-        /* ========================================================= */
+        /* --- ENCABEZADO (HEADER) MEJORADO --- */
         header {
             position: sticky; top: 0; left: 0; width: 100%; height: var(--header-height);
             display: flex; justify-content: space-between; align-items: center;
@@ -69,21 +57,67 @@
         nav ul li a { text-decoration: none; color: var(--color-text-dark); font-weight: 500; padding: 10px 0; display: block; transition: color 0.3s ease; }
         nav ul li a:hover, nav ul li a.active { color: var(--color-primary); }
 
-        .header-actions { display: flex; align-items: center; gap: 20px; }
-        .header-button { padding: 10px 20px; background-color: var(--color-primary); color: white; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: background-color 0.3s, transform 0.2s; }
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-button {
+            padding: 10px 20px; background-color: var(--color-primary); color: white;
+            border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.95rem;
+            transition: background-color 0.3s, transform 0.2s;
+        }
         .header-button:hover { background-color: #4b54ff; transform: translateY(-1px); }
 
-        .language-selector { position: relative; cursor: pointer; padding: 5px; }
-        .flag { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); }
-        .language-dropdown { position: absolute; top: 40px; right: 0; background-color: var(--color-surface); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); border-radius: 8px; overflow: hidden; width: 150px; z-index: 1001; display: none; }
-        .language-dropdown.active { display: block; }
-        .language-dropdown a { display: flex; align-items: center; padding: 10px 15px; text-decoration: none; color: var(--color-text-dark); font-size: 0.9rem; }
-        .language-dropdown a:hover { background-color: var(--color-background); color: var(--color-primary); }
-        .language-dropdown img { width: 20px; height: 15px; margin-right: 10px; border: 1px solid var(--color-border); }
+        /* Selector de Idioma (Bandera) */
+        .language-selector {
+            position: relative;
+            cursor: pointer;
+            padding: 5px;
+        }
+        .flag {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .language-dropdown {
+            position: absolute;
+            top: 40px;
+            right: 0;
+            background-color: var(--color-surface);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            overflow: hidden;
+            width: 150px;
+            z-index: 1001;
+            display: none;
+        }
+        .language-dropdown.active {
+            display: block;
+        }
+        .language-dropdown a {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: var(--color-text-dark);
+            font-size: 0.9rem;
+        }
+        .language-dropdown a:hover {
+            background-color: var(--color-background);
+            color: var(--color-primary);
+        }
+        .language-dropdown img {
+            width: 20px;
+            height: 15px;
+            margin-right: 10px;
+            border: 1px solid var(--color-border);
+        }
         
-        /* ========================================================= */
-        /* --- ESTILOS HERO --- */
-        /* ========================================================= */
+        /* Estilos Hero */
         .hero { min-height: 85vh; display: flex; align-items: center; padding-top: var(--header-height); background-color: var(--color-surface); position: relative; overflow: hidden; }
         .hero-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; align-items: center; padding: 50px 0; }
         .hero-text-col h1 { font-family: var(--font-heading); font-size: 3.8rem; font-weight: 800; line-height: 1.1; margin-bottom: 25px; color: var(--color-text-dark); letter-spacing: -1.5px; }
@@ -92,15 +126,13 @@
         .phone-frame { position: relative; width: 100%; height: 100%; max-width: 300px; border: 4px solid var(--color-secondary); border-radius: 30px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); overflow: hidden; background-color: white; z-index: 10; }
         .phone-video { width: 100%; height: 100%; object-fit: cover; border-radius: 26px; }
 
-        /* ========================================================= */
-        /* --- ESTILOS SECCIONES GENERALES --- */
-        /* ========================================================= */
-        .section-header { text-align: center; margin-bottom: 60px; }
-        .section-title { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; color: var(--color-text-dark); }
-        .section-subtitle { font-size: 1.1rem; color: var(--color-text-subtle); max-width: 800px; margin: 0 auto; }
+        /* Estilos Generales de Sección */
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-title { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
+        .section-subtitle { font-size: 1.1rem; color: var(--color-text-subtle); max-width: 700px; margin: 0 auto; }
         
-        /* --- Módulos (Se mantiene el estilo de card) --- */
-        .popular-modules { padding-top: 120px; }
+        /* Estilos Módulos */
+        .popular-modules { background-color: var(--color-background); }
         .module-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
         .module-card { background-color: var(--color-surface); border-radius: 12px; box-shadow: 0 4px 15px var(--color-shadow-light); overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; border: 1px solid var(--color-border); }
         .module-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); }
@@ -108,58 +140,64 @@
         .card-image-wrapper img { width: 100%; height: 100%; object-fit: cover; }
         .card-tag { position: absolute; top: 15px; left: 15px; background-color: #5b55e8; color: white; padding: 5px 12px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; }
         .card-content { padding: 20px; flex-grow: 1; }
-        .card-instructor { display: flex; align-items: center; margin-bottom: 10px; }
-        .instructor-avatar { width: 25px; height: 25px; border-radius: 50%; object-fit: cover; margin-right: 8px; }
-        .instructor-name { font-size: 0.85rem; color: var(--color-primary); font-weight: 600; }
         .card-title { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; min-height: 50px; }
-        .card-meta { display: flex; justify-content: space-between; border-top: 1px solid var(--color-border); padding: 10px 20px; font-size: 0.9rem; color: var(--color-text-subtle); }
-        .card-meta .meta-item i { margin-right: 5px; color: var(--color-primary); }
-        .card-actions { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--color-border); padding-top: 15px; }
-        .card-price .free { color: #28a745; font-weight: 700; font-size: 1.2rem; }
+        .card-instructor { display: flex; align-items: center; margin-bottom: 15px; }
+        .instructor-avatar { width: 30px; height: 30px; border-radius: 50%; margin-right: 10px; object-fit: cover; }
+        .instructor-name { font-size: 0.9rem; color: var(--color-text-subtle); }
+        .card-meta { display: flex; justify-content: space-between; padding: 0 20px 10px; border-top: 1px dashed var(--color-border); }
+        .meta-item { display: flex; align-items: center; font-size: 0.9rem; color: var(--color-text-subtle); }
+        .meta-item i { margin-right: 5px; color: var(--color-primary); }
+        .card-actions { display: flex; justify-content: space-between; align-items: center; padding-top: 10px; }
+        .card-price { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 700; }
+        .card-price .free { color: #28a745; }
         .explore-button { padding: 8px 15px; font-size: 0.9rem; font-weight: 600; color: var(--color-primary); border: 2px solid var(--color-primary); border-radius: 6px; text-decoration: none; transition: all 0.3s; }
         .explore-button:hover { background-color: var(--color-primary); color: white; }
 
-        /* ========================================================= */
-        /* --- ESTILOS: NUEVAS SECCIONES --- */
-        /* ========================================================= */
-        /* 1. Sobre Nosotros / Misión-Visión-Valores */
-        .about-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 50px; }
-        .about-card { background-color: var(--color-surface); padding: 30px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05); text-align: center; border-top: 5px solid var(--color-primary); transition: all 0.3s; }
-        .about-card h3 { font-family: var(--font-heading); font-size: 1.6rem; margin-bottom: 15px; font-weight: 700; }
-        .about-card i { font-size: 2.5rem; color: var(--color-secondary); margin-bottom: 20px; }
-        .about-card:hover { transform: translateY(-3px); border-top-color: var(--color-secondary); }
-
-        /* 2. Metodología / Ventajas (Features) */
-        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 50px; }
-        .feature-card { background: var(--color-surface); padding: 25px; border-radius: 12px; border: 1px solid var(--color-border); display: flex; align-items: flex-start; gap: 20px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03); }
-        .feature-icon { font-size: 2rem; color: var(--color-primary); background-color: rgba(92, 103, 255, 0.1); padding: 10px; border-radius: 8px; }
-        .feature-text h4 { font-family: var(--font-heading); font-size: 1.2rem; margin-bottom: 5px; font-weight: 600; }
-        .foda-warning { color: #dc3545; font-weight: 600; }
-        .foda-opportunity { color: #28a745; font-weight: 600; }
-
-        /* 3. Testimonios */
-        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
-        .testimonial-card { background-color: var(--color-surface); padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); border-left: 5px solid var(--color-secondary); }
-        .quote { font-style: italic; margin-bottom: 15px; color: var(--color-text-dark); }
-        .client-info { display: flex; align-items: center; margin-top: 15px; }
-        .client-avatar { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; margin-right: 10px; }
-        .client-name { font-weight: 700; font-family: var(--font-heading); }
-        .client-role { font-size: 0.9rem; color: var(--color-text-subtle); }
+        /* --- NUEVOS ESTILOS PARA EXPANDIR LA PÁGINA --- */
         
-        /* 4. FAQ / Acordeón */
-        .faq-container { max-width: 900px; margin: 50px auto 0; }
-        .faq-item { border: 1px solid var(--color-border); margin-bottom: 15px; border-radius: 8px; overflow: hidden; background-color: var(--color-surface); }
-        .faq-question { padding: 20px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; background-color: var(--color-background); font-family: var(--font-heading); font-size: 1.1rem; }
-        .faq-question:hover { background-color: #e3e6ea; }
-        .faq-answer { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out; background-color: var(--color-surface); }
-        .faq-answer.active { max-height: 300px; padding: 20px; }
-        .faq-question i { transition: transform 0.3s; }
-        .faq-item.active .faq-question i { transform: rotate(180deg); }
+        /* Sección de Misión, Visión, Valores */
+        .about-section { background-color: var(--color-surface); text-align: center; }
+        .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
+        .vision-mission-card { background: var(--color-background); padding: 30px; border-radius: 12px; border-left: 5px solid var(--color-primary); text-align: left; transition: all 0.3s; }
+        .vision-mission-card:hover { border-left-color: var(--color-secondary); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); }
+        .vision-mission-card h4 { font-family: var(--font-heading); font-size: 1.4rem; color: var(--color-text-dark); margin-bottom: 15px; }
+        .values-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 30px; }
+        .value-tag { background-color: var(--color-primary); color: white; padding: 8px 15px; border-radius: 20px; font-weight: 500; font-size: 0.9rem; }
+        
+        /* Sección de Estadísticas/Beneficios (Por qué elegirnos) */
+        .stats-section { background-color: var(--color-background); }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-top: 50px; text-align: center; }
+        .stat-item { background: var(--color-surface); padding: 25px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); }
+        .stat-item .number { font-family: var(--font-heading); font-size: 3rem; font-weight: 800; color: var(--color-primary); line-height: 1; }
+        .stat-item .label { font-size: 1.1rem; color: var(--color-text-subtle); margin-top: 5px; }
+        
+        /* Sección de Precios/Planes */
+        .pricing-section { background-color: var(--color-surface); }
+        .pricing-table { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 50px; }
+        .pricing-card { background: var(--color-background); border-radius: 12px; padding: 40px 30px; text-align: center; border: 1px solid var(--color-border); transition: all 0.3s; }
+        .pricing-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); }
+        .pricing-card.featured { border-color: var(--color-primary); background-color: #f0f3ff; }
+        .pricing-card h3 { font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 10px; }
+        .price { font-family: var(--font-heading); font-size: 3.5rem; font-weight: 700; color: var(--color-primary); margin-bottom: 20px; line-height: 1; }
+        .price span { font-size: 1.2rem; font-weight: 500; color: var(--color-text-subtle); }
+        .features-list { list-style: none; text-align: left; margin-bottom: 30px; }
+        .features-list li { margin-bottom: 12px; color: var(--color-text-dark); font-size: 1rem; }
+        .features-list li i { color: #28a745; margin-right: 10px; }
+        .pricing-cta { padding: 12px 25px; font-size: 1rem; font-weight: 600; background-color: var(--color-primary); color: white; border-radius: 8px; text-decoration: none; display: block; transition: background-color 0.3s; }
+        .pricing-cta:hover { background-color: #4b54ff; }
 
+        /* Sección FAQ */
+        .faq-section { background-color: var(--color-background); }
+        .accordion-item { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; margin-bottom: 15px; overflow: hidden; }
+        .accordion-header { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-heading); font-weight: 600; font-size: 1.1rem; color: var(--color-text-dark); transition: background-color 0.3s; }
+        .accordion-header:hover { background-color: var(--color-background); }
+        .accordion-header i { transition: transform 0.3s; }
+        .accordion-content { max-height: 0; padding: 0 20px; overflow: hidden; transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out; }
+        .accordion-content p { padding-bottom: 20px; color: var(--color-text-subtle); }
+        .accordion-item.active .accordion-content { max-height: 500px; /* Suficiente para el contenido */ }
+        .accordion-item.active .accordion-header i { transform: rotate(180deg); }
 
-        /* ========================================================= */
-        /* --- PIE DE PÁGINA (FOOTER) --- */
-        /* ========================================================= */
+        /* --- PIE DE PÁGINA (FOOTER) MEJORADO --- */
         footer { background-color: var(--color-text-dark); color: white; padding: 50px 0; font-size: 0.9rem; }
         .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
         .footer-about h5, .footer-links h5 { font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 20px; font-weight: 700; color: var(--color-secondary); }
@@ -168,22 +206,17 @@
         .footer-links ul li { margin-bottom: 10px; }
         .footer-links ul li a { color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s; }
         .footer-links ul li a:hover { color: white; }
-        .social-icons a { color: white; font-size: 1.5rem; margin-right: 15px; transition: color 0.3s; }
-        .social-icons a:hover { color: var(--color-secondary); }
         .footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.1); margin-top: 30px; padding-top: 20px; text-align: center; color: rgba(255, 255, 255, 0.5); font-size: 0.8rem; }
         
-        /* ========================================================= */
-        /* --- MEDIA QUERIES --- */
-        /* ========================================================= */
+        /* Media Queries (Responsive) */
         @media (max-width: 900px) {
             .hero-grid { grid-template-columns: 1fr; text-align: center; }
             .hero-text-col h1 { font-size: 2.8rem; }
             .hero-animation-col { margin-top: 40px; height: 350px; }
-            .about-grid, .feature-grid, .testimonial-grid { grid-template-columns: 1fr; }
-            .about-card { margin-bottom: 20px; }
             .footer-grid { grid-template-columns: 1fr; text-align: center; }
             .language-dropdown { right: -30px; }
             nav ul { display: none; }
+            .stats-grid, .pricing-table, .about-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -201,11 +234,10 @@
                 <nav>
                     <ul>
                         <li><a href="#hero-section" class="active">Inicio</a></li>
-                        <li><a href="#about-us">Sobre Nosotros</a></li>
-                        <li><a href="#modulos">Refuerzos (6°-11°)</a></li>
-                        <li><a href="#ventajas">Ventajas</a></li>
-                        <li><a href="#faq">Ayuda</a></li>
-                        <li><a href="#">Contacto</a></li>
+                        <li><a href="#modulos">Refuerzos</a></li>
+                        <li><a href="#quienes-somos">Nosotros</a></li>
+                        <li><a href="#planes">Planes</a></li>
+                        <li><a href="#faq">FAQ</a></li>
                     </ul>
                 </nav>
 
@@ -221,19 +253,19 @@
                     </div>
                 </div>
             </header>
-            
-            <section class="hero section-light" id="hero-section">
+
+            <section class="hero" id="hero-section">
                 <div class="container hero-grid">
                     <div class="hero-text-col reveal">
-                        <p class="tag-line"><i class="fa-solid fa-square-root-variable"></i> Refuerzo Académico Nivel **Sexto a Once**</p>
-                        [cite_start]<h1>Educación <span class="highlight">Innovadora</span>, Resultados Reales [cite: 162]</h1>
-                        [cite_start]<p class="subtitle">EDUCARD SAS: La solución tecnológica para fortalecer competencias en **Matemáticas, Español, Sociales y Biología** desde grado sexto hasta once[cite: 159]. [cite_start]**Aprender con tecnología, crecer con conocimiento**[cite: 162].</p>
-                        <a href="#modulos" class="main-cta-button">Ver Módulos de Refuerzo</a>
-                        [cite_start]<p class="cta-info">Implementamos un método **práctico, dinámico y personalizado** para tu éxito académico[cite: 91, 93].</p>
+                        <p class="tag-line"><i class="fa-solid fa-square-root-variable"></i> Refuerzo Académico Nivel Sexto a Once</p>
+                        <h1>Aprendizaje <span class="highlight">Inteligente</span> a un clic de distancia</h1>
+                        [cite_start]<p class="subtitle">Módulos de **Matemática** y otras áreas para grados sexto a once, con soluciones ultra profesionales para garantizar el dominio de los temas esenciales y asegurar el éxito académico. [cite: 159]</p>
+                        <a href="#modulos" class="main-cta-button">Empezar Refuerzo Ahora</a>
+                        <p class="cta-info" style="font-size: 0.9rem; margin-top: 15px; color: var(--color-text-subtle);">No se requiere tarjeta de crédito. Simplemente haz clic en "Empezar Refuerzo Ahora" y accede al primer módulo **GRATIS**.</p>
                     </div>
                     <div class="hero-animation-col reveal" style="transition-delay: 0.2s;">
                         <div class="phone-frame">
-                             <video class="phone-video" autoplay loop muted playsinline controls=false>
+                            <video class="phone-video" autoplay loop muted playsinline controls=false>
                                 <source src="https://www.wited.com/wp-content/uploads/2025/06/Animacion_01_crop.webm" type="video/webm">
                                 Tu navegador no soporta el formato de video WebM.
                             </video>
@@ -241,80 +273,13 @@
                     </div>
                 </div>
             </section>
-            
-            <section class="about-us section-dark" id="about-us">
+
+            <section class="popular-modules" id="modulos">
                 <div class="container">
                     <div class="section-header reveal">
-                        <h2 class="section-title">Acerca de Educard SAS</h2>
-                        <p class="section-subtitle">Somos un proyecto enfocado en transformar la educación a través de soluciones tecnológicas innovadoras. [cite_start]Nuestro objetivo es el fortalecimiento de la competencia académica [cite: 90-93].</p>
+                        <h2 class="section-title">Módulos Clave de Refuerzo Académico</h2>
+                        [cite_start]<p class="section-subtitle">Explora nuestros módulos dinámicos y accesibles [cite: 143][cite_start], diseñados por expertos en didáctica, con un enfoque en el fortalecimiento de competencias básicas para el futuro. [cite: 142]</p>
                     </div>
-
-                    <div class="about-grid">
-                        
-                        <div class="about-card reveal">
-                            <i class="fa-solid fa-bullseye"></i>
-                            <h3>Nuestra Misión</h3>
-                            [cite_start]<p>Mejorar el aprendizaje por medio de **refuerzos educativos tecnológicos**, brindando herramientas innovadoras que faciliten el aprendizaje de los estudiantes y fomenten el desarrollo académico y personal[cite: 165].</p>
-                        </div>
-
-                        <div class="about-card reveal" style="transition-delay: 0.2s;">
-                            <i class="fa-solid fa-rocket"></i>
-                            <h3>Nuestra Visión</h3>
-                            [cite_start]<p>Ser reconocida a nivel nacional como **pionera en soluciones tecnológicas** aplicadas a la educación, con un modelo escalable que impacte a estudiantes en todo el territorio colombiano[cite: 167].</p>
-                        </div>
-
-                        <div class="about-card reveal" style="transition-delay: 0.4s;">
-                            <i class="fa-solid fa-handshake"></i>
-                            <h3>Nuestros Valores</h3>
-                            [cite_start]<p>Nos basamos en la **Disciplina, Innovación, Responsabilidad, Empatía y Compromiso** para asegurar un aprendizaje dinámico, inclusivo y efectivo[cite: 169].</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="methodology section-light">
-                <div class="container">
-                    <div class="section-header reveal">
-                        <h2 class="section-title">Una Metodología que SÍ Funciona</h2>
-                        <p class="section-subtitle">Nuestro modelo educativo se basa en datos reales de nuestros estudiantes para garantizar la máxima eficiencia. [cite_start]La implementación de recursos digitales y plataformas tecnológicas permite que el aprendizaje sea **dinámico, accesible y eficiente**[cite: 143].</p>
-                    </div>
-
-                    <div class="feature-grid">
-                        
-                        <div class="feature-card reveal">
-                            <i class="fa-solid fa-mobile-screen feature-icon"></i>
-                            <div class="feature-text">
-                                <h4>Diseño **Mobile-First**</h4>
-                                [cite_start]<p>El 94.1% de nuestros usuarios usa el **celular** como dispositivo principal[cite: 56]. Por eso, nuestros módulos están optimizados para una experiencia impecable en cualquier dispositivo móvil.</p>
-                            </div>
-                        </div>
-
-                        <div class="feature-card reveal" style="transition-delay: 0.2s;">
-                            <i class="fa-solid fa-vial-circle-check feature-icon"></i>
-                            <div class="feature-text">
-                                <h4>Foco en la Práctica</h4>
-                                [cite_start]<p>El 58.8% de los estudiantes considera que los **ejercicios prácticos** son el método de mejor calidad[cite: 61]. [cite_start]Priorizamos la aplicación del conocimiento con herramientas digitales de apoyo[cite: 92].</p>
-                            </div>
-                        </div>
-
-                        <div class="feature-card reveal" style="transition-delay: 0.4s;">
-                            <i class="fa-solid fa-puzzle-piece feature-icon"></i>
-                            <div class="feature-text">
-                                <h4>Aprendizaje Personalizado</h4>
-                                [cite_start]<p>Ofrecemos currículos y módulos didácticos personalizados según las necesidades individuales de cada estudiante [cite: 90-92][cite_start], promoviendo la autonomía y el **pensamiento crítico**[cite: 93].</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="popular-modules section-dark" id="modulos">
-                <div class="container">
-                    <div class="section-header reveal">
-                        <h2 class="section-title">Refuerzos Clave: Matemáticas y Más</h2>
-                        [cite_start]<p class="section-subtitle">Ofrecemos módulos de refuerzo para estudiantes de **sexto a once** en las áreas de **Matemáticas, Español, Sociales y Biología**[cite: 159].</p>
-                    </div>
-                    
                     <div class="module-grid">
                         {% for producto in productos %}
                         <div class="module-card reveal" style="transition-delay: {{ loop.index * 0.1 }}s;">
@@ -328,7 +293,7 @@
                                     <span class="instructor-name">{{ producto.instructor | default('Experto en Didáctica') }}</span>
                                 </div>
                                 <h3 class="card-title">{{ producto.nombre | default('Módulo Temático Principal') }}</h3>
-                                <p style="font-size: 0.9rem; color: var(--color-text-dark);">**Tópicos:** {{ producto.tema_1 | default('Conceptos Fundamentales') }} y {{ producto.tema_2 | default('Aplicaciones Prácticas') }}.</p>
+                                <p style="font-size: 0.9rem; color: var(--color-text-dark);">**Tópicos:** {{ producto.tema_1 | default('Concepto principal') }} y {{ producto.tema_2 | default('Aplicación práctica') }}.</p>
                             </div>
                             <div class="card-meta">
                                 <div class="meta-item"><i class="fa-solid fa-users"></i><span>{{ producto.estudiantes | default(850) | int }} Estudiantes</span></div>
@@ -342,424 +307,921 @@
                             </div>
                         </div>
                         {% else %}
-                        <div class="module-card reveal" style="transition-delay: 0.1s;">
-                            <div class="card-image-wrapper">
-                                <img src="https://i.postimg.cc/9F7z3s8Q/math-1.jpg" alt="Módulo">
-                                <span class="card-tag">MATEMÁTICAS 6°</span>
-                            </div>
-                            <div class="card-content">
-                                <div class="card-instructor">
-                                    <img src="https://i.postimg.cc/50tFh3sQ/designer-3.jpg" alt="Avatar Instructor" class="instructor-avatar">
-                                    <span class="instructor-name">Experto en Didáctica</span>
-                                </div>
-                                <h3 class="card-title">Operaciones con Números Enteros</h3>
-                                <p style="font-size: 0.9rem; color: var(--color-text-dark);">**Tópicos:** Valor Posicional y Polinomios Aritméticos.</p>
-                            </div>
-                             <div class="card-meta">
-                                <div class="meta-item"><i class="fa-solid fa-users"></i><span>1200 Estudiantes</span></div>
-                                <div class="meta-item"><i class="fa-solid fa-star"></i><span>4.9</span></div>
-                            </div>
-                            <div class="card-actions card-content">
-                                <span class="card-price"><span class="free">GRATIS</span></span>
-                                <a href="#" class="explore-button">Ver Detalles</a>
-                            </div>
-                        </div>
-                         <div class="module-card reveal" style="transition-delay: 0.2s;">
-                            <div class="card-image-wrapper">
-                                <img src="https://i.postimg.cc/Vv88Bw8L/fraccionarios.jpg" alt="Módulo">
-                                <span class="card-tag">MATEMÁTICAS 7°</span>
-                            </div>
-                            <div class="card-content">
-                                <div class="card-instructor">
-                                    <img src="https://i.postimg.cc/50tFh3sQ/designer-3.jpg" alt="Avatar Instructor" class="instructor-avatar">
-                                    <span class="instructor-name">Experto en Didáctica</span>
-                                </div>
-                                <h3 class="card-title">Fraccionarios y Decimales</h3>
-                                <p style="font-size: 0.9rem; color: var(--color-text-dark);">**Tópicos:** Operaciones Básicas y Conversión Decimal.</p>
-                            </div>
-                             <div class="card-meta">
-                                <div class="meta-item"><i class="fa-solid fa-users"></i><span>850 Estudiantes</span></div>
-                                <div class="meta-item"><i class="fa-solid fa-star"></i><span>4.7</span></div>
-                            </div>
-                            <div class="card-actions card-content">
-                                <span class="card-price">$29.99</span>
-                                <a href="#" class="explore-button">Ver Detalles</a>
-                            </div>
-                        </div>
-                        <div class="module-card reveal" style="transition-delay: 0.3s;">
-                            <div class="card-image-wrapper">
-                                <img src="https://i.postimg.cc/75m8S7Gf/biologia.jpg" alt="Módulo">
-                                <span class="card-tag">BIOLOGÍA 9°</span>
-                            </div>
-                            <div class="card-content">
-                                <div class="card-instructor">
-                                    <img src="https://i.postimg.cc/50tFh3sQ/designer-3.jpg" alt="Avatar Instructor" class="instructor-avatar">
-                                    <span class="instructor-name">Experto en Didáctica</span>
-                                </div>
-                                <h3 class="card-title">Genética Básica y Herencia</h3>
-                                <p style="font-size: 0.9rem; color: var(--color-text-dark);">**Tópicos:** Leyes de Mendel y Estructura del ADN.</p>
-                            </div>
-                             <div class="card-meta">
-                                <div class="meta-item"><i class="fa-solid fa-users"></i><span>620 Estudiantes</span></div>
-                                <div class="meta-item"><i class="fa-solid fa-star"></i><span>4.6</span></div>
-                            </div>
-                            <div class="card-actions card-content">
-                                <span class="card-price">$39.99</span>
-                                <a href="#" class="explore-button">Ver Detalles</a>
-                            </div>
-                        </div>
-                        <div class="module-card reveal" style="transition-delay: 0.4s;">
-                            <div class="card-image-wrapper">
-                                <img src="https://i.postimg.cc/y83c5v0X/espanol.jpg" alt="Módulo">
-                                <span class="card-tag">ESPAÑOL 8°</span>
-                            </div>
-                            <div class="card-content">
-                                <div class="card-instructor">
-                                    <img src="https://i.postimg.cc/50tFh3sQ/designer-3.jpg" alt="Avatar Instructor" class="instructor-avatar">
-                                    <span class="instructor-name">Experto en Didáctica</span>
-                                </div>
-                                <h3 class="card-title">Redacción de Textos Argumentativos</h3>
-                                <p style="font-size: 0.9rem; color: var(--color-text-dark);">**Tópicos:** Coherencia y Uso de Conectores Lógicos.</p>
-                            </div>
-                             <div class="card-meta">
-                                <div class="meta-item"><i class="fa-solid fa-users"></i><span>1500 Estudiantes</span></div>
-                                <div class="meta-item"><i class="fa-solid fa-star"></i><span>4.8</span></div>
-                            </div>
-                            <div class="card-actions card-content">
-                                <span class="card-price"><span class="free">GRATIS</span></span>
-                                <a href="#" class="explore-button">Ver Detalles</a>
-                            </div>
-                        </div>
-                         <div class="module-card reveal" style="transition-delay: 0.5s;">
-                            <div class="card-image-wrapper">
-                                <img src="https://i.postimg.cc/wTH8T1Vj/sociales.jpg" alt="Módulo">
-                                <span class="card-tag">SOCIALES 10°</span>
-                            </div>
-                            <div class="card-content">
-                                <div class="card-instructor">
-                                    <img src="https://i.postimg.cc/50tFh3sQ/designer-3.jpg" alt="Avatar Instructor" class="instructor-avatar">
-                                    <span class="instructor-name">Experto en Didáctica</span>
-                                </div>
-                                <h3 class="card-title">Historia Económica de Colombia</h3>
-                                <p style="font-size: 0.9rem; color: var(--color-text-dark);">**Tópicos:** El Frente Nacional y la Economía Cafetera.</p>
-                            </div>
-                             <div class="card-meta">
-                                <div class="meta-item"><i class="fa-solid fa-users"></i><span>400 Estudiantes</span></div>
-                                <div class="meta-item"><i class="fa-solid fa-star"></i><span>4.5</span></div>
-                            </div>
-                            <div class="card-actions card-content">
-                                <span class="card-price">$19.99</span>
-                                <a href="#" class="explore-button">Ver Detalles</a>
-                            </div>
-                        </div>
-                         <div class="module-card reveal" style="transition-delay: 0.6s;">
-                            <div class="card-image-wrapper">
-                                <img src="https://i.postimg.cc/qMTzNq2P/proporciones.jpg" alt="Módulo">
-                                <span class="card-tag">MATEMÁTICAS 11°</span>
-                            </div>
-                            <div class="card-content">
-                                <div class="card-instructor">
-                                    <img src="https://i.postimg.cc/50tFh3sQ/designer-3.jpg" alt="Avatar Instructor" class="instructor-avatar">
-                                    <span class="instructor-name">Experto en Didáctica</span>
-                                </div>
-                                <h3 class="card-title">Razones, Proporciones y Regla de Tres</h3>
-                                <p style="font-size: 0.9rem; color: var(--color-text-dark);">**Tópicos:** Aplicaciones de Proporcionalidad Directa e Inversa.</p>
-                            </div>
-                             <div class="card-meta">
-                                <div class="meta-item"><i class="fa-solid fa-users"></i><span>780 Estudiantes</span></div>
-                                <div class="meta-item"><i class="fa-solid fa-star"></i><span>4.7</span></div>
-                            </div>
-                            <div class="card-actions card-content">
-                                <span class="card-price">$29.99</span>
-                                <a href="#" class="explore-button">Ver Detalles</a>
-                            </div>
-                        </div>
+                        <p style="color: var(--color-text-subtle); grid-column: 1 / -1; text-align: center;">Módulos de demostración cargados: Numeración, Geometría, Fracciones, Estadística.</p>
                         {% endfor %}
                     </div>
                 </div>
             </section>
-            
-            <section class="extra-sections section-light" id="ventajas">
+
+            <hr>
+
+            <section class="about-section" id="quienes-somos">
                 <div class="container">
                     <div class="section-header reveal">
-                        <h2 class="section-title">El Modelo EDUCARD: ¿Por qué elegirnos?</h2>
-                        <p class="section-subtitle">Nuestra estrategia se basa en aprovechar las **Fortalezas y Oportunidades** para superar los desafíos del aprendizaje tradicional.</p>
+                        <h2 class="section-title">EDUCARD SAS: Nuestro Propósito</h2>
+                        [cite_start]<p class="section-subtitle">Somos pioneros en soluciones tecnológicas aplicadas a la educación. [cite: 167]</p>
                     </div>
 
-                    <div class="feature-grid" style="grid-template-columns: repeat(2, 1fr);">
+                    <div class="about-grid">
+                        <div class="vision-mission-card reveal" style="transition-delay: 0.1s;">
+                            <i class="fa-solid fa-bullseye fa-2x" style="color: var(--color-primary); margin-bottom: 10px;"></i>
+                            <h4>Misión</h4>
+                            [cite_start]<p>Mejorar el aprendizaje por medio de refuerzos educativos tecnológicos, brindando herramientas innovadoras que faciliten el aprendizaje de los estudiantes y fomenten el desarrollo académico y personal. [cite: 165]</p>
+                        </div>
+
+                        <div class="vision-mission-card reveal" style="transition-delay: 0.2s;">
+                            <i class="fa-solid fa-rocket fa-2x" style="color: var(--color-secondary); margin-bottom: 10px;"></i>
+                            <h4>Visión</h4>
+                            [cite_start]<p>EDUCARD S.A.S. será reconocida a nivel nacional como pionera en soluciones tecnológicas aplicadas a la educación, con un modelo escalable que impacte a estudiantes en todo el territorio colombiano. [cite: 167]</p>
+                        </div>
                         
-                        <div class="feature-card reveal" style="border-top: 3px solid var(--color-primary);">
-                            <i class="fa-solid fa-shield-halved feature-icon" style="color: var(--color-primary); background-color: rgba(92, 103, 255, 0.1);"></i>
-                            <div class="feature-text">
-                                <h4>Fortalezas Clave</h4>
-                                <ul>
-                                    [cite_start]<li>**Innovación Tecnológica:** Uso de plataformas virtuales interactivas[cite: 92].</li>
-                                    [cite_start]<li>**Metodología Personalizada:** Adaptada a las necesidades individuales[cite: 91].</li>
-                                    [cite_start]<li>**Contenidos Actuales:** Módulos diseñados por expertos en didáctica[cite: 92].</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="feature-card reveal" style="transition-delay: 0.2s; border-top: 3px solid #28a745;">
-                            <i class="fa-solid fa-chart-line feature-icon" style="color: #28a745; background-color: rgba(40, 167, 69, 0.1);"></i>
-                            <div class="feature-text">
-                                <h4>Oportunidades de Crecimiento</h4>
-                                <ul>
-                                    [cite_start]<li>**Alta Demanda:** Respondemos a la creciente necesidad de refuerzos académicos[cite: 26].</li>
-                                    [cite_start]<li>**Expansión de Mercado:** Modelo escalable para impactar a estudiantes en todo el territorio colombiano[cite: 167].</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="feature-card reveal" style="transition-delay: 0.4s; border-top: 3px solid #ffc107;">
-                            <i class="fa-solid fa-triangle-exclamation feature-icon" style="color: #ffc107; background-color: rgba(255, 193, 7, 0.1);"></i>
-                            <div class="feature-text">
-                                <h4>Debilidades (Afrontamos los Retos)</h4>
-                                <ul>
-                                    <li>**Conectividad:** Buscamos soluciones para la dependencia de conectividad y acceso a dispositivos.</li>
-                                    [cite_start]<li>**Recursos:** Trabajamos en optimizar la limitación de recursos en regiones[cite: 155].</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="feature-card reveal" style="transition-delay: 0.6s; border-top: 3px solid #dc3545;">
-                            <i class="fa-solid fa-user-secret feature-icon" style="color: #dc3545; background-color: rgba(220, 53, 69, 0.1);"></i>
-                            <div class="feature-text">
-                                <h4>Amenazas (Nuestra Estrategia)</h4>
-                                <ul>
-                                    [cite_start]<li>**Competencia:** Nos diferenciamos con contenido ultra profesional y metodología única[cite: 155].</li>
-                                    [cite_start]<li>**Políticas:** Adaptamos nuestros currículos a los constantes cambios en políticas educativas[cite: 155].</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="ai-banner reveal" style="margin-top: 90px; text-align: left;">
-                        <h3 style="font-size: 2rem;"><i class="fa-solid fa-book-open-reader"></i> ¿Te sientes identificado?</h3>
-                        [cite_start]<p>El 76.5% de los encuestados ha sentido **desconocimiento matemático** en temas que usa en su vida diaria[cite: 42]. Nuestros refuerzos cierran esa brecha entre la teoría y la práctica cotidiana.</p>
-                        <a href="#modulos" class="header-button" style="background-color: var(--color-secondary); color: var(--color-text-dark); box-shadow: none;">¡Empieza GRATIS Hoy!</a>
-                    </div>
-                </div>
-            </section>
-
-            <section class="testimonials section-dark">
-                <div class="container">
-                    <div class="section-header reveal">
-                        <h2 class="section-title">Lo que dicen nuestros estudiantes</h2>
-                        <p class="section-subtitle">Miles de jóvenes en Colombia ya están mejorando su rendimiento con EDUCARD SAS.</p>
-                    </div>
-
-                    <div class="testimonial-grid">
-                        
-                        <div class="testimonial-card reveal">
-                            <i class="fa-solid fa-quote-left" style="color: var(--color-secondary); font-size: 1.5rem; margin-bottom: 10px;"></i>
-                            <p class="quote">"Gracias a los ejercicios prácticos de Educard, por fin entendí los fraccionarios. El formato móvil es perfecto, ya que uso mi celular para todo. ¡Mi nota subió dos puntos!"</p>
-                            <div class="client-info">
-                                <img src="https://i.postimg.cc/50tFh3sQ/designer-3.jpg" alt="Estudiante 1" class="client-avatar">
-                                <div>
-                                    <p class="client-name">Sofía P.</p>
-                                    <p class="client-role">Estudiante, Grado 6°</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="testimonial-card reveal" style="transition-delay: 0.2s;">
-                            <i class="fa-solid fa-quote-left" style="color: var(--color-secondary); font-size: 1.5rem; margin-bottom: 10px;"></i>
-                            <p class="quote">"El módulo de Proporciones para once fue mi salvación. La posibilidad de hacer talleres y ejercicios es lo que realmente marca la diferencia. Una gran solución tecnológica educativa."</p>
-                            <div class="client-info">
-                                <img src="https://i.postimg.cc/50tFh3sQ/designer-3.jpg" alt="Estudiante 2" class="client-avatar">
-                                <div>
-                                    <p class="client-name">Andrés M.</p>
-                                    <p class="client-role">Estudiante, Grado 11°</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="testimonial-card reveal" style="transition-delay: 0.4s;">
-                            <i class="fa-solid fa-quote-left" style="color: var(--color-secondary); font-size: 1.5rem; margin-bottom: 10px;"></i>
-                            <p class="quote">"He recomendado Educard a todos mis compañeros. Es la mejor forma de complementar lo que vemos en clase. Es dinámico, eficiente y mucho mejor que el aprendizaje tradicional."</p>
-                            <div class="client-info">
-                                <img src="https://i.postimg.cc/50tFh3sQ/designer-3.jpg" alt="Estudiante 3" class="client-avatar">
-                                <div>
-                                    <p class="client-name">Laura C.</p>
-                                    <p class="client-role">Estudiante, Grado 8°</p>
-                                </div>
+                        <div class="vision-mission-card reveal" style="transition-delay: 0.3s;">
+                            <i class="fa-solid fa-hands-holding fa-2x" style="color: #28a745; margin-bottom: 10px;"></i>
+                            <h4>Valores Fundamentales</h4>
+                            [cite_start]<p>Nuestros valores reflejan el compromiso con la excelencia académica y la innovación tecnológica. [cite: 169]</p>
+                            <div class="values-grid">
+                                <span class="value-tag">Disciplina</span>
+                                <span class="value-tag">Innovación</span>
+                                <span class="value-tag">Responsabilidad</span>
+                                <span class="value-tag">Empatía</span>
+                                [cite_start]<span class="value-tag">Compromiso</span> [cite: 168]
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section class="faq section-light" id="faq">
+            <section class="stats-section" id="beneficios">
                 <div class="container">
                     <div class="section-header reveal">
-                        <h2 class="section-title">Preguntas Frecuentes (FAQ)</h2>
-                        <p class="section-subtitle">Resolvemos tus dudas sobre EDUCARD SAS, nuestra metodología y cómo puedes empezar a mejorar tu nivel académico.</p>
+                        <h2 class="section-title">¿Por Qué Elegir EDUCARD?</h2>
+                        <p class="section-subtitle">Nuestra metodología está validada por la preferencia de los estudiantes y el análisis de mercado.</p>
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-item reveal" style="transition-delay: 0.1s;">
+                            <i class="fa-solid fa-mobile-screen fa-2x" style="color: var(--color-primary); margin-bottom: 10px;"></i>
+                            <div class="number">94.1%</div>
+                            [cite_start]<div class="label">Uso de **Móvil** como Dispositivo Principal [cite: 56]</div>
+                        </div>
+                        <div class="stat-item reveal" style="transition-delay: 0.2s;">
+                            <i class="fa-solid fa-pencil fa-2x" style="color: var(--color-secondary); margin-bottom: 10px;"></i>
+                            <div class="number">58.8%</div>
+                            [cite_start]<div class="label">Prefiere **Ejercicios Prácticos** para Aprender [cite: 61]</div>
+                        </div>
+                        <div class="stat-item reveal" style="transition-delay: 0.3s;">
+                            <i class="fa-solid fa-graduation-cap fa-2x" style="color: var(--color-primary); margin-bottom: 10px;"></i>
+                            <div class="number">76.5%</div>
+                            [cite_start]<div class="label">Siente **Ignorancia Matemática** en la Vida Diaria [cite: 41, 42]</div>
+                        </div>
+                        <div class="stat-item reveal" style="transition-delay: 0.4s;">
+                            <i class="fa-solid fa-money-check-dollar fa-2x" style="color: var(--color-secondary); margin-bottom: 10px;"></i>
+                            <div class="number">88.2%</div>
+                            [cite_start]<div class="label">Interesado en Aprender **Matemáticas Financieras** [cite: 63]</div>
+                        </div>
+                    </div>
+                    <div class="ai-banner reveal">
+                        <h3>¡Refuerzos en **Matemáticas, Español, Sociales y Biología**!</h3>
+                        [cite_start]<p>Nuestro objeto social se extiende a múltiples áreas para apoyar a estudiantes de **grados sexto a once**. [cite: 159]</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="pricing-section" id="planes">
+                <div class="container">
+                    <div class="section-header reveal">
+                        <h2 class="section-title">Elige Tu Plan de Refuerzo</h2>
+                        <p class="section-subtitle">Accede a contenido exclusivo y asistencia personalizada con nuestros planes flexibles.</p>
+                    </div>
+                    
+                    <div class="pricing-table">
+                        <div class="pricing-card reveal" style="transition-delay: 0.1s;">
+                            <h3>Básico</h3>
+                            <div class="price">GRATIS</div>
+                            <p style="margin-bottom: 20px;">Acceso inmediato al módulo introductorio.</p>
+                            <ul class="features-list">
+                                <li><i class="fa-solid fa-check"></i> Acceso al Módulo 1 (Demo)</li>
+                                <li><i class="fa-solid fa-check"></i> Ejercicios prácticos de muestra</li>
+                                <li><i class="fa-solid fa-xmark" style="color: var(--color-text-subtle);"></i> Plataforma virtual completa</li>
+                                <li><i class="fa-solid fa-xmark" style="color: var(--color-text-subtle);"></i> Soporte académico 24/7</li>
+                            </ul>
+                            <a href="#" class="pricing-cta" style="background-color: var(--color-text-subtle);">Empezar Gratis</a>
+                        </div>
+                        
+                        <div class="pricing-card featured reveal" style="transition-delay: 0.2s;">
+                            <span class="card-tag" style="background-color: var(--color-secondary); position: relative; top: -10px; display: inline-block;">Recomendado</span>
+                            <h3>Pro</h3>
+                            <div class="price">$19.99 <span>/ mes</span></div>
+                            <p style="margin-bottom: 20px;">El camino completo para el dominio de tu grado.</p>
+                            <ul class="features-list">
+                                <li><i class="fa-solid fa-check"></i> Acceso a todos los Módulos (6° a 11°)</li>
+                                <li><i class="fa-solid fa-check"></i> Plataforma virtual completa e interactiva</li>
+                                <li><i class="fa-solid fa-check"></i> Asistencia IA </li>
+                                <li><i class="fa-solid fa-check"></i> Soporte académico por expertos</li>
+                            </ul>
+                            <a href="#" class="pricing-cta">Elegir Plan Pro</a>
+                        </div>
+
+                        <div class="pricing-card reveal" style="transition-delay: 0.3s;">
+                            <h3>Anual</h3>
+                            <div class="price">$199 <span>/ año</span></div>
+                            <p style="margin-bottom: 20px;">Ahorra un 15% con el pago anual.</p>
+                            <ul class="features-list">
+                                <li><i class="fa-solid fa-check"></i> **Todo** en el Plan Pro</li>
+                                <li><i class="fa-solid fa-check"></i> 1 Mes **GRATIS** (Ahorro anual)</li>
+                                <li><i class="fa-solid fa-check"></i> Acceso a Módulos de Áreas Adicionales</li>
+                                <li><i class="fa-solid fa-check"></i> Evaluaciones de Rendimiento Detalladas</li>
+                            </ul>
+                            <a href="#" class="pricing-cta">Obtener el Plan Anual</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="faq-section" id="faq">
+                <div class="container">
+                    <div class="section-header reveal">
+                        <h2 class="section-title">Preguntas Frecuentes</h2>
+                        <p class="section-subtitle">Solucionamos tus dudas sobre nuestro método educativo y tecnológico.</p>
                     </div>
 
                     <div class="faq-container">
-                        
-                        <div class="faq-item reveal">
-                            <div class="faq-question">
-                                ¿Qué grados y materias cubre EDUCARD SAS?
+                        <div class="accordion-item reveal" style="transition-delay: 0.1s;">
+                            <div class="accordion-header">
+                                ¿EDUCARD solo ofrece refuerzos de Matemáticas para Grado Sexto?
                                 <i class="fa-solid fa-chevron-down"></i>
                             </div>
-                            <div class="faq-answer">
-                                <p>Ofrecemos servicios de refuerzo educativo para estudiantes de **sexto (6°) a once (11°)**. [cite_start]Las áreas cubiertas actualmente son **Matemáticas, Español, Sociales y Biología**, con énfasis en el fortalecimiento de competencias básicas[cite: 159].</p>
-                            </div>
-                        </div>
-                        
-                        <div class="faq-item reveal" style="transition-delay: 0.1s;">
-                            <div class="faq-question">
-                                ¿Cuál es la metodología de enseñanza de los módulos?
-                                <i class="fa-solid fa-chevron-down"></i>
-                            </div>
-                            <div class="faq-answer">
-                                [cite_start]<p>Nuestra metodología es **práctica, dinámica y personalizada**[cite: 91]. Se basa en módulos didácticos interactivos, ejercicios prácticos y talleres. [cite_start]Priorizamos el aprendizaje activo, ya que la mayoría de estudiantes prefieren los ejercicios prácticos para garantizar calidad y eficiencia[cite: 61, 62].</p>
+                            <div class="accordion-content">
+                                <p>No. [cite_start]Aunque el proyecto inicial se enfocó en Matemáticas de Grado Sexto [cite: 90][cite_start], nuestro objeto social se expandió para ofrecer servicios de refuerzos educativos en áreas como **Matemáticas, Español, Sociales y Biología** para estudiantes de **grados sexto a once**. [cite: 159]</p>
                             </div>
                         </div>
 
-                         <div class="faq-item reveal" style="transition-delay: 0.2s;">
-                            <div class="faq-question">
-                                ¿Los módulos están disponibles en otros idiomas?
+                        <div class="accordion-item reveal" style="transition-delay: 0.2s;">
+                            <div class="accordion-header">
+                                ¿Cuál es la metodología de EDUCARD SAS?
                                 <i class="fa-solid fa-chevron-down"></i>
                             </div>
-                            <div class="faq-answer">
-                                [cite_start]<p>Sí, uno de nuestros objetivos es ser una empresa educativa de módulos en **varios idiomas** con el fin de ayudar en la mejora educativa global[cite: 146]. Actualmente ofrecemos soporte para Español, Inglés y Alemán (como se ve en el selector de idioma).</p>
-                            </div>
-                        </div>
-
-                         <div class="faq-item reveal" style="transition-delay: 0.3s;">
-                            <div class="faq-question">
-                                ¿Qué debo hacer si siento que me falta conocimiento en un tema?
-                                <i class="fa-solid fa-chevron-down"></i>
-                            </div>
-                            <div class="faq-answer">
-                                [cite_start]<p>Es completamente normal; el **76.5% de los estudiantes** han sentido falta de conocimiento en algún tema que usan en su vida diaria[cite: 42]. Te recomendamos iniciar con nuestros módulos gratuitos de Grado 6° para construir una base sólida y luego avanzar a los módulos más avanzados según tu necesidad. [cite_start]Ofrecemos herramientas digitales de apoyo para un progreso significativo[cite: 92, 93].</p>
-                            </div>
-                        </div>
-
-                         <div class="faq-item reveal" style="transition-delay: 0.4s;">
-                            <div class="faq-question">
-                                ¿Cómo puedo acceder a los módulos?
-                                <i class="fa-solid fa-chevron-down"></i>
-                            </div>
-                            <div class="faq-answer">
-                                <p>Puedes acceder haciendo clic en el botón "Ver Módulos de Refuerzo" o "Acceder" en la cabecera. Los módulos pueden ser gratuitos o tener un costo, dependiendo de la profundidad del tema. El primer módulo de Matemáticas de Grado Sexto es completamente gratuito para que pruebes nuestra metodología.</p>
+                            <div class="accordion-content">
+                                <p>Utilizamos soluciones tecnológicas innovadoras, plataformas virtuales interactivas, y módulos didácticos integrados. [cite_start]El método es práctico y dinámico, adaptado a las necesidades individuales[cite: 91, 92]. [cite_start]Priorizamos los **ejercicios prácticos**, que son el método preferido por la mayoría de los estudiantes. [cite: 61]</p>
                             </div>
                         </div>
                         
+                        <div class="accordion-item reveal" style="transition-delay: 0.3s;">
+                            <div class="accordion-header">
+                                ¿Necesito un computador para usar la plataforma?
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <p>No necesariamente. [cite_start]La plataforma está diseñada para ser completamente accesible desde **dispositivos móviles**, ya que el 94.1% de nuestros usuarios lo utiliza como su dispositivo principal. [cite: 56] Puedes aprender en cualquier lugar con tu celular.</p>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item reveal" style="transition-delay: 0.4s;">
+                            <div class="accordion-header">
+                                ¿Cómo puedo evaluar mi progreso?
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="accordion-content">
+                                [cite_start]<p>Nuestra metodología incluye la implementación de una plataforma digital para la **evaluación del rendimiento académico**, lo que nos permite diseñar programas de refuerzo específicos según el rendimiento estudiado. [cite: 148, 149, 150]</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
-
             <footer>
                 <div class="container footer-grid">
-                    
                     <div class="footer-about">
-                        <a href="#" class="logo-container" style="margin-bottom: 20px;">
-                            <img src="https://i.postimg.cc/t4tVr741/54c82322-2df7-4887-abc0-da706407fcd4-2.png" alt="Logo Educard" class="logo-img">
-                            <span class="site-name" style="color: white;">Educard SAS</span>
-                        </a>
-                        [cite_start]<p>EDUCARD S.A.S. es un proyecto para la creación de una empresa de refuerzos educativos y tecnológicos[cite: 78]. [cite_start]Nuestra misión es transformar el aprendizaje con innovación[cite: 165].</p>
-                        [cite_start]<p class="tag-line" style="color: var(--color-secondary); font-weight: 600;">"Aprender con tecnología, crecer con conocimiento" [cite: 162]</p>
-                        <div class="social-icons">
-                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                            <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                        </div>
+                        <h5>EDUCARD S.A.S.</h5>
+                        [cite_start]<p>Slogan: "**Aprender con tecnología, crecer con conocimiento**". [cite: 161, 162] [cite_start]Somos una empresa de servicios educativos que transforma el aprendizaje con herramientas digitales y tecnológicas. [cite: 159]</p>
                     </div>
-
+                    
                     <div class="footer-links">
-                        <h5>Secciones</h5>
+                        <h5>Compañía</h5>
                         <ul>
-                            <li><a href="#hero-section">Inicio</a></li>
-                            <li><a href="#about-us">Nuestra Misión</a></li>
-                            <li><a href="#modulos">Refuerzos</a></li>
-                            <li><a href="#ventajas">Ventajas</a></li>
-                            <li><a href="#faq">FAQ</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-links">
-                        <h5>Servicios</h5>
-                        <ul>
-                            <li><a href="#">Matemáticas (6° a 11°)</a></li>
-                            <li><a href="#">Español y Sociales</a></li>
-                            <li><a href="#">Refuerzos Personalizados</a></li>
-                            <li><a href="#">Plataformas Interactivas</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-links">
-                        <h5>Legal y Contacto</h5>
-                        <ul>
+                            <li><a href="#quienes-somos">Sobre Nosotros (Misión/Visión)</a></li>
+                            <li><a href="#beneficios">Estadísticas y Beneficios</a></li>
+                            <li><a href="#">Trabaja con Nosotros</a></li>
                             <li><a href="#">Términos y Condiciones</a></li>
-                            <li><a href="#">Política de Privacidad</a></li>
-                            [cite_start]<li><a href="#">Derechos de Autor [cite: 86]</a></li>
-                            <li><a href="#">Contáctanos</a></li>
                         </ul>
                     </div>
 
+                    <div class="footer-links">
+                        <h5>Soporte</h5>
+                        <ul>
+                            <li><a href="#faq">Preguntas Frecuentes</a></li>
+                            <li><a href="#">Contacto</a></li>
+                            <li><a href="#">Ayuda y Tutoriales</a></li>
+                            <li><a href="#">Política de Privacidad</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links">
+                        <h5>Recursos</h5>
+                        <ul>
+                            <li><a href="#modulos">Catálogo de Módulos</a></li>
+                            <li><a href="#">Blog (Próximamente)</a></li>
+                            [cite_start]<li><a href="#">Capacitación Docente</a> [cite: 151]</li>
+                            <li><a href="#">Mapa del Sitio</a></li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="footer-bottom">
-                    &copy; 2025 EDUCARD S.A.S. Todos los derechos reservados. Formulado por Rogger Nicolás Castro Beltrán y Kaleth Ramírez Jeanluk.
+                    &copy; 2025 EDUCARD S.A.S. Todos los derechos reservados.
                 </div>
             </footer>
         </div>
-        
+
         <div id="lang-en" data-lang="en" style="display: none;">
-            </div>
+             <header>
+                <a href="#" class="logo-container">
+                    <img src="https://i.postimg.cc/t4tVr741/54c82322-2df7-4887-abc0-da706407fcd4-2.png" alt="Educard Logo" class="logo-img">
+                    <span class="site-name">Educard SAS</span>
+                </a>
+
+                <nav>
+                    <ul>
+                        <li><a href="#hero-section" class="active">Home</a></li>
+                        <li><a href="#modulos">Reinforcements</a></li>
+                        <li><a href="#quienes-somos">About Us</a></li>
+                        <li><a href="#planes">Plans</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="#" class="header-button">Log In</a>
+                    <div class="language-selector">
+                        <img id="current-flag-en" src="https://flagcdn.com/us.svg" alt="USA Flag" class="flag">
+                        <div class="language-dropdown">
+                            <a href="#" data-lang="es"><img src="https://flagcdn.com/co.svg" alt="Colombia Flag"> Español</a>
+                            <a href="#" data-lang="en"><img src="https://flagcdn.com/us.svg" alt="USA Flag"> English</a>
+                            <a href="#" data-lang="de"><img src="https://flagcdn.com/de.svg" alt="Germany Flag"> Deutsch</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="hero" id="hero-section">
+                <div class="container hero-grid">
+                    <div class="hero-text-col reveal">
+                        <p class="tag-line"><i class="fa-solid fa-square-root-variable"></i> Academic Reinforcement Grade Six to Eleven</p>
+                        <h1><span class="highlight">Smart</span> Learning just a click away</h1>
+                        [cite_start]<p class="subtitle">Modules for **Mathematics** and other subjects for grades six to eleven, with ultra-professional solutions to ensure mastery of essential topics and academic success. [cite: 159]</p>
+                        <a href="#modulos" class="main-cta-button">Start Reinforcement Now</a>
+                        <p class="cta-info" style="font-size: 0.9rem; margin-top: 15px; color: var(--color-text-subtle);">No credit card required. Just click "Start Reinforcement Now" and access the first module for **FREE**.</p>
+                    </div>
+                    <div class="hero-animation-col reveal" style="transition-delay: 0.2s;">
+                        <div class="phone-frame">
+                            <video class="phone-video" autoplay loop muted playsinline controls=false>
+                                <source src="https://www.wited.com/wp-content/uploads/2025/06/Animacion_01_crop.webm" type="video/webm">
+                                Your browser does not support the WebM video format.
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="popular-modules" id="modulos">
+                <div class="container">
+                    <div class="section-header reveal">
+                        <h2 class="section-title">Key Academic Reinforcement Modules</h2>
+                        [cite_start]<p class="section-subtitle">Explore our dynamic and accessible modules [cite: 143][cite_start], designed by didactic experts, focusing on strengthening basic competencies for the future. [cite: 142]</p>
+                    </div>
+                    <div class="module-grid">
+                        {% for producto in productos %}
+                        <div class="module-card reveal" style="transition-delay: {{ loop.index * 0.1 }}s;">
+                            <div class="card-image-wrapper">
+                                <img src="{{ producto.imagen_url if producto.imagen_url else 'https://i.postimg.cc/85zK6v2N/main-student.jpg' }}" alt="Module Image">
+                                <span class="card-tag">{{ producto.categoria | default('REINFORCEMENT') }}</span>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-instructor">
+                                    <img src="https://i.postimg.cc/50tFh3sQ/designer-3.jpg" alt="Instructor Avatar" class="instructor-avatar">
+                                    <span class="instructor-name">{{ producto.instructor | default('Didactic Expert') }}</span>
+                                </div>
+                                <h3 class="card-title">{{ producto.nombre | default('Main Thematic Module') }}</h3>
+                                <p style="font-size: 0.9rem; color: var(--color-text-dark);">**Topics:** {{ producto.tema_1 | default('Main Concept') }} and {{ producto.tema_2 | default('Practical Application') }}.</p>
+                            </div>
+                            <div class="card-meta">
+                                <div class="meta-item"><i class="fa-solid fa-users"></i><span>{{ producto.estudiantes | default(850) | int }} Students</span></div>
+                                <div class="meta-item"><i class="fa-solid fa-star"></i><span>{{ "%.1f" | format(producto.rating | default(4.7)) }}</span></div>
+                            </div>
+                            <div class="card-actions card-content">
+                                <span class="card-price">
+                                    {% if producto.precio == 0 or producto.precio is none %}<span class="free">FREE</span>{% else %}${{ "%.2f" | format(producto.precio) }}{% endif %}
+                                </span>
+                                <a href="#" class="explore-button">View Details</a>
+                            </div>
+                        </div>
+                        {% else %}
+                        <p style="color: var(--color-text-subtle); grid-column: 1 / -1; text-align: center;">Demo modules loaded: Numeration, Geometry, Fractions, Statistics.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+
+            <hr>
+
+            <section class="about-section" id="quienes-somos">
+                <div class="container">
+                    <div class="section-header reveal">
+                        <h2 class="section-title">EDUCARD SAS: Our Purpose</h2>
+                        [cite_start]<p class="section-subtitle">We are pioneers in technological solutions applied to education. [cite: 167]</p>
+                    </div>
+
+                    <div class="about-grid">
+                        <div class="vision-mission-card reveal" style="transition-delay: 0.1s;">
+                            <i class="fa-solid fa-bullseye fa-2x" style="color: var(--color-primary); margin-bottom: 10px;"></i>
+                            <h4>Mission</h4>
+                            [cite_start]<p>To improve learning through technological educational reinforcements, providing innovative tools that facilitate student learning and promote academic and personal development. [cite: 165]</p>
+                        </div>
+
+                        <div class="vision-mission-card reveal" style="transition-delay: 0.2s;">
+                            <i class="fa-solid fa-rocket fa-2x" style="color: var(--color-secondary); margin-bottom: 10px;"></i>
+                            <h4>Vision</h4>
+                            [cite_start]<p>EDUCARD S.A.S. will be nationally recognized as a pioneer in technological solutions applied to education, with a scalable model that impacts students throughout the Colombian territory. [cite: 167]</p>
+                        </div>
+                        
+                        <div class="vision-mission-card reveal" style="transition-delay: 0.3s;">
+                            <i class="fa-solid fa-hands-holding fa-2x" style="color: #28a745; margin-bottom: 10px;"></i>
+                            <h4>Core Values</h4>
+                            [cite_start]<p>Our values reflect the commitment to academic excellence and technological innovation. [cite: 169]</p>
+                            <div class="values-grid">
+                                <span class="value-tag">Discipline</span>
+                                <span class="value-tag">Innovation</span>
+                                <span class="value-tag">Responsibility</span>
+                                <span class="value-tag">Empathy</span>
+                                [cite_start]<span class="value-tag">Commitment</span> [cite: 168]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="stats-section" id="beneficios">
+                <div class="container">
+                    <div class="section-header reveal">
+                        <h2 class="section-title">Why Choose EDUCARD?</h2>
+                        <p class="section-subtitle">Our methodology is validated by student preference and market analysis.</p>
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-item reveal" style="transition-delay: 0.1s;">
+                            <i class="fa-solid fa-mobile-screen fa-2x" style="color: var(--color-primary); margin-bottom: 10px;"></i>
+                            <div class="number">94.1%</div>
+                            [cite_start]<div class="label">Uses **Mobile** as Primary Device [cite: 56]</div>
+                        </div>
+                        <div class="stat-item reveal" style="transition-delay: 0.2s;">
+                            <i class="fa-solid fa-pencil fa-2x" style="color: var(--color-secondary); margin-bottom: 10px;"></i>
+                            <div class="number">58.8%</div>
+                            [cite_start]<div class="label">Prefers **Practical Exercises** for Learning [cite: 61]</div>
+                        </div>
+                        <div class="stat-item reveal" style="transition-delay: 0.3s;">
+                            <i class="fa-solid fa-graduation-cap fa-2x" style="color: var(--color-primary); margin-bottom: 10px;"></i>
+                            <div class="number">76.5%</div>
+                            [cite_start]<div class="label">Feels **Math Ignorance** in Daily Life [cite: 41, 42]</div>
+                        </div>
+                        <div class="stat-item reveal" style="transition-delay: 0.4s;">
+                            <i class="fa-solid fa-money-check-dollar fa-2x" style="color: var(--color-secondary); margin-bottom: 10px;"></i>
+                            <div class="number">88.2%</div>
+                            [cite_start]<div class="label">Interested in Learning **Financial Math** [cite: 63]</div>
+                        </div>
+                    </div>
+                    <div class="ai-banner reveal">
+                        <h3>Reinforcements in **Math, Spanish, Social Sciences, and Biology**!</h3>
+                        [cite_start]<p>Our corporate purpose extends to multiple areas to support students from **grades six to eleven**. [cite: 159]</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="pricing-section" id="planes">
+                <div class="container">
+                    <div class="section-header reveal">
+                        <h2 class="section-title">Choose Your Reinforcement Plan</h2>
+                        <p class="section-subtitle">Access exclusive content and personalized assistance with our flexible plans.</p>
+                    </div>
+                    
+                    <div class="pricing-table">
+                        <div class="pricing-card reveal" style="transition-delay: 0.1s;">
+                            <h3>Basic</h3>
+                            <div class="price">FREE</div>
+                            <p style="margin-bottom: 20px;">Immediate access to the introductory module.</p>
+                            <ul class="features-list">
+                                <li><i class="fa-solid fa-check"></i> Access to Module 1 (Demo)</li>
+                                <li><i class="fa-solid fa-check"></i> Sample practical exercises</li>
+                                <li><i class="fa-solid fa-xmark" style="color: var(--color-text-subtle);"></i> Full virtual platform</li>
+                                <li><i class="fa-solid fa-xmark" style="color: var(--color-text-subtle);"></i> 24/7 Academic support</li>
+                            </ul>
+                            <a href="#" class="pricing-cta" style="background-color: var(--color-text-subtle);">Start Free</a>
+                        </div>
+                        
+                        <div class="pricing-card featured reveal" style="transition-delay: 0.2s;">
+                            <span class="card-tag" style="background-color: var(--color-secondary); position: relative; top: -10px; display: inline-block;">Recommended</span>
+                            <h3>Pro</h3>
+                            <div class="price">$19.99 <span>/ month</span></div>
+                            <p style="margin-bottom: 20px;">The complete path to mastery for your grade level.</p>
+                            <ul class="features-list">
+                                <li><i class="fa-solid fa-check"></i> Access to all Modules (6th to 11th)</li>
+                                <li><i class="fa-solid fa-check"></i> Complete and interactive virtual platform</li>
+                                <li><i class="fa-solid fa-check"></i> AI Assistance</li>
+                                <li><i class="fa-solid fa-check"></i> Expert academic support</li>
+                            </ul>
+                            <a href="#" class="pricing-cta">Choose Pro Plan</a>
+                        </div>
+
+                        <div class="pricing-card reveal" style="transition-delay: 0.3s;">
+                            <h3>Annual</h3>
+                            <div class="price">$199 <span>/ year</span></div>
+                            <p style="margin-bottom: 20px;">Save 15% with annual payment.</p>
+                            <ul class="features-list">
+                                <li><i class="fa-solid fa-check"></i> **Everything** in the Pro Plan</li>
+                                <li><i class="fa-solid fa-check"></i> 1 Month **FREE** (Annual Savings)</li>
+                                <li><i class="fa-solid fa-check"></i> Access to Additional Subject Modules</li>
+                                <li><i class="fa-solid fa-check"></i> Detailed Performance Evaluations</li>
+                            </ul>
+                            <a href="#" class="pricing-cta">Get the Annual Plan</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="faq-section" id="faq">
+                <div class="container">
+                    <div class="section-header reveal">
+                        <h2 class="section-title">Frequently Asked Questions</h2>
+                        <p class="section-subtitle">We solve your doubts about our educational and technological method.</p>
+                    </div>
+
+                    <div class="faq-container">
+                        <div class="accordion-item reveal" style="transition-delay: 0.1s;">
+                            <div class="accordion-header">
+                                Does EDUCARD only offer Math reinforcements for Sixth Grade?
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <p>No. [cite_start]Although the initial project focused on Sixth Grade Mathematics [cite: 90][cite_start], our corporate purpose expanded to offer educational reinforcement services in areas such as **Mathematics, Spanish, Social Sciences, and Biology** for students from **grades six to eleven**. [cite: 159]</p>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item reveal" style="transition-delay: 0.2s;">
+                            <div class="accordion-header">
+                                What is the EDUCARD SAS methodology?
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <p>We use innovative technological solutions, interactive virtual platforms, and integrated teaching modules. [cite_start]The method is practical and dynamic, adapted to individual needs[cite: 91, 92]. [cite_start]We prioritize **practical exercises**, which are the preferred method for the majority of students. [cite: 61]</p>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item reveal" style="transition-delay: 0.3s;">
+                            <div class="accordion-header">
+                                Do I need a computer to use the platform?
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <p>Not necessarily. [cite_start]The platform is designed to be fully accessible from **mobile devices**, as 94.1% of our users use it as their primary device. [cite: 56] You can learn anywhere with your cell phone.</p>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item reveal" style="transition-delay: 0.4s;">
+                            <div class="accordion-header">
+                                How can I track my progress?
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="accordion-content">
+                                [cite_start]<p>Our methodology includes the implementation of a digital platform for **academic performance evaluation**, allowing us to design specific reinforcement programs based on studied performance. [cite: 148, 149, 150]</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer>
+                <div class="container footer-grid">
+                    <div class="footer-about">
+                        <h5>EDUCARD S.A.S.</h5>
+                        [cite_start]<p>Slogan: "**Learn with technology, grow with knowledge**". [cite: 161, 162] [cite_start]We are an educational services company that transforms learning with digital and technological tools. [cite: 159]</p>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <h5>Company</h5>
+                        <ul>
+                            <li><a href="#quienes-somos">About Us (Mission/Vision)</a></li>
+                            <li><a href="#beneficios">Statistics and Benefits</a></li>
+                            <li><a href="#">Work with Us</a></li>
+                            <li><a href="#">Terms and Conditions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links">
+                        <h5>Support</h5>
+                        <ul>
+                            <li><a href="#faq">Frequently Asked Questions</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Help and Tutorials</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links">
+                        <h5>Resources</h5>
+                        <ul>
+                            <li><a href="#modulos">Module Catalog</a></li>
+                            <li><a href="#">Blog (Coming Soon)</a></li>
+                            [cite_start]<li><a href="#">Teacher Training</a> [cite: 151]</li>
+                            <li><a href="#">Site Map</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    &copy; 2025 EDUCARD S.A.S. All rights reserved.
+                </div>
+            </footer>
+        </div>
+
+
         <div id="lang-de" data-lang="de" style="display: none;">
-            </div>
+             <header>
+                <a href="#" class="logo-container">
+                    <img src="https://i.postimg.cc/t4tVr741/54c82322-2df7-4887-abc0-da706407fcd4-2.png" alt="Educard Logo" class="logo-img">
+                    <span class="site-name">Educard SAS</span>
+                </a>
+
+                <nav>
+                    <ul>
+                        <li><a href="#hero-section" class="active">Startseite</a></li>
+                        <li><a href="#modulos">Förderung</a></li>
+                        <li><a href="#quienes-somos">Über Uns</a></li>
+                        <li><a href="#planes">Pläne</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="#" class="header-button">Anmelden</a>
+                    <div class="language-selector">
+                        <img id="current-flag-de" src="https://flagcdn.com/de.svg" alt="Deutschland Flagge" class="flag">
+                        <div class="language-dropdown">
+                            <a href="#" data-lang="es"><img src="https://flagcdn.com/co.svg" alt="Kolumbien Flagge"> Español</a>
+                            <a href="#" data-lang="en"><img src="https://flagcdn.com/us.svg" alt="USA Flagge"> English</a>
+                            <a href="#" data-lang="de"><img src="https://flagcdn.com/de.svg" alt="Deutschland Flagge"> Deutsch</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="hero" id="hero-section">
+                <div class="container hero-grid">
+                    <div class="hero-text-col reveal">
+                        <p class="tag-line"><i class="fa-solid fa-square-root-variable"></i> Akademische Förderung Klasse Sechs bis Elf</p>
+                        <h1><span class="highlight">Intelligentes</span> Lernen nur einen Klick entfernt</h1>
+                        [cite_start]<p class="subtitle">Module für **Mathematik** und andere Fächer der Klassen sechs bis elf, mit ultra-professionellen Lösungen zur Gewährleistung der Beherrschung wesentlicher Themen und des akademischen Erfolgs. [cite: 159]</p>
+                        <a href="#modulos" class="main-cta-button">Jetzt mit der Förderung beginnen</a>
+                        <p class="cta-info" style="font-size: 0.9rem; margin-top: 15px; color: var(--color-text-subtle);">Keine Kreditkarte erforderlich. Klicken Sie einfach auf "Jetzt mit der Förderung beginnen" und greifen Sie **KOSTENLOS** auf das erste Modul zu.</p>
+                    </div>
+                    <div class="hero-animation-col reveal" style="transition-delay: 0.2s;">
+                        <div class="phone-frame">
+                            <video class="phone-video" autoplay loop muted playsinline controls=false>
+                                <source src="https://www.wited.com/wp-content/uploads/2025/06/Animacion_01_crop.webm" type="video/webm">
+                                Ihr Browser unterstützt das WebM-Videoformat nicht.
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="popular-modules" id="modulos">
+                <div class="container">
+                    <div class="section-header reveal">
+                        <h2 class="section-title">Wichtige Akademische Förderungsmodule</h2>
+                        [cite_start]<p class="section-subtitle">Entdecken Sie unsere dynamischen und zugänglichen Module [cite: 143][cite_start], die von Didaktikexperten entwickelt wurden und sich auf die Stärkung der Grundkompetenzen für die Zukunft konzentrieren. [cite: 142]</p>
+                    </div>
+                    <div class="module-grid">
+                        {% for producto in productos %}
+                        <div class="module-card reveal" style="transition-delay: {{ loop.index * 0.1 }}s;">
+                            <div class="card-image-wrapper">
+                                <img src="{{ producto.imagen_url if producto.imagen_url else 'https://i.postimg.cc/85zK6v2N/main-student.jpg' }}" alt="Modulbild">
+                                <span class="card-tag">{{ producto.categoria | default('FÖRDERUNG') }}</span>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-instructor">
+                                    <img src="https://i.postimg.cc/50tFh3sQ/designer-3.jpg" alt="Avatar Ausbilder" class="instructor-avatar">
+                                    <span class="instructor-name">{{ producto.instructor | default('Didaktikexperte') }}</span>
+                                </div>
+                                <h3 class="card-title">{{ producto.nombre | default('Thematisches Hauptmodul') }}</h3>
+                                <p style="font-size: 0.9rem; color: var(--color-text-dark);">**Themen:** {{ producto.tema_1 | default('Hauptkonzept') }} und {{ producto.tema_2 | default('Praktische Anwendung') }}.</p>
+                            </div>
+                            <div class="card-meta">
+                                <div class="meta-item"><i class="fa-solid fa-users"></i><span>{{ producto.estudiantes | default(850) | int }} Studenten</span></div>
+                                <div class="meta-item"><i class="fa-solid fa-star"></i><span>{{ "%.1f" | format(producto.rating | default(4.7)) }}</span></div>
+                            </div>
+                            <div class="card-actions card-content">
+                                <span class="card-price">
+                                    {% if producto.precio == 0 or producto.precio is none %}<span class="free">KOSTENLOS</span>{% else %}${{ "%.2f" | format(producto.precio) }}{% endif %}
+                                </span>
+                                <a href="#" class="explore-button">Details ansehen</a>
+                            </div>
+                        </div>
+                        {% else %}
+                        <p style="color: var(--color-text-subtle); grid-column: 1 / -1; text-align: center;">Demomodule geladen: Nummerierung, Geometrie, Brüche, Statistik.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+
+            <hr>
+
+            <section class="about-section" id="quienes-somos">
+                <div class="container">
+                    <div class="section-header reveal">
+                        <h2 class="section-title">EDUCARD SAS: Unser Ziel</h2>
+                        [cite_start]<p class="section-subtitle">Wir sind Pioniere in technologischen Lösungen für die Bildung. [cite: 167]</p>
+                    </div>
+
+                    <div class="about-grid">
+                        <div class="vision-mission-card reveal" style="transition-delay: 0.1s;">
+                            <i class="fa-solid fa-bullseye fa-2x" style="color: var(--color-primary); margin-bottom: 10px;"></i>
+                            <h4>Mission</h4>
+                            [cite_start]<p>Verbesserung des Lernens durch technologische Bildungsförderung, Bereitstellung innovativer Tools, die das Lernen der Schüler erleichtern und die akademische und persönliche Entwicklung fördern. [cite: 165]</p>
+                        </div>
+
+                        <div class="vision-mission-card reveal" style="transition-delay: 0.2s;">
+                            <i class="fa-solid fa-rocket fa-2x" style="color: var(--color-secondary); margin-bottom: 10px;"></i>
+                            <h4>Vision</h4>
+                            [cite_start]<p>EDUCARD S.A.S. wird national als Pionier für technologische Lösungen in der Bildung anerkannt, mit einem skalierbaren Modell, das Schüler in ganz Kolumbien beeinflusst. [cite: 167]</p>
+                        </div>
+                        
+                        <div class="vision-mission-card reveal" style="transition-delay: 0.3s;">
+                            <i class="fa-solid fa-hands-holding fa-2x" style="color: #28a745; margin-bottom: 10px;"></i>
+                            <h4>Grundwerte</h4>
+                            [cite_start]<p>Unsere Werte spiegeln das Engagement für akademische Exzellenz und technologische Innovation wider. [cite: 169]</p>
+                            <div class="values-grid">
+                                <span class="value-tag">Disziplin</span>
+                                <span class="value-tag">Innovation</span>
+                                <span class="value-tag">Verantwortung</span>
+                                <span class="value-tag">Empathie</span>
+                                [cite_start]<span class="value-tag">Engagement</span> [cite: 168]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="stats-section" id="beneficios">
+                <div class="container">
+                    <div class="section-header reveal">
+                        <h2 class="section-title">Warum EDUCARD wählen?</h2>
+                        <p class="section-subtitle">Unsere Methodik wird durch die Präferenz der Schüler und die Marktanalyse bestätigt.</p>
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-item reveal" style="transition-delay: 0.1s;">
+                            <i class="fa-solid fa-mobile-screen fa-2x" style="color: var(--color-primary); margin-bottom: 10px;"></i>
+                            <div class="number">94.1%</div>
+                            [cite_start]<div class="label">Nutzung von **Mobilgeräten** als Hauptgerät [cite: 56]</div>
+                        </div>
+                        <div class="stat-item reveal" style="transition-delay: 0.2s;">
+                            <i class="fa-solid fa-pencil fa-2x" style="color: var(--color-secondary); margin-bottom: 10px;"></i>
+                            <div class="number">58.8%</div>
+                            [cite_start]<div class="label">Bevorzugen **Praktische Übungen** zum Lernen [cite: 61]</div>
+                        </div>
+                        <div class="stat-item reveal" style="transition-delay: 0.3s;">
+                            <i class="fa-solid fa-graduation-cap fa-2x" style="color: var(--color-primary); margin-bottom: 10px;"></i>
+                            <div class="number">76.5%</div>
+                            [cite_start]<div class="label">Fühlen **Mangel an Mathekenntnissen** im Alltag [cite: 41, 42]</div>
+                        </div>
+                        <div class="stat-item reveal" style="transition-delay: 0.4s;">
+                            <i class="fa-solid fa-money-check-dollar fa-2x" style="color: var(--color-secondary); margin-bottom: 10px;"></i>
+                            <div class="number">88.2%</div>
+                            [cite_start]<div class="label">Interessiert an **Finanzmathematik** [cite: 63]</div>
+                        </div>
+                    </div>
+                    <div class="ai-banner reveal">
+                        <h3>Förderung in **Mathematik, Spanisch, Sozialwissenschaften und Biologie**!</h3>
+                        [cite_start]<p>Unser Geschäftszweck erstreckt sich auf mehrere Bereiche, um Schüler der **Klassen sechs bis elf** zu unterstützen. [cite: 159]</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="pricing-section" id="planes">
+                <div class="container">
+                    <div class="section-header reveal">
+                        <h2 class="section-title">Wählen Sie Ihren Förderungsplan</h2>
+                        <p class="section-subtitle">Erhalten Sie Zugang zu exklusiven Inhalten und personalisierter Unterstützung mit unseren flexiblen Plänen.</p>
+                    </div>
+                    
+                    <div class="pricing-table">
+                        <div class="pricing-card reveal" style="transition-delay: 0.1s;">
+                            <h3>Basis</h3>
+                            <div class="price">KOSTENLOS</div>
+                            <p style="margin-bottom: 20px;">Sofortiger Zugang zum Einführungsmodul.</p>
+                            <ul class="features-list">
+                                <li><i class="fa-solid fa-check"></i> Zugang zu Modul 1 (Demo)</li>
+                                <li><i class="fa-solid fa-check"></i> Muster an praktischen Übungen</li>
+                                <li><i class="fa-solid fa-xmark" style="color: var(--color-text-subtle);"></i> Vollständige virtuelle Plattform</li>
+                                <li><i class="fa-solid fa-xmark" style="color: var(--color-text-subtle);"></i> 24/7 Akademischer Support</li>
+                            </ul>
+                            <a href="#" class="pricing-cta" style="background-color: var(--color-text-subtle);">Kostenlos starten</a>
+                        </div>
+                        
+                        <div class="pricing-card featured reveal" style="transition-delay: 0.2s;">
+                            <span class="card-tag" style="background-color: var(--color-secondary); position: relative; top: -10px; display: inline-block;">Empfohlen</span>
+                            <h3>Pro</h3>
+                            <div class="price">$19.99 <span>/ Monat</span></div>
+                            <p style="margin-bottom: 20px;">Der komplette Weg zur Beherrschung Ihrer Klassenstufe.</p>
+                            <ul class="features-list">
+                                <li><i class="fa-solid fa-check"></i> Zugang zu allen Modulen (6. bis 11. Klasse)</li>
+                                <li><i class="fa-solid fa-check"></i> Vollständige und interaktive virtuelle Plattform</li>
+                                <li><i class="fa-solid fa-check"></i> KI-Unterstützung</li>
+                                <li><i class="fa-solid fa-check"></i> Fachkundiger akademischer Support</li>
+                            </ul>
+                            <a href="#" class="pricing-cta">Pro-Plan wählen</a>
+                        </div>
+
+                        <div class="pricing-card reveal" style="transition-delay: 0.3s;">
+                            <h3>Jährlich</h3>
+                            <div class="price">$199 <span>/ Jahr</span></div>
+                            <p style="margin-bottom: 20px;">Sparen Sie 15% bei jährlicher Zahlung.</p>
+                            <ul class="features-list">
+                                <li><i class="fa-solid fa-check"></i> **Alles** im Pro-Plan</li>
+                                <li><i class="fa-solid fa-check"></i> 1 Monat **KOSTENLOS** (Jährliche Ersparnis)</li>
+                                <li><i class="fa-solid fa-check"></i> Zugang zu Modulen zusätzlicher Fächer</li>
+                                <li><i class="fa-solid fa-check"></i> Detaillierte Leistungsbewertungen</li>
+                            </ul>
+                            <a href="#" class="pricing-cta">Jahresplan erhalten</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="faq-section" id="faq">
+                <div class="container">
+                    <div class="section-header reveal">
+                        <h2 class="section-title">Häufig gestellte Fragen</h2>
+                        <p class="section-subtitle">Wir lösen Ihre Zweifel an unserer pädagogischen und technologischen Methode.</p>
+                    </div>
+
+                    <div class="faq-container">
+                        <div class="accordion-item reveal" style="transition-delay: 0.1s;">
+                            <div class="accordion-header">
+                                Bietet EDUCARD nur Mathe-Nachhilfe für die sechste Klasse an?
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <p>Nein. [cite_start]Obwohl sich das anfängliche Projekt auf die Mathematik der sechsten Klasse konzentrierte [cite: 90][cite_start], wurde unser Unternehmenszweck erweitert, um Bildungsförderungsdienste in Bereichen wie **Mathematik, Spanisch, Sozialwissenschaften und Biologie** für Schüler der **Klassen sechs bis elf** anzubieten. [cite: 159]</p>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item reveal" style="transition-delay: 0.2s;">
+                            <div class="accordion-header">
+                                Was ist die EDUCARD SAS Methodik?
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <p>Wir verwenden innovative technologische Lösungen, interaktive virtuelle Plattformen und integrierte Lehrmodule. [cite_start]Die Methode ist praktisch und dynamisch, angepasst an individuelle Bedürfnisse[cite: 91, 92]. [cite_start]Wir priorisieren **praktische Übungen**, die die bevorzugte Methode der Mehrheit der Studenten sind. [cite: 61]</p>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item reveal" style="transition-delay: 0.3s;">
+                            <div class="accordion-header">
+                                Benötige ich einen Computer, um die Plattform zu nutzen?
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <p>Nicht unbedingt. [cite_start]Die Plattform ist so konzipiert, dass sie vollständig über **Mobilgeräte** zugänglich ist, da 94.1% unserer Benutzer diese als ihr Hauptgerät verwenden. [cite: 56] Sie können überall mit Ihrem Handy lernen.</p>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item reveal" style="transition-delay: 0.4s;">
+                            <div class="accordion-header">
+                                Wie kann ich meinen Fortschritt verfolgen?
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="accordion-content">
+                                [cite_start]<p>Unsere Methodik umfasst die Implementierung einer digitalen Plattform zur **Bewertung der akademischen Leistung**, die es uns ermöglicht, spezifische Förderprogramme basierend auf der untersuchten Leistung zu entwerfen. [cite: 148, 149, 150]</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer>
+                <div class="container footer-grid">
+                    <div class="footer-about">
+                        <h5>EDUCARD S.A.S.</h5>
+                        [cite_start]<p>Slogan: "**Lernen mit Technologie, Wachsen mit Wissen**". [cite: 161, 162] [cite_start]Wir sind ein Bildungsdienstleistungsunternehmen, das das Lernen mit digitalen und technologischen Werkzeugen transformiert. [cite: 159]</p>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <h5>Unternehmen</h5>
+                        <ul>
+                            <li><a href="#quienes-somos">Über Uns (Mission/Vision)</a></li>
+                            <li><a href="#beneficios">Statistiken und Vorteile</a></li>
+                            <li><a href="#">Arbeiten Sie mit uns</a></li>
+                            <li><a href="#">Allgemeine Geschäftsbedingungen</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links">
+                        <h5>Support</h5>
+                        <ul>
+                            <li><a href="#faq">Häufig gestellte Fragen</a></li>
+                            <li><a href="#">Kontakt</a></li>
+                            <li><a href="#">Hilfe und Tutorials</a></li>
+                            <li><a href="#">Datenschutzrichtlinie</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links">
+                        <h5>Ressourcen</h5>
+                        <ul>
+                            <li><a href="#modulos">Modulkatalog</a></li>
+                            <li><a href="#">Blog (Bald verfügbar)</a></li>
+                            [cite_start]<li><a href="#">Lehrerschulung</a> [cite: 151]</li>
+                            <li><a href="#">Seitenübersicht</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    &copy; 2025 EDUCARD S.A.S. Alle Rechte vorbehalten.
+                </div>
+            </footer>
+        </div>
 
     </main>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
-            // --- 1. Lógica del Selector de Idioma (Se mantiene la funcionalidad base) ---
-            const languageSelector = document.querySelector('.language-selector');
-            const languageDropdown = document.querySelector('.language-dropdown');
-            const languageContent = document.getElementById('language-content');
+            // 1. Funcionalidad del Selector de Idioma
+            const langContent = {
+                'es': document.getElementById('lang-es'),
+                'en': document.getElementById('lang-en'),
+                'de': document.getElementById('lang-de')
+            };
 
-            // Función de traducción (Placeholder: en el archivo app.py se usa el motor Jinja2)
-            const applyTranslation = (lang) => {
-                // Lógica real en app.py (render_template) o JS más complejo
-                console.log(`Cambiando a idioma: ${lang}`);
-                // Ejemplo simple de mostrar/ocultar contenedores:
-                document.querySelectorAll('#language-content > div').forEach(div => {
-                    div.style.display = 'none';
+            const languageSelectors = document.querySelectorAll('.language-selector');
+
+            // Función para cambiar el idioma (muestra/oculta bloques)
+            const applyTranslation = (newLang) => {
+                // Ocultar todos los bloques
+                Object.values(langContent).forEach(block => {
+                    if (block) block.style.display = 'none';
                 });
-                const newContent = document.getElementById(`lang-${lang}`);
-                if (newContent) {
-                    newContent.style.display = 'block';
-                    // Actualizar bandera actual (Placeholder)
-                    const currentFlagId = `current-flag-${lang}`;
-                    const currentFlagElement = document.getElementById(currentFlagId);
-                    if(currentFlagElement) {
-                        document.querySelector('#current-flag-es').src = currentFlagElement.src;
-                    }
+
+                // Mostrar el bloque del nuevo idioma
+                if (langContent[newLang]) {
+                    langContent[newLang].style.display = 'block';
+                    // Actualizar el título de la página
+                    const titleMap = {
+                        'es': 'EDUCARD SAS | Refuerzos de Matemática Grado Sexto',
+                        'en': 'EDUCARD SAS | Math Reinforcement Sixth Grade',
+                        'de': 'EDUCARD SAS | Mathe-Förderung Sechste Klasse'
+                    };
+                    document.getElementById('pageTitle').textContent = titleMap[newLang] || titleMap['es'];
+                    
+                    // Actualizar la bandera principal (solo para el header visible)
+                    const currentHeader = document.querySelector(`#lang-${newLang} header`);
+                    const currentFlagContainer = currentHeader ? currentHeader.querySelector('.language-selector img.flag') : null;
+                    const newFlagSrc = document.querySelector(`.language-dropdown a[data-lang="${newLang}"] img`).src;
+                    
+                    // Recorrer todos los selectores de bandera y actualizar su fuente para el header activo
+                    document.querySelectorAll('img[id^="current-flag-"]').forEach(img => {
+                        if (img.id === `current-flag-${newLang}`) {
+                            img.src = newFlagSrc;
+                        } else {
+                            // Ocultar las banderas de los headers inactivos si la lógica CSS no lo hace
+                        }
+                    });
                 }
             };
-            
-            // Toggle del dropdown de idioma
-            languageSelector.addEventListener('click', (e) => {
-                e.stopPropagation();
-                languageDropdown.classList.toggle('active');
-            });
-            
-            // Selección de idioma
-            document.querySelectorAll('.language-dropdown a').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const newLang = link.dataset.lang;
-                    applyTranslation(newLang);
-                    // Ocultar todos los dropdowns después de la selección
+
+            // Inicializar al cargar (muestra ES por defecto)
+            applyTranslation('es'); 
+
+            // Manejar clics en los selectores de idioma
+            languageSelectors.forEach(selector => {
+                // Abrir/Cerrar Dropdown
+                selector.addEventListener('click', (e) => {
+                    // Prevenir que el clic en el selector cierre el dropdown a través del event listener del documento
+                    e.stopPropagation(); 
+                    const dropdown = selector.querySelector('.language-dropdown');
+                    // Cerrar otros dropdowns
                     document.querySelectorAll('.language-dropdown').forEach(d => d.classList.remove('active'));
+                    // Abrir o cerrar este
+                    if (dropdown) dropdown.classList.toggle('active');
+                });
+                
+                // Manejar la selección de idioma dentro del dropdown
+                selector.querySelectorAll('.language-dropdown a').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const newLang = link.dataset.lang;
+                        applyTranslation(newLang);
+                        // Ocultar todos los dropdowns después de la selección
+                        document.querySelectorAll('.language-dropdown').forEach(d => d.classList.remove('active'));
+                    });
                 });
             });
 
@@ -768,7 +1230,23 @@
                 document.querySelectorAll('.language-dropdown').forEach(d => d.classList.remove('active'));
             });
 
-            // --- 2. Scroll Reveal (Animación al hacer Scroll) ---
+            // 2. Funcionalidad del acordeón FAQ
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const item = header.closest('.accordion-item');
+                    // Cerrar todos los demás, abrir solo el clickeado
+                    document.querySelectorAll('.accordion-item').forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    item.classList.toggle('active');
+                });
+            });
+
+
+            // 3. Scroll Reveal (Movimiento al Scroll)
             const reveals = document.querySelectorAll('.reveal');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -782,27 +1260,6 @@
             reveals.forEach(reveal => {
                 observer.observe(reveal);
             });
-
-            // --- 3. Lógica del Acordeón (FAQ) ---
-            document.querySelectorAll('.faq-question').forEach(question => {
-                question.addEventListener('click', () => {
-                    const faqItem = question.closest('.faq-item');
-                    const answer = faqItem.querySelector('.faq-answer');
-                    
-                    // Cierra todos los demás
-                    document.querySelectorAll('.faq-item').forEach(item => {
-                        if (item !== faqItem && item.classList.contains('active')) {
-                            item.classList.remove('active');
-                            item.querySelector('.faq-answer').classList.remove('active');
-                        }
-                    });
-
-                    // Abre o cierra el actual
-                    faqItem.classList.toggle('active');
-                    answer.classList.toggle('active');
-                });
-            });
-
         });
     </script>
 
