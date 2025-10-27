@@ -20,7 +20,7 @@
             --color-shadow-light: rgba(0, 0, 0, 0.08);
             --font-heading: 'Outfit', sans-serif;
             --font-body: 'Instrument Sans', sans-serif;
-            --header-height: 60px; /* Reducida a 60px */
+            --header-height: 60px; /* Encabezado corto */
             --wited-blue: #5c67ff;
             --wited-pink: #eb549e;
             --wited-orange: #ffc107;
@@ -36,10 +36,10 @@
         /* --- ENCABEZADO (HEADER) NUEVO ESTILO WITED --- */
         header {
             position: sticky; top: 0; left: 0; width: 100%; height: var(--header-height);
-            display: flex; justify-content: center; /* Centrar contenido para la estructura interna */
+            display: flex; justify-content: center; 
             padding: 0 3%; 
             background-color: var(--color-surface);
-            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.00); /* Sin sombra por defecto */
+            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05); 
             z-index: 1000;
         }
         
@@ -54,7 +54,7 @@
 
         .logo-container { text-decoration: none; display: flex; align-items: center; }
         .logo-img { height: 40px; margin-right: 10px; /* Logo más grande */ }
-        .site-name { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 700; color: var(--color-text-dark); display: none; /* Ocultar el nombre para replicar la imagen */ }
+        .site-name { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 700; color: var(--color-text-dark); display: none; }
 
         /* Navegación al estilo de la imagen */
         nav ul { list-style: none; display: flex; margin-left: 40px; gap: 10px;}
@@ -92,7 +92,7 @@
         .language-selector {
             position: relative;
             cursor: pointer;
-            padding: 5px 10px; /* Espacio para el selector */
+            padding: 5px 10px; 
             display: flex;
             align-items: center;
             gap: 5px;
@@ -104,7 +104,7 @@
         }
 
         .flag {
-            width: 25px; /* Bandera más pequeña */
+            width: 25px; 
             height: 25px;
             border-radius: 50%;
             object-fit: cover;
@@ -126,7 +126,6 @@
         .language-dropdown.active {
             display: block;
         }
-        /* El resto de estilos del dropdown se mantienen */
         .language-dropdown a {
             display: flex;
             align-items: center;
@@ -172,9 +171,47 @@
         .cta-info { font-size: 0.9rem; color: var(--color-text-subtle); margin-top: 15px; }
 
 
-        /* --- Sección: ¿Buscas mejores resultados? (NUEVA) --- */
+        /* --- Sección 2: Acceso y Compromiso (NUEVA) --- */
+        .commitment-section {
+            background-color: var(--color-surface); /* Fondo blanco */
+            padding: 60px 0; 
+            text-align: center;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        .feature-card {
+            background-color: var(--color-background);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px var(--color-shadow-light);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid var(--color-border);
+        }
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--wited-blue);
+            margin-bottom: 15px;
+        }
+        .feature-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+        .feature-card p {
+            font-size: 0.95rem;
+            color: var(--color-text-subtle);
+            line-height: 1.5;
+        }
+
+        /* --- Sección 3: ¿Buscas mejores resultados? --- */
         .better-results-section {
-            background-color: white; /* Asumiendo fondo blanco como el Hero */
+            background-color: white; 
             padding: 90px 0;
         }
         .results-grid {
@@ -187,7 +224,7 @@
             position: relative;
             padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
             height: 0;
-            background-color: #f0f4ff; /* Color de fondo claro para el contenedor */
+            background-color: #f0f4ff; 
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
@@ -224,44 +261,75 @@
             text-decoration: none;
             transition: opacity 0.3s;
         }
-        .results-button-group a:first-child { /* Refuerzo */
+        .results-button-group a:first-child { 
             background-color: var(--wited-pink);
             color: white;
         }
-        .results-button-group a:last-child { /* Homeschool */
+        .results-button-group a:last-child { 
             background-color: var(--wited-blue);
             color: white;
         }
-
 
         /* --- Estilos Módulos (MANTENIDOS) --- */
         .popular-modules { background-color: var(--color-background); padding-top: 120px; }
         .section-header { text-align: center; margin-bottom: 50px; }
         .section-title { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
         .section-subtitle { font-size: 1.1rem; color: var(--color-text-subtle); max-width: 700px; margin: 0 auto; }
-        .module-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
-        .module-card { background-color: var(--color-surface); border-radius: 12px; box-shadow: 0 4px 15px var(--color-shadow-light); overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; border: 1px solid var(--color-border); }
-        .card-image-wrapper { position: relative; height: 200px; overflow: hidden; }
-        .card-tag { position: absolute; top: 15px; left: 15px; background-color: #5b55e8; color: white; padding: 5px 12px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; }
-        .card-content { padding: 20px; flex-grow: 1; }
-        .card-title { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; min-height: 50px; }
-        .card-price .free { color: #28a745; }
-        .explore-button { padding: 8px 15px; font-size: 0.9rem; font-weight: 600; color: var(--color-primary); border: 2px solid var(--color-primary); border-radius: 6px; text-decoration: none; transition: all 0.3s; }
-        .explore-button:hover { background-color: var(--color-primary); color: white; }
 
-        /* --- Estilos Secciones Adicionales (MANTENIDOS) --- */
-        .extra-sections { background-color: var(--color-background); padding-bottom: 90px; }
-        .subjects-grid { display: flex; justify-content: space-between; margin-top: 40px; gap: 20px; padding-top: 30px; }
-        .subject-card { background: var(--color-surface); padding: 25px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); width: 30%; text-align: center; }
-        .subject-card i { font-size: 2.5rem; color: var(--color-primary); margin-bottom: 15px; }
-        .subject-card h4 { font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 10px; }
-        .subject-card.future { opacity: 0.5; }
+        /* --- Sección de Preguntas Frecuentes (FAQ) --- */
+        .faq-section {
+            background-color: var(--color-surface);
+            padding: 90px 0;
+        }
+        .accordion {
+            max-width: 900px;
+            margin: 40px auto 0;
+        }
+        .accordion-item {
+            background-color: var(--color-surface);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+        }
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 25px;
+            cursor: pointer;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--color-text-dark);
+            transition: background-color 0.3s;
+        }
+        .accordion-header:hover {
+            background-color: #f8f8f8;
+        }
+        .accordion-header i {
+            transition: transform 0.3s;
+            color: var(--wited-blue);
+            font-size: 1.2rem;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+        }
+        .accordion-content p {
+            padding: 0 25px 18px 25px;
+            color: var(--color-text-subtle);
+        }
+        .accordion-item.active .accordion-content {
+            max-height: 500px; 
+            padding-top: 10px;
+        }
+        .accordion-item.active .accordion-header i {
+            transform: rotate(180deg);
+        }
 
-        /* Asistencia IA Banner */
-        .ai-banner { background-color: var(--color-primary); color: white; padding: 50px; border-radius: 12px; margin-top: 50px; text-align: center; }
-        .ai-banner h3 { font-family: var(--font-heading); font-size: 2.2rem; margin-bottom: 15px; }
-        .ai-banner p { font-size: 1.1rem; opacity: 0.8; margin-bottom: 20px; }
-        
         /* --- PIE DE PÁGINA (FOOTER) MEJORADO (MANTENIDO) --- */
         footer { background-color: var(--color-text-dark); color: white; padding: 50px 0; font-size: 0.9rem; }
         .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
@@ -273,7 +341,7 @@
         .footer-links ul li a:hover { color: white; }
         .footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.1); margin-top: 30px; padding-top: 20px; text-align: center; color: rgba(255, 255, 255, 0.5); font-size: 0.8rem; }
         
-        /* Media Queries (MANTENIDOS y ajustados) */
+        /* Media Queries (Ajustados) */
         @media (max-width: 900px) {
             .hero-grid { grid-template-columns: 1fr; text-align: center; }
             .hero-text-col h1 { font-size: 2.8rem; }
@@ -284,6 +352,7 @@
             .subjects-grid { flex-direction: column; align-items: center; }
             .subject-card { width: 80%; margin-bottom: 20px; }
             .results-grid { grid-template-columns: 1fr; text-align: center; }
+            .features-grid { padding: 0 10%; }
         }
     </style>
 </head>
@@ -338,6 +407,26 @@
                                 Tu navegador no soporta el formato de video WebM.
                             </video>
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="commitment-section">
+                <div class="container features-grid">
+                    <div class="feature-card reveal">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                        <h3>Acceso 100% Móvil</h3>
+                        [cite_start]<p>El 94.1% de los estudiantes usa su celular a diario[cite: 149]. Por eso, nuestros módulos están diseñados para una experiencia impecable en cualquier dispositivo móvil.</p>
+                    </div>
+                    <div class="feature-card reveal" style="transition-delay: 0.1s;">
+                        <i class="fa-solid fa-clock"></i>
+                        <h3>Dedica el Tiempo Justo</h3>
+                        [cite_start]<p>La mayoría de nuestros usuarios se compromete a mejorar en 15 a 30 minutos al día[cite: 170]. Nuestro formato de lecciones cortas se adapta perfectamente a tu horario.</p>
+                    </div>
+                    <div class="feature-card reveal" style="transition-delay: 0.2s;">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <h3>Educación Innovadora</h3>
+                        [cite_start]<p>Integramos plataformas virtuales interactivas y ejercicios prácticos, la metodología preferida por el 58.8% de los estudiantes[cite: 151, 167], para una comprensión profunda.</p>
                     </div>
                 </div>
             </section>
@@ -435,6 +524,66 @@
                     </div>
                 </div>
             </section>
+            
+            <section class="faq-section" id="faq-section">
+                <div class="container">
+                    <div class="section-header reveal">
+                        <h2 class="section-title">Preguntas Frecuentes (FAQ)</h2>
+                        <p class="section-subtitle">Respuestas a las dudas más comunes sobre EDUCARD SAS y nuestra metodología.</p>
+                    </div>
+                    <div class="accordion reveal">
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                ¿Cuál es el enfoque principal de EDUCARD SAS?
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="accordion-content">
+                                [cite_start]<p>EDUCARD SAS se enfoca en apoyar currículos personalizados en el área de **Matemática**, dirigido específicamente a estudiantes de **grado sexto**[cite: 13]. [cite_start]Nuestro objetivo es fortalecer la competencia académica con un método práctico y dinámico[cite: 14].</p>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                ¿Qué áreas académicas cubren sus refuerzos?
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="accordion-content">
+                                [cite_start]<p>Actualmente, ofrecemos servicios de refuerzos educativos en áreas como **Matemáticas, Español, Sociales y Biología** para estudiantes de **grados sexto a once**, utilizando herramientas digitales y tecnológicas[cite: 82].</p>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                ¿Qué diferencia a la metodología de EDUCARD SAS?
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="accordion-content">
+                                [cite_start]<p>Nuestro programa utiliza **soluciones tecnológicas innovadoras** y **plataformas virtuales interactivas**[cite: 15]. [cite_start]Los resultados de encuestas muestran que el 58.8% de los estudiantes prefiere los **ejercicios prácticos** [cite: 151, 167][cite_start], por lo que nuestra metodología se enfoca en la aplicación práctica para una comprensión profunda[cite: 167].</p>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                ¿Por qué enfocarse en refuerzos de Matemáticas?
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="accordion-content">
+                                [cite_start]<p>Nos enfocamos en Matemática porque el 76.5% de los encuestados ha declarado haber sentido desconocimiento sobre algún tema matemático que usa cotidianamente[cite: 155, 177]. [cite_start]Existe una "imperiosa necesidad de integrar el pensamiento cuantitativo y lógico en la formación práctica"[cite: 180].</p>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                ¿Cuál es la visión a futuro de EDUCARD SAS?
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="accordion-content">
+                                [cite_start]<p>EDUCARD S.A.S. aspira a ser reconocida a **nivel nacional** como pionera en soluciones tecnológicas aplicadas a la educación, con un modelo escalable que impacte a estudiantes en todo el territorio colombiano[cite: 90].</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
         
         <div id="lang-en" data-lang="en" style="display: none;">
@@ -477,6 +626,26 @@
                     </div>
                     <div class="hero-animation-col reveal" style="transition-delay: 0.2s;">
                         <div class="phone-frame"><video class="phone-video" autoplay loop muted playsinline controls=false><source src="https://www.wited.com/wp-content/uploads/2025/06/Animacion_01_crop.webm" type="video/webm"></video></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="commitment-section">
+                <div class="container features-grid">
+                    <div class="feature-card reveal">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                        <h3>100% Mobile Access</h3>
+                        [cite_start]<p>94.1% of students use their cell phone daily[cite: 149]. That's why our modules are designed for a seamless experience on any mobile device.</p>
+                    </div>
+                    <div class="feature-card reveal" style="transition-delay: 0.1s;">
+                        <i class="fa-solid fa-clock"></i>
+                        <h3>Commit the Right Amount of Time</h3>
+                        [cite_start]<p>Most of our users commit to improving in 15 to 30 minutes per day[cite: 170]. Our short lesson format fits perfectly into your schedule.</p>
+                    </div>
+                    <div class="feature-card reveal" style="transition-delay: 0.2s;">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <h3>Innovative Education</h3>
+                        [cite_start]<p>We integrate interactive virtual platforms and practical exercises, the preferred methodology by 58.8% of students[cite: 151, 167], for deep understanding.</p>
                     </div>
                 </div>
             </section>
@@ -572,6 +741,66 @@
                     </div>
                 </div>
             </section>
+
+            <section class="faq-section" id="faq-section">
+                <div class="container">
+                    <div class="section-header reveal">
+                        <h2 class="section-title">Frequently Asked Questions (FAQ)</h2>
+                        <p class="section-subtitle">Answers to the most common questions about EDUCARD SAS and our methodology.</p>
+                    </div>
+                    <div class="accordion reveal">
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                What is the main focus of EDUCARD SAS?
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="accordion-content">
+                                [cite_start]<p>EDUCARD SAS focuses on supporting personalized curricula in the area of **Mathematics**, specifically aimed at **sixth-grade students**[cite: 18]. [cite_start]Our objective is to strengthen academic competence with a practical and dynamic method[cite: 19].</p>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                What academic areas do your reinforcements cover?
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="accordion-content">
+                                [cite_start]<p>Currently, we offer educational reinforcement services in areas such as **Mathematics, Spanish, Social Studies, and Biology** for students from **sixth to eleventh grade**, using digital and technological tools[cite: 82].</p>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                What makes EDUCARD SAS's methodology different?
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="accordion-content">
+                                [cite_start]<p>Our program uses **innovative technological solutions** and **interactive virtual platforms**[cite: 20]. [cite_start]Survey results show that 58.8% of students prefer **practical exercises** [cite: 151, 167][cite_start], so our methodology focuses on practical application for deeper understanding[cite: 167].</p>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                Why focus on Math reinforcements?
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="accordion-content">
+                                [cite_start]<p>We focus on Mathematics because 76.5% of those surveyed have stated that they have felt ignorance about some mathematical topic they use daily[cite: 155, 177]. [cite_start]There is an "imperious need to integrate quantitative and logical thinking into practical training"[cite: 180].</p>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                What is the future vision for EDUCARD SAS?
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="accordion-content">
+                                [cite_start]<p>EDUCARD S.A.S. aims to be recognized **nationally** as a pioneer in technological solutions applied to education, with a scalable model that impacts students throughout the Colombian territory[cite: 90].</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
         
         <div id="lang-de" data-lang="de" style="display: none;">
@@ -618,6 +847,26 @@
                 </div>
             </section>
             
+            <section class="commitment-section">
+                <div class="container features-grid">
+                    <div class="feature-card reveal">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                        <h3>100% Mobiler Zugang</h3>
+                        [cite_start]<p>94,1% der Schüler nutzen täglich ihr Mobiltelefon[cite: 149]. Deshalb sind unsere Module für einwandfreie Nutzung auf jedem mobilen Gerät konzipiert.</p>
+                    </div>
+                    <div class="feature-card reveal" style="transition-delay: 0.1s;">
+                        <i class="fa-solid fa-clock"></i>
+                        <h3>Widmen Sie genau die richtige Zeit</h3>
+                        [cite_start]<p>Die meisten unserer Nutzer verpflichten sich, sich in 15 bis 30 Minuten pro Tag zu verbessern[cite: 170]. Unser Format mit kurzen Lektionen passt perfekt zu Ihrem Zeitplan.</p>
+                    </div>
+                    <div class="feature-card reveal" style="transition-delay: 0.2s;">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <h3>Innovative Bildung</h3>
+                        [cite_start]<p>Wir integrieren interaktive virtuelle Plattformen und praktische Übungen, die von 58,8% der Studenten bevorzugte Methode[cite: 151, 167], für ein tiefes Verständnis.</p>
+                    </div>
+                </div>
+            </section>
+
             <section class="better-results-section">
                 <div class="container results-grid">
                     <div class="results-video-col reveal">
@@ -709,6 +958,66 @@
                     </div>
                 </div>
             </section>
+
+            <section class="faq-section" id="faq-section">
+                <div class="container">
+                    <div class="section-header reveal">
+                        <h2 class="section-title">Häufig gestellte Fragen (FAQ)</h2>
+                        <p class="section-subtitle">Antworten auf die häufigsten Fragen zu EDUCARD SAS und unserer Methodik.</p>
+                    </div>
+                    <div class="accordion reveal">
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                Was ist der Hauptfokus von EDUCARD SAS?
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="accordion-content">
+                                [cite_start]<p>EDUCARD SAS konzentriert sich auf die Unterstützung personalisierter Lehrpläne im Bereich **Mathematik**, speziell für **Schüler der sechsten Klasse**[cite: 18]. [cite_start]Unser Ziel ist es, die akademische Kompetenz durch eine praktische und dynamische Methode zu stärken[cite: 19].</p>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                Welche akademischen Bereiche decken Ihre Förderungen ab?
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="accordion-content">
+                                [cite_start]<p>Derzeit bieten wir Bildungsförderungsdienste in Bereichen wie **Mathematik, Spanisch, Sozialkunde und Biologie** für Schüler der **sechsten bis elften Klasse** an, unter Verwendung digitaler und technologischer Werkzeuge[cite: 82].</p>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                Was unterscheidet die Methodik von EDUCARD SAS?
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="accordion-content">
+                                [cite_start]<p>Unser Programm nutzt **innovative technologische Lösungen** und **interaktive virtuelle Plattformen**[cite: 20]. [cite_start]Umfrageergebnisse zeigen, dass 58,8% der Schüler **praktische Übungen** bevorzugen [cite: 151, 167][cite_start], weshalb unsere Methodik den Fokus auf die praktische Anwendung für tiefgreifendes Verständnis legt[cite: 167].</p>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                Warum der Fokus auf Mathematik-Förderung?
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="accordion-content">
+                                [cite_start]<p>Wir konzentrieren uns auf Mathematik, da 76,5% der Befragten angegeben haben, Unkenntnis über ein mathematisches Thema empfunden zu haben, das sie im Alltag verwenden[cite: 155, 177]. [cite_start]Es besteht eine "zwingende Notwendigkeit, quantitatives und logisches Denken in die praktische Ausbildung zu integrieren"[cite: 180].</p>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                Was ist die Zukunftsvision von EDUCARD SAS?
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                            <div class="accordion-content">
+                                [cite_start]<p>EDUCARD S.A.S. strebt an, **landesweit** als Pionier für in der Bildung angewandte technologische Lösungen anerkannt zu werden, mit einem skalierbaren Modell, das Studenten in ganz Kolumbien beeinflusst[cite: 90].</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </main>
 
@@ -740,11 +1049,11 @@
             </div>
 
             <div class="footer-links">
-                <h5 id="footer-social-title">Síguenos</h5>
+                <h5 id="footer-social-title">Información Legal</h5>
                 <ul>
-                    <li><a href="#"><i class="fa-brands fa-facebook"></i> Facebook</a></li>
-                    <li><a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
-                    <li><a href="#"><i class="fa-brands fa-linkedin"></i> LinkedIn</a></li>
+                    <li><a href="#">Política de Privacidad</a></li>
+                    <li><a href="#">Aviso Legal</a></li>
+                    <li><a href="#">Derechos de Autor</a></li>
                 </ul>
             </div>
         </div>
@@ -755,7 +1064,7 @@
     </footer>
 
     <script>
-        // --- JAVASCRIPT: LÓGICA DE IDIOMA Y SCROLL REVEAL (MANTENIDO) ---
+        // --- JAVASCRIPT: LÓGICA DE IDIOMA Y SCROLL REVEAL ---
         
         // 1. DICCIONARIO DE TRADUCCIONES (Para el Footer y Títulos Estáticos)
         const translations = {
@@ -770,7 +1079,7 @@
                 'footer-faq-link': 'FAQ',
                 'footer-support-link': 'Soporte Técnico',
                 'footer-terms-link': 'Términos y Condiciones',
-                'footer-social-title': 'Síguenos'
+                'footer-social-title': 'Información Legal'
             },
             'en': {
                 'pageTitle': 'EDUCARD SAS | Sixth Grade Math Reinforcements',
@@ -783,7 +1092,7 @@
                 'footer-faq-link': 'FAQ',
                 'footer-support-link': 'Technical Support',
                 'footer-terms-link': 'Terms and Conditions',
-                'footer-social-title': 'Follow Us'
+                'footer-social-title': 'Legal Information'
             },
             'de': {
                 'pageTitle': 'EDUCARD SAS | Nachhilfe 6. Klasse Mathematik',
@@ -796,31 +1105,28 @@
                 'footer-faq-link': 'FAQ',
                 'footer-support-link': 'Technischer Support',
                 'footer-terms-link': 'Allgemeine Geschäftsbedingungen',
-                'footer-social-title': 'Folgen Sie uns'
+                'footer-social-title': 'Rechtliche Hinweise'
             }
         };
 
         const flags = {
-            'es': 'https://flagcdn.com/co.svg', // Bandera Colombia
-            'en': 'https://flagcdn.com/us.svg', // Bandera EE.UU.
-            'de': 'https://flagcdn.com/de.svg'  // Bandera Alemania
+            'es': 'https://flagcdn.com/co.svg', 
+            'en': 'https://flagcdn.com/us.svg', 
+            'de': 'https://flagcdn.com/de.svg'  
         };
 
         function applyTranslation(lang) {
-            // A. Cambiar la visualización de las secciones Hero/Header/Sections
+            // A. Cambiar la visualización de las secciones
             document.querySelectorAll('[data-lang]').forEach(section => {
-                // Alternar la visualización del bloque de idioma principal
                 section.style.display = section.dataset.lang === lang ? 'block' : 'none';
                 
-                // Asegurar que el header correcto esté visible (está dentro del div de idioma)
                 const header = section.querySelector('header');
                 if (header) {
-                    // El header debe ser 'flex' para que funcione el justify-content: center;
                     header.style.display = section.dataset.lang === lang ? 'flex' : 'none';
                 }
             });
 
-            // B. Aplicar traducciones del Footer y Títulos (contenidos estáticos)
+            // B. Aplicar traducciones del Footer y Títulos estáticos
             const dict = translations[lang] || translations['es'];
             document.getElementById('pageTitle').textContent = dict['pageTitle'];
             
@@ -831,7 +1137,7 @@
                 }
             }
             
-            // C. Actualizar bandera principal para el idioma activo (dentro de cada header)
+            // C. Actualizar bandera principal
             document.querySelectorAll('.language-selector .flag').forEach(flagElement => {
                  flagElement.src = flags[lang];
             });
@@ -842,16 +1148,14 @@
 
         // 2. Lógica del Selector de Idioma
         document.addEventListener('DOMContentLoaded', () => {
-            const currentLang = localStorage.getItem('selectedLang') || 'es'; // Por defecto Español
+            const currentLang = localStorage.getItem('selectedLang') || 'es'; 
             applyTranslation(currentLang);
             
             // Mostrar u ocultar el dropdown
             document.querySelectorAll('.language-selector').forEach(selector => {
                 selector.addEventListener('click', (e) => {
                     const dropdown = selector.querySelector('.language-dropdown');
-                    // Ocultar todos los dropdowns primero
                     document.querySelectorAll('.language-dropdown').forEach(d => d.classList.remove('active'));
-                    // Mostrar solo el actual
                     dropdown.classList.toggle('active');
                     e.stopPropagation();
                 });
@@ -863,7 +1167,6 @@
                     e.preventDefault();
                     const newLang = link.dataset.lang;
                     applyTranslation(newLang);
-                    // Ocultar todos los dropdowns después de la selección
                     document.querySelectorAll('.language-dropdown').forEach(d => d.classList.remove('active'));
                 });
             });
@@ -879,13 +1182,30 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
-                        // observer.unobserve(entry.target); // Dejar comentado si quieres que se anime cada vez que entre en el viewport
                     }
                 });
             }, { root: null, rootMargin: '0px', threshold: 0.1 });
 
             reveals.forEach(reveal => {
                 observer.observe(reveal);
+            });
+
+            // 4. Lógica del Acordeón (FAQ)
+            document.querySelectorAll('.accordion-header').forEach(header => {
+                header.addEventListener('click', () => {
+                    const item = header.closest('.accordion-item');
+                    const isActive = item.classList.contains('active');
+
+                    // Cerrar todos los demás
+                    document.querySelectorAll('.accordion-item.active').forEach(activeItem => {
+                        if (activeItem !== item) {
+                            activeItem.classList.remove('active');
+                        }
+                    });
+
+                    // Abrir/Cerrar el actual
+                    item.classList.toggle('active', !isActive);
+                });
             });
         });
     </script>
