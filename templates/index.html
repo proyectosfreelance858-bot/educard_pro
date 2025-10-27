@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="pageTitle">EDUCARD SAS | Refuerzos de Matemática Grado Sexto</title>
+    <title id="pageTitle">EDUCARD SAS | Refuerzos Académicos Grado Sexto a Once</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
@@ -153,16 +153,68 @@
         .explore-button { padding: 8px 15px; font-size: 0.9rem; font-weight: 600; color: var(--color-primary); border: 2px solid var(--color-primary); border-radius: 6px; text-decoration: none; transition: all 0.3s; }
         .explore-button:hover { background-color: var(--color-primary); color: white; }
 
-        /* --- NUEVOS ESTILOS PARA EXPANDIR LA PÁGINA --- */
-        
-        /* Sección de Misión, Visión, Valores */
-        .about-section { background-color: var(--color-surface); text-align: center; }
-        .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
-        .vision-mission-card { background: var(--color-background); padding: 30px; border-radius: 12px; border-left: 5px solid var(--color-primary); text-align: left; transition: all 0.3s; }
-        .vision-mission-card:hover { border-left-color: var(--color-secondary); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); }
-        .vision-mission-card h4 { font-family: var(--font-heading); font-size: 1.4rem; color: var(--color-text-dark); margin-bottom: 15px; }
-        .values-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 30px; }
-        .value-tag { background-color: var(--color-primary); color: white; padding: 8px 15px; border-radius: 20px; font-weight: 500; font-size: 0.9rem; }
+        /* --- NUEVOS ESTILOS PARA LA SECCIÓN "NUESTRO PROPÓSITO" (Timeline Design) --- */
+        .about-section { background-color: var(--color-surface); }
+        .purpose-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+            position: relative;
+        }
+        .purpose-grid::before {
+            content: '';
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 4px;
+            background-color: var(--color-border);
+            z-index: 1;
+        }
+
+        .purpose-item {
+            position: relative;
+            text-align: center;
+            padding: 20px;
+            z-index: 5;
+            background: var(--color-surface);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        .purpose-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .purpose-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: var(--color-background);
+            border: 4px solid var(--color-primary);
+            color: var(--color-primary);
+            font-size: 1.8rem;
+            margin: 0 auto 20px;
+            transition: all 0.3s;
+        }
+        .purpose-item:nth-child(2) .purpose-icon { border-color: var(--color-secondary); color: var(--color-secondary); }
+        .purpose-item:nth-child(3) .purpose-icon { border-color: #28a745; color: #28a745; }
+
+        .purpose-item h4 { 
+            font-family: var(--font-heading); 
+            font-size: 1.4rem; 
+            color: var(--color-text-dark); 
+            margin-bottom: 15px; 
+        }
+        .purpose-item p {
+            font-size: 0.95rem;
+            color: var(--color-text-subtle);
+        }
         
         /* Sección de Estadísticas/Beneficios (Por qué elegirnos) */
         .stats-section { background-color: var(--color-background); }
@@ -170,22 +222,24 @@
         .stat-item { background: var(--color-surface); padding: 25px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); }
         .stat-item .number { font-family: var(--font-heading); font-size: 3rem; font-weight: 800; color: var(--color-primary); line-height: 1; }
         .stat-item .label { font-size: 1.1rem; color: var(--color-text-subtle); margin-top: 5px; }
+        .ai-banner {
+            margin-top: 60px;
+            background-color: var(--color-primary);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .ai-banner h3 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        .ai-banner p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
         
-        /* Sección de Precios/Planes */
-        .pricing-section { background-color: var(--color-surface); }
-        .pricing-table { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 50px; }
-        .pricing-card { background: var(--color-background); border-radius: 12px; padding: 40px 30px; text-align: center; border: 1px solid var(--color-border); transition: all 0.3s; }
-        .pricing-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); }
-        .pricing-card.featured { border-color: var(--color-primary); background-color: #f0f3ff; }
-        .pricing-card h3 { font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 10px; }
-        .price { font-family: var(--font-heading); font-size: 3.5rem; font-weight: 700; color: var(--color-primary); margin-bottom: 20px; line-height: 1; }
-        .price span { font-size: 1.2rem; font-weight: 500; color: var(--color-text-subtle); }
-        .features-list { list-style: none; text-align: left; margin-bottom: 30px; }
-        .features-list li { margin-bottom: 12px; color: var(--color-text-dark); font-size: 1rem; }
-        .features-list li i { color: #28a745; margin-right: 10px; }
-        .pricing-cta { padding: 12px 25px; font-size: 1rem; font-weight: 600; background-color: var(--color-primary); color: white; border-radius: 8px; text-decoration: none; display: block; transition: background-color 0.3s; }
-        .pricing-cta:hover { background-color: #4b54ff; }
-
         /* Sección FAQ */
         .faq-section { background-color: var(--color-background); }
         .accordion-item { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; margin-bottom: 15px; overflow: hidden; }
@@ -199,7 +253,7 @@
 
         /* --- PIE DE PÁGINA (FOOTER) MEJORADO --- */
         footer { background-color: var(--color-text-dark); color: white; padding: 50px 0; font-size: 0.9rem; }
-        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; } /* Se eliminó una columna */
         .footer-about h5, .footer-links h5 { font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 20px; font-weight: 700; color: var(--color-secondary); }
         .footer-about p { color: rgba(255, 255, 255, 0.7); margin-bottom: 20px; }
         .footer-links ul { list-style: none; }
@@ -216,7 +270,10 @@
             .footer-grid { grid-template-columns: 1fr; text-align: center; }
             .language-dropdown { right: -30px; }
             nav ul { display: none; }
-            .stats-grid, .pricing-table, .about-grid { grid-template-columns: 1fr; }
+            .stats-grid, .purpose-grid { grid-template-columns: 1fr; }
+            .purpose-grid::before { display: none; } /* Ocultar la línea en móvil */
+            .purpose-item { border-left: 5px solid var(--color-primary); text-align: left; }
+            .purpose-icon { margin-left: 0; }
         }
     </style>
 </head>
@@ -235,8 +292,8 @@
                     <ul>
                         <li><a href="#hero-section" class="active">Inicio</a></li>
                         <li><a href="#modulos">Refuerzos</a></li>
-                        <li><a href="#quienes-somos">Nosotros</a></li>
-                        <li><a href="#planes">Planes</a></li>
+                        <li><a href="#quienes-somos">Nuestro Propósito</a></li>
+                        <li><a href="#beneficios">Beneficios</a></li>
                         <li><a href="#faq">FAQ</a></li>
                     </ul>
                 </nav>
@@ -259,9 +316,9 @@
                     <div class="hero-text-col reveal">
                         <p class="tag-line"><i class="fa-solid fa-square-root-variable"></i> Refuerzo Académico Nivel Sexto a Once</p>
                         <h1>Aprendizaje <span class="highlight">Inteligente</span> a un clic de distancia</h1>
-                        [cite_start]<p class="subtitle">Módulos de **Matemática** y otras áreas para grados sexto a once, con soluciones ultra profesionales para garantizar el dominio de los temas esenciales y asegurar el éxito académico. [cite: 159]</p>
-                        <a href="#modulos" class="main-cta-button">Empezar Refuerzo Ahora</a>
-                        <p class="cta-info" style="font-size: 0.9rem; margin-top: 15px; color: var(--color-text-subtle);">No se requiere tarjeta de crédito. Simplemente haz clic en "Empezar Refuerzo Ahora" y accede al primer módulo **GRATIS**.</p>
+                        <p class="subtitle">Módulos de **Matemática** y otras áreas para grados sexto a once, con soluciones ultra profesionales para garantizar el dominio de los temas esenciales y asegurar el éxito académico.</p>
+                        <a href="#modulos" class="main-cta-button">Explorar Módulos Ahora</a>
+                        <p class="cta-info" style="font-size: 0.9rem; margin-top: 15px; color: var(--color-text-subtle);">Explora nuestros módulos y el primer contenido **GRATIS**.</p>
                     </div>
                     <div class="hero-animation-col reveal" style="transition-delay: 0.2s;">
                         <div class="phone-frame">
@@ -278,7 +335,7 @@
                 <div class="container">
                     <div class="section-header reveal">
                         <h2 class="section-title">Módulos Clave de Refuerzo Académico</h2>
-                        [cite_start]<p class="section-subtitle">Explora nuestros módulos dinámicos y accesibles [cite: 143][cite_start], diseñados por expertos en didáctica, con un enfoque en el fortalecimiento de competencias básicas para el futuro. [cite: 142]</p>
+                        <p class="section-subtitle">Explora nuestros módulos dinámicos y accesibles, diseñados por expertos en didáctica, con un enfoque en el fortalecimiento de competencias básicas para el futuro.</p>
                     </div>
                     <div class="module-grid">
                         {% for producto in productos %}
@@ -319,33 +376,26 @@
                 <div class="container">
                     <div class="section-header reveal">
                         <h2 class="section-title">EDUCARD SAS: Nuestro Propósito</h2>
-                        [cite_start]<p class="section-subtitle">Somos pioneros en soluciones tecnológicas aplicadas a la educación. [cite: 167]</p>
+                        <p class="section-subtitle">Somos pioneros en soluciones tecnológicas aplicadas a la educación, impulsando el éxito académico y personal.</p>
                     </div>
 
-                    <div class="about-grid">
-                        <div class="vision-mission-card reveal" style="transition-delay: 0.1s;">
-                            <i class="fa-solid fa-bullseye fa-2x" style="color: var(--color-primary); margin-bottom: 10px;"></i>
-                            <h4>Misión</h4>
-                            [cite_start]<p>Mejorar el aprendizaje por medio de refuerzos educativos tecnológicos, brindando herramientas innovadoras que faciliten el aprendizaje de los estudiantes y fomenten el desarrollo académico y personal. [cite: 165]</p>
+                    <div class="purpose-grid">
+                        <div class="purpose-item reveal" style="transition-delay: 0.1s;">
+                            <div class="purpose-icon"><i class="fa-solid fa-rocket"></i></div>
+                            <h4>Pioneros en Tecnología (Visión)</h4>
+                            <p>Ser reconocidos a nivel nacional como pioneros en soluciones tecnológicas aplicadas a la educación, con un modelo escalable que impacte a estudiantes en todo Colombia.</p>
                         </div>
 
-                        <div class="vision-mission-card reveal" style="transition-delay: 0.2s;">
-                            <i class="fa-solid fa-rocket fa-2x" style="color: var(--color-secondary); margin-bottom: 10px;"></i>
-                            <h4>Visión</h4>
-                            [cite_start]<p>EDUCARD S.A.S. será reconocida a nivel nacional como pionera en soluciones tecnológicas aplicadas a la educación, con un modelo escalable que impacte a estudiantes en todo el territorio colombiano. [cite: 167]</p>
+                        <div class="purpose-item reveal" style="transition-delay: 0.2s;">
+                            <div class="purpose-icon"><i class="fa-solid fa-bullseye"></i></div>
+                            <h4>Nuestro Objetivo (Misión)</h4>
+                            <p>Mejorar el aprendizaje por medio de refuerzos educativos tecnológicos, brindando herramientas innovadoras que faciliten el desarrollo académico y fomenten el crecimiento personal.</p>
                         </div>
                         
-                        <div class="vision-mission-card reveal" style="transition-delay: 0.3s;">
-                            <i class="fa-solid fa-hands-holding fa-2x" style="color: #28a745; margin-bottom: 10px;"></i>
-                            <h4>Valores Fundamentales</h4>
-                            [cite_start]<p>Nuestros valores reflejan el compromiso con la excelencia académica y la innovación tecnológica. [cite: 169]</p>
-                            <div class="values-grid">
-                                <span class="value-tag">Disciplina</span>
-                                <span class="value-tag">Innovación</span>
-                                <span class="value-tag">Responsabilidad</span>
-                                <span class="value-tag">Empatía</span>
-                                [cite_start]<span class="value-tag">Compromiso</span> [cite: 168]
-                            </div>
+                        <div class="purpose-item reveal" style="transition-delay: 0.3s;">
+                            <div class="purpose-icon"><i class="fa-solid fa-hands-helping"></i></div>
+                            <h4>Compromiso y Valores</h4>
+                            <p>Nos guiamos por la **Disciplina, Innovación, Responsabilidad, Empatía y Compromiso**. Estos valores aseguran la excelencia en cada módulo y servicio que ofrecemos.</p>
                         </div>
                     </div>
                 </div>
@@ -355,85 +405,34 @@
                 <div class="container">
                     <div class="section-header reveal">
                         <h2 class="section-title">¿Por Qué Elegir EDUCARD?</h2>
-                        <p class="section-subtitle">Nuestra metodología está validada por la preferencia de los estudiantes y el análisis de mercado.</p>
+                        <p class="section-subtitle">Nuestra metodología está validada por la preferencia de los estudiantes y el análisis de mercado (Fuente: Estudio de Factibilidad).</p>
                     </div>
                     
                     <div class="stats-grid">
                         <div class="stat-item reveal" style="transition-delay: 0.1s;">
                             <i class="fa-solid fa-mobile-screen fa-2x" style="color: var(--color-primary); margin-bottom: 10px;"></i>
                             <div class="number">94.1%</div>
-                            [cite_start]<div class="label">Uso de **Móvil** como Dispositivo Principal [cite: 56]</div>
+                            <div class="label">Uso de **Móvil** como Dispositivo Principal</div>
                         </div>
                         <div class="stat-item reveal" style="transition-delay: 0.2s;">
                             <i class="fa-solid fa-pencil fa-2x" style="color: var(--color-secondary); margin-bottom: 10px;"></i>
                             <div class="number">58.8%</div>
-                            [cite_start]<div class="label">Prefiere **Ejercicios Prácticos** para Aprender [cite: 61]</div>
+                            <div class="label">Prefiere **Ejercicios Prácticos** para Aprender</div>
                         </div>
                         <div class="stat-item reveal" style="transition-delay: 0.3s;">
                             <i class="fa-solid fa-graduation-cap fa-2x" style="color: var(--color-primary); margin-bottom: 10px;"></i>
                             <div class="number">76.5%</div>
-                            [cite_start]<div class="label">Siente **Ignorancia Matemática** en la Vida Diaria [cite: 41, 42]</div>
+                            <div class="label">Siente **Ignorancia Matemática** en la Vida Diaria</div>
                         </div>
                         <div class="stat-item reveal" style="transition-delay: 0.4s;">
                             <i class="fa-solid fa-money-check-dollar fa-2x" style="color: var(--color-secondary); margin-bottom: 10px;"></i>
                             <div class="number">88.2%</div>
-                            [cite_start]<div class="label">Interesado en Aprender **Matemáticas Financieras** [cite: 63]</div>
+                            <div class="label">Interesado en Aprender **Matemáticas Financieras**</div>
                         </div>
                     </div>
                     <div class="ai-banner reveal">
                         <h3>¡Refuerzos en **Matemáticas, Español, Sociales y Biología**!</h3>
-                        [cite_start]<p>Nuestro objeto social se extiende a múltiples áreas para apoyar a estudiantes de **grados sexto a once**. [cite: 159]</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="pricing-section" id="planes">
-                <div class="container">
-                    <div class="section-header reveal">
-                        <h2 class="section-title">Elige Tu Plan de Refuerzo</h2>
-                        <p class="section-subtitle">Accede a contenido exclusivo y asistencia personalizada con nuestros planes flexibles.</p>
-                    </div>
-                    
-                    <div class="pricing-table">
-                        <div class="pricing-card reveal" style="transition-delay: 0.1s;">
-                            <h3>Básico</h3>
-                            <div class="price">GRATIS</div>
-                            <p style="margin-bottom: 20px;">Acceso inmediato al módulo introductorio.</p>
-                            <ul class="features-list">
-                                <li><i class="fa-solid fa-check"></i> Acceso al Módulo 1 (Demo)</li>
-                                <li><i class="fa-solid fa-check"></i> Ejercicios prácticos de muestra</li>
-                                <li><i class="fa-solid fa-xmark" style="color: var(--color-text-subtle);"></i> Plataforma virtual completa</li>
-                                <li><i class="fa-solid fa-xmark" style="color: var(--color-text-subtle);"></i> Soporte académico 24/7</li>
-                            </ul>
-                            <a href="#" class="pricing-cta" style="background-color: var(--color-text-subtle);">Empezar Gratis</a>
-                        </div>
-                        
-                        <div class="pricing-card featured reveal" style="transition-delay: 0.2s;">
-                            <span class="card-tag" style="background-color: var(--color-secondary); position: relative; top: -10px; display: inline-block;">Recomendado</span>
-                            <h3>Pro</h3>
-                            <div class="price">$19.99 <span>/ mes</span></div>
-                            <p style="margin-bottom: 20px;">El camino completo para el dominio de tu grado.</p>
-                            <ul class="features-list">
-                                <li><i class="fa-solid fa-check"></i> Acceso a todos los Módulos (6° a 11°)</li>
-                                <li><i class="fa-solid fa-check"></i> Plataforma virtual completa e interactiva</li>
-                                <li><i class="fa-solid fa-check"></i> Asistencia IA </li>
-                                <li><i class="fa-solid fa-check"></i> Soporte académico por expertos</li>
-                            </ul>
-                            <a href="#" class="pricing-cta">Elegir Plan Pro</a>
-                        </div>
-
-                        <div class="pricing-card reveal" style="transition-delay: 0.3s;">
-                            <h3>Anual</h3>
-                            <div class="price">$199 <span>/ año</span></div>
-                            <p style="margin-bottom: 20px;">Ahorra un 15% con el pago anual.</p>
-                            <ul class="features-list">
-                                <li><i class="fa-solid fa-check"></i> **Todo** en el Plan Pro</li>
-                                <li><i class="fa-solid fa-check"></i> 1 Mes **GRATIS** (Ahorro anual)</li>
-                                <li><i class="fa-solid fa-check"></i> Acceso a Módulos de Áreas Adicionales</li>
-                                <li><i class="fa-solid fa-check"></i> Evaluaciones de Rendimiento Detalladas</li>
-                            </ul>
-                            <a href="#" class="pricing-cta">Obtener el Plan Anual</a>
-                        </div>
+                        <p>Nuestro objeto social se extiende a múltiples áreas para apoyar a estudiantes de **grados sexto a once**.</p>
                     </div>
                 </div>
             </section>
@@ -452,7 +451,7 @@
                                 <i class="fa-solid fa-chevron-down"></i>
                             </div>
                             <div class="accordion-content">
-                                <p>No. [cite_start]Aunque el proyecto inicial se enfocó en Matemáticas de Grado Sexto [cite: 90][cite_start], nuestro objeto social se expandió para ofrecer servicios de refuerzos educativos en áreas como **Matemáticas, Español, Sociales y Biología** para estudiantes de **grados sexto a once**. [cite: 159]</p>
+                                <p>No. Aunque el proyecto inicial se enfocó en Matemáticas de Grado Sexto, nuestro objeto social se expandió para ofrecer servicios de refuerzos educativos en áreas como **Matemáticas, Español, Sociales y Biología** para estudiantes de **grados sexto a once**.</p>
                             </div>
                         </div>
 
@@ -462,7 +461,7 @@
                                 <i class="fa-solid fa-chevron-down"></i>
                             </div>
                             <div class="accordion-content">
-                                <p>Utilizamos soluciones tecnológicas innovadoras, plataformas virtuales interactivas, y módulos didácticos integrados. [cite_start]El método es práctico y dinámico, adaptado a las necesidades individuales[cite: 91, 92]. [cite_start]Priorizamos los **ejercicios prácticos**, que son el método preferido por la mayoría de los estudiantes. [cite: 61]</p>
+                                <p>Utilizamos soluciones tecnológicas innovadoras, plataformas virtuales interactivas, y módulos didácticos integrados. El método es práctico y dinámico, adaptado a las necesidades individuales. Priorizamos los **ejercicios prácticos**, que son el método preferido por la mayoría de los estudiantes.</p>
                             </div>
                         </div>
                         
@@ -472,7 +471,7 @@
                                 <i class="fa-solid fa-chevron-down"></i>
                             </div>
                             <div class="accordion-content">
-                                <p>No necesariamente. [cite_start]La plataforma está diseñada para ser completamente accesible desde **dispositivos móviles**, ya que el 94.1% de nuestros usuarios lo utiliza como su dispositivo principal. [cite: 56] Puedes aprender en cualquier lugar con tu celular.</p>
+                                <p>No necesariamente. La plataforma está diseñada para ser completamente accesible desde **dispositivos móviles**, ya que el 94.1% de nuestros usuarios lo utiliza como su dispositivo principal. Puedes aprender en cualquier lugar con tu celular.</p>
                             </div>
                         </div>
 
@@ -482,7 +481,7 @@
                                 <i class="fa-solid fa-chevron-down"></i>
                             </div>
                             <div class="accordion-content">
-                                [cite_start]<p>Nuestra metodología incluye la implementación de una plataforma digital para la **evaluación del rendimiento académico**, lo que nos permite diseñar programas de refuerzo específicos según el rendimiento estudiado. [cite: 148, 149, 150]</p>
+                                <p>Nuestra metodología incluye la implementación de una plataforma digital para la **evaluación del rendimiento académico**, lo que nos permite diseñar programas de refuerzo específicos según el rendimiento estudiado.</p>
                             </div>
                         </div>
                     </div>
@@ -493,14 +492,14 @@
                 <div class="container footer-grid">
                     <div class="footer-about">
                         <h5>EDUCARD S.A.S.</h5>
-                        [cite_start]<p>Slogan: "**Aprender con tecnología, crecer con conocimiento**". [cite: 161, 162] [cite_start]Somos una empresa de servicios educativos que transforma el aprendizaje con herramientas digitales y tecnológicas. [cite: 159]</p>
+                        <p>Slogan: "**Aprender con tecnología, crecer con conocimiento**". Somos una empresa de servicios educativos que transforma el aprendizaje con herramientas digitales y tecnológicas.</p>
                     </div>
                     
                     <div class="footer-links">
                         <h5>Compañía</h5>
                         <ul>
-                            <li><a href="#quienes-somos">Sobre Nosotros (Misión/Visión)</a></li>
-                            <li><a href="#beneficios">Estadísticas y Beneficios</a></li>
+                            <li><a href="#quienes-somos">Nuestro Propósito</a></li>
+                            <li><a href="#beneficios">Beneficios y Datos</a></li>
                             <li><a href="#">Trabaja con Nosotros</a></li>
                             <li><a href="#">Términos y Condiciones</a></li>
                         </ul>
@@ -516,15 +515,6 @@
                         </ul>
                     </div>
 
-                    <div class="footer-links">
-                        <h5>Recursos</h5>
-                        <ul>
-                            <li><a href="#modulos">Catálogo de Módulos</a></li>
-                            <li><a href="#">Blog (Próximamente)</a></li>
-                            [cite_start]<li><a href="#">Capacitación Docente</a> [cite: 151]</li>
-                            <li><a href="#">Mapa del Sitio</a></li>
-                        </ul>
-                    </div>
                 </div>
                 <div class="footer-bottom">
                     &copy; 2025 EDUCARD S.A.S. Todos los derechos reservados.
@@ -543,8 +533,8 @@
                     <ul>
                         <li><a href="#hero-section" class="active">Home</a></li>
                         <li><a href="#modulos">Reinforcements</a></li>
-                        <li><a href="#quienes-somos">About Us</a></li>
-                        <li><a href="#planes">Plans</a></li>
+                        <li><a href="#quienes-somos">Our Purpose</a></li>
+                        <li><a href="#beneficios">Benefits</a></li>
                         <li><a href="#faq">FAQ</a></li>
                     </ul>
                 </nav>
@@ -567,9 +557,9 @@
                     <div class="hero-text-col reveal">
                         <p class="tag-line"><i class="fa-solid fa-square-root-variable"></i> Academic Reinforcement Grade Six to Eleven</p>
                         <h1><span class="highlight">Smart</span> Learning just a click away</h1>
-                        [cite_start]<p class="subtitle">Modules for **Mathematics** and other subjects for grades six to eleven, with ultra-professional solutions to ensure mastery of essential topics and academic success. [cite: 159]</p>
-                        <a href="#modulos" class="main-cta-button">Start Reinforcement Now</a>
-                        <p class="cta-info" style="font-size: 0.9rem; margin-top: 15px; color: var(--color-text-subtle);">No credit card required. Just click "Start Reinforcement Now" and access the first module for **FREE**.</p>
+                        <p class="subtitle">Modules for **Mathematics** and other subjects for grades six to eleven, with ultra-professional solutions to ensure mastery of essential topics and academic success.</p>
+                        <a href="#modulos" class="main-cta-button">Explore Modules Now</a>
+                        <p class="cta-info" style="font-size: 0.9rem; margin-top: 15px; color: var(--color-text-subtle);">Explore our modules and the first content for **FREE**.</p>
                     </div>
                     <div class="hero-animation-col reveal" style="transition-delay: 0.2s;">
                         <div class="phone-frame">
@@ -586,7 +576,7 @@
                 <div class="container">
                     <div class="section-header reveal">
                         <h2 class="section-title">Key Academic Reinforcement Modules</h2>
-                        [cite_start]<p class="section-subtitle">Explore our dynamic and accessible modules [cite: 143][cite_start], designed by didactic experts, focusing on strengthening basic competencies for the future. [cite: 142]</p>
+                        <p class="section-subtitle">Explore our dynamic and accessible modules, designed by didactic experts, focusing on strengthening basic competencies for the future.</p>
                     </div>
                     <div class="module-grid">
                         {% for producto in productos %}
@@ -627,33 +617,26 @@
                 <div class="container">
                     <div class="section-header reveal">
                         <h2 class="section-title">EDUCARD SAS: Our Purpose</h2>
-                        [cite_start]<p class="section-subtitle">We are pioneers in technological solutions applied to education. [cite: 167]</p>
+                        <p class="section-subtitle">We are pioneers in technological solutions applied to education, driving academic and personal success.</p>
                     </div>
 
-                    <div class="about-grid">
-                        <div class="vision-mission-card reveal" style="transition-delay: 0.1s;">
-                            <i class="fa-solid fa-bullseye fa-2x" style="color: var(--color-primary); margin-bottom: 10px;"></i>
-                            <h4>Mission</h4>
-                            [cite_start]<p>To improve learning through technological educational reinforcements, providing innovative tools that facilitate student learning and promote academic and personal development. [cite: 165]</p>
+                    <div class="purpose-grid">
+                        <div class="purpose-item reveal" style="transition-delay: 0.1s;">
+                            <div class="purpose-icon"><i class="fa-solid fa-rocket"></i></div>
+                            <h4>Pioneers in Technology (Vision)</h4>
+                            <p>To be nationally recognized as a pioneer in technological solutions applied to education, with a scalable model that impacts students throughout Colombia.</p>
                         </div>
 
-                        <div class="vision-mission-card reveal" style="transition-delay: 0.2s;">
-                            <i class="fa-solid fa-rocket fa-2x" style="color: var(--color-secondary); margin-bottom: 10px;"></i>
-                            <h4>Vision</h4>
-                            [cite_start]<p>EDUCARD S.A.S. will be nationally recognized as a pioneer in technological solutions applied to education, with a scalable model that impacts students throughout the Colombian territory. [cite: 167]</p>
+                        <div class="purpose-item reveal" style="transition-delay: 0.2s;">
+                            <div class="purpose-icon"><i class="fa-solid fa-bullseye"></i></div>
+                            <h4>Our Objective (Mission)</h4>
+                            <p>To improve learning through technological educational reinforcements, providing innovative tools that facilitate academic development and foster personal growth.</p>
                         </div>
                         
-                        <div class="vision-mission-card reveal" style="transition-delay: 0.3s;">
-                            <i class="fa-solid fa-hands-holding fa-2x" style="color: #28a745; margin-bottom: 10px;"></i>
-                            <h4>Core Values</h4>
-                            [cite_start]<p>Our values reflect the commitment to academic excellence and technological innovation. [cite: 169]</p>
-                            <div class="values-grid">
-                                <span class="value-tag">Discipline</span>
-                                <span class="value-tag">Innovation</span>
-                                <span class="value-tag">Responsibility</span>
-                                <span class="value-tag">Empathy</span>
-                                [cite_start]<span class="value-tag">Commitment</span> [cite: 168]
-                            </div>
+                        <div class="purpose-item reveal" style="transition-delay: 0.3s;">
+                            <div class="purpose-icon"><i class="fa-solid fa-hands-helping"></i></div>
+                            <h4>Commitment and Values</h4>
+                            <p>We are guided by **Discipline, Innovation, Responsibility, Empathy, and Commitment**. These values ensure excellence in every module and service we offer.</p>
                         </div>
                     </div>
                 </div>
@@ -663,85 +646,34 @@
                 <div class="container">
                     <div class="section-header reveal">
                         <h2 class="section-title">Why Choose EDUCARD?</h2>
-                        <p class="section-subtitle">Our methodology is validated by student preference and market analysis.</p>
+                        <p class="section-subtitle">Our methodology is validated by student preference and market analysis (Source: Feasibility Study).</p>
                     </div>
                     
                     <div class="stats-grid">
                         <div class="stat-item reveal" style="transition-delay: 0.1s;">
                             <i class="fa-solid fa-mobile-screen fa-2x" style="color: var(--color-primary); margin-bottom: 10px;"></i>
                             <div class="number">94.1%</div>
-                            [cite_start]<div class="label">Uses **Mobile** as Primary Device [cite: 56]</div>
+                            <div class="label">Uses **Mobile** as Primary Device</div>
                         </div>
                         <div class="stat-item reveal" style="transition-delay: 0.2s;">
                             <i class="fa-solid fa-pencil fa-2x" style="color: var(--color-secondary); margin-bottom: 10px;"></i>
                             <div class="number">58.8%</div>
-                            [cite_start]<div class="label">Prefers **Practical Exercises** for Learning [cite: 61]</div>
+                            <div class="label">Prefers **Practical Exercises** for Learning</div>
                         </div>
                         <div class="stat-item reveal" style="transition-delay: 0.3s;">
                             <i class="fa-solid fa-graduation-cap fa-2x" style="color: var(--color-primary); margin-bottom: 10px;"></i>
                             <div class="number">76.5%</div>
-                            [cite_start]<div class="label">Feels **Math Ignorance** in Daily Life [cite: 41, 42]</div>
+                            <div class="label">Feels **Math Ignorance** in Daily Life</div>
                         </div>
                         <div class="stat-item reveal" style="transition-delay: 0.4s;">
                             <i class="fa-solid fa-money-check-dollar fa-2x" style="color: var(--color-secondary); margin-bottom: 10px;"></i>
                             <div class="number">88.2%</div>
-                            [cite_start]<div class="label">Interested in Learning **Financial Math** [cite: 63]</div>
+                            <div class="label">Interested in Learning **Financial Math**</div>
                         </div>
                     </div>
                     <div class="ai-banner reveal">
                         <h3>Reinforcements in **Math, Spanish, Social Sciences, and Biology**!</h3>
-                        [cite_start]<p>Our corporate purpose extends to multiple areas to support students from **grades six to eleven**. [cite: 159]</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="pricing-section" id="planes">
-                <div class="container">
-                    <div class="section-header reveal">
-                        <h2 class="section-title">Choose Your Reinforcement Plan</h2>
-                        <p class="section-subtitle">Access exclusive content and personalized assistance with our flexible plans.</p>
-                    </div>
-                    
-                    <div class="pricing-table">
-                        <div class="pricing-card reveal" style="transition-delay: 0.1s;">
-                            <h3>Basic</h3>
-                            <div class="price">FREE</div>
-                            <p style="margin-bottom: 20px;">Immediate access to the introductory module.</p>
-                            <ul class="features-list">
-                                <li><i class="fa-solid fa-check"></i> Access to Module 1 (Demo)</li>
-                                <li><i class="fa-solid fa-check"></i> Sample practical exercises</li>
-                                <li><i class="fa-solid fa-xmark" style="color: var(--color-text-subtle);"></i> Full virtual platform</li>
-                                <li><i class="fa-solid fa-xmark" style="color: var(--color-text-subtle);"></i> 24/7 Academic support</li>
-                            </ul>
-                            <a href="#" class="pricing-cta" style="background-color: var(--color-text-subtle);">Start Free</a>
-                        </div>
-                        
-                        <div class="pricing-card featured reveal" style="transition-delay: 0.2s;">
-                            <span class="card-tag" style="background-color: var(--color-secondary); position: relative; top: -10px; display: inline-block;">Recommended</span>
-                            <h3>Pro</h3>
-                            <div class="price">$19.99 <span>/ month</span></div>
-                            <p style="margin-bottom: 20px;">The complete path to mastery for your grade level.</p>
-                            <ul class="features-list">
-                                <li><i class="fa-solid fa-check"></i> Access to all Modules (6th to 11th)</li>
-                                <li><i class="fa-solid fa-check"></i> Complete and interactive virtual platform</li>
-                                <li><i class="fa-solid fa-check"></i> AI Assistance</li>
-                                <li><i class="fa-solid fa-check"></i> Expert academic support</li>
-                            </ul>
-                            <a href="#" class="pricing-cta">Choose Pro Plan</a>
-                        </div>
-
-                        <div class="pricing-card reveal" style="transition-delay: 0.3s;">
-                            <h3>Annual</h3>
-                            <div class="price">$199 <span>/ year</span></div>
-                            <p style="margin-bottom: 20px;">Save 15% with annual payment.</p>
-                            <ul class="features-list">
-                                <li><i class="fa-solid fa-check"></i> **Everything** in the Pro Plan</li>
-                                <li><i class="fa-solid fa-check"></i> 1 Month **FREE** (Annual Savings)</li>
-                                <li><i class="fa-solid fa-check"></i> Access to Additional Subject Modules</li>
-                                <li><i class="fa-solid fa-check"></i> Detailed Performance Evaluations</li>
-                            </ul>
-                            <a href="#" class="pricing-cta">Get the Annual Plan</a>
-                        </div>
+                        <p>Our corporate purpose extends to multiple areas to support students from **grades six to eleven**.</p>
                     </div>
                 </div>
             </section>
@@ -760,7 +692,7 @@
                                 <i class="fa-solid fa-chevron-down"></i>
                             </div>
                             <div class="accordion-content">
-                                <p>No. [cite_start]Although the initial project focused on Sixth Grade Mathematics [cite: 90][cite_start], our corporate purpose expanded to offer educational reinforcement services in areas such as **Mathematics, Spanish, Social Sciences, and Biology** for students from **grades six to eleven**. [cite: 159]</p>
+                                <p>No. Although the initial project focused on Sixth Grade Mathematics, our corporate purpose expanded to offer educational reinforcement services in areas such as **Mathematics, Spanish, Social Sciences, and Biology** for students from **grades six to eleven**.</p>
                             </div>
                         </div>
 
@@ -770,7 +702,7 @@
                                 <i class="fa-solid fa-chevron-down"></i>
                             </div>
                             <div class="accordion-content">
-                                <p>We use innovative technological solutions, interactive virtual platforms, and integrated teaching modules. [cite_start]The method is practical and dynamic, adapted to individual needs[cite: 91, 92]. [cite_start]We prioritize **practical exercises**, which are the preferred method for the majority of students. [cite: 61]</p>
+                                <p>We use innovative technological solutions, interactive virtual platforms, and integrated teaching modules. The method is practical and dynamic, adapted to individual needs. We prioritize **practical exercises**, which are the preferred method for the majority of students.</p>
                             </div>
                         </div>
                         
@@ -780,7 +712,7 @@
                                 <i class="fa-solid fa-chevron-down"></i>
                             </div>
                             <div class="accordion-content">
-                                <p>Not necessarily. [cite_start]The platform is designed to be fully accessible from **mobile devices**, as 94.1% of our users use it as their primary device. [cite: 56] You can learn anywhere with your cell phone.</p>
+                                <p>Not necessarily. The platform is designed to be fully accessible from **mobile devices**, as 94.1% of our users use it as their primary device. You can learn anywhere with your cell phone.</p>
                             </div>
                         </div>
 
@@ -790,7 +722,7 @@
                                 <i class="fa-solid fa-chevron-down"></i>
                             </div>
                             <div class="accordion-content">
-                                [cite_start]<p>Our methodology includes the implementation of a digital platform for **academic performance evaluation**, allowing us to design specific reinforcement programs based on studied performance. [cite: 148, 149, 150]</p>
+                                <p>Our methodology includes the implementation of a digital platform for **academic performance evaluation**, allowing us to design specific reinforcement programs based on studied performance.</p>
                             </div>
                         </div>
                     </div>
@@ -801,14 +733,14 @@
                 <div class="container footer-grid">
                     <div class="footer-about">
                         <h5>EDUCARD S.A.S.</h5>
-                        [cite_start]<p>Slogan: "**Learn with technology, grow with knowledge**". [cite: 161, 162] [cite_start]We are an educational services company that transforms learning with digital and technological tools. [cite: 159]</p>
+                        <p>Slogan: "**Learn with technology, grow with knowledge**". We are an educational services company that transforms learning with digital and technological tools.</p>
                     </div>
                     
                     <div class="footer-links">
                         <h5>Company</h5>
                         <ul>
-                            <li><a href="#quienes-somos">About Us (Mission/Vision)</a></li>
-                            <li><a href="#beneficios">Statistics and Benefits</a></li>
+                            <li><a href="#quienes-somos">Our Purpose</a></li>
+                            <li><a href="#beneficios">Benefits and Data</a></li>
                             <li><a href="#">Work with Us</a></li>
                             <li><a href="#">Terms and Conditions</a></li>
                         </ul>
@@ -821,16 +753,6 @@
                             <li><a href="#">Contact</a></li>
                             <li><a href="#">Help and Tutorials</a></li>
                             <li><a href="#">Privacy Policy</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-links">
-                        <h5>Resources</h5>
-                        <ul>
-                            <li><a href="#modulos">Module Catalog</a></li>
-                            <li><a href="#">Blog (Coming Soon)</a></li>
-                            [cite_start]<li><a href="#">Teacher Training</a> [cite: 151]</li>
-                            <li><a href="#">Site Map</a></li>
                         </ul>
                     </div>
                 </div>
@@ -852,8 +774,8 @@
                     <ul>
                         <li><a href="#hero-section" class="active">Startseite</a></li>
                         <li><a href="#modulos">Förderung</a></li>
-                        <li><a href="#quienes-somos">Über Uns</a></li>
-                        <li><a href="#planes">Pläne</a></li>
+                        <li><a href="#quienes-somos">Unser Zweck</a></li>
+                        <li><a href="#beneficios">Vorteile</a></li>
                         <li><a href="#faq">FAQ</a></li>
                     </ul>
                 </nav>
@@ -876,9 +798,9 @@
                     <div class="hero-text-col reveal">
                         <p class="tag-line"><i class="fa-solid fa-square-root-variable"></i> Akademische Förderung Klasse Sechs bis Elf</p>
                         <h1><span class="highlight">Intelligentes</span> Lernen nur einen Klick entfernt</h1>
-                        [cite_start]<p class="subtitle">Module für **Mathematik** und andere Fächer der Klassen sechs bis elf, mit ultra-professionellen Lösungen zur Gewährleistung der Beherrschung wesentlicher Themen und des akademischen Erfolgs. [cite: 159]</p>
-                        <a href="#modulos" class="main-cta-button">Jetzt mit der Förderung beginnen</a>
-                        <p class="cta-info" style="font-size: 0.9rem; margin-top: 15px; color: var(--color-text-subtle);">Keine Kreditkarte erforderlich. Klicken Sie einfach auf "Jetzt mit der Förderung beginnen" und greifen Sie **KOSTENLOS** auf das erste Modul zu.</p>
+                        <p class="subtitle">Module für **Mathematik** und andere Fächer der Klassen sechs bis elf, mit ultra-professionellen Lösungen zur Gewährleistung der Beherrschung wesentlicher Themen und des akademischen Erfolgs.</p>
+                        <a href="#modulos" class="main-cta-button">Module jetzt erkunden</a>
+                        <p class="cta-info" style="font-size: 0.9rem; margin-top: 15px; color: var(--color-text-subtle);">Erkunden Sie unsere Module und die ersten Inhalte **KOSTENLOS**.</p>
                     </div>
                     <div class="hero-animation-col reveal" style="transition-delay: 0.2s;">
                         <div class="phone-frame">
@@ -895,7 +817,7 @@
                 <div class="container">
                     <div class="section-header reveal">
                         <h2 class="section-title">Wichtige Akademische Förderungsmodule</h2>
-                        [cite_start]<p class="section-subtitle">Entdecken Sie unsere dynamischen und zugänglichen Module [cite: 143][cite_start], die von Didaktikexperten entwickelt wurden und sich auf die Stärkung der Grundkompetenzen für die Zukunft konzentrieren. [cite: 142]</p>
+                        <p class="section-subtitle">Entdecken Sie unsere dynamischen und zugänglichen Module, die von Didaktikexperten entwickelt wurden und sich auf die Stärkung der Grundkompetenzen für die Zukunft konzentrieren.</p>
                     </div>
                     <div class="module-grid">
                         {% for producto in productos %}
@@ -935,34 +857,27 @@
             <section class="about-section" id="quienes-somos">
                 <div class="container">
                     <div class="section-header reveal">
-                        <h2 class="section-title">EDUCARD SAS: Unser Ziel</h2>
-                        [cite_start]<p class="section-subtitle">Wir sind Pioniere in technologischen Lösungen für die Bildung. [cite: 167]</p>
+                        <h2 class="section-title">EDUCARD SAS: Unser Zweck</h2>
+                        <p class="section-subtitle">Wir sind Pioniere in technologischen Lösungen für die Bildung, die akademischen und persönlichen Erfolg vorantreiben.</p>
                     </div>
 
-                    <div class="about-grid">
-                        <div class="vision-mission-card reveal" style="transition-delay: 0.1s;">
-                            <i class="fa-solid fa-bullseye fa-2x" style="color: var(--color-primary); margin-bottom: 10px;"></i>
-                            <h4>Mission</h4>
-                            [cite_start]<p>Verbesserung des Lernens durch technologische Bildungsförderung, Bereitstellung innovativer Tools, die das Lernen der Schüler erleichtern und die akademische und persönliche Entwicklung fördern. [cite: 165]</p>
+                    <div class="purpose-grid">
+                        <div class="purpose-item reveal" style="transition-delay: 0.1s;">
+                            <div class="purpose-icon"><i class="fa-solid fa-rocket"></i></div>
+                            <h4>Pioniere in Technologie (Vision)</h4>
+                            <p>National als Pionier für technologische Lösungen in der Bildung anerkannt zu werden, mit einem skalierbaren Modell, das Schüler in ganz Kolumbien beeinflusst.</p>
                         </div>
 
-                        <div class="vision-mission-card reveal" style="transition-delay: 0.2s;">
-                            <i class="fa-solid fa-rocket fa-2x" style="color: var(--color-secondary); margin-bottom: 10px;"></i>
-                            <h4>Vision</h4>
-                            [cite_start]<p>EDUCARD S.A.S. wird national als Pionier für technologische Lösungen in der Bildung anerkannt, mit einem skalierbaren Modell, das Schüler in ganz Kolumbien beeinflusst. [cite: 167]</p>
+                        <div class="purpose-item reveal" style="transition-delay: 0.2s;">
+                            <div class="purpose-icon"><i class="fa-solid fa-bullseye"></i></div>
+                            <h4>Unser Ziel (Mission)</h4>
+                            <p>Verbesserung des Lernens durch technologische Bildungsförderung, Bereitstellung innovativer Tools, die die akademische Entwicklung erleichtern und persönliches Wachstum fördern.</p>
                         </div>
                         
-                        <div class="vision-mission-card reveal" style="transition-delay: 0.3s;">
-                            <i class="fa-solid fa-hands-holding fa-2x" style="color: #28a745; margin-bottom: 10px;"></i>
-                            <h4>Grundwerte</h4>
-                            [cite_start]<p>Unsere Werte spiegeln das Engagement für akademische Exzellenz und technologische Innovation wider. [cite: 169]</p>
-                            <div class="values-grid">
-                                <span class="value-tag">Disziplin</span>
-                                <span class="value-tag">Innovation</span>
-                                <span class="value-tag">Verantwortung</span>
-                                <span class="value-tag">Empathie</span>
-                                [cite_start]<span class="value-tag">Engagement</span> [cite: 168]
-                            </div>
+                        <div class="purpose-item reveal" style="transition-delay: 0.3s;">
+                            <div class="purpose-icon"><i class="fa-solid fa-hands-helping"></i></div>
+                            <h4>Engagement und Werte</h4>
+                            <p>Wir werden von **Disziplin, Innovation, Verantwortung, Empathie und Engagement** geleitet. Diese Werte gewährleisten Exzellenz in jedem von uns angebotenen Modul und Service.</p>
                         </div>
                     </div>
                 </div>
@@ -972,85 +887,34 @@
                 <div class="container">
                     <div class="section-header reveal">
                         <h2 class="section-title">Warum EDUCARD wählen?</h2>
-                        <p class="section-subtitle">Unsere Methodik wird durch die Präferenz der Schüler und die Marktanalyse bestätigt.</p>
+                        <p class="section-subtitle">Unsere Methodik wird durch die Präferenz der Schüler und die Marktanalyse bestätigt (Quelle: Machbarkeitsstudie).</p>
                     </div>
                     
                     <div class="stats-grid">
                         <div class="stat-item reveal" style="transition-delay: 0.1s;">
                             <i class="fa-solid fa-mobile-screen fa-2x" style="color: var(--color-primary); margin-bottom: 10px;"></i>
                             <div class="number">94.1%</div>
-                            [cite_start]<div class="label">Nutzung von **Mobilgeräten** als Hauptgerät [cite: 56]</div>
+                            <div class="label">Nutzung von **Mobilgeräten** als Hauptgerät</div>
                         </div>
                         <div class="stat-item reveal" style="transition-delay: 0.2s;">
                             <i class="fa-solid fa-pencil fa-2x" style="color: var(--color-secondary); margin-bottom: 10px;"></i>
                             <div class="number">58.8%</div>
-                            [cite_start]<div class="label">Bevorzugen **Praktische Übungen** zum Lernen [cite: 61]</div>
+                            <div class="label">Bevorzugen **Praktische Übungen** zum Lernen</div>
                         </div>
                         <div class="stat-item reveal" style="transition-delay: 0.3s;">
                             <i class="fa-solid fa-graduation-cap fa-2x" style="color: var(--color-primary); margin-bottom: 10px;"></i>
                             <div class="number">76.5%</div>
-                            [cite_start]<div class="label">Fühlen **Mangel an Mathekenntnissen** im Alltag [cite: 41, 42]</div>
+                            <div class="label">Fühlen **Mangel an Mathekenntnissen** im Alltag</div>
                         </div>
                         <div class="stat-item reveal" style="transition-delay: 0.4s;">
                             <i class="fa-solid fa-money-check-dollar fa-2x" style="color: var(--color-secondary); margin-bottom: 10px;"></i>
                             <div class="number">88.2%</div>
-                            [cite_start]<div class="label">Interessiert an **Finanzmathematik** [cite: 63]</div>
+                            <div class="label">Interessiert an **Finanzmathematik**</div>
                         </div>
                     </div>
                     <div class="ai-banner reveal">
                         <h3>Förderung in **Mathematik, Spanisch, Sozialwissenschaften und Biologie**!</h3>
-                        [cite_start]<p>Unser Geschäftszweck erstreckt sich auf mehrere Bereiche, um Schüler der **Klassen sechs bis elf** zu unterstützen. [cite: 159]</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="pricing-section" id="planes">
-                <div class="container">
-                    <div class="section-header reveal">
-                        <h2 class="section-title">Wählen Sie Ihren Förderungsplan</h2>
-                        <p class="section-subtitle">Erhalten Sie Zugang zu exklusiven Inhalten und personalisierter Unterstützung mit unseren flexiblen Plänen.</p>
-                    </div>
-                    
-                    <div class="pricing-table">
-                        <div class="pricing-card reveal" style="transition-delay: 0.1s;">
-                            <h3>Basis</h3>
-                            <div class="price">KOSTENLOS</div>
-                            <p style="margin-bottom: 20px;">Sofortiger Zugang zum Einführungsmodul.</p>
-                            <ul class="features-list">
-                                <li><i class="fa-solid fa-check"></i> Zugang zu Modul 1 (Demo)</li>
-                                <li><i class="fa-solid fa-check"></i> Muster an praktischen Übungen</li>
-                                <li><i class="fa-solid fa-xmark" style="color: var(--color-text-subtle);"></i> Vollständige virtuelle Plattform</li>
-                                <li><i class="fa-solid fa-xmark" style="color: var(--color-text-subtle);"></i> 24/7 Akademischer Support</li>
-                            </ul>
-                            <a href="#" class="pricing-cta" style="background-color: var(--color-text-subtle);">Kostenlos starten</a>
-                        </div>
-                        
-                        <div class="pricing-card featured reveal" style="transition-delay: 0.2s;">
-                            <span class="card-tag" style="background-color: var(--color-secondary); position: relative; top: -10px; display: inline-block;">Empfohlen</span>
-                            <h3>Pro</h3>
-                            <div class="price">$19.99 <span>/ Monat</span></div>
-                            <p style="margin-bottom: 20px;">Der komplette Weg zur Beherrschung Ihrer Klassenstufe.</p>
-                            <ul class="features-list">
-                                <li><i class="fa-solid fa-check"></i> Zugang zu allen Modulen (6. bis 11. Klasse)</li>
-                                <li><i class="fa-solid fa-check"></i> Vollständige und interaktive virtuelle Plattform</li>
-                                <li><i class="fa-solid fa-check"></i> KI-Unterstützung</li>
-                                <li><i class="fa-solid fa-check"></i> Fachkundiger akademischer Support</li>
-                            </ul>
-                            <a href="#" class="pricing-cta">Pro-Plan wählen</a>
-                        </div>
-
-                        <div class="pricing-card reveal" style="transition-delay: 0.3s;">
-                            <h3>Jährlich</h3>
-                            <div class="price">$199 <span>/ Jahr</span></div>
-                            <p style="margin-bottom: 20px;">Sparen Sie 15% bei jährlicher Zahlung.</p>
-                            <ul class="features-list">
-                                <li><i class="fa-solid fa-check"></i> **Alles** im Pro-Plan</li>
-                                <li><i class="fa-solid fa-check"></i> 1 Monat **KOSTENLOS** (Jährliche Ersparnis)</li>
-                                <li><i class="fa-solid fa-check"></i> Zugang zu Modulen zusätzlicher Fächer</li>
-                                <li><i class="fa-solid fa-check"></i> Detaillierte Leistungsbewertungen</li>
-                            </ul>
-                            <a href="#" class="pricing-cta">Jahresplan erhalten</a>
-                        </div>
+                        <p>Unser Geschäftszweck erstreckt sich auf mehrere Bereiche, um Schüler der **Klassen sechs bis elf** zu unterstützen.</p>
                     </div>
                 </div>
             </section>
@@ -1069,7 +933,7 @@
                                 <i class="fa-solid fa-chevron-down"></i>
                             </div>
                             <div class="accordion-content">
-                                <p>Nein. [cite_start]Obwohl sich das anfängliche Projekt auf die Mathematik der sechsten Klasse konzentrierte [cite: 90][cite_start], wurde unser Unternehmenszweck erweitert, um Bildungsförderungsdienste in Bereichen wie **Mathematik, Spanisch, Sozialwissenschaften und Biologie** für Schüler der **Klassen sechs bis elf** anzubieten. [cite: 159]</p>
+                                <p>Nein. Obwohl sich das anfängliche Projekt auf die Mathematik der sechsten Klasse konzentrierte, wurde unser Unternehmenszweck erweitert, um Bildungsförderungsdienste in Bereichen wie **Mathematik, Spanisch, Sozialwissenschaften und Biologie** für Schüler der **Klassen sechs bis elf** anzubieten.</p>
                             </div>
                         </div>
 
@@ -1079,7 +943,7 @@
                                 <i class="fa-solid fa-chevron-down"></i>
                             </div>
                             <div class="accordion-content">
-                                <p>Wir verwenden innovative technologische Lösungen, interaktive virtuelle Plattformen und integrierte Lehrmodule. [cite_start]Die Methode ist praktisch und dynamisch, angepasst an individuelle Bedürfnisse[cite: 91, 92]. [cite_start]Wir priorisieren **praktische Übungen**, die die bevorzugte Methode der Mehrheit der Studenten sind. [cite: 61]</p>
+                                <p>Wir verwenden innovative technologische Lösungen, interaktive virtuelle Plattformen und integrierte Lehrmodule. Die Methode ist praktisch und dynamisch, angepasst an individuelle Bedürfnisse. Wir priorisieren **praktische Übungen**, die die bevorzugte Methode der Mehrheit der Studenten sind.</p>
                             </div>
                         </div>
                         
@@ -1089,7 +953,7 @@
                                 <i class="fa-solid fa-chevron-down"></i>
                             </div>
                             <div class="accordion-content">
-                                <p>Nicht unbedingt. [cite_start]Die Plattform ist so konzipiert, dass sie vollständig über **Mobilgeräte** zugänglich ist, da 94.1% unserer Benutzer diese als ihr Hauptgerät verwenden. [cite: 56] Sie können überall mit Ihrem Handy lernen.</p>
+                                <p>Nicht unbedingt. Die Plattform ist so konzipiert, dass sie vollständig über **Mobilgeräte** zugänglich ist, da 94.1% unserer Benutzer diese als ihr Hauptgerät verwenden. Sie können überall mit Ihrem Handy lernen.</p>
                             </div>
                         </div>
 
@@ -1099,7 +963,7 @@
                                 <i class="fa-solid fa-chevron-down"></i>
                             </div>
                             <div class="accordion-content">
-                                [cite_start]<p>Unsere Methodik umfasst die Implementierung einer digitalen Plattform zur **Bewertung der akademischen Leistung**, die es uns ermöglicht, spezifische Förderprogramme basierend auf der untersuchten Leistung zu entwerfen. [cite: 148, 149, 150]</p>
+                                <p>Unsere Methodik umfasst die Implementierung einer digitalen Plattform zur **Bewertung der akademischen Leistung**, die es uns ermöglicht, spezifische Förderprogramme basierend auf der untersuchten Leistung zu entwerfen.</p>
                             </div>
                         </div>
                     </div>
@@ -1110,14 +974,14 @@
                 <div class="container footer-grid">
                     <div class="footer-about">
                         <h5>EDUCARD S.A.S.</h5>
-                        [cite_start]<p>Slogan: "**Lernen mit Technologie, Wachsen mit Wissen**". [cite: 161, 162] [cite_start]Wir sind ein Bildungsdienstleistungsunternehmen, das das Lernen mit digitalen und technologischen Werkzeugen transformiert. [cite: 159]</p>
+                        <p>Slogan: "**Lernen mit Technologie, Wachsen mit Wissen**". Wir sind ein Bildungsdienstleistungsunternehmen, das das Lernen mit digitalen und technologischen Werkzeugen transformiert.</p>
                     </div>
                     
                     <div class="footer-links">
                         <h5>Unternehmen</h5>
                         <ul>
-                            <li><a href="#quienes-somos">Über Uns (Mission/Vision)</a></li>
-                            <li><a href="#beneficios">Statistiken und Vorteile</a></li>
+                            <li><a href="#quienes-somos">Unser Zweck</a></li>
+                            <li><a href="#beneficios">Vorteile und Daten</a></li>
                             <li><a href="#">Arbeiten Sie mit uns</a></li>
                             <li><a href="#">Allgemeine Geschäftsbedingungen</a></li>
                         </ul>
@@ -1130,16 +994,6 @@
                             <li><a href="#">Kontakt</a></li>
                             <li><a href="#">Hilfe und Tutorials</a></li>
                             <li><a href="#">Datenschutzrichtlinie</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-links">
-                        <h5>Ressourcen</h5>
-                        <ul>
-                            <li><a href="#modulos">Modulkatalog</a></li>
-                            <li><a href="#">Blog (Bald verfügbar)</a></li>
-                            [cite_start]<li><a href="#">Lehrerschulung</a> [cite: 151]</li>
-                            <li><a href="#">Seitenübersicht</a></li>
                         </ul>
                     </div>
                 </div>
@@ -1175,23 +1029,22 @@
                     langContent[newLang].style.display = 'block';
                     // Actualizar el título de la página
                     const titleMap = {
-                        'es': 'EDUCARD SAS | Refuerzos de Matemática Grado Sexto',
-                        'en': 'EDUCARD SAS | Math Reinforcement Sixth Grade',
-                        'de': 'EDUCARD SAS | Mathe-Förderung Sechste Klasse'
+                        'es': 'EDUCARD SAS | Refuerzos Académicos Grado Sexto a Once',
+                        'en': 'EDUCARD SAS | Academic Reinforcements Grade Six to Eleven',
+                        'de': 'EDUCARD SAS | Akademische Förderung Klasse Sechs bis Elf'
                     };
                     document.getElementById('pageTitle').textContent = titleMap[newLang] || titleMap['es'];
                     
                     // Actualizar la bandera principal (solo para el header visible)
-                    const currentHeader = document.querySelector(`#lang-${newLang} header`);
-                    const currentFlagContainer = currentHeader ? currentHeader.querySelector('.language-selector img.flag') : null;
-                    const newFlagSrc = document.querySelector(`.language-dropdown a[data-lang="${newLang}"] img`).src;
+                    const newFlagSrc = document.querySelector(`#lang-${newLang} .language-dropdown a[data-lang="${newLang}"] img`).src;
                     
                     // Recorrer todos los selectores de bandera y actualizar su fuente para el header activo
                     document.querySelectorAll('img[id^="current-flag-"]').forEach(img => {
                         if (img.id === `current-flag-${newLang}`) {
                             img.src = newFlagSrc;
                         } else {
-                            // Ocultar las banderas de los headers inactivos si la lógica CSS no lo hace
+                            // En un entorno de una sola página y múltiples headers, esto no es estrictamente necesario, 
+                            // pero asegura que la bandera inicial del bloque activo sea la correcta.
                         }
                     });
                 }
@@ -1237,7 +1090,7 @@
                     const item = header.closest('.accordion-item');
                     // Cerrar todos los demás, abrir solo el clickeado
                     document.querySelectorAll('.accordion-item').forEach(otherItem => {
-                        if (otherItem !== item) {
+                        if (otherItem !== item && otherItem.closest('#language-content').style.display !== 'none') {
                             otherItem.classList.remove('active');
                         }
                     });
@@ -1252,12 +1105,28 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
-                        // observer.unobserve(entry.target); // Dejar comentado si quieres que se anime cada vez que entre en el viewport
                     }
                 });
             }, { root: null, rootMargin: '0px', threshold: 0.1 });
 
             reveals.forEach(reveal => {
+                // Agregar clase para animación base (opcional, si se requiere un estilo inicial)
+                reveal.style.opacity = 0;
+                reveal.style.transform = 'translateY(20px)';
+                reveal.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                
+                // Definir el estado final 'active'
+                if (document.styleSheets) {
+                    const style = document.createElement('style');
+                    style.innerHTML = `
+                        .reveal.active {
+                            opacity: 1 !important;
+                            transform: translateY(0) !important;
+                        }
+                    `;
+                    document.head.appendChild(style);
+                }
+
                 observer.observe(reveal);
             });
         });
