@@ -689,33 +689,34 @@
                     </div>
                 </div>
             </section>
-            <section class="modules-section">
+           <section class="modules-section">
                 <div class="container reveal">
                     <div class="section-header">
                         <h2 class="section-title">Explora Nuestros Módulos Destacados</h2>
                         <p class="section-subtitle">Estos son los módulos más populares que están transformando el rendimiento académico.</p>
                     </div>
                     
-                    {# Opcional: Mantener el estado de la BD para fines de debugging #}
+                    {# Mantenemos el estado de la BD visible #}
                     {% if db_status %}
                     <div class="db-status-container">
                         Estado de conexión a la Base de Datos: {{ db_status }}
                     </div>
                     {% endif %}
 
-                    {# COMIENZA LA SECCIÓN DE DATOS FIJOS/GENÉRICOS (Reemplaza todo el bloque IF anterior) #}
+                    {# ESTE BLOQUE MUESTRA LOS DATOS FIJOS SIN PREGUNTAR A LA BASE DE DATOS #}
+                    {% if generic_products %}
                     <div class="module-cards-grid">
                         {# Iteramos sobre los primeros 3 elementos de la lista generic_products #}
                         {% for modulo in generic_products[:3] %}
                         <div class="module-card card-fixed-data">
                             <div class="card-image-wrapper">
-                                {# Usamos una imagen fija, ya que el fallback no tiene URLs de imagen #}
+                                {# Usamos una imagen fija #}
                                 <img src="https://i.postimg.cc/9Q9M6h1Y/math-generic.png" alt="Imagen del módulo genérico" class="card-image">
                                 <span class="category-tag">{{ modulo[1] }}</span>
                             </div>
                             <div class="card-content">
                                 <div class="instructor-info">
-                                    {# Logo de Educard fijo solicitado #}
+                                    {# Logo de Educard fijo #}
                                     <img src="https://i.postimg.cc/t4tVr741/54c82322-2df7-4887-abc0-da706407fcd4-2.png" alt="Logo de Educard" class="instructor-logo">
                                     <span class="instructor-name">Educard</span>
                                 </div>
@@ -741,14 +742,15 @@
                         </div>
                         {% endfor %}
                     </div>
-                    {# FIN DE LA SECCIÓN DE DATOS FIJOS #}
+                    {% else %}
+                        <p style="text-align: center; color: var(--color-text-subtle); margin-top: 20px;">Error: No se pudo cargar ni siquiera la lista de datos genéricos.</p>
+                    {% endif %}
                     
                     <div class="modules-link">
                         <a href="refuerzos.html" class="main-cta-button" style="margin-top: 50px;">Ver Catálogo Completo</a>
                     </div>
                 </div>
             </section>
-
             <section class="testimonials-section">
                 <div class="container reveal">
                     <div class="section-header">
