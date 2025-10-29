@@ -51,40 +51,27 @@ def index():
             # 1. Obtener la versión de PostgreSQL
             cur.execute('SELECT version();')
             data = cur.fetchone()
-            db_status = f" Conectado y versión de PostgreSQL: {data[0][:30]}..."
+            db_status = f"✅ Conectado y versión de PostgreSQL: {data[0][:30]}..."
 
-            # 2. Intentar cargar los productos (Ajusta la consulta a tu esquema real)
-            # Nota: Los campos deben coincidir con lo que esperas en el HTML (nombre, precio, etc.)
-            # Los campos 'tema_1' y 'tema_2' no existen en la tabla de la imagen,
-            # pero los mantengo para compatibilidad con el código original y el fallback.
-            # Según la imagen, los campos disponibles son: nombre, categoria, instructor, imagen_url, precio, estudiantes, rating
-            cur.execute("SELECT nombre, precio, categoria, instructor, imagen_url, precio, estudiantes, rating FROM productos LIMIT 6;")
+            # 2. Intentar cargar los productos. Usamos los 7 campos visibles en tu tabla.
+            # NO incluimos tema_1 ni tema_2 porque no están en tu tabla.
+            cur.execute("SELECT nombre, categoria, instructor, imagen_url, precio, estudiantes, rating FROM productos LIMIT 6;")
             
-            # Obtener los nombres de las columnas para crear una lista de diccionarios
-            # Nota: la consulta debe incluir los 9 campos que el código original intenta obtener para evitar errores de índice.
-            # He ajustado la SELECT para que obtenga solo 7 (los que se ven en la imagen), 
-            # lo que probablemente causará un error si el template espera 9, ¡pero me ajusto a lo que se ve!
+            # **CLAVE DE LA SOLUCIÓN:** Obtenemos los nombres de las columnas directamente desde la consulta
+            # Esto hace que el código sea resistente a cambios menores en el orden de las columnas.
+            col_names = [desc[0] for desc in cur.description]
             
-            # **NOTA DE COMPATIBILIDAD:** Para que el código original funcione sin errores, 
-            # asumo que los campos 'tema_1' y 'tema_2' se deberían haber añadido a la SELECT
-            # o se deberían usar solo los campos existentes de la tabla 'productos' (nombre, precio, categoria, instructor, estudiantes, rating, imagen_url)
-            
-            # Vamos a usar solo los campos reales visibles en la imagen para ser precisos.
-            cur.execute("SELECT nombre, precio, categoria, instructor, imagen_url, estudiantes, rating FROM productos LIMIT 6;")
-            
-            # Reconstruir col_names basado en la nueva SELECT de 7 campos.
-            col_names = ['nombre', 'precio', 'categoria', 'instructor', 'imagen_url', 'estudiantes', 'rating']
+            # Mapeamos los resultados a una lista de diccionarios
             productos = [dict(zip(col_names, row)) for row in cur.fetchall()]
             
-            # Si no hay productos, añade un mensaje al estado para debug
             if not productos:
-                db_status += " | La tabla 'productos' está vacía o no existe."
+                db_status += " | ⚠️ La tabla 'productos' está vacía o no existe. Mostrando fallback."
 
             cur.close()
 
         except Exception as e:
-            # Capturar cualquier error de SQL o conexión
-            db_status = f" Conectado, pero la consulta falló: {e}"
+            # Ahora el error exacto aparecerá en el estado si la consulta falla.
+            db_status = f"⚠️ Conectado, pero la consulta falló: {e}"
         finally:
             conn.close()
     else:

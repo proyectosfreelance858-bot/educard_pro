@@ -690,87 +690,89 @@
                 </div>
             </section>
             <section class="modules-section">
-    <div class="container reveal">
-        <div class="section-header">
-            <h2 class="section-title">Explora Nuestros Módulos Destacados</h2>
-            <p class="section-subtitle">Estos son los módulos más populares que están transformando el rendimiento académico.</p>
-        </div>
-        
-        {% if db_status %}
-        <div class="db-status-container">
-            Estado de conexión a la Base de Datos: {{ db_status }}
-        </div>
-        {% endif %}
+                <div class="container reveal">
+                    <div class="section-header">
+                        <h2 class="section-title">Explora Nuestros Módulos Destacados</h2>
+                        <p class="section-subtitle">Estos son los módulos más populares que están transformando el rendimiento académico.</p>
+                    </div>
+                    
+                    {% if db_status %}
+                    <div class="db-status-container">
+                        Estado de conexión a la Base de Datos: {{ db_status }}
+                    </div>
+                    {% endif %}
 
-        {% if productos %}
-        <div class="module-cards-grid">
-            {# Itera solo sobre los primeros 3 productos para la sección destacada #}
-            {% for producto in productos[:3] %}
-            <div class="module-card">
-                <div class="card-image-wrapper">
-                    <img src="{{ producto.imagen_url }}" alt="Imagen del módulo {{ producto.nombre }}" class="card-image">
-                    <span class="category-tag">{{ producto.categoria }}</span>
-                </div>
-                <div class="card-content">
-                    <div class="instructor-info">
-                        {# Usamos el logo de Educard tal como se solicitó #}
-                        <img src="https://i.postimg.cc/t4tVr741/54c82322-2df7-4887-abc0-da706407fcd4-2.png" alt="Logo de Educard" class="instructor-logo">
-                        <span class="instructor-name">{{ producto.instructor }}</span>
+                    {% if productos %}
+                    <div class="module-cards-grid">
+                        {# Itera solo sobre los primeros 3 productos de la BD #}
+                        {% for producto in productos[:3] %}
+                        <div class="module-card">
+                            <div class="card-image-wrapper">
+                                <img src="{{ producto.imagen_url }}" alt="Imagen del módulo {{ producto.nombre }}" class="card-image">
+                                <span class="category-tag">{{ producto.categoria }}</span>
+                            </div>
+                            <div class="card-content">
+                                <div class="instructor-info">
+                                    {# Logo de Educard solicitado #}
+                                    <img src="https://i.postimg.cc/t4tVr741/54c82322-2df7-4887-abc0-da706407fcd4-2.png" alt="Logo de Educard" class="instructor-logo">
+                                    <span class="instructor-name">{{ producto.instructor }}</span>
+                                </div>
+                                <h3 class="card-title">{{ producto.nombre }}</h3>
+                                
+                                {# CLAVE DE LA SOLUCIÓN: Usamos los valores de la BD, o un texto genérico si faltan tema_1/tema_2. #}
+                                {# ATENCIÓN: Si tema_1/tema_2 NO EXISTEN en el diccionario 'producto' (lo más probable), esto fallará. #}
+                                {# La solución más segura es usar un texto estático: #}
+                                <p class="card-topics">
+                                    <strong>Tópicos:</strong> Números, Álgebra, Geometría, y más.
+                                </p>
+                                
+                                <div class="card-meta">
+                                    <span class="students-count">
+                                        <i class="fas fa-users"></i> {{ producto.estudiantes | int }} Estudiantes
+                                    </span>
+                                    <span class="rating">
+                                        <i class="fas fa-star"></i> {{ producto.rating | float }}
+                                    </span>
+                                </div>
+                                <div class="card-footer">
+                                    <span class="price">${{ producto.precio | float | round(2) }}</span>
+                                    <a href="#" class="details-button">Ver Detalles</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
                     </div>
-                    <h3 class="card-title">{{ producto.nombre }}</h3>
+                    {% elif generic_products %}
+                        {# El FALLBACK se mantiene por si la tabla está vacía o hay un error #}
+                        <div class="section-header">
+                            <h3 class="section-title" style="color: var(--color-primary);">Catálogo de Ejemplo:</h3>
+                            <p class="section-subtitle">No se encontraron productos en la base de datos, mostrando temas genéricos de ejemplo.</p>
+                        </div>
+                        <div class="module-cards-grid">
+                            {% for modulo in generic_products[:3] %}
+                            <div class="module-card card-fallback">
+                                <h4 class="card-title">{{ modulo[0] }}</h4>
+                                <p class="card-subtitle">Área: {{ modulo[1] }}</p>
+                                <ul>
+                                    <li><strong>Tema Principal:</strong> {{ modulo[2] }}</li>
+                                    <li><strong>Subtema Clave:</strong> {{ modulo[3] }}</li>
+                                </ul>
+                                <div class="card-footer">
+                                    <span class="price">$99.00</span>
+                                    <a href="#" class="details-button">Ver Detalles</a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p style="text-align: center; color: var(--color-text-subtle); margin-top: 20px;">No hay módulos disponibles en este momento. Por favor, revisa la conexión a la base de datos.</p>
+                    {% endif %}
                     
-                    {# Aquí reemplazamos los asteriscos por <strong> #}
-                    <p class="card-topics">
-                        <strong>Tópicos:</strong> {{ producto.tema_1 | default('N/D') }} y {{ producto.tema_2 | default('N/D') }}
-                    </p>
-                    
-                    <div class="card-meta">
-                        <span class="students-count">
-                            <i class="fas fa-users"></i> {{ producto.estudiantes }} Estudiantes
-                        </span>
-                        <span class="rating">
-                            <i class="fas fa-star"></i> {{ producto.rating }}
-                        </span>
-                    </div>
-                    <div class="card-footer">
-                        <span class="price">${{ producto.precio }}</span>
-                        <a href="#" class="details-button">Ver Detalles</a>
+                    <div class="modules-link">
+                        <a href="refuerzos.html" class="main-cta-button" style="margin-top: 50px;">Ver Catálogo Completo</a>
                     </div>
                 </div>
-            </div>
-            {% endfor %}
-        </div>
-        {% elif generic_products %}
-            {# Mantenemos el fallback si la BD está vacía #}
-            <div class="section-header">
-                <h3 class="section-title" style="color: var(--color-primary);">Catálogo de Ejemplo:</h3>
-                <p class="section-subtitle">No se encontraron productos en la base de datos, mostrando temas genéricos de ejemplo.</p>
-            </div>
-            <div class="module-cards-grid">
-                {% for modulo in generic_products[:3] %}
-                <div class="module-card card-fallback">
-                    <h4 class="card-title">{{ modulo[0] }}</h4>
-                    <p class="card-subtitle">Área: {{ modulo[1] }}</p>
-                    <ul>
-                        <li><strong>Tema Principal:</strong> {{ modulo[2] }}</li>
-                        <li><strong>Subtema Clave:</strong> {{ modulo[3] }}</li>
-                    </ul>
-                    <div class="card-footer">
-                        <span class="price">$99.00</span>
-                        <a href="#" class="details-button">Ver Detalles</a>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        {% else %}
-            <p style="text-align: center; color: var(--color-text-subtle); margin-top: 20px;">No hay módulos disponibles en este momento. Por favor, revisa la conexión a la base de datos.</p>
-        {% endif %}
-        
-        <div class="modules-link">
-            <a href="refuerzos.html" class="main-cta-button" style="margin-top: 50px;">Ver Catálogo Completo</a>
-        </div>
-    </div>
-</section>
+            </section>
 
             <section class="testimonials-section">
                 <div class="container reveal">
@@ -781,32 +783,32 @@
                     
                     <div class="testimonials-grid">
                         <div class="testimonial-card reveal" style="transition-delay: 0.1s;">
-                            <p class="testimonial-quote">"Antes odiaba Matemáticas, pero con los módulos interactivos de Educard, todo es más fácil y divertido. Subí mi nota de 3.0 a 4.5 en un trimestre."</p>
+                            <p class="testimonial-quote">"Antes mi hijo odiaba Matemáticas, pero con los módulos interactivos de Educard, todo es más fácil y divertido."</p>
                             <div class="testimonial-author">
                                 <img src="https://i.postimg.cc/8Pj7V243/avatar1.jpg" alt="Avatar Laura S." class="author-avatar">
                                 <div class="author-info">
-                                    <strong>Laura S.</strong>
-                                    <span>Estudiante, Grado 6°</span>
+                                    <strong>Hilda M.</strong>
+                                    <span>Madre de estudiante</span>
                                 </div>
                             </div>
                         </div>
                         <div class="testimonial-card reveal" style="transition-delay: 0.2s;">
-                            <p class="testimonial-quote">"La plataforma es muy intuitiva y me permite repasar Biología y Sociales a mi propio ritmo. Lo mejor es que ya no tengo miedo a los exámenes."</p>
+                            <p class="testimonial-quote">"La plataforma es muy intuitiva y le permite repasar Biología y Sociales a mi hijo."</p>
                             <div class="testimonial-author">
                                 <img src="https://i.postimg.cc/QCg8tF6s/avatar2.jpg" alt="Avatar Mateo R." class="author-avatar">
                                 <div class="author-info">
-                                    <strong>Mateo R.</strong>
-                                    <span>Estudiante, Grado 8°</span>
+                                    <strong>Jorge C.</strong>
+                                    <span>Padre de estudiante</span>
                                 </div>
                             </div>
                         </div>
                         <div class="testimonial-card reveal" style="transition-delay: 0.3s;">
-                            <p class="testimonial-quote">"Como padre, me da mucha tranquilidad saber que mi hijo recibe una educación de refuerzo de calidad y alineada con la tecnología actual. ¡Recomendado 100%!"</p>
+                            <p class="testimonial-quote">"Siento que recibo una educación de refuerzo de calidad y alineada con la tecnología actual. ¡Recomendado 100%!"</p>
                             <div class="testimonial-author">
-                                <img src="https://i.postimg.cc/YSpw0qKx/avatar3.jpg" alt="Avatar Sra. Pérez" class="author-avatar">
+                                <img src="https://i.postimg.cc/YSpw0qKx/avatar2.jpg" alt="Avatar Sra. Pérez" class="author-avatar">
                                 <div class="author-info">
-                                    <strong>Sra. Marcela Pérez</strong>
-                                    <span>Madre de Familia</span>
+                                    <strong>Kaleth Ramirez</strong>
+                                    <span>Estudiante</span>
                                 </div>
                             </div>
                         </div>
