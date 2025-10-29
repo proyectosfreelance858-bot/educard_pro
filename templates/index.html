@@ -696,77 +696,52 @@
                         <p class="section-subtitle">Estos son los módulos más populares que están transformando el rendimiento académico.</p>
                     </div>
                     
+                    {# Opcional: Mantener el estado de la BD para fines de debugging #}
                     {% if db_status %}
                     <div class="db-status-container">
                         Estado de conexión a la Base de Datos: {{ db_status }}
                     </div>
                     {% endif %}
 
-                    {% if productos %}
+                    {# COMIENZA LA SECCIÓN DE DATOS FIJOS/GENÉRICOS (Reemplaza todo el bloque IF anterior) #}
                     <div class="module-cards-grid">
-                        {# Itera solo sobre los primeros 3 productos de la BD #}
-                        {% for producto in productos[:3] %}
-                        <div class="module-card">
+                        {# Iteramos sobre los primeros 3 elementos de la lista generic_products #}
+                        {% for modulo in generic_products[:3] %}
+                        <div class="module-card card-fixed-data">
                             <div class="card-image-wrapper">
-                                <img src="{{ producto.imagen_url }}" alt="Imagen del módulo {{ producto.nombre }}" class="card-image">
-                                <span class="category-tag">{{ producto.categoria }}</span>
+                                {# Usamos una imagen fija, ya que el fallback no tiene URLs de imagen #}
+                                <img src="https://i.postimg.cc/9Q9M6h1Y/math-generic.png" alt="Imagen del módulo genérico" class="card-image">
+                                <span class="category-tag">{{ modulo[1] }}</span>
                             </div>
                             <div class="card-content">
                                 <div class="instructor-info">
-                                    {# Logo de Educard solicitado #}
+                                    {# Logo de Educard fijo solicitado #}
                                     <img src="https://i.postimg.cc/t4tVr741/54c82322-2df7-4887-abc0-da706407fcd4-2.png" alt="Logo de Educard" class="instructor-logo">
-                                    <span class="instructor-name">{{ producto.instructor }}</span>
+                                    <span class="instructor-name">Educard</span>
                                 </div>
-                                <h3 class="card-title">{{ producto.nombre }}</h3>
+                                <h3 class="card-title">{{ modulo[0] }}</h3>
                                 
-                                {# CLAVE DE LA SOLUCIÓN: Usamos los valores de la BD, o un texto genérico si faltan tema_1/tema_2. #}
-                                {# ATENCIÓN: Si tema_1/tema_2 NO EXISTEN en el diccionario 'producto' (lo más probable), esto fallará. #}
-                                {# La solución más segura es usar un texto estático: #}
                                 <p class="card-topics">
-                                    <strong>Tópicos:</strong> Números, Álgebra, Geometría, y más.
+                                    <strong>Tópicos:</strong> {{ modulo[2] }} y {{ modulo[3] }}
                                 </p>
                                 
                                 <div class="card-meta">
                                     <span class="students-count">
-                                        <i class="fas fa-users"></i> {{ producto.estudiantes | int }} Estudiantes
+                                        <i class="fas fa-users"></i> 100 Estudiantes
                                     </span>
                                     <span class="rating">
-                                        <i class="fas fa-star"></i> {{ producto.rating | float }}
+                                        <i class="fas fa-star"></i> 4.8
                                     </span>
                                 </div>
                                 <div class="card-footer">
-                                    <span class="price">${{ producto.precio | float | round(2) }}</span>
+                                    <span class="price">$99.00</span>
                                     <a href="#" class="details-button">Ver Detalles</a>
                                 </div>
                             </div>
                         </div>
                         {% endfor %}
                     </div>
-                    {% elif generic_products %}
-                        {# El FALLBACK se mantiene por si la tabla está vacía o hay un error #}
-                        <div class="section-header">
-                            <h3 class="section-title" style="color: var(--color-primary);">Catálogo de Ejemplo:</h3>
-                            <p class="section-subtitle">No se encontraron productos en la base de datos, mostrando temas genéricos de ejemplo.</p>
-                        </div>
-                        <div class="module-cards-grid">
-                            {% for modulo in generic_products[:3] %}
-                            <div class="module-card card-fallback">
-                                <h4 class="card-title">{{ modulo[0] }}</h4>
-                                <p class="card-subtitle">Área: {{ modulo[1] }}</p>
-                                <ul>
-                                    <li><strong>Tema Principal:</strong> {{ modulo[2] }}</li>
-                                    <li><strong>Subtema Clave:</strong> {{ modulo[3] }}</li>
-                                </ul>
-                                <div class="card-footer">
-                                    <span class="price">$99.00</span>
-                                    <a href="#" class="details-button">Ver Detalles</a>
-                                </div>
-                            </div>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        <p style="text-align: center; color: var(--color-text-subtle); margin-top: 20px;">No hay módulos disponibles en este momento. Por favor, revisa la conexión a la base de datos.</p>
-                    {% endif %}
+                    {# FIN DE LA SECCIÓN DE DATOS FIJOS #}
                     
                     <div class="modules-link">
                         <a href="refuerzos.html" class="main-cta-button" style="margin-top: 50px;">Ver Catálogo Completo</a>
