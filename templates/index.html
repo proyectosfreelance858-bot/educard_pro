@@ -689,68 +689,6 @@
                     </div>
                 </div>
             </section>
-           <section class="modules-section">
-                <div class="container reveal">
-                    <div class="section-header">
-                        <h2 class="section-title">Explora Nuestros Módulos Destacados</h2>
-                        <p class="section-subtitle">Estos son los módulos más populares que están transformando el rendimiento académico.</p>
-                    </div>
-                    
-                    {# Mantenemos el estado de la BD visible #}
-                    {% if db_status %}
-                    <div class="db-status-container">
-                        Estado de conexión a la Base de Datos: {{ db_status }}
-                    </div>
-                    {% endif %}
-
-                    {# ESTE BLOQUE MUESTRA LOS DATOS FIJOS SIN PREGUNTAR A LA BASE DE DATOS #}
-                    {% if generic_products %}
-                    <div class="module-cards-grid">
-                        {# Iteramos sobre los primeros 3 elementos de la lista generic_products #}
-                        {% for modulo in generic_products[:3] %}
-                        <div class="module-card card-fixed-data">
-                            <div class="card-image-wrapper">
-                                {# Usamos una imagen fija #}
-                                <img src="https://i.postimg.cc/9Q9M6h1Y/math-generic.png" alt="Imagen del módulo genérico" class="card-image">
-                                <span class="category-tag">{{ modulo[1] }}</span>
-                            </div>
-                            <div class="card-content">
-                                <div class="instructor-info">
-                                    {# Logo de Educard fijo #}
-                                    <img src="https://i.postimg.cc/t4tVr741/54c82322-2df7-4887-abc0-da706407fcd4-2.png" alt="Logo de Educard" class="instructor-logo">
-                                    <span class="instructor-name">Educard</span>
-                                </div>
-                                <h3 class="card-title">{{ modulo[0] }}</h3>
-                                
-                                <p class="card-topics">
-                                    <strong>Tópicos:</strong> {{ modulo[2] }} y {{ modulo[3] }}
-                                </p>
-                                
-                                <div class="card-meta">
-                                    <span class="students-count">
-                                        <i class="fas fa-users"></i> 100 Estudiantes
-                                    </span>
-                                    <span class="rating">
-                                        <i class="fas fa-star"></i> 4.8
-                                    </span>
-                                </div>
-                                <div class="card-footer">
-                                    <span class="price">$99.00</span>
-                                    <a href="#" class="details-button">Ver Detalles</a>
-                                </div>
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
-                    {% else %}
-                        <p style="text-align: center; color: var(--color-text-subtle); margin-top: 20px;">Error: No se pudo cargar ni siquiera la lista de datos genéricos.</p>
-                    {% endif %}
-                    
-                    <div class="modules-link">
-                        <a href="refuerzos.html" class="main-cta-button" style="margin-top: 50px;">Ver Catálogo Completo</a>
-                    </div>
-                </div>
-            </section>
             <section class="testimonials-section">
                 <div class="container reveal">
                     <div class="section-header">
