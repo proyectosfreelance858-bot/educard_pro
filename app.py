@@ -8,26 +8,26 @@ from dotenv import load_dotenv
 load_dotenv()
 app = Flask(__name__)
 
-# --- NOTA CRÍTICA: ELIMINAMOS MODULOS_INFO ---
-# Definimos una lista de temas genéricos SÓLO para asegurar que los productos tengan contexto
-# si la base de datos sólo contiene los campos básicos (nombre, precio, etc.)
+# --- DATOS FIJOS/GENÉRICOS PARA FALLBACK O MUESTRA ---
+# Esta lista se usa en index.html para mostrar tarjetas fijas.
 GENERIC_MATH_TOPICS = [
-    ("MÓDULO NÚMEROS (6°)", "NÚMEROS Y OPERACIONES", "Valor Posicional", "Polinomios Aritméticos"),
-    ("MÓDULO FRACCIONES (6°)", "FRACCIONES Y DECIMALES", "Operaciones Básicas", "Conversión Decimal"),
-    ("MÓDULO DIVISIBILIDAD (6°)", "MÚLTIPLOS Y DIVISORES", "M.C.M. y M.C.D.", "Criterios de Divisibilidad"),
-    ("MÓDULO GEOMETRÍA (6°)", "GEOMETRÍA BÁSICA", "Área y Perímetro", "Clasificación de Figuras"),
-    ("MÓDULO ESTADÍSTICA (6°)", "ESTADÍSTICA Y AZAR", "Tablas de Frecuencia", "Probabilidad Elemental"),
-    ("MÓDULO PROPORCIONES (6°)", "RAZONES Y PROPORCIONES", "Regla de Tres", "Escalas y Mapas"),
+    ("Operaciones con números enteros", "Matemáticas 6°", "Valor Posicional", "Polinomios Aritméticos"),
+    ("Fraccionarios y decimales", "Matemáticas 6°", "Operaciones Básicas", "Conversión Decimal"),
+    ("Geometría básica (figuras, ángulos y áreas)", "Matemáticas 6°", "Área y Perímetro", "Clasificación de Figuras"),
+    ("Proporcionalidad y porcentajes", "Matemáticas 6°", "Regla de Tres", "Escalas y Mapas"),
+    ("Lógica, conjuntos y sistema de coordenadas", "Matemáticas 6°", "Tablas de Frecuencia", "Probabilidad Elemental"),
+    ("Funciones y Gráficos", "Matemáticas 6°", "Dominio y Rango", "Interpretación de Gráficos"),
 ]
 
 # --- 2. GESTIÓN DE LA CONEXIÓN A LA BASE DE DATOS ---
 def get_db_connection():
     DATABASE_URL = os.environ.get('DATABASE_URL')
     if not DATABASE_URL:
+        # Nota: En un entorno de producción, esto debería ser un error fatal.
         print("ERROR: La variable DATABASE_URL no está definida.")
         return None
     if DATABASE_URL.startswith('postgres://'):
-        # psycopg2 requiere 'postgresql://' en lugar de 'postgres://' para algunas configuraciones
+        # Reemplazo requerido por algunas versiones de psycopg2
         DATABASE_URL = DATABASE_URL.replace('postgres://', 'postgresql://', 1)
     try:
         conn = psycopg2.connect(DATABASE_URL)
@@ -40,7 +40,7 @@ def get_db_connection():
 @app.route('/')
 def index():
     db_status = "Desconectado"
-    productos = []  # Inicializar la lista de productos
+    productos = []  # Inicializar la lista de productos de la BD
     
     conn = get_db_connection()
 
@@ -53,40 +53,40 @@ def index():
             data = cur.fetchone()
             db_status = f"✅ Conectado y versión de PostgreSQL: {data[0][:30]}..."
 
-            # 2. Intentar cargar los productos. Usamos los 7 campos visibles en tu tabla.
-            # NO incluimos tema_1 ni tema_2 porque no están en tu tabla.
+            # 2. Intentar cargar los productos (Usando los 7 campos visibles)
+            # NOTA: Esta consulta debe coincidir con los campos de tu tabla 'productos'.
             cur.execute("SELECT nombre, categoria, instructor, imagen_url, precio, estudiantes, rating FROM productos LIMIT 6;")
             
-            # **CLAVE DE LA SOLUCIÓN:** Obtenemos los nombres de las columnas directamente desde la consulta
-            # Esto hace que el código sea resistente a cambios menores en el orden de las columnas.
-            col_names = [desc[0] for desc in cur.description]
-            
-            # Mapeamos los resultados a una lista de diccionarios
+            # Obtenemos los nombres de las columnas para crear una lista de diccionarios
+            col_names = [desc[0] for desc in cur.description] 
             productos = [dict(zip(col_names, row)) for row in cur.fetchall()]
             
             if not productos:
-                db_status += " | ⚠️ La tabla 'productos' está vacía o no existe. Mostrando fallback."
+                db_status += " | ⚠️ La tabla 'productos' está vacía."
 
             cur.close()
 
         except Exception as e:
-            # Ahora el error exacto aparecerá en el estado si la consulta falla.
+            # Capturar cualquier error de SQL o conexión
             db_status = f"⚠️ Conectado, pero la consulta falló: {e}"
         finally:
-            conn.close()
+            # Aseguramos el cierre de la conexión
+            if conn:
+                conn.close()
     else:
-        db_status = " Fallo Crítico de Conexión. Revisa la DATABASE_URL."
+        db_status = "❌ Fallo Crítico de Conexión. Revisa la DATABASE_URL."
     
-    # Renderizar la plantilla HTML, pasando el estado, los productos de la BD, 
-    # y la lista genérica como 'generic_products' para el fallback.
+    # Renderizar la plantilla HTML.
+    # CRÍTICO: Pasamos la lista GENERIC_MATH_TOPICS como 'generic_products' para los datos fijos.
     return render_template(
         'index.html', 
         db_status=db_status, 
         productos=productos,
-        generic_products=GENERIC_MATH_TOPICS # <-- ¡Añadido para el fallback en el template!
+        generic_products=GENERIC_MATH_TOPICS 
     )
 
 # --- 4. INICIO DEL SERVIDOR ---
 if __name__ == '__main__':
+    # Usamos el puerto del entorno o 5000 por defecto
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port, debug=True)
