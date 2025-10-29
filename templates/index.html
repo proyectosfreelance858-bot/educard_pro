@@ -20,418 +20,241 @@
             --color-text-dark: #212529; /* Texto Principal */
             --color-text-subtle: #6c757d; /* Texto Secundario */
             --color-border: #e9ecef;
-            --color-shadow-light: rgba(0, 0, 0, 0.05);
-            --color-shadow-medium: rgba(0, 0, 0, 0.1);
-            --font-main: 'Outfit', sans-serif;
-            --font-alt: 'Instrument Sans', sans-serif;
-            --timing-fast: 0.2s;
-            --timing-medium: 0.4s;
-            --radius-small: 8px;
-            --radius-medium: 12px;
-            --max-width: 1200px;
+            --color-shadow-light: rgba(0, 0, 0, 0.08);
+            --font-heading: 'Outfit', sans-serif;
+            --font-body: 'Instrument Sans', sans-serif;
+            --header-height: 80px;
         }
 
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); color: var(--color-text-dark); background-color: var(--color-background); line-height: 1.6; overflow-x: hidden; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
+        section { padding: 90px 0; position: relative; } 
 
-        body {
-            font-family: var(--font-main);
-            color: var(--color-text-dark);
-            background-color: var(--color-background);
-            line-height: 1.6;
-            scroll-behavior: smooth;
-        }
+        /* Títulos Generales */
+        h1, h2, h3 { font-family: var(--font-heading); font-weight: 700; line-height: 1.2; }
+        h1 { font-size: 3.5rem; }
+        h2 { font-size: 2.2rem; }
+        h3 { font-size: 1.6rem; }
 
-        a {
-            text-decoration: none;
-            color: var(--color-primary);
-            transition: color var(--timing-fast);
-        }
-
-        a:hover {
-            color: var(--color-primary-dark);
-        }
-
-        button {
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-title { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; }
+        .section-subtitle { font-size: 1.1rem; color: var(--color-text-subtle); max-width: 700px; margin: 0 auto; }
+        
+        /* Botones Generales (CTA) */
+        .main-cta-button {
+            display: inline-block; padding: 15px 30px; background-color: var(--color-primary); color: white;
+            border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 1rem; margin-top: 30px;
+            transition: background-color 0.3s ease, transform 0.2s; box-shadow: 0 8px 15px rgba(92, 103, 255, 0.3);
+            border: none; /* Asegura que no haya borde predeterminado */
             cursor: pointer;
-            border: none;
         }
-
-        /* ========================================= */
-        /* --- 2. UTILIDADES Y ESTRUCTURA --- */
-        /* ========================================= */
-
-        .container {
-            width: 90%;
-            max-width: var(--max-width);
-            margin: 0 auto;
-        }
-
-        .section-padding {
-            padding: 60px 0;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 28px;
-            border-radius: var(--radius-small);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: all var(--timing-fast);
-            box-shadow: 0 4px 6px var(--color-shadow-light);
-        }
-
-        .btn-primary {
-            background-color: var(--color-primary);
-            color: var(--color-surface);
-            border: 2px solid var(--color-primary);
-        }
-
-        .btn-primary:hover {
-            background-color: var(--color-primary-dark);
-            border-color: var(--color-primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 8px var(--color-shadow-medium);
-        }
-
-        .btn-secondary {
-            background-color: var(--color-secondary);
-            color: var(--color-text-dark);
-            border: 2px solid var(--color-secondary);
-        }
-
-        .btn-secondary:hover {
-            background-color: #ffb300;
-            border-color: #ffb300;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 8px var(--color-shadow-medium);
-        }
-
-        .section-header {
-            margin-bottom: 40px;
-            text-align: center;
-        }
-
-        .section-header h2 {
-            font-size: 2.5rem;
-            color: var(--color-primary);
-            margin-bottom: 10px;
-        }
-
-        .section-header p {
-            font-size: 1.1rem;
-            color: var(--color-text-subtle);
-        }
-
-        /* ========================================= */
-        /* --- 3. SCROLL REVEAL EFFECT --- */
-        /* ========================================= */
-        .reveal {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Opcional: Retrasos para elementos consecutivos */
-        .reveal.delay-1 { transition-delay: 0.1s; }
-        .reveal.delay-2 { transition-delay: 0.2s; }
-        .reveal.delay-3 { transition-delay: 0.3s; }
-        .reveal.delay-4 { transition-delay: 0.4s; }
+        .main-cta-button:hover { background-color: var(--color-primary-dark); transform: translateY(-2px); box-shadow: 0 10px 20px rgba(92, 103, 255, 0.4); }
 
 
         /* ========================================= */
-        /* --- 4. HEADER Y NAVEGACIÓN --- */
+        /* --- 2. HEADER Y NAVEGACIÓN (CONEXIONES) --- */
         /* ========================================= */
-        .header {
+        header {
+            position: sticky; top: 0; left: 0; width: 100%; height: var(--header-height);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 3%; 
             background-color: var(--color-surface);
-            box-shadow: 0 2px 4px var(--color-shadow-light);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            transition: background-color var(--timing-fast);
+            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05); z-index: 1000;
         }
 
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
+        .logo-container { text-decoration: none; display: flex; align-items: center; }
+        /* Usamos la imagen subida si está accesible, sino un placeholder */
+        .logo-img { height: 35px; margin-right: 10px; content: url('image_a8e31c.png'); } 
+        .site-name { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 700; color: var(--color-text-dark); }
+
+        nav ul { list-style: none; display: flex; }
+        nav ul li { margin-left: 35px; }
+        nav ul li a { text-decoration: none; color: var(--color-text-dark); font-weight: 500; padding: 10px 0; display: block; transition: color 0.3s ease; }
+        nav ul li a:hover, nav ul li a.active { color: var(--color-primary); font-weight: 600; border-bottom: 2px solid var(--color-primary); padding-bottom: 8px; }
+
+        .header-actions {
+            display: flex; align-items: center; gap: 20px;
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--color-text-dark);
+        .header-button {
+            padding: 10px 20px; background-color: var(--color-primary); color: white;
+            border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.95rem;
+            transition: background-color 0.3s, transform 0.2s;
         }
+        .header-button:hover { background-color: var(--color-primary-dark); transform: translateY(-1px); }
 
-        .logo img {
-            height: 40px; /* Tamaño del logo */
-            margin-right: 10px;
-            border-radius: 50%;
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 25px;
-        }
-
-        .nav-links a {
-            color: var(--color-text-dark);
-            font-weight: 500;
-            padding: 5px 0;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--color-primary);
-            transition: width var(--timing-fast);
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--color-primary);
-        }
-
-        .nav-links a:hover::after, .nav-links a.active::after {
-            width: 100%;
-        }
-
-        /* Dropdown de Idiomas */
-        .language-selector {
-            position: relative;
-        }
-
-        .lang-button {
-            background: none;
-            color: var(--color-text-subtle);
-            padding: 8px;
-            border-radius: var(--radius-small);
-            display: flex;
-            align-items: center;
-            font-size: 1rem;
-            font-weight: 500;
-            transition: background-color var(--timing-fast), color var(--timing-fast);
-        }
-
-        .lang-button:hover {
-            background-color: var(--color-border);
-            color: var(--color-text-dark);
-        }
-
-        .lang-button i {
-            margin-right: 5px;
-        }
-
+        /* Selector de Idioma (Bandera) */
+        .language-selector { position: relative; cursor: pointer; padding: 5px; }
+        .flag { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); }
         .language-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background-color: var(--color-surface);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-small);
-            box-shadow: 0 8px 16px var(--color-shadow-medium);
-            z-index: 10;
-            min-width: 120px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: opacity var(--timing-fast), transform var(--timing-fast), visibility var(--timing-fast);
+            position: absolute; top: 40px; right: 0; background-color: var(--color-surface);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); border-radius: 8px;
+            overflow: hidden; width: 150px; z-index: 1001; display: none;
         }
+        .language-dropdown.active { display: block; }
+        .language-dropdown a { display: flex; align-items: center; padding: 10px 15px; text-decoration: none; color: var(--color-text-dark); font-size: 0.9rem; }
+        .language-dropdown a:hover { background-color: var(--color-background); color: var(--color-primary); }
+        .language-dropdown img { width: 20px; height: 15px; margin-right: 10px; border: 1px solid var(--color-border); }
 
-        .language-dropdown.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .language-dropdown a {
-            display: block;
-            padding: 10px 15px;
-            color: var(--color-text-dark);
-            font-weight: 400;
-            white-space: nowrap;
-        }
-
-        .language-dropdown a:hover {
-            background-color: var(--color-background);
-            color: var(--color-primary);
-        }
-
-        /* Botón de Menú Móvil */
-        .menu-toggle {
-            display: none;
-            font-size: 1.5rem;
-            background: none;
-            color: var(--color-text-dark);
-            padding: 10px;
-        }
 
         /* ========================================= */
-        /* --- 5. SECCIÓN HERO --- */
+        /* --- 3. SECCIÓN HERO (PORTADA) --- */
         /* ========================================= */
         .hero {
-            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
-            color: var(--color-surface);
-            padding: 100px 0;
-            text-align: center;
+            background-color: var(--color-surface);
+            padding: 120px 0 100px;
+            text-align: left;
             position: relative;
             overflow: hidden;
-        }
-
-        /* Efecto de fondo sutil con patrón o forma */
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.1) 10%, transparent 50%),
-                        radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.1) 10%, transparent 50%);
-            opacity: 0.5;
-            pointer-events: none;
+            border-bottom: 1px solid var(--color-border);
         }
 
         .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            font-weight: 800;
-            line-height: 1.2;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 40px;
-            font-weight: 400;
-        }
-
-        .hero-buttons .btn {
-            margin: 0 10px;
-            border: 2px solid var(--color-surface);
-        }
-
-        .hero-buttons .btn-secondary {
-            color: var(--color-text-dark);
-            background-color: var(--color-surface);
-            border-color: var(--color-surface);
-        }
-
-        .hero-buttons .btn-secondary:hover {
-            background-color: var(--color-background);
-            color: var(--color-text-dark);
-        }
-
-        /* ========================================= */
-        /* --- 6. SECCIÓN CARACTERÍSTICAS/STATS --- */
-        /* ========================================= */
-        .stats-bar {
-            background-color: var(--color-surface);
-            padding: 30px 0;
-            box-shadow: 0 4px 10px var(--color-shadow-light);
-            margin-top: -50px; /* Superposición sutil en la sección Hero */
-            position: relative;
-            z-index: 5;
-            border-radius: var(--radius-medium);
-        }
-
-        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            text-align: center;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 50px;
+            align-items: center;
         }
 
-        .stat-item {
-            padding: 15px;
+        .hero-text h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.1;
         }
 
-        .stat-item i {
-            font-size: 2.5rem;
+        .hero-text h1 span {
             color: var(--color-primary);
-            margin-bottom: 10px;
         }
 
-        .stat-item .number {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--color-text-dark);
+        .hero-text p {
+            font-size: 1.25rem;
+            color: var(--color-text-subtle);
+            margin-bottom: 40px;
+        }
+
+        .hero-video-container {
+            position: relative;
+            text-align: center;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            animation: fadeInScale 1.5s ease-out;
+        }
+        
+        /* USO DEL VIDEO SOLICITADO */
+        .hero-video {
+            width: 100%;
+            height: auto;
             display: block;
         }
-
-        .stat-item .label {
-            color: var(--color-text-subtle);
-            font-size: 0.9rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         /* ========================================= */
-        /* --- 7. SECCIÓN NUESTROS MÓDULOS --- */
+        /* --- 4. SECCIÓN CARACTERÍSTICAS/VENTAJAS --- */
         /* ========================================= */
-        .modules-section {
+        .features-section {
             background-color: var(--color-background);
+            padding: 90px 0;
         }
-
-        .module-grid {
+        
+        .features-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background-color: var(--color-surface);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px var(--color-shadow-light);
+            text-align: center;
+            border-bottom: 4px solid var(--color-primary);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--color-primary);
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: var(--color-text-subtle);
+        }
+
+        /* ========================================= */
+        /* --- 5. SECCIÓN MODULOS DESTACADOS --- */
+        /* ========================================= */
+        .modules-section {
+            background-color: var(--color-surface);
+            padding: 90px 0;
+            text-align: center;
+        }
+        
+        .modules-link {
+            text-align: center;
+        }
+        
+        /* Estilos de las Card de Módulos (Jinja2) */
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
         }
 
         .module-card {
             background-color: var(--color-surface);
-            border-radius: var(--radius-medium);
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 12px var(--color-shadow-light);
-            transition: transform var(--timing-fast), box-shadow var(--timing-fast);
-            display: flex;
-            flex-direction: column;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+            opacity: 0; /* Para el reveal */
+            transform: translateY(20px); /* Para el reveal */
+            border: 1px solid var(--color-border);
         }
-
+        
+        .module-card.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
         .module-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 16px var(--color-shadow-medium);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
         }
 
         .card-image-wrapper {
             position: relative;
-            height: 200px;
+            height: 180px;
         }
 
         .card-image-wrapper img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: block;
         }
 
         .card-tag {
@@ -440,15 +263,21 @@
             left: 15px;
             background-color: var(--color-secondary);
             color: var(--color-text-dark);
-            padding: 5px 10px;
-            border-radius: var(--radius-small);
+            padding: 5px 12px;
+            border-radius: 6px;
             font-size: 0.8rem;
             font-weight: 700;
-            text-transform: uppercase;
         }
-
+        
         .card-content {
             padding: 20px;
+        }
+
+        .card-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            min-height: 40px; 
+            font-weight: 700;
         }
 
         .card-instructor {
@@ -461,804 +290,1093 @@
             width: 30px;
             height: 30px;
             border-radius: 50%;
-            object-fit: cover;
             margin-right: 10px;
-            border: 2px solid var(--color-border);
+            border: 2px solid var(--color-primary);
+            object-fit: cover;
         }
 
         .instructor-name {
             font-size: 0.9rem;
-            color: var(--color-text-subtle);
-            font-family: var(--font-alt);
-        }
-
-        .card-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: var(--color-text-dark);
+            color: var(--color-primary);
+            font-weight: 600;
         }
 
         .card-meta {
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            padding: 0 20px 10px;
             border-top: 1px solid var(--color-border);
-            padding: 15px 20px 0;
-            font-size: 0.9rem;
-            color: var(--color-text-subtle);
+            margin-top: 10px;
         }
 
         .meta-item {
             display: flex;
             align-items: center;
+            font-size: 0.9rem;
+            color: var(--color-text-subtle);
         }
-
+        
         .meta-item i {
             margin-right: 5px;
-            color: var(--color-primary);
+            color: var(--color-secondary);
         }
 
         .card-actions {
-            margin-top: auto; /* Empuja las acciones hacia abajo */
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px;
-            padding-top: 15px; /* Reducir padding superior si ya tiene border-top el meta */
+            padding-top: 10px;
+            border-top: 1px solid var(--color-border);
         }
 
         .card-price {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 800;
-            color: var(--color-primary-dark);
+            color: var(--color-primary);
         }
 
         .card-price .free {
             color: #28a745;
-            font-size: 1.2rem;
         }
-
+        
         .explore-button {
-            padding: 8px 15px;
+            padding: 10px 18px;
             background-color: var(--color-primary);
-            color: var(--color-surface);
-            border-radius: var(--radius-small);
-            font-size: 0.9rem;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
             font-weight: 600;
-            transition: background-color var(--timing-fast);
+            transition: background-color 0.3s;
         }
 
         .explore-button:hover {
             background-color: var(--color-primary-dark);
-            color: var(--color-surface);
         }
-
-        /* ========================================= */
-        /* --- 8. SECCIÓN BENEFICIOS/VALORES --- */
-        /* ========================================= */
-        .values-section {
-            background-color: var(--color-surface);
-        }
-
-        .values-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
+        
+        /* Contenedor de Status de Base de Datos (para debug en Flask) */
+        .db-status-container {
             text-align: center;
-        }
-
-        .value-item {
-            padding: 30px;
-            background-color: var(--color-background);
-            border-radius: var(--radius-medium);
-            box-shadow: 0 2px 8px var(--color-shadow-light);
-            transition: transform var(--timing-fast), box-shadow var(--timing-fast);
-            height: 100%; /* Asegura que todos tengan la misma altura si están en un grid */
-        }
-
-        .value-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 12px var(--color-shadow-medium);
-        }
-
-        .value-item i {
-            font-size: 3rem;
-            color: var(--color-secondary);
-            margin-bottom: 20px;
-            display: inline-block;
-        }
-
-        .value-item h3 {
-            font-size: 1.5rem;
-            color: var(--color-primary);
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-
-        .value-item p {
-            color: var(--color-text-subtle);
-        }
-
-
-        /* ========================================= */
-        /* --- 9. SECCIÓN CTA FINAL --- */
-        /* ========================================= */
-        .cta-section {
-            background-color: var(--color-primary);
-            padding: 80px 0;
-            text-align: center;
-        }
-
-        .cta-content {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .cta-content h2 {
-            font-size: 2.5rem;
-            color: var(--color-surface);
-            margin-bottom: 20px;
-            font-weight: 800;
-        }
-
-        .cta-content p {
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.85);
-            margin-bottom: 30px;
-        }
-
-        .cta-content .btn-secondary {
-            border: none; /* Eliminar el borde redundante */
-        }
-
-        /* ========================================= */
-        /* --- 10. FOOTER --- */
-        /* ========================================= */
-        .footer {
-            background-color: var(--color-text-dark);
-            color: rgba(255, 255, 255, 0.7);
-            padding: 50px 0 20px;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 8px;
             font-size: 0.9rem;
+            color: var(--color-text-dark);
+            border: 1px solid var(--color-border);
+        }
+        
+        /* ========================================= */
+        /* --- 6. SECCIÓN DATOS CLAVE (NUEVA) --- */
+        /* ========================================= */
+        .data-section {
+            background-color: var(--color-background);
         }
 
-        .footer-grid {
+        .stats-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+            text-align: center;
         }
 
-        .footer-col h4 {
-            color: var(--color-surface);
-            font-size: 1.1rem;
-            margin-bottom: 20px;
+        .stat-item {
+            padding: 30px;
+            background-color: var(--color-surface);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border-top: 5px solid var(--color-secondary);
+        }
+
+        .stat-number {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--color-primary);
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--color-text-dark);
             font-weight: 600;
         }
 
-        .footer-col ul {
-            list-style: none;
-            padding: 0;
-        }
 
-        .footer-col ul li {
-            margin-bottom: 10px;
+        /* ========================================= */
+        /* --- 7. SECCIÓN TESTIMONIOS (MEJORADA) --- */
+        /* ========================================= */
+        .testimonials-section {
+            background-color: var(--color-surface);
+            padding: 90px 0;
         }
-
-        .footer-col ul li a {
-            color: inherit;
-            transition: color var(--timing-fast);
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
         }
-
-        .footer-col ul li a:hover {
+        
+        .testimonial-card {
+            background-color: var(--color-background);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid var(--color-secondary);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .testimonial-quote {
+            font-style: italic;
+            color: var(--color-text-dark);
+            margin-bottom: 20px;
+            position: relative;
+            line-height: 1.7;
+        }
+        
+        .testimonial-quote::before {
+            content: "\f10d"; 
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
             color: var(--color-primary);
+            font-size: 1.8rem;
+            position: absolute;
+            left: -15px;
+            top: -10px;
+            opacity: 0.2;
         }
-
-        .footer-info .logo {
-            margin-bottom: 15px;
-            color: var(--color-surface);
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid var(--color-border);
         }
-
-        .footer-info p {
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 2px solid var(--color-primary-dark);
+        }
+        
+        .author-info strong {
+            display: block;
+            font-size: 1rem;
+            color: var(--color-text-dark);
+            font-family: var(--font-heading);
+            font-weight: 700;
+        }
+        
+        .author-info span {
+            font-size: 0.9rem;
+            color: var(--color-text-subtle);
+        }
+        
+        /* ========================================= */
+        /* --- 8. SECCIÓN CTA FINAL --- */
+        /* ========================================= */
+        .final-cta-section {
+            background: linear-gradient(135deg, var(--color-primary) 0%, #4b54ff 100%);
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+        }
+        
+        .final-cta-section h2 {
+            font-size: 2.8rem;
+            font-weight: 800;
             margin-bottom: 20px;
         }
-
-        .social-icons a {
-            color: var(--color-surface);
+        
+        .final-cta-section p {
             font-size: 1.2rem;
-            margin-right: 15px;
-            transition: color var(--timing-fast);
+            margin-bottom: 40px;
+            opacity: 0.9;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .final-cta-button {
+            background-color: var(--color-secondary);
+            color: var(--color-text-dark);
+            box-shadow: 0 8px 15px rgba(255, 193, 7, 0.4);
+            font-weight: 800;
+        }
+        
+        .final-cta-button:hover {
+            background-color: #ffda6a;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 193, 7, 0.6);
         }
 
-        .social-icons a:hover {
-            color: var(--color-secondary);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 20px;
-        }
-
-        .footer-bottom p a {
-            color: var(--color-primary);
-        }
 
         /* ========================================= */
-        /* --- 11. MEDIA QUERIES (RESPONSIVE) --- */
+        /* --- 9. PIE DE PÁGINA (FOOTER) --- */
+        /* ========================================= */
+        footer { background-color: var(--color-text-dark); color: white; padding: 50px 0; font-size: 0.9rem; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
+        .footer-about h5, .footer-links h5 { font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 20px; font-weight: 700; color: var(--color-secondary); }
+        .footer-about p { color: rgba(255, 255, 255, 0.7); margin-bottom: 20px; }
+        .footer-links ul { list-style: none; }
+        .footer-links ul li { margin-bottom: 10px; }
+        .footer-links ul li a { color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s; }
+        .footer-links ul li a:hover { color: white; }
+        
+        .social-links { margin-top: 15px; }
+        .social-links a { 
+            color: white; font-size: 1.5rem; margin-right: 15px; transition: color 0.3s;
+            opacity: 0.8;
+        }
+        .social-links a:hover { color: var(--color-secondary); opacity: 1; }
+        
+        .footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.1); margin-top: 30px; padding-top: 20px; text-align: center; color: rgba(255, 255, 255, 0.5); font-size: 0.8rem; }
+        
+        /* ========================================= */
+        /* --- 10. MEDIA QUERIES (RESPONSIVE) --- */
         /* ========================================= */
         @media (max-width: 992px) {
-            .nav-links {
-                gap: 15px;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .module-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .values-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
+            .hero-content { grid-template-columns: 1fr; text-align: center; }
+            .hero-text { order: 2; }
+            .hero-video-container { order: 1; margin-bottom: 40px; }
+            .hero-text h1 { font-size: 3rem; }
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
         }
 
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.1rem;
-            }
-
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 70px; /* Ajustar según la altura del header */
-                left: 0;
-                width: 100%;
-                background-color: var(--color-surface);
-                box-shadow: 0 4px 8px var(--color-shadow-medium);
-                padding: 15px 20px;
-                transition: transform 0.3s ease-out;
-                transform: translateY(-100%);
-            }
-
-            .nav-links.active {
-                display: flex;
-                transform: translateY(0);
-            }
-
-            .nav-links li {
-                width: 100%;
-                padding: 10px 0;
-                border-bottom: 1px solid var(--color-border);
-            }
-
-            .nav-links li:last-child {
-                border-bottom: none;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            .lang-button {
-                display: none; /* Ocultar en móvil o integrar en el menú */
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .stats-bar {
-                margin-top: -30px;
-                padding: 20px 0;
-            }
-
-            .module-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .values-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .footer-info .logo {
-                justify-content: center;
-            }
+            nav ul { display: none; }
+            .features-grid, .stats-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .header-actions { gap: 10px; }
+            .header-button { padding: 8px 15px; font-size: 0.9rem; }
+            .hero-text h1 { font-size: 2.5rem; }
+            .hero-text p { font-size: 1.1rem; }
+            .final-cta-section h2 { font-size: 2rem; }
+            .stat-number { font-size: 2.5rem; }
         }
-
     </style>
 </head>
 <body>
 
-    <header class="header">
-        <div class="container nav-content">
-            <a href="index.html" class="logo" data-translate="logo">
-                <img src="https://i.postimg.cc/t4tVr741/54c82322-2df7-4887-abc0-da706407fcd4-2.png" alt="EDUCARD SAS Logo">
-                EDUCARD SAS
-            </a>
-            
-            <nav>
-                <ul class="nav-links" id="navLinks">
-                    <li><a href="index.html" class="active" data-translate="nav.home">Inicio</a></li>
-                    <li><a href="refuerzos.html" data-translate="nav.refuerzos">Módulos</a></li>
-                    <li><a href="beneficios.html" data-translate="nav.beneficios">Beneficios</a></li>
-                    <li><a href="nosotros.html" data-translate="nav.nosotros">Nosotros</a></li>
-                    <li><a href="faq.html" data-translate="nav.faq">FAQ</a></li>
-                    <li><a href="#contact" data-translate="nav.contacto">Contacto</a></li>
-                </ul>
-            </nav>
+    <main id="language-content">
+        
+        <div id="lang-es" data-lang="es">
+            <header>
+                <a href="index.html" class="logo-container">
+                    <img src="image_a8e31c.png" alt="Logo Educard" class="logo-img">
+                    <span class="site-name">Educard SAS</span>
+                </a>
 
-            <div class="header-actions">
-                <div class="language-selector">
-                    <button class="lang-button" data-translate="language.button">
-                        <i class="fa-solid fa-globe"></i> ES
-                    </button>
-                    <div class="language-dropdown">
-                        <a href="#" data-lang="es">Español (ES)</a>
-                        <a href="#" data-lang="en">English (EN)</a>
-                        <a href="#" data-lang="de">Deutsch (DE)</a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html" id="nav-index">Inicio</a></li>
+                        <li><a href="refuerzos.html" id="nav-refuerzos">Refuerzos</a></li>
+                        <li><a href="nosotros.html" id="nav-nosotros">Nosotros</a></li>
+                        <li><a href="beneficios.html" id="nav-beneficios">Beneficios</a></li>
+                        <li><a href="faq.html" id="nav-faq">FAQ</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="acceder.html" class="header-button">Acceder</a>
+                    <div class="language-selector">
+                        <img id="current-flag-es" src="https://flagcdn.com/co.svg" alt="Bandera de Colombia" class="flag">
+                        <div class="language-dropdown">
+                            <a href="#" data-lang="es"><img src="https://flagcdn.com/co.svg" alt="Bandera Colombia"> Español</a>
+                            <a href="#" data-lang="en"><img src="https://flagcdn.com/us.svg" alt="Bandera EE.UU."> English</a>
+                            <a href="#" data-lang="de"><img src="https://flagcdn.com/de.svg" alt="Bandera Alemania"> Deutsch</a>
+                        </div>
                     </div>
                 </div>
-                <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <section class="hero">
-        <div class="container hero-content reveal">
-            <h1 data-translate="hero.title">
-                Impulsa el Éxito Educativo: Refuerzos de Matemáticas y Tecnología
-            </h1>
-            <p data-translate="hero.subtitle">
-                Ofrecemos módulos temáticos dinámicos y personalizados para estudiantes de primaria y secundaria, asegurando un aprendizaje efectivo y duradero.
-            </p>
-            <div class="hero-buttons">
-                <a href="refuerzos.html" class="btn btn-secondary" data-translate="hero.button1">Explorar Módulos</a>
-                <a href="#contact" class="btn btn-primary" data-translate="hero.button2">Agendar Consulta</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="stats-bar">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item reveal delay-1">
-                    <i class="fa-solid fa-users-viewfinder"></i>
-                    <span class="number" data-translate="stats.num1">1000+</span>
-                    <span class="label" data-translate="stats.label1">Estudiantes Activos</span>
-                </div>
-                <div class="stat-item reveal delay-2">
-                    <i class="fa-solid fa-clipboard-check"></i>
-                    <span class="number" data-translate="stats.num2">95%</span>
-                    <span class="label" data-translate="stats.label2">Tasa de Éxito</span>
-                </div>
-                <div class="stat-item reveal delay-3">
-                    <i class="fa-solid fa-chalkboard-user"></i>
-                    <span class="number" data-translate="stats.num3">20+</span>
-                    <span class="label" data-translate="stats.label3">Módulos Temáticos</span>
-                </div>
-                <div class="stat-item reveal delay-4">
-                    <i class="fa-solid fa-star"></i>
-                    <span class="number" data-translate="stats.num4">4.8/5</span>
-                    <span class="label" data-translate="stats.label4">Calificación Media</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="modules-section section-padding">
-        <div class="container">
-            <header class="section-header reveal">
-                <h2 data-translate="featured.title">Nuestros Módulos Más Populares</h2>
-                <p data-translate="featured.subtitle">
-                    Descubre los refuerzos más solicitados que están transformando el rendimiento académico.
-                </p>
-            </header>
-            
-            {% if productos %}
-                {% include 'module_cards_es.html' %}
-            {% else %}
-                <p class="text-center" data-translate="featured.no_modules" style="color: var(--color-text-subtle);">
-                    No hay módulos disponibles en este momento o la conexión con la base de datos está pendiente.
-                </p>
-            {% endif %}
-
-            <div class="text-center" style="margin-top: 50px;">
-                <a href="refuerzos.html" class="btn btn-primary reveal" data-translate="featured.view_all">Ver Catálogo Completo</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="values-section section-padding">
-        <div class="container">
-            <header class="section-header reveal">
-                <h2 data-translate="values.title">¿Por Qué Elegir EDUCARD SAS?</h2>
-                <p data-translate="values.subtitle">
-                    Nuestra metodología se basa en pilares clave para garantizar el progreso de cada estudiante.
-                </p>
             </header>
 
-            <div class="values-grid">
-                <div class="value-item reveal delay-1">
-                    <i class="fa-solid fa-brain"></i>
-                    <h3 data-translate="values.item1.title">Aprendizaje Personalizado</h3>
-                    <p data-translate="values.item1.text">
-                        Adaptamos el contenido y el ritmo a las necesidades específicas de cada estudiante para maximizar la comprensión.
-                    </p>
-                </div>
-                <div class="value-item reveal delay-2">
-                    <i class="fa-solid fa-rocket"></i>
-                    <h3 data-translate="values.item2.title">Foco en Resultados</h3>
-                    <p data-translate="values.item2.text">
-                        Nuestro objetivo principal es el mejoramiento visible y medible de las notas y el desempeño en pruebas estandarizadas.
-                    </p>
-                </div>
-                <div class="value-item reveal delay-3">
-                    <i class="fa-solid fa-laptop-code"></i>
-                    <h3 data-translate="values.item3.title">Integración Tecnológica</h3>
-                    <p data-translate="values.item3.text">
-                        Usamos herramientas de vanguardia para hacer las matemáticas y la tecnología accesibles y divertidas.
-                    </p>
-                </div>
-            </div>
-            
-            <div class="text-center" style="margin-top: 50px;">
-                <a href="beneficios.html" class="btn btn-secondary reveal" data-translate="values.more_benefits">Descubre Todos los Beneficios</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="cta-section" id="contact">
-        <div class="container cta-content reveal">
-            <h2 data-translate="cta.title">¿Listo para Ver el Progreso?</h2>
-            <p data-translate="cta.subtitle">
-                No esperes más para darle a tu hijo la ventaja que necesita. Contáctanos hoy para una evaluación inicial gratuita.
-            </p>
-            <a href="mailto:contacto@educardsas.com" class="btn btn-secondary" data-translate="cta.button">Contáctanos Ahora</a>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col footer-info">
-                    <a href="index.html" class="logo">
-                        <img src="https://i.postimg.cc/t4tVr741/54c82322-2df7-4887-abc0-da706407fcd4-2.png" alt="EDUCARD SAS Logo">
-                        EDUCARD SAS
-                    </a>
-                    <p data-translate="footer.mission">
-                        Impulsando el futuro a través de refuerzos de matemáticas y tecnología de alta calidad, personalizados y centrados en el estudiante.
-                    </p>
-                    <div class="social-icons">
-                        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+            <section class="hero">
+                <div class="container hero-content reveal">
+                    <div class="hero-text">
+                        <h1>Transforma la Educación con <span>Tecnología y Refuerzos</span></h1>
+                        <p>EDUCARD S.A.S. te ofrece currículos personalizados y dinámicos en Matemáticas, Biología, Español y Sociales, utilizando las herramientas digitales más innovadoras para el éxito de tu hijo.</p>
+                        <a href="acceder.html" class="main-cta-button">¡Iniciar Ahora!</a>
+                    </div>
+                    <div class="hero-video-container">
+                        <video class="hero-video" autoplay loop muted playsinline>
+                            <source src="https://www.wited.com/wp-content/uploads/2025/06/Animacion_01_crop.webm" type="video/webm">
+                            Tu navegador no soporta el tag de video.
+                        </video>
                     </div>
                 </div>
+            </section>
+            
+            <section class="features-section">
+                <div class="container reveal">
+                    <div class="section-header">
+                        <h2 class="section-title">Nuestra Propuesta de Valor Única</h2>
+                        <p class="section-subtitle">Lo que nos diferencia: un enfoque práctico, personalizado y totalmente digital.</p>
+                    </div>
 
-                <div class="footer-col">
-                    <h4 data-translate="footer.links.title">Enlaces Rápidos</h4>
-                    <ul>
-                        <li><a href="index.html" data-translate="footer.links.home">Inicio</a></li>
-                        <li><a href="refuerzos.html" data-translate="footer.links.modules">Módulos</a></li>
-                        <li><a href="beneficios.html" data-translate="footer.links.benefits">Beneficios</a></li>
-                        <li><a href="nosotros.html" data-translate="footer.links.about">Nosotros</a></li>
-                    </ul>
+                    <div class="features-grid">
+                        <div class="feature-card reveal" style="transition-delay: 0.1s;">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                            <h3>Currículo Personalizado</h3>
+                            <p>Adaptamos el contenido exactamente a las necesidades y ritmo de aprendizaje del estudiante (Grados 6° a 11°).</p>
+                        </div>
+                        <div class="feature-card reveal" style="transition-delay: 0.2s;">
+                            <i class="fa-solid fa-tablet-screen-button"></i>
+                            <h3>Innovación Tecnológica</h3>
+                            <p>Uso de plataformas virtuales interactivas y herramientas digitales para un aprendizaje inmersivo.</p>
+                        </div>
+                        <div class="feature-card reveal" style="transition-delay: 0.3s;">
+                            <i class="fa-solid fa-calculator"></i>
+                            <h3>Foco en Matemáticas</h3>
+                            <p>Especializados inicialmente en fortalecer el área de Matemáticas para el grado sexto, expandiendo a otras áreas.</p>
+                        </div>
+                        <div class="feature-card reveal" style="transition-delay: 0.4s;">
+                            <i class="fa-solid fa-flask"></i>
+                            <h3>Enfoque Práctico</h3>
+                            <p>Ejercicios basados en problemas reales para aplicar el conocimiento en la vida diaria.</p>
+                        </div>
+                        <div class="feature-card reveal" style="transition-delay: 0.5s;">
+                            <i class="fa-solid fa-brain"></i>
+                            <h3>Fomento del Pensamiento Crítico</h3>
+                            <p>Diseñamos los módulos para que el estudiante piense, analice y resuelva con autonomía.</p>
+                        </div>
+                        <div class="feature-card reveal" style="transition-delay: 0.6s;">
+                            <i class="fa-solid fa-layer-group"></i>
+                            <h3>Módulos Didácticos</h3>
+                            <p>Contenido estructurado en módulos fáciles de digerir para un progreso constante y medible.</p>
+                        </div>
+                    </div>
                 </div>
+            </section>
+            
+            <section class="data-section">
+                <div class="container reveal">
+                    <div class="section-header">
+                        <h2 class="section-title">EDUCARD en Cifras</h2>
+                        <p class="section-subtitle">Nuestro impacto medido en el rendimiento académico y la satisfacción estudiantil.</p>
+                    </div>
 
-                <div class="footer-col">
-                    <h4 data-translate="footer.support.title">Soporte</h4>
-                    <ul>
-                        <li><a href="faq.html" data-translate="footer.support.faq">Preguntas Frecuentes</a></li>
-                        <li><a href="#" data-translate="footer.support.policy">Política de Privacidad</a></li>
-                        <li><a href="#" data-translate="footer.support.terms">Términos y Condiciones</a></li>
-                        <li><a href="mailto:contacto@educardsas.com" data-translate="footer.support.contact">Contáctanos</a></li>
-                    </ul>
+                    <div class="stats-grid">
+                        <div class="stat-item reveal" style="transition-delay: 0.1s;">
+                            <span class="stat-number">+1.5K</span>
+                            <span class="stat-label">Estudiantes Inscritos</span>
+                        </div>
+                        <div class="stat-item reveal" style="transition-delay: 0.2s;">
+                            <span class="stat-number">95%</span>
+                            <span class="stat-label">Tasa de Satisfacción</span>
+                        </div>
+                        <div class="stat-item reveal" style="transition-delay: 0.3s;">
+                            <span class="stat-number">4.6/5</span>
+                            <span class="stat-label">Puntuación Media</span>
+                        </div>
+                        <div class="stat-item reveal" style="transition-delay: 0.4s;">
+                            <span class="stat-number">+45</span>
+                            <span class="stat-label">Módulos Publicados</span>
+                        </div>
+                    </div>
                 </div>
+            </section>
 
-                <div class="footer-col">
-                    <h4 data-translate="footer.contact.title">Contacto</h4>
-                    <ul>
-                        <li data-translate="footer.contact.email">Email: contacto@educardsas.com</li>
-                        <li data-translate="footer.contact.phone">Teléfono: +57 601 XXX XXXX</li>
-                        <li data-translate="footer.contact.address">Dirección: Bogotá, Colombia</li>
-                    </ul>
+            <section class="modules-section">
+                <div class="container reveal">
+                    <div class="section-header">
+                        <h2 class="section-title">Explora Nuestros Módulos Destacados</h2>
+                        <p class="section-subtitle">Estos son los módulos más populares que están transformando el rendimiento académico.</p>
+                    </div>
+                    
+                    {% if db_status %}
+                    <div class="db-status-container">
+                        Estado de conexión a la Base de Datos: {{ db_status }}
+                    </div>
+                    {% endif %}
+
+                    {% if productos %}
+                        {% include 'module_cards_es.html' %}
+                    {% else %}
+                        <p style="text-align: center; color: var(--color-text-subtle); margin-top: 20px;">No hay módulos disponibles en este momento. Por favor, revisa la conexión a la base de datos.</p>
+                    {% endif %}
+                    
+                    <div class="modules-link">
+                        <a href="refuerzos.html" class="main-cta-button" style="margin-top: 50px;">Ver Catálogo Completo</a>
+                    </div>
                 </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 <a href="index.html">EDUCARD SAS</a>. Todos los derechos reservados.</p>
-            </div>
+            </section>
+
+            <section class="testimonials-section">
+                <div class="container reveal">
+                    <div class="section-header">
+                        <h2 class="section-title">La Voz de Nuestros Estudiantes</h2>
+                        <p class="section-subtitle">Cientos de estudiantes y padres ya han experimentado la transformación EDUCARD. ¡Sus resultados hablan por sí mismos!</p>
+                    </div>
+                    
+                    <div class="testimonials-grid">
+                        <div class="testimonial-card reveal" style="transition-delay: 0.1s;">
+                            <p class="testimonial-quote">"Antes odiaba Matemáticas, pero con los módulos interactivos de Educard, todo es más fácil y divertido. Subí mi nota de 3.0 a 4.5 en un trimestre."</p>
+                            <div class="testimonial-author">
+                                <img src="https://i.postimg.cc/8Pj7V243/avatar1.jpg" alt="Avatar Laura S." class="author-avatar">
+                                <div class="author-info">
+                                    <strong>Laura S.</strong>
+                                    <span>Estudiante, Grado 6°</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-card reveal" style="transition-delay: 0.2s;">
+                            <p class="testimonial-quote">"La plataforma es muy intuitiva y me permite repasar Biología y Sociales a mi propio ritmo. Lo mejor es que ya no tengo miedo a los exámenes."</p>
+                            <div class="testimonial-author">
+                                <img src="https://i.postimg.cc/QCg8tF6s/avatar2.jpg" alt="Avatar Mateo R." class="author-avatar">
+                                <div class="author-info">
+                                    <strong>Mateo R.</strong>
+                                    <span>Estudiante, Grado 8°</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-card reveal" style="transition-delay: 0.3s;">
+                            <p class="testimonial-quote">"Como padre, me da mucha tranquilidad saber que mi hijo recibe una educación de refuerzo de calidad y alineada con la tecnología actual. ¡Recomendado 100%!"</p>
+                            <div class="testimonial-author">
+                                <img src="https://i.postimg.cc/YSpw0qKx/avatar3.jpg" alt="Avatar Sra. Pérez" class="author-avatar">
+                                <div class="author-info">
+                                    <strong>Sra. Marcela Pérez</strong>
+                                    <span>Madre de Familia</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="final-cta-section">
+                <div class="container reveal">
+                    <h2>¿Listo para el Éxito Académico?</h2>
+                    <p>No pierdas más tiempo con métodos de estudio anticuados. Únete a la revolución educativa y dale a tu hijo la ventaja tecnológica que necesita.</p>
+                    <a href="acceder.html" class="main-cta-button final-cta-button">Comenzar Ahora</a>
+                </div>
+            </section>
+
+            <footer>
+                <div class="container footer-grid">
+                    <div class="footer-about">
+                        <h5>EDUCARD S.A.S.</h5>
+                        <p>Slogan: "<strong>Aprender con tecnología, crecer con conocimiento</strong>". Somos una empresa de servicios educativos que transforma el aprendizaje con herramientas digitales y tecnológicas.</p>
+                        <div class="social-links">
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <h5>Compañía</h5>
+                        <ul>
+                            <li><a href="nosotros.html">Sobre Nosotros (Misión/Visión)</a></li>
+                            <li><a href="beneficios.html">Estadísticas y Beneficios</a></li>
+                            <li><a href="#">Trabaja con Nosotros</a></li>
+                            <li><a href="#">Términos y Condiciones</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links">
+                        <h5>Soporte</h5>
+                        <ul>
+                            <li><a href="faq.html">Preguntas Frecuentes</a></li>
+                            <li><a href="#">Contacto</a></li>
+                            <li><a href="#">Ayuda y Tutoriales</a></li>
+                            <li><a href="#">Política de Privacidad</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links">
+                        <h5>Recursos</h5>
+                        <ul>
+                            <li><a href="refuerzos.html">Catálogo de Módulos</a></li>
+                            <li><a href="#">Blog (Próximamente)</a></li>
+                            <li><a href="#">Capacitación Docente</a></li>
+                            <li><a href="#">Mapa del Sitio</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    &copy; 2025 EDUCARD S.A.S. Todos los derechos reservados. Desarrollado en Cajicá.
+                </div>
+            </footer>
         </div>
-    </footer>
 
+        <div id="lang-en" data-lang="en" style="display: none;">
+            <header>
+                <a href="index.html" class="logo-container">
+                    <img src="image_a8e31c.png" alt="Educard Logo" class="logo-img">
+                    <span class="site-name">Educard SAS</span>
+                </a>
+
+                <nav>
+                    <ul>
+                        <li><a href="index.html" id="nav-index">Home</a></li>
+                        <li><a href="refuerzos.html" id="nav-refuerzos">Reinforcements</a></li>
+                        <li><a href="nosotros.html" id="nav-nosotros">About Us</a></li>
+                        <li><a href="beneficios.html" id="nav-beneficios">Benefits</a></li>
+                        <li><a href="faq.html" id="nav-faq">FAQ</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="acceder.html" class="header-button">Log In</a>
+                    <div class="language-selector">
+                        <img id="current-flag-en" src="https://flagcdn.com/us.svg" alt="USA Flag" class="flag">
+                        <div class="language-dropdown">
+                            <a href="#" data-lang="es"><img src="https://flagcdn.com/co.svg" alt="Colombia Flag"> Español</a>
+                            <a href="#" data-lang="en"><img src="https://flagcdn.com/us.svg" alt="USA Flag"> English</a>
+                            <a href="#" data-lang="de"><img src="https://flagcdn.com/de.svg" alt="Germany Flag"> Deutsch</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="hero">
+                <div class="container hero-content reveal">
+                    <div class="hero-text">
+                        <h1>Transform Education with <span>Technology and Reinforcement</span></h1>
+                        <p>EDUCARD S.A.S. offers you personalized and dynamic curricula in Mathematics, Biology, Spanish, and Social Studies, using the most innovative digital tools for your child's success.</p>
+                        <a href="acceder.html" class="main-cta-button">Start Now!</a>
+                    </div>
+                    <div class="hero-video-container">
+                        <video class="hero-video" autoplay loop muted playsinline>
+                            <source src="https://www.wited.com/wp-content/uploads/2025/06/Animacion_01_crop.webm" type="video/webm">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </section>
+
+            <section class="features-section">
+                <div class="container reveal">
+                    <div class="section-header">
+                        <h2 class="section-title">Our Unique Value Proposition</h2>
+                        <p class="section-subtitle">What sets us apart: a practical, personalized, and fully digital approach.</p>
+                    </div>
+
+                    <div class="features-grid">
+                        <div class="feature-card reveal" style="transition-delay: 0.1s;">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                            <h3>Personalized Curriculum</h3>
+                            <p>We adapt content exactly to the needs and learning pace of the student (Grades 6th to 11th).</p>
+                        </div>
+                        <div class="feature-card reveal" style="transition-delay: 0.2s;">
+                            <i class="fa-solid fa-tablet-screen-button"></i>
+                            <h3>Technological Innovation</h3>
+                            <p>Use of interactive virtual platforms and digital tools for immersive learning.</p>
+                        </div>
+                        <div class="feature-card reveal" style="transition-delay: 0.3s;">
+                            <i class="fa-solid fa-calculator"></i>
+                            <h3>Focus on Mathematics</h3>
+                            <p>Initially specialized in strengthening the Mathematics area for sixth grade, expanding to other areas.</p>
+                        </div>
+                        <div class="feature-card reveal" style="transition-delay: 0.4s;">
+                            <i class="fa-solid fa-flask"></i>
+                            <h3>Practical Approach</h3>
+                            <p>Exercises based on real-life problems to apply knowledge in daily life.</p>
+                        </div>
+                        <div class="feature-card reveal" style="transition-delay: 0.5s;">
+                            <i class="fa-solid fa-brain"></i>
+                            <h3>Fostering Critical Thinking</h3>
+                            <p>We design the modules so that the student thinks, analyzes, and solves autonomously.</p>
+                        </div>
+                        <div class="feature-card reveal" style="transition-delay: 0.6s;">
+                            <i class="fa-solid fa-layer-group"></i>
+                            <h3>Didactic Modules</h3>
+                            <p>Content structured in easily digestible modules for constant and measurable progress.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="data-section">
+                <div class="container reveal">
+                    <div class="section-header">
+                        <h2 class="section-title">EDUCARD in Numbers</h2>
+                        <p class="section-subtitle">Our impact measured in academic performance and student satisfaction.</p>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-item reveal" style="transition-delay: 0.1s;">
+                            <span class="stat-number">+1.5K</span>
+                            <span class="stat-label">Enrolled Students</span>
+                        </div>
+                        <div class="stat-item reveal" style="transition-delay: 0.2s;">
+                            <span class="stat-number">95%</span>
+                            <span class="stat-label">Satisfaction Rate</span>
+                        </div>
+                        <div class="stat-item reveal" style="transition-delay: 0.3s;">
+                            <span class="stat-number">4.6/5</span>
+                            <span class="stat-label">Average Rating</span>
+                        </div>
+                        <div class="stat-item reveal" style="transition-delay: 0.4s;">
+                            <span class="stat-number">+45</span>
+                            <span class="stat-label">Published Modules</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="modules-section">
+                <div class="container reveal">
+                    <div class="section-header">
+                        <h2 class="section-title">Explore Our Featured Modules</h2>
+                        <p class="section-subtitle">These are the most popular modules that are transforming academic performance.</p>
+                    </div>
+
+                    {% if db_status %}
+                    <div class="db-status-container">
+                        Database connection status: {{ db_status }}
+                    </div>
+                    {% endif %}
+
+                    {% if productos %}
+                        {% include 'module_cards_en.html' %}
+                    {% else %}
+                        <p style="text-align: center; color: var(--color-text-subtle); margin-top: 20px;">No modules are available at the moment. Please check the database connection.</p>
+                    {% endif %}
+                    
+                    <div class="modules-link">
+                        <a href="refuerzos.html" class="main-cta-button" style="margin-top: 50px;">View Full Catalog</a>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="testimonials-section">
+                <div class="container reveal">
+                    <div class="section-header">
+                        <h2 class="section-title">The Voice of Our Students</h2>
+                        <p class="section-subtitle">Hundreds of students and parents have already experienced the EDUCARD transformation. Their results speak for themselves!</p>
+                    </div>
+                    
+                    <div class="testimonials-grid">
+                        <div class="testimonial-card reveal" style="transition-delay: 0.1s;">
+                            <p class="testimonial-quote">"I used to hate Math, but with Educard's interactive modules, everything is easier and more fun. My grade went from 3.0 to 4.5 in one semester."</p>
+                            <div class="testimonial-author">
+                                <img src="https://i.postimg.cc/8Pj7V243/avatar1.jpg" alt="Avatar Laura S." class="author-avatar">
+                                <div class="author-info">
+                                    <strong>Laura S.</strong>
+                                    <span>Student, 6th Grade</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-card reveal" style="transition-delay: 0.2s;">
+                            <p class="testimonial-quote">"The platform is very intuitive and allows me to review Biology and Social Studies at my own pace. The best part is that I'm no longer afraid of exams."</p>
+                            <div class="testimonial-author">
+                                <img src="https://i.postimg.cc/QCg8tF6s/avatar2.jpg" alt="Avatar Mateo R." class="author-avatar">
+                                <div class="author-info">
+                                    <strong>Mateo R.</strong>
+                                    <span>Student, 8th Grade</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-card reveal" style="transition-delay: 0.3s;">
+                            <p class="testimonial-quote">"As a parent, it gives me great peace of mind to know that my son receives quality reinforcement education aligned with current technology. 100% recommended!"</p>
+                            <div class="testimonial-author">
+                                <img src="https://i.postimg.cc/YSpw0qKx/avatar3.jpg" alt="Avatar Mrs. Pérez" class="author-avatar">
+                                <div class="author-info">
+                                    <strong>Mrs. Marcela Pérez</strong>
+                                    <span>Parent</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="final-cta-section">
+                <div class="container reveal">
+                    <h2>Ready for Academic Success?</h2>
+                    <p>Don't waste any more time with outdated study methods. Join the educational revolution and give your child the technological advantage they need.</p>
+                    <a href="acceder.html" class="main-cta-button final-cta-button">Get Started Now</a>
+                </div>
+            </section>
+
+            <footer>
+                <div class="container footer-grid">
+                    <div class="footer-about">
+                        <h5>EDUCARD S.A.S.</h5>
+                        <p>Slogan: "<strong>Learn with technology, grow with knowledge</strong>". We are an educational services company that transforms learning with digital and technological tools.</p>
+                        <div class="social-links">
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <h5>Company</h5>
+                        <ul>
+                            <li><a href="nosotros.html">About Us (Mission/Vision)</a></li>
+                            <li><a href="beneficios.html">Statistics and Benefits</a></li>
+                            <li><a href="#">Work with Us</a></li>
+                            <li><a href="#">Terms and Conditions</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links">
+                        <h5>Support</h5>
+                        <ul>
+                            <li><a href="faq.html">Frequently Asked Questions</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Help and Tutorials</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links">
+                        <h5>Resources</h5>
+                        <ul>
+                            <li><a href="refuerzos.html">Module Catalog</a></li>
+                            <li><a href="#">Blog (Coming Soon)</a></li>
+                            <li><a href="#">Teacher Training</a></li>
+                            <li><a href="#">Site Map</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    &copy; 2025 EDUCARD S.A.S. All rights reserved. Developed in Cajicá.
+                </div>
+            </footer>
+        </div>
+
+
+        <div id="lang-de" data-lang="de" style="display: none;">
+            <header>
+                <a href="index.html" class="logo-container">
+                    <img src="image_a8e31c.png" alt="Educard Logo" class="logo-img">
+                    <span class="site-name">Educard SAS</span>
+                </a>
+
+                <nav>
+                    <ul>
+                        <li><a href="index.html" id="nav-index">Startseite</a></li>
+                        <li><a href="refuerzos.html" id="nav-refuerzos">Förderung</a></li>
+                        <li><a href="nosotros.html" id="nav-nosotros">Über Uns</a></li>
+                        <li><a href="beneficios.html" id="nav-beneficios">Vorteile</a></li>
+                        <li><a href="faq.html" id="nav-faq">FAQ</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="acceder.html" class="header-button">Anmelden</a>
+                    <div class="language-selector">
+                        <img id="current-flag-de" src="https://flagcdn.com/de.svg" alt="Deutschland Flagge" class="flag">
+                        <div class="language-dropdown">
+                            <a href="#" data-lang="es"><img src="https://flagcdn.com/co.svg" alt="Kolumbien Flagge"> Español</a>
+                            <a href="#" data-lang="en"><img src="https://flagcdn.com/us.svg" alt="USA Flagge"> English</a>
+                            <a href="#" data-lang="de"><img src="https://flagcdn.com/de.svg" alt="Deutschland Flagge"> Deutsch</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="hero">
+                <div class="container hero-content reveal">
+                    <div class="hero-text">
+                        <h1>Verwandeln Sie Bildung mit <span>Technologie und Förderung</span></h1>
+                        <p>EDUCARD S.A.S. bietet Ihnen personalisierte und dynamische Lehrpläne in Mathematik, Biologie, Spanisch und Sozialkunde, unter Verwendung der innovativsten digitalen Tools für den Erfolg Ihres Kindes.</p>
+                        <a href="acceder.html" class="main-cta-button">Jetzt Starten!</a>
+                    </div>
+                    <div class="hero-video-container">
+                        <video class="hero-video" autoplay loop muted playsinline>
+                            <source src="https://www.wited.com/wp-content/uploads/2025/06/Animacion_01_crop.webm" type="video/webm">
+                            Ihr Browser unterstützt das Video-Tag nicht.
+                        </video>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="features-section">
+                <div class="container reveal">
+                    <div class="section-header">
+                        <h2 class="section-title">Unser Einzigartiges Wertversprechen</h2>
+                        <p class="section-subtitle">Was uns auszeichnet: ein praktischer, personalisierter und vollständig digitaler Ansatz.</p>
+                    </div>
+
+                    <div class="features-grid">
+                        <div class="feature-card reveal" style="transition-delay: 0.1s;">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                            <h3>Personalisierter Lehrplan</h3>
+                            <p>Wir passen die Inhalte exakt an die Bedürfnisse und das Lerntempo des Schülers an (Klassen 6 bis 11).</p>
+                        </div>
+                        <div class="feature-card reveal" style="transition-delay: 0.2s;">
+                            <i class="fa-solid fa-tablet-screen-button"></i>
+                            <h3>Technologische Innovation</h3>
+                            <p>Einsatz interaktiver virtueller Plattformen und digitaler Tools für immersives Lernen.</p>
+                        </div>
+                        <div class="feature-card reveal" style="transition-delay: 0.3s;">
+                            <i class="fa-solid fa-calculator"></i>
+                            <h3>Fokus auf Mathematik</h3>
+                            <p>Ursprünglich spezialisiert auf die Stärkung des Fachbereichs Mathematik für die sechste Klasse, Ausweitung auf andere Bereiche.</p>
+                        </div>
+                        <div class="feature-card reveal" style="transition-delay: 0.4s;">
+                            <i class="fa-solid fa-flask"></i>
+                            <h3>Praktischer Ansatz</h3>
+                            <p>Übungen basierend auf realen Problemen zur Anwendung von Wissen im Alltag.</p>
+                        </div>
+                        <div class="feature-card reveal" style="transition-delay: 0.5s;">
+                            <i class="fa-solid fa-brain"></i>
+                            <h3>Förderung des Kritischen Denkens</h3>
+                            <p>Wir konzipieren die Module so, dass der Schüler autonom denkt, analysiert und löst.</p>
+                        </div>
+                        <div class="feature-card reveal" style="transition-delay: 0.6s;">
+                            <i class="fa-solid fa-layer-group"></i>
+                            <h3>Didaktische Module</h3>
+                            <p>In leicht verständliche Module strukturierter Inhalt für konstanten und messbaren Fortschritt.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="data-section">
+                <div class="container reveal">
+                    <div class="section-header">
+                        <h2 class="section-title">EDUCARD in Zahlen</h2>
+                        <p class="section-subtitle">Unsere Wirkung gemessen an der akademischen Leistung und der Zufriedenheit der Studenten.</p>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-item reveal" style="transition-delay: 0.1s;">
+                            <span class="stat-number">+1.5K</span>
+                            <span class="stat-label">Eingeschriebene Studenten</span>
+                        </div>
+                        <div class="stat-item reveal" style="transition-delay: 0.2s;">
+                            <span class="stat-number">95%</span>
+                            <span class="stat-label">Zufriedenheitsrate</span>
+                        </div>
+                        <div class="stat-item reveal" style="transition-delay: 0.3s;">
+                            <span class="stat-number">4.6/5</span>
+                            <span class="stat-label">Durchschnittliche Bewertung</span>
+                        </div>
+                        <div class="stat-item reveal" style="transition-delay: 0.4s;">
+                            <span class="stat-number">+45</span>
+                            <span class="stat-label">Veröffentlichte Module</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="modules-section">
+                <div class="container reveal">
+                    <div class="section-header">
+                        <h2 class="section-title">Entdecken Sie Unsere Empfohlenen Module</h2>
+                        <p class="section-subtitle">Dies sind die beliebtesten Module, die die akademische Leistung transformieren.</p>
+                    </div>
+
+                    {% if db_status %}
+                    <div class="db-status-container">
+                        Datenbank-Verbindungsstatus: {{ db_status }}
+                    </div>
+                    {% endif %}
+
+                    {% if productos %}
+                        {% include 'module_cards_de.html' %}
+                    {% else %}
+                        <p style="text-align: center; color: var(--color-text-subtle); margin-top: 20px;">Derzeit sind keine Module verfügbar. Bitte überprüfen Sie die Datenbankverbindung.</p>
+                    {% endif %}
+                    
+                    <div class="modules-link">
+                        <a href="refuerzos.html" class="main-cta-button" style="margin-top: 50px;">Gesamten Katalog Ansehen</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="testimonials-section">
+                <div class="container reveal">
+                    <div class="section-header">
+                        <h2 class="section-title">Die Stimmen Unserer Schüler</h2>
+                        <p class="section-subtitle">Hunderte von Schülern und Eltern haben die EDUCARD-Transformation bereits erlebt. Ihre Ergebnisse sprechen für sich!</p>
+                    </div>
+                    
+                    <div class="testimonials-grid">
+                        <div class="testimonial-card reveal" style="transition-delay: 0.1s;">
+                            <p class="testimonial-quote">"Ich hasste früher Mathe, aber mit den interaktiven Modulen von Educard ist alles einfacher und macht mehr Spaß. Meine Note stieg in einem Semester von 3,0 auf 4,5."</p>
+                            <div class="testimonial-author">
+                                <img src="https://i.postimg.cc/8Pj7V243/avatar1.jpg" alt="Avatar Laura S." class="author-avatar">
+                                <div class="author-info">
+                                    <strong>Laura S.</strong>
+                                    <span>Schülerin, 6. Klasse</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-card reveal" style="transition-delay: 0.2s;">
+                            <p class="testimonial-quote">"Die Plattform ist sehr intuitiv und ermöglicht es mir, Biologie und Sozialkunde in meinem eigenen Tempo zu wiederholen. Das Beste ist, dass ich keine Angst mehr vor Prüfungen habe."</p>
+                            <div class="testimonial-author">
+                                <img src="https://i.postimg.cc/QCg8tF6s/avatar2.jpg" alt="Avatar Mateo R." class="author-avatar">
+                                <div class="author-info">
+                                    <strong>Mateo R.</strong>
+                                    <span>Schüler, 8. Klasse</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-card reveal" style="transition-delay: 0.3s;">
+                            <p class="testimonial-quote">"Als Vater bin ich sehr beruhigt zu wissen, dass mein Sohn eine qualitativ hochwertige Förderbildung erhält, die auf die aktuelle Technologie abgestimmt ist. 100% empfohlen!"</p>
+                            <div class="testimonial-author">
+                                <img src="https://i.postimg.cc/YSpw0qKx/avatar3.jpg" alt="Avatar Frau Pérez" class="author-avatar">
+                                <div class="author-info">
+                                    <strong>Frau Marcela Pérez</strong>
+                                    <span>Elternteil</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="final-cta-section">
+                <div class="container reveal">
+                    <h2>Bereit für den Akademischen Erfolg?</h2>
+                    <p>Verschwenden Sie keine Zeit mehr mit veralteten Lernmethoden. Schließen Sie sich der Bildungsrevolution an und geben Sie Ihrem Kind den technologischen Vorteil, den es braucht.</p>
+                    <a href="acceder.html" class="main-cta-button final-cta-button">Jetzt Beginnen</a>
+                </div>
+            </section>
+
+            <footer>
+                <div class="container footer-grid">
+                    <div class="footer-about">
+                        <h5>EDUCARD S.A.S.</h5>
+                        <p>Slogan: "<strong>Mit Technologie lernen, mit Wissen wachsen</strong>". Wir sind ein Bildungsdienstleistungsunternehmen, das Lernen mit digitalen und technologischen Werkzeugen transformiert.</p>
+                        <div class="social-links">
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <h5>Unternehmen</h5>
+                        <ul>
+                            <li><a href="nosotros.html">Über Uns (Mission/Vision)</a></li>
+                            <li><a href="beneficios.html">Statistiken und Vorteile</a></li>
+                            <li><a href="#">Arbeiten Sie mit uns</a></li>
+                            <li><a href="#">Allgemeine Geschäftsbedingungen</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links">
+                        <h5>Support</h5>
+                        <ul>
+                            <li><a href="faq.html">Häufig gestellte Fragen</a></li>
+                            <li><a href="#">Kontakt</a></li>
+                            <li><a href="#">Hilfe und Tutorials</a></li>
+                            <li><a href="#">Datenschutzrichtlinie</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links">
+                        <h5>Ressourcen</h5>
+                        <ul>
+                            <li><a href="refuerzos.html">Modulkatalog</a></li>
+                            <li><a href="#">Blog (Bald verfügbar)</a></li>
+                            <li><a href="#">Lehrerschulung</a></li>
+                            <li><a href="#">Seitenübersicht</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    &copy; 2025 EDUCARD S.A.S. Alle Rechte vorbehalten. Entwickelt in Cajicá.
+                </div>
+            </footer>
+        </div>
+    </main>
 
     <script>
-        // Mapeo de traducciones (simplificado para el ejemplo)
-        const translations = {
-            'es': {
-                'pageTitle': 'EDUCARD SAS | Refuerzos de Matemáticas y Tecnología',
-                'logo': 'EDUCARD SAS',
-                'nav.home': 'Inicio',
-                'nav.refuerzos': 'Módulos',
-                'nav.beneficios': 'Beneficios',
-                'nav.nosotros': 'Nosotros',
-                'nav.faq': 'FAQ',
-                'nav.contacto': 'Contacto',
-                'language.button': 'ES',
-                'hero.title': 'Impulsa el Éxito Educativo: Refuerzos de Matemáticas y Tecnología',
-                'hero.subtitle': 'Ofrecemos módulos temáticos dinámicos y personalizados para estudiantes de primaria y secundaria, asegurando un aprendizaje efectivo y duradero.',
-                'hero.button1': 'Explorar Módulos',
-                'hero.button2': 'Agendar Consulta',
-                'stats.num1': '1000+',
-                'stats.label1': 'Estudiantes Activos',
-                'stats.num2': '95%',
-                'stats.label2': 'Tasa de Éxito',
-                'stats.num3': '20+',
-                'stats.label3': 'Módulos Temáticos',
-                'stats.num4': '4.8/5',
-                'stats.label4': 'Calificación Media',
-                'featured.title': 'Nuestros Módulos Más Populares',
-                'featured.subtitle': 'Descubre los refuerzos más solicitados que están transformando el rendimiento académico.',
-                'featured.no_modules': 'No hay módulos disponibles en este momento o la conexión con la base de datos está pendiente.',
-                'featured.view_all': 'Ver Catálogo Completo',
-                'values.title': '¿Por Qué Elegir EDUCARD SAS?',
-                'values.subtitle': 'Nuestra metodología se basa en pilares clave para garantizar el progreso de cada estudiante.',
-                'values.item1.title': 'Aprendizaje Personalizado',
-                'values.item1.text': 'Adaptamos el contenido y el ritmo a las necesidades específicas de cada estudiante para maximizar la comprensión.',
-                'values.item2.title': 'Foco en Resultados',
-                'values.item2.text': 'Nuestro objetivo principal es el mejoramiento visible y medible de las notas y el desempeño en pruebas estandarizadas.',
-                'values.item3.title': 'Integración Tecnológica',
-                'values.item3.text': 'Usamos herramientas de vanguardia para hacer las matemáticas y la tecnología accesibles y divertidas.',
-                'values.more_benefits': 'Descubre Todos los Beneficios',
-                'cta.title': '¿Listo para Ver el Progreso?',
-                'cta.subtitle': 'No esperes más para darle a tu hijo la ventaja que necesita. Contáctanos hoy para una evaluación inicial gratuita.',
-                'cta.button': 'Contáctanos Ahora',
-                'footer.mission': 'Impulsando el futuro a través de refuerzos de matemáticas y tecnología de alta calidad, personalizados y centrados en el estudiante.',
-                'footer.links.title': 'Enlaces Rápidos',
-                'footer.links.home': 'Inicio',
-                'footer.links.modules': 'Módulos',
-                'footer.links.benefits': 'Beneficios',
-                'footer.links.about': 'Nosotros',
-                'footer.support.title': 'Soporte',
-                'footer.support.faq': 'Preguntas Frecuentes',
-                'footer.support.policy': 'Política de Privacidad',
-                'footer.support.terms': 'Términos y Condiciones',
-                'footer.support.contact': 'Contáctanos',
-                'footer.contact.title': 'Contacto',
-                'footer.contact.email': 'Email: contacto@educardsas.com',
-                'footer.contact.phone': 'Teléfono: +57 601 XXX XXXX',
-                'footer.contact.address': 'Dirección: Bogotá, Colombia',
-                'module_card.tag': 'REFUERZO',
-                'module_card.instructor': 'Experto en Didáctica',
-                'module_card.title': 'Módulo Temático Principal',
-                'module_card.price_free': 'GRATIS',
-                'module_card.view_details': 'Ver Detalles'
-            },
-            'en': {
-                'pageTitle': 'EDUCARD SAS | Math and Tech Reinforcement',
-                'logo': 'EDUCARD SAS',
-                'nav.home': 'Home',
-                'nav.refuerzos': 'Modules',
-                'nav.beneficios': 'Benefits',
-                'nav.nosotros': 'About Us',
-                'nav.faq': 'FAQ',
-                'nav.contacto': 'Contact',
-                'language.button': 'EN',
-                'hero.title': 'Drive Educational Success: Math and Tech Reinforcement',
-                'hero.subtitle': 'We offer dynamic and personalized thematic modules for primary and secondary students, ensuring effective and lasting learning.',
-                'hero.button1': 'Explore Modules',
-                'hero.button2': 'Schedule Consultation',
-                'stats.num1': '1000+',
-                'stats.label1': 'Active Students',
-                'stats.num2': '95%',
-                'stats.label2': 'Success Rate',
-                'stats.num3': '20+',
-                'stats.label3': 'Thematic Modules',
-                'stats.num4': '4.8/5',
-                'stats.label4': 'Average Rating',
-                'featured.title': 'Our Most Popular Modules',
-                'featured.subtitle': 'Discover the most requested reinforcements that are transforming academic performance.',
-                'featured.no_modules': 'No modules available at this time or database connection is pending.',
-                'featured.view_all': 'View Full Catalog',
-                'values.title': 'Why Choose EDUCARD SAS?',
-                'values.subtitle': 'Our methodology is based on key pillars to guarantee the progress of each student.',
-                'values.item1.title': 'Personalized Learning',
-                'values.item1.text': 'We adapt the content and pace to the specific needs of each student to maximize comprehension.',
-                'values.item2.title': 'Focus on Results',
-                'values.item2.text': 'Our main goal is the visible and measurable improvement of grades and performance on standardized tests.',
-                'values.item3.title': 'Technological Integration',
-                'values.item3.text': 'We use cutting-edge tools to make math and technology accessible and fun.',
-                'values.more_benefits': 'Discover All Benefits',
-                'cta.title': 'Ready to See the Progress?',
-                'cta.subtitle': 'Don\'t wait any longer to give your child the advantage they need. Contact us today for a free initial assessment.',
-                'cta.button': 'Contact Us Now',
-                'footer.mission': 'Driving the future through high-quality, personalized, and student-centered math and technology reinforcements.',
-                'footer.links.title': 'Quick Links',
-                'footer.links.home': 'Home',
-                'footer.links.modules': 'Modules',
-                'footer.links.benefits': 'Benefits',
-                'footer.links.about': 'About Us',
-                'footer.support.title': 'Support',
-                'footer.support.faq': 'Frequently Asked Questions',
-                'footer.support.policy': 'Privacy Policy',
-                'footer.support.terms': 'Terms and Conditions',
-                'footer.support.contact': 'Contact Us',
-                'footer.contact.title': 'Contact',
-                'footer.contact.email': 'Email: contact@educardsas.com',
-                'footer.contact.phone': 'Phone: +57 601 XXX XXXX',
-                'footer.contact.address': 'Address: Bogotá, Colombia',
-                'module_card.tag': 'REINFORCEMENT',
-                'module_card.instructor': 'Didactic Expert',
-                'module_card.title': 'Main Thematic Module',
-                'module_card.price_free': 'FREE',
-                'module_card.view_details': 'View Details'
-            },
-            'de': {
-                'pageTitle': 'EDUCARD SAS | Mathematik- und Technologie-Förderung',
-                'logo': 'EDUCARD SAS',
-                'nav.home': 'Startseite',
-                'nav.refuerzos': 'Module',
-                'nav.beneficios': 'Vorteile',
-                'nav.nosotros': 'Über uns',
-                'nav.faq': 'FAQ',
-                'nav.contacto': 'Kontakt',
-                'language.button': 'DE',
-                'hero.title': 'Steigern Sie den Bildungserfolg: Mathematik- und Technologie-Förderung',
-                'hero.subtitle': 'Wir bieten dynamische und personalisierte thematische Module für Grund- und Sekundarschüler, die ein effektives und nachhaltiges Lernen gewährleisten.',
-                'hero.button1': 'Module Entdecken',
-                'hero.button2': 'Beratung Buchen',
-                'stats.num1': '1000+',
-                'stats.label1': 'Aktive Schüler',
-                'stats.num2': '95%',
-                'stats.label2': 'Erfolgsquote',
-                'stats.num3': '20+',
-                'stats.label3': 'Thematische Module',
-                'stats.num4': '4.8/5',
-                'stats.label4': 'Durchschnittliche Bewertung',
-                'featured.title': 'Unsere Beliebtesten Module',
-                'featured.subtitle': 'Entdecken Sie die gefragtesten Förderungen, die die akademische Leistung transformieren.',
-                'featured.no_modules': 'Momentan sind keine Module verfügbar oder die Datenbankverbindung steht noch aus.',
-                'featured.view_all': 'Gesamtkatalog Ansehen',
-                'values.title': 'Warum EDUCARD SAS Wählen?',
-                'values.subtitle': 'Unsere Methodik basiert auf Schlüsselpfeilern, um den Fortschritt jedes Schülers zu garantieren.',
-                'values.item1.title': 'Personalisiertes Lernen',
-                'values.item1.text': 'Wir passen den Inhalt und das Tempo an die spezifischen Bedürfnisse jedes Schülers an, um das Verständnis zu maximieren.',
-                'values.item2.title': 'Fokus auf Ergebnisse',
-                'values.item2.text': 'Unser Hauptziel ist die sichtbare und messbare Verbesserung der Noten und der Leistung bei standardisierten Tests.',
-                'values.item3.title': 'Technologische Integration',
-                'values.item3.text': 'Wir verwenden innovative Werkzeuge, um Mathematik und Technologie zugänglich und unterhaltsam zu machen.',
-                'values.more_benefits': 'Alle Vorteile Entdecken',
-                'cta.title': 'Bereit, den Fortschritt zu Sehen?',
-                'cta.subtitle': 'Warten Sie nicht länger, um Ihrem Kind den nötigen Vorsprung zu verschaffen. Kontaktieren Sie uns noch heute für eine kostenlose Erstberatung.',
-                'cta.button': 'Jetzt Kontaktieren',
-                'footer.mission': 'Wir treiben die Zukunft durch hochwertige, personalisierte und schülerzentrierte Mathematik- und Technologie-Förderungen voran.',
-                'footer.links.title': 'Schnell-Links',
-                'footer.links.home': 'Startseite',
-                'footer.links.modules': 'Module',
-                'footer.links.benefits': 'Vorteile',
-                'footer.links.about': 'Über uns',
-                'footer.support.title': 'Support',
-                'footer.support.faq': 'Häufig Gestellte Fragen',
-                'footer.support.policy': 'Datenschutzrichtlinie',
-                'footer.support.terms': 'AGB',
-                'footer.support.contact': 'Kontaktieren Sie uns',
-                'footer.contact.title': 'Kontakt',
-                'footer.contact.email': 'E-Mail: kontakt@educardsas.com',
-                'footer.contact.phone': 'Telefon: +57 601 XXX XXXX',
-                'footer.contact.address': 'Adresse: Bogotá, Kolumbien',
-                'module_card.tag': 'FÖRDERUNG',
-                'module_card.instructor': 'Didaktikexperte',
-                'module_card.title': 'Thematisches Hauptmodul',
-                'module_card.price_free': 'KOSTENLOS',
-                'module_card.view_details': 'Details ansehen'
-            }
-        };
-
-        // Función para aplicar la traducción
-        const applyTranslation = (lang) => {
-            const t = translations[lang] || translations['es'];
-            
-            // 1. Título de la página
-            document.getElementById('pageTitle').textContent = t.pageTitle;
-
-            // 2. Elementos con data-translate
-            document.querySelectorAll('[data-translate]').forEach(el => {
-                const key = el.dataset.translate;
-                if (t[key]) {
-                    el.textContent = t[key];
-                }
-            });
-
-            // 3. Casos especiales: Botón de idioma
-            const langButton = document.querySelector('.lang-button');
-            if (langButton) {
-                langButton.innerHTML = `<i class="fa-solid fa-globe"></i> ${lang.toUpperCase()}`;
-            }
-
-            // 4. Integrar el módulo card template
-            // Esto es necesario para que Flask sepa qué plantilla cargar
-            // Para el modo HTML simple, simularemos un cambio de plantilla
-            const moduleSection = document.querySelector('.modules-section .container');
-            if (moduleSection) {
-                let moduleHtml = '';
-                if (lang === 'en') {
-                    // Carga simulada de module_cards_en.html
-                    moduleHtml = `<p class="text-center" style="color: var(--color-text-subtle);">Simulación: Módulos en Inglés. Use app.py para la carga real.</p>
-                                  {% include 'module_cards_en.html' %}`;
-                } else if (lang === 'de') {
-                    // Carga simulada de module_cards_de.html
-                    moduleHtml = `<p class="text-center" style="color: var(--color-text-subtle);">Simulación: Módulos en Alemán. Use app.py para la carga real.</p>
-                                  {% include 'module_cards_de.html' %}`;
-                } else {
-                    // Carga simulada de module_cards_es.html
-                    moduleHtml = `{% include 'module_cards_es.html' %}`;
-                }
-                
-                // Nota: En un entorno de desarrollo Flask real, esto se manejaría en app.py. 
-                // Aquí solo aseguramos que el HTML del módulo se mantenga si la traducción lo requiere.
-            }
-            
-            // 5. Actualizar la clase 'active' para el menú
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === 'index.html' && key === 'nav.home') {
-                    link.classList.add('active');
-                }
-            });
-
-            // 6. Actualizar el atributo lang del HTML
-            document.documentElement.lang = lang;
-        };
-
         document.addEventListener('DOMContentLoaded', () => {
-            // 1. Lógica de Navegación Móvil
-            const menuToggle = document.getElementById('menuToggle');
-            const navLinks = document.getElementById('navLinks');
 
-            menuToggle.addEventListener('click', (e) => {
-                e.stopPropagation(); // Evita que el click cierre el dropdown de idioma
-                navLinks.classList.toggle('active');
-                const isExpanded = navLinks.classList.contains('active');
-                menuToggle.querySelector('i').className = isExpanded ? 'fa-solid fa-times' : 'fa-solid fa-bars';
-            });
+            // Obtener el nombre del archivo actual (para navegación activa)
+            const path = window.location.pathname;
+            const currentFile = path.substring(path.lastIndexOf('/') + 1) || 'index.html';
+            const pageId = currentFile.replace('.html', ''); 
 
-            // 2. Lógica de Cambio de Idioma (Local Storage + Dropdown)
+            // 1. Función para marcar el enlace activo en el menú principal
+            const setActiveLink = (pageId) => {
+                // Remove all existing active classes from the header navigation
+                document.querySelectorAll('nav a').forEach(link => {
+                    link.classList.remove('active');
+                });
+                
+                // Find and set the active class to the corresponding link using its ID
+                const activeLink = document.getElementById(`nav-${pageId}`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
+            };
+            
+            // Llamar a la función para establecer el enlace activo al cargar la página
+            setActiveLink(pageId === 'index' || pageId === '' ? 'index' : pageId);
+
+
+            // 2. Funcionalidad del Selector de Idioma
+            const langContent = {
+                'es': document.getElementById('lang-es'),
+                'en': document.getElementById('lang-en'),
+                'de': document.getElementById('lang-de')
+            };
+
             const languageSelectors = document.querySelectorAll('.language-selector');
 
-            // Cargar la preferencia de idioma al inicio
+            const applyTranslation = (newLang) => {
+                // Ocultar todos los bloques
+                Object.values(langContent).forEach(block => {
+                    if (block) block.style.display = 'none';
+                });
+
+                // Mostrar el bloque seleccionado
+                if (langContent[newLang]) {
+                    langContent[newLang].style.display = 'block';
+                    
+                    const titleMap = {
+                        'es': 'EDUCARD SAS | Refuerzos de Matemáticas y Tecnología',
+                        'en': 'EDUCARD SAS | Math Reinforcement and Technology',
+                        'de': 'EDUCARD SAS | Mathematikförderung und Technologie'
+                    };
+                    document.getElementById('pageTitle').textContent = titleMap[newLang] || titleMap['es'];
+                    
+                    // Actualizar la bandera principal para el idioma seleccionado
+                    const newFlagSrc = document.querySelector(`.language-dropdown a[data-lang="${newLang}"] img`).src;
+                    document.querySelectorAll('.language-selector .flag').forEach(img => {
+                        // Solo actualiza la bandera visible dentro del header del idioma activo
+                        if (img.closest(`#lang-${newLang}`)) {
+                             img.src = newFlagSrc;
+                        }
+                    });
+                    
+                    // Asegurar que el link activo se mantenga después del cambio de idioma
+                    setActiveLink(pageId === 'index' || pageId === '' ? 'index' : pageId);
+                }
+            };
+
+            // Intentar cargar el idioma del localStorage o establecer 'es' por defecto
             const savedLang = localStorage.getItem('educardLang') || 'es';
-            applyTranslation(savedLang);
+            applyTranslation(savedLang); 
 
             languageSelectors.forEach(selector => {
-                const button = selector.querySelector('.lang-button');
-                const dropdown = selector.querySelector('.language-dropdown');
-                
-                button.addEventListener('click', (e) => {
-                    e.stopPropagation(); // Evita que el evento se propague y cierre el dropdown inmediatamente
-                    // Cierra todos los demás dropdowns
+                // Toggle del dropdown
+                selector.addEventListener('click', (e) => {
+                    e.stopPropagation(); 
+                    const dropdown = selector.querySelector('.language-dropdown');
+                    // Cerrar todos los demás dropdowns
                     document.querySelectorAll('.language-dropdown').forEach(d => d.classList.remove('active'));
                     if (dropdown) dropdown.classList.toggle('active');
                 });
                 
+                // Manejar la selección de idioma dentro del dropdown
                 selector.querySelectorAll('.language-dropdown a').forEach(link => {
                     link.addEventListener('click', (e) => {
                         e.preventDefault();
