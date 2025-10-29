@@ -85,6 +85,17 @@ def index():
         generic_products=GENERIC_MATH_TOPICS 
     )
 
+# --- NUEVA RUTA AGREGADA PARA LA PÁGINA DE REFUERZOS ---
+@app.route('/refuerzos')
+def refuerzos():
+    """
+    Ruta que renderiza la plantilla 'refuerzos.html'.
+    Deberías replicar la lógica de la BD aquí si quieres que cargue 
+    productos dinámicos en esta página.
+    """
+    return render_template('refuerzos.html')
+
+
 # --- 4. INICIO DEL SERVIDOR ---
 if __name__ == '__main__':
     # Usamos el puerto del entorno o 5000 por defecto
