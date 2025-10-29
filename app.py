@@ -75,7 +75,12 @@ def index():
         db_status = "❌ Fallo Crítico de Conexión. Revisa la DATABASE_URL."
     
     # Renderizar la plantilla HTML, pasando el estado y los productos
-    return render_template('index.html', db_status=db_status, productos=productos)
+   return render_template(
+        'index.html', 
+        db_status=db_status, 
+        productos=productos, 
+        generic_products=GENERIC_MATH_TOPICS # <-- ¡Añade esto!
+    )
 
 # --- 4. INICIO DEL SERVIDOR ---
 if __name__ == '__main__':

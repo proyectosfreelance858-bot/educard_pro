@@ -689,7 +689,6 @@
                     </div>
                 </div>
             </section>
-
             <section class="modules-section">
                 <div class="container reveal">
                     <div class="section-header">
@@ -705,6 +704,23 @@
 
                     {% if productos %}
                         {% include 'module_cards_es.html' %}
+                    {% elif generic_products %} 
+                        <div class="section-header">
+                            <h3 class="section-title" style="color: var(--color-primary);">Catálogo de Ejemplo:</h3>
+                            <p class="section-subtitle">No se encontraron productos en la base de datos, mostrando temas genéricos de ejemplo.</p>
+                        </div>
+                        <div class="module-cards-grid">
+                            {% for modulo in generic_products %}
+                            <div class="module-card card-fallback">
+                                <h4 class="card-title">{{ modulo[0] }}</h4>
+                                <p class="card-subtitle">Área: {{ modulo[1] }}</p>
+                                <ul>
+                                    <li>Tema Principal: {{ modulo[2] }}</li>
+                                    <li>Subtema Clave: {{ modulo[3] }}</li>
+                                </ul>
+                            </div>
+                            {% endfor %}
+                        </div>
                     {% else %}
                         <p style="text-align: center; color: var(--color-text-subtle); margin-top: 20px;">No hay módulos disponibles en este momento. Por favor, revisa la conexión a la base de datos.</p>
                     {% endif %}
