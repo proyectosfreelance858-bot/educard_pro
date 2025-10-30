@@ -1,21 +1,19 @@
-# Archivo: app.py
 import os
 import psycopg2
-# Importar 'request', 'session', y 'redirect' para manejar el login y la redirección
+# Importar 'request', 'session', 'redirect', 'url_for' para manejar el login y la redirección
 from flask import Flask, render_template, request, session, redirect, url_for 
 from dotenv import load_dotenv
-import urllib.parse 
-import json # Necesario para parsear el JSON de módulos (si usas JSONB)
+import urllib.parse
+import json 
 
 # --- 1. CONFIGURACIÓN INICIAL ---
 load_dotenv()
 app = Flask(__name__)
 
-# Configuración CRÍTICA para usar sesiones (¡DEBE ESTAR PRESENTE!)
-# En un entorno de producción, esta clave debe ser muy compleja y secreta.
-app.secret_key = os.environ.get('SECRET_KEY', 'una_clave_secreta_super_default_insegura')
+# Configuración CRÍTICA para usar sesiones
+# En producción, usar una variable de entorno secreta y compleja.
+app.secret_key = os.environ.get('SECRET_KEY', 'una_clave_secreta_super_default_insegura_debes_cambiarla')
 
-# ... (Resto de datos fijos y la función get_db_connection son las mismas) ...
 # --- DATOS FIJOS/GENÉRICOS (sin cambios) ---
 GENERIC_MATH_TOPICS = [
     ("Operaciones con números enteros", "Matemáticas 6°", "Valor Posicional", "Polinomios Aritméticos"),
@@ -26,78 +24,80 @@ GENERIC_MATH_TOPICS = [
     ("Funciones y Gráficos", "Matemáticas 6°", "Dominio y Rango", "Interpretación de Gráficos"),
 ]
 
-# --- 2. GESTIÓN DE LA CONEXIÓN A LA BASE DE DATOS (MÉTODO EXPLÍCITO FINAL) ---
+# --- 2. GESTIÓN DE LA CONEXIÓN A LA BASE DE DATOS ---
 def get_db_connection():
     DATABASE_URL = os.environ.get('DATABASE_URL')
     
     if not DATABASE_URL:
-        # Esto solo se verá en los logs de Render si la variable no está configurada.
         print("ERROR: La variable DATABASE_URL no está definida.") 
         return None
         
-    print(f"DEBUG DB URL (START): {DATABASE_URL[:30]}...") 
-    
-    # Asegurar el prefijo 'postgresql' para un parseo correcto con urllib
     if DATABASE_URL.startswith('postgres://'):
         safe_url = DATABASE_URL.replace('postgres://', 'postgresql://', 1)
     else:
         safe_url = DATABASE_URL
     
     try:
-        # Descomponer la URL
         url = urllib.parse.urlparse(safe_url)
-        
-        # Conectar usando parámetros explícitos y SSL
         conn = psycopg2.connect(
-            database=url.path[1:],  # Ignora el "/" inicial
+            database=url.path[1:],
             user=url.username,
             password=url.password,
             host=url.hostname,
             port=url.port,
-            sslmode='require'  # CRÍTICO para Render y otras plataformas cloud
+            sslmode='require' # CRÍTICO para Render
         )
         return conn
         
     except Exception as e:
-        print(f"Error CRÍTICO al conectar a la base de datos (Método Explícito): {e}")
+        print(f"Error CRÍTICO al conectar a la base de datos: {e}")
         return None
 
-# --- NUEVA RUTA: Manejar el POST del Login y Establecer Sesión ---
-# Reemplazamos el login de JavaScript por una ruta de Flask para manejar la sesión.
-# Nota: La validación real de las credenciales debe ocurrir aquí consultando la DB.
+# --- 3. RUTAS DE AUTENTICACIÓN Y DASHBOARD ---
 
+# Ruta para mostrar el formulario de login (Corregido)
+@app.route('/login') 
+def login():
+    # Si el usuario ya está autenticado, redirigir a su dashboard correspondiente.
+    if 'username' in session:
+        if session.get('role') == 'Administrador':
+            return redirect(url_for('dashboard_admin'))
+        else:
+            return redirect(url_for('dashboard_student'))
+            
+    return render_template('login.html')
+
+# Ruta para procesar el formulario de login (POST)
 @app.route('/auth_login', methods=['POST'])
 def auth_login():
     nombre = request.form.get('nombre')
     contrasena = request.form.get('contrasena')
     
-    # *** SIMULACIÓN DE LA CONSULTA A LA BASE DE DATOS ***
-    # En un sistema real, aquí buscarías el usuario, obtendrías el hash y lo compararías.
+    # --- SIMULACIÓN DE LA CONSULTA A LA BASE DE DATOS (REEMPLAZAR CON LÓGICA REAL) ---
     
-    # Simulando la obtención de datos de usuario (solo para que el dashboard funcione)
-    # ¡Necesitas reemplazar esto con una consulta real a la tabla 'usuarios'!
+    # Aquí debería ir la consulta a la DB para validar el hash de la contraseña
+    # y obtener el rol. Por ahora, usamos la simulación basada en el nombre:
     
-    # Asumimos que la validación ha ocurrido con éxito y obtenemos el rol:
-    if nombre == 'Nicolas' or nombre == 'Kaleth':
+    # Nota: En un sistema real, si el login falla, deberías volver a /login con un mensaje de error.
+    if (nombre == 'Nicolas' or nombre == 'Kaleth') and contrasena == '1072':
         session['username'] = nombre
         session['role'] = 'Administrador'
         return redirect(url_for('dashboard_admin'))
-    elif nombre == 'Rogger':
+    elif nombre == 'Rogger' and contrasena == '1072':
         session['username'] = nombre
         session['role'] = 'Estudiante'
         return redirect(url_for('dashboard_student'))
     
-    # Si las credenciales fallan, redirige al login.
-    return redirect(url_for('index')) # O a una página de login con error
-    
-# --- RUTAS PRINCIPALES DEL DASHBOARD ---
+    # Si las credenciales fallan o el usuario no existe.
+    return redirect(url_for('login', error='Credenciales incorrectas'))
 
-# Ruta para el login de ESTUDIANTES (debe coincidir con la redirección en JS/HTML)
+
+# Ruta para el dashboard de ESTUDIANTES
 @app.route('/dashboard')
 def dashboard_student():
-    # 1. Asegurar que haya una sesión activa (autenticación)
+    # 1. Asegurar que haya una sesión activa y el rol correcto
     if 'username' not in session or session.get('role') != 'Estudiante':
-        return redirect(url_for('index')) # Redirigir al login si no está autenticado como estudiante
+        return redirect(url_for('login'))
 
     user_name = session['username']
     modules_list = []
@@ -113,7 +113,7 @@ def dashboard_student():
             module_data = cur.fetchone()
             
             if module_data and module_data[0]:
-                # Asumiendo la Opción 1 (TEXTO separado por comas) del paso anterior
+                # Asumiendo la Opción 1 (TEXTO separado por comas)
                 modules_raw = module_data[0]
                 modules_list = [m.strip() for m in modules_raw.split(',')]
                 db_status = f"✅ Conexión exitosa. Módulos encontrados para {user_name}."
@@ -128,9 +128,7 @@ def dashboard_student():
         finally:
             if conn:
                 conn.close()
-    else:
-        db_status = "❌ Fallo Crítico de Conexión a DB."
-
+    
     # Pasar los datos al template HTML
     return render_template(
         'dashboard.html', 
@@ -139,21 +137,25 @@ def dashboard_student():
         db_status=db_status
     )
 
-# Ruta para el login de ADMINISTRADORES (debe coincidir con la redirección en JS/HTML)
+# Ruta para el dashboard de ADMINISTRADORES
 @app.route('/dashboardadmin')
 def dashboard_admin():
     if 'username' not in session or session.get('role') != 'Administrador':
-        return redirect(url_for('index'))
+        return redirect(url_for('login'))
 
-    # Esta ruta es más sencilla y solo verifica la autenticación.
-    # El dashboard real de admin tendrá sus propias consultas.
     return render_template('dashboardadmin.html', user_name=session['username'])
 
+# Ruta para cerrar la sesión
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    session.pop('role', None)
+    return redirect(url_for('index'))
 
-# --- RUTAS DE LA APLICACIÓN (el resto se mantiene igual) ---
+# --- 4. RUTAS DE NAVEGACIÓN Y MÓDULOS (Nuevas Rutas Añadidas) ---
+
 @app.route('/')
 def index():
-    # ... (El código de la ruta index se mantiene igual) ...
     db_status = "Desconectado"
     productos = []
     
@@ -191,11 +193,32 @@ def index():
         generic_products=GENERIC_MATH_TOPICS 
     )
 
-# --- RUTAS DE NAVEGACIÓN (DEFINIDAS SIN .html) ---
+# Rutas de Módulos (Nuevas)
+@app.route('/modulo1')
+def modulo1():
+    return render_template('modulo1.html')
 
+@app.route('/modulo2')
+def modulo2():
+    return render_template('modulo2.html')
+
+@app.route('/modulo3')
+def modulo3():
+    return render_template('modulo3.html')
+
+@app.route('/modulo4')
+def modulo4():
+    return render_template('modulo4.html')
+
+@app.route('/modulo5')
+def modulo5():
+    return render_template('modulo5.html')
+
+
+# Rutas de Navegación Existentes
 @app.route('/refuerzos') 
 def refuerzos():
-    return render_template('refuerzos.html') 
+    return render_template('refuerzos.html')
 
 @app.route('/nosotros') 
 def nosotros():
@@ -210,7 +233,27 @@ def faq():
     return render_template('faq.html')
 
 
-# --- 4. INICIO DEL SERVIDOR ---
+# --- 5. INICIO DEL SERVIDOR ---
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, debug=True)
+```
+eof
+
+### Próximos Pasos (Frontend):
+
+Para que todo funcione correctamente, debes asegurarte de que tu `dashboard.html` use las nuevas rutas con la función `url_for`:
+
+1.  **En el encabezado del `dashboard.html`**, cambia el enlace de "Salir" para usar la nueva ruta de `logout`:
+    ```html
+    <a href="{{ url_for('logout') }}" style="...">Salir</a>
+    ```
+
+2.  **En el cuerpo del `dashboard.html`**, cambia la redirección de los módulos para usar el índice del ciclo `for` y llamar a la ruta de Flask:
+
+    ```html
+    <!-- En dashboard.html, dentro del loop: -->
+    <div class="module-card" onclick="window.location.href='{{ url_for('modulo' ~ loop.index) }}'">
+        <!-- ... contenido ... -->
+    </div>
+    
