@@ -17,115 +17,128 @@
             --color-text-dark: #212529; /* Texto Principal */
             --color-text-subtle: #6c757d; /* Texto Secundario */
             --color-border: #e9ecef;
-            --color-shadow-light: rgba(0, 0, 0, 0.08);
+            --color-shadow-light: rgba(0, 0, 0, 0.05);
             --font-main: 'Outfit', sans-serif;
             --font-secondary: 'Instrument Sans', sans-serif;
-            --padding-base: 1.5rem;
+            --spacing-unit: 1rem;
+            --border-radius-base: 8px;
+            --border-radius-large: 12px;
         }
 
-        /* Estilos Globales de HTML/BODY */
+        /* Estilos Generales */
         body {
             font-family: var(--font-main);
             color: var(--color-text-dark);
-            background-color: var(--color-background);
-            line-height: 1.6;
             margin: 0;
             padding: 0;
-            overflow-x: hidden; /* Evita scroll horizontal */
+            background-color: var(--color-background);
+            transition: background-color 0.3s;
         }
 
-        /* Contenedor Principal (Centrado y Responsive) */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-secondary);
+            font-weight: 700;
+            color: var(--color-text-dark);
+            margin-top: 0;
+        }
+
+        a {
+            color: var(--color-primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: var(--color-primary-dark);
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 var(--padding-base);
+            padding: 0 var(--spacing-unit) * 1.5;
         }
 
-        /* ========================================= */
-        /* --- 1. BARRA DE NAVEGACIÓN (NAVBAR) --- */
-        /* ========================================= */
-        .navbar {
+        /* Encabezado y Navegación */
+        .header {
             background-color: var(--color-surface);
-            box-shadow: 0 2px 10px var(--color-shadow-light);
-            padding: 1rem 0;
+            box-shadow: var(--color-shadow-light) 0px 4px 12px;
+            padding: var(--spacing-unit) 0;
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
-        .navbar .container {
+        .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .navbar a {
-            text-decoration: none;
-            color: var(--color-text-dark);
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .logo-text {
-            font-family: var(--font-secondary);
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--color-primary) !important;
-        }
-
-        .nav-links {
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--color-primary);
             display: flex;
-            gap: 1.5rem;
             align-items: center;
         }
 
-        .nav-link {
+        .logo i {
+            margin-right: 8px;
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: var(--spacing-unit) * 2;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-link a {
+            font-weight: 600;
+            color: var(--color-text-dark);
             padding: 0.5rem 0;
             position: relative;
         }
 
-        .nav-link:hover {
-            color: var(--color-primary);
-        }
-
-        .nav-link.active {
-            color: var(--color-primary);
-            font-weight: 600;
-        }
-
-        .nav-link.active::after {
+        .nav-link a:hover::after, .nav-link.active a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
             left: 0;
+            bottom: -5px;
             width: 100%;
             height: 3px;
             background-color: var(--color-primary);
             border-radius: 2px;
         }
 
-        /* Menú Móvil (Hamburguesa) */
         .menu-toggle {
             display: none;
-            font-size: 1.5rem;
             cursor: pointer;
+            font-size: 1.5rem;
         }
 
-        /* Selector de Idioma (Dropdown) */
         .language-selector {
             position: relative;
             cursor: pointer;
-        }
-
-        .language-current {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius-base);
+            font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem;
-            border: 1px solid var(--color-border);
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 500;
+            user-select: none;
+            margin-left: var(--spacing-unit);
+            transition: all 0.3s;
+        }
+
+        .language-selector:hover {
+            background-color: var(--color-background);
+        }
+
+        .language-selector span {
+            margin-right: 5px;
         }
 
         .language-dropdown {
@@ -133,25 +146,28 @@
             top: 100%;
             right: 0;
             background-color: var(--color-surface);
-            border: 1px solid var(--color-border);
-            border-radius: 8px;
-            box-shadow: 0 4px 12px var(--color-shadow-light);
-            padding: 0.5rem 0;
-            margin-top: 0.5rem;
+            box-shadow: 0px 8px 16px var(--color-shadow-light);
+            border-radius: var(--border-radius-base);
             min-width: 150px;
             z-index: 10;
-            display: none;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
+            margin-top: 10px;
         }
 
         .language-dropdown.active {
-            display: block;
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
         }
 
         .language-dropdown a {
+            color: var(--color-text-dark);
+            padding: 12px 16px;
             display: block;
-            padding: 0.5rem 1rem;
-            white-space: nowrap;
-            font-size: 0.9rem;
+            font-weight: 500;
         }
 
         .language-dropdown a:hover {
@@ -159,251 +175,228 @@
             color: var(--color-primary);
         }
 
-        /* Media Queries para Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 70px; /* Ajustar basado en la altura de la navbar */
-                left: 0;
-                width: 100%;
-                background-color: var(--color-surface);
-                box-shadow: 0 4px 10px var(--color-shadow-light);
-                padding: 1rem 0;
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .nav-links .nav-link {
-                padding: 0.75rem var(--padding-base);
-                text-align: center;
-                width: 100%;
-            }
-
-            .nav-link.active::after {
-                content: none; /* Eliminar subrayado en móvil */
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            .language-selector {
-                margin: 0.75rem auto; /* Centrar y espaciar en móvil */
-            }
-
-            .language-dropdown {
-                left: 50%;
-                transform: translateX(-50%);
-            }
-        }
-
-        /* ========================================= */
-        /* --- 2. SECCIÓN DE HÉROE/HEADER --- */
-        /* ========================================= */
-        .header {
+        /* Héroe/Sección Principal */
+        .hero-section {
+            background-color: var(--color-surface);
+            padding: 4rem 0;
             text-align: center;
-            padding: 4rem 0 2rem;
         }
 
-        .header h1 {
+        .hero-title {
             font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
             color: var(--color-primary);
+            margin-bottom: var(--spacing-unit);
         }
 
-        .header p {
+        .hero-subtitle {
             font-size: 1.2rem;
             color: var(--color-text-subtle);
             max-width: 800px;
-            margin: 0 auto 2rem;
+            margin: 0 auto 3rem;
         }
 
-        /* ========================================= */
-        /* --- 3. SECCIÓN DE FILTROS/BÚSQUEDA --- */
-        /* ========================================= */
-        .filter-section {
-            background-color: var(--color-surface);
-            padding: 1.5rem 0;
-            margin-bottom: 3rem;
-            border-bottom: 1px solid var(--color-border);
-        }
-
-        .filter-container {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .filter-item {
-            position: relative;
-            flex-grow: 1;
-            max-width: 300px;
-        }
-
-        .filter-item label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 0.4rem;
-            color: var(--color-text-subtle);
-        }
-
-        .filter-item input[type="text"],
-        .filter-item select {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: 1px solid var(--color-border);
-            border-radius: 8px;
-            font-family: var(--font-main);
-            font-size: 1rem;
-            box-sizing: border-box;
-            transition: border-color 0.3s;
-        }
-
-        .filter-item input[type="text"]:focus,
-        .filter-item select:focus {
-            border-color: var(--color-primary);
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(92, 103, 255, 0.2);
-        }
-
-        /* ========================================= */
-        /* --- 4. SECCIÓN DE MÓDULOS (GRID) --- */
-        /* ========================================= */
-        .modules-section {
-            padding: 2rem 0 5rem;
+        /* Grid de Módulos (Catálogo) */
+        .module-catalog {
+            padding: 4rem 0;
         }
 
         .module-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            justify-content: center;
+            margin-top: 2rem;
         }
 
-        /* El contenido de las tarjetas (module-card) se carga dinámicamente */
-        /* desde el archivo module_cards_es.html (incluido con Jinja2) */
-
-        /* ========================================= */
-        /* --- 5. SECCIÓN DE LLAMADA A LA ACCIÓN (CTA) --- */
-        /* ========================================= */
-        .cta-section {
-            background-color: var(--color-primary);
-            color: var(--color-surface);
-            text-align: center;
-            padding: 4rem 0;
-            margin-top: 3rem;
+        /* Tarjeta de Módulo */
+        .module-card {
+            background-color: var(--color-surface);
+            border-radius: var(--border-radius-large);
+            box-shadow: 0 4px 12px var(--color-shadow-light);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
         }
 
-        .cta-content h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         }
 
-        .cta-content p {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
+        .card-image-wrapper {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
         }
 
-        .cta-button {
-            display: inline-block;
+        .card-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .module-card:hover .card-image-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .card-tag {
+            position: absolute;
+            top: 10px;
+            right: 10px;
             background-color: var(--color-secondary);
             color: var(--color-text-dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: var(--border-radius-base);
+            font-size: 0.8rem;
             font-weight: 700;
-            padding: 0.75rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            transition: background-color 0.3s, transform 0.2s;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
-        .cta-button:hover {
-            background-color: #ffda6a;
-            transform: translateY(-2px);
+        .card-content {
+            padding: var(--spacing-unit) * 1.5;
+            flex-grow: 1;
         }
 
-        /* ========================================= */
-        /* --- 6. PIE DE PÁGINA (FOOTER) --- */
-        /* ========================================= */
-        .footer {
-            background-color: var(--color-text-dark);
-            color: var(--color-background);
-            padding: 3rem 0 1.5rem;
-            font-size: 0.9rem;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-column h4 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--color-surface);
-            border-bottom: 2px solid var(--color-primary);
-            padding-bottom: 0.3rem;
-            display: inline-block;
-        }
-
-        .footer-column ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .footer-column ul li {
+        .card-instructor {
+            display: flex;
+            align-items: center;
             margin-bottom: 0.5rem;
         }
 
-        .footer-column a {
-            color: var(--color-background);
-            text-decoration: none;
-            transition: color 0.3s;
-            display: block;
+        .instructor-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 8px;
+            object-fit: cover;
+            border: 2px solid var(--color-primary);
         }
 
-        .footer-column a:hover {
+        .instructor-name {
+            font-size: 0.9rem;
+            font-weight: 500;
             color: var(--color-primary);
         }
 
-        .footer-bottom {
-            text-align: center;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        .card-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--spacing-unit) 0;
+            border-top: 1px solid var(--color-border);
+            margin: 0 var(--spacing-unit) * 1.5;
+        }
+
+        .meta-item {
+            font-size: 0.9rem;
             color: var(--color-text-subtle);
+            display: flex;
+            align-items: center;
         }
 
-        /* Estilo para los iconos sociales */
-        .social-icons a {
-            font-size: 1.2rem;
-            margin-right: 1rem;
-            color: var(--color-primary);
-        }
-        .social-icons a:hover {
+        .meta-item i {
+            margin-right: 5px;
             color: var(--color-secondary);
         }
 
-        /* ========================================= */
-        /* --- 7. ANIMACIÓN DE REVEAL (JS) --- */
-        /* ========================================= */
+        .card-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--color-border);
+            padding-top: var(--spacing-unit);
+            margin-top: 0; /* Asegurar que no haya margen superior adicional */
+        }
+
+        .card-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--color-primary);
+        }
+
+        .card-price .free {
+            color: #28a745; /* Verde para GRATIS */
+        }
+
+        .explore-button {
+            background-color: var(--color-primary);
+            color: var(--color-surface);
+            padding: 0.6rem 1.5rem;
+            border-radius: var(--border-radius-base);
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .explore-button:hover {
+            background-color: #4b54ff; /* Tono más oscuro de primary */
+            color: var(--color-surface); /* Mantener blanco */
+        }
+
+        /* Pie de página */
+        .footer {
+            background-color: var(--color-text-dark);
+            color: var(--color-background);
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: rgba(248, 249, 250, 0.7); /* Gris claro */
+            font-size: 0.95rem;
+        }
+
+        .footer-section a:hover {
+            color: var(--color-primary);
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(248, 249, 250, 0.1);
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: rgba(248, 249, 250, 0.5);
+        }
+
+        /* Animaciones - Reveal */
         .reveal {
             position: relative;
             transform: translateY(20px);
             opacity: 0;
-            transition: all 0.5s ease;
+            transition: all 0.5s ease-out;
         }
 
         .reveal.active {
@@ -411,386 +404,172 @@
             opacity: 1;
         }
 
-        /* Estilo para el ícono del módulo */
-        .module-icon {
-            font-size: 2.5rem;
-            color: var(--color-primary);
-            margin-bottom: 1rem;
-        }
 
-        /* Estilo para el botón de Reiniciar Filtros */
-        .reset-button {
-            background-color: #e9ecef;
-            color: var(--color-text-subtle);
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-family: var(--font-main);
-            font-size: 1rem;
-            font-weight: 500;
-            transition: background-color 0.3s, color 0.3s;
-            margin-top: 1.5rem;
-        }
-
-        .reset-button:hover {
-            background-color: var(--color-text-dark);
-            color: var(--color-surface);
-        }
-
-        @media (max-width: 768px) {
-            .filter-container {
+        /* Media Queries (Diseño Responsivo) */
+        @media (max-width: 900px) {
+            .nav-links {
+                display: none;
                 flex-direction: column;
-                align-items: stretch;
-            }
-            .filter-item {
-                max-width: 100%;
-            }
-            .reset-button {
+                position: absolute;
+                top: 60px; /* Ajustar basado en la altura del header */
+                left: 0;
                 width: 100%;
+                background-color: var(--color-surface);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+                padding: var(--spacing-unit);
+                gap: 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-link a {
+                padding: 0.8rem 1rem;
+                display: block;
+                border-bottom: 1px solid var(--color-border);
+            }
+
+            .nav-link:last-child a {
+                border-bottom: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .navbar {
+                padding: 0 var(--spacing-unit) * 1.5;
+            }
+
+            .language-selector {
+                margin-left: 0;
+            }
+
+            .language-dropdown {
+                right: -10px; /* Ajuste para el móvil */
             }
         }
     </style>
 </head>
 <body>
 
-    <header class="navbar">
+    <header class="header">
         <div class="container">
-            <a href="/" class="logo-text">EDUCARD SAS</a>
-            <div class="nav-links" id="navLinks">
-                <a href="/" class="nav-link" id="navHome">Inicio</a>
-                <a href="/refuerzos" class="nav-link active" id="navRefuerzos">Refuerzos</a>
-                <a href="/nosotros" class="nav-link" id="navNosotros">Nosotros</a>
-                <a href="/beneficios" class="nav-link" id="navBeneficios">Beneficios</a>
-                <a href="/faq" class="nav-link" id="navFAQ">FAQ</a>
+            <nav class="navbar">
+                <a href="/" class="logo" data-translate-key="home_logo_link">
+                    <i class="fa-solid fa-graduation-cap"></i> <span id="logo-text">EDUCARD</span>
+                </a>
                 
-                <div class="language-selector" data-selector-id="navbar-lang">
-                    <div class="language-current" data-lang-display>
-                        <i class="fa-solid fa-globe"></i>
-                        <span id="currentLangName">ES</span>
-                        <i class="fa-solid fa-chevron-down" style="font-size: 0.6rem;"></i>
+                <ul class="nav-links" id="navLinks">
+                    <li class="nav-link"><a href="/" data-translate-key="nav_home">Inicio</a></li>
+                    <li class="nav-link active"><a href="/refuerzos" data-translate-key="nav_refuerzos">Refuerzos</a></li>
+                    <li class="nav-link"><a href="/beneficios" data-translate-key="nav_beneficios">Beneficios</a></li>
+                    <li class="nav-link"><a href="/nosotros" data-translate-key="nav_nosotros">Nosotros</a></li>
+                    <li class="nav-link"><a href="/faq" data-translate-key="nav_faq">FAQ</a></li>
+                </ul>
+
+                <div style="display: flex; align-items: center;">
+                    <div class="language-selector" id="languageSelector">
+                        <span id="currentLang">ES</span>
+                        <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 5px;"></i>
+                        <div class="language-dropdown">
+                            <a href="#" data-lang="es">Español (ES)</a>
+                            <a href="#" data-lang="en">English (EN)</a>
+                            <a href="#" data-lang="de">Deutsch (DE)</a>
+                        </div>
                     </div>
-                    <div class="language-dropdown">
-                        <a href="#" data-lang="es">Español (ES)</a>
-                        <a href="#" data-lang="en">English (EN)</a>
-                        <a href="#" data-lang="de">Deutsch (DE)</a>
+                    <div class="menu-toggle" id="menuToggle">
+                        <i class="fa-solid fa-bars"></i>
                     </div>
                 </div>
-            </div>
-            <i class="fa-solid fa-bars menu-toggle" id="menuToggle"></i>
+            </nav>
         </div>
     </header>
 
-    <section class="header">
+    <main class="module-catalog">
         <div class="container">
-            <h1 id="headerTitle">Catálogo de Refuerzos de Matemáticas</h1>
-            <p id="headerSubtitle">Explora nuestra colección de módulos de refuerzo para dominar los temas clave. Filtrado por nivel educativo y tema.</p>
-        </div>
-    </section>
+            <h1 class="hero-title reveal" data-translate-key="catalog_title">Catálogo de Refuerzos de Matemáticas</h1>
+            <p class="hero-subtitle reveal" style="transition-delay: 0.2s;" data-translate-key="catalog_subtitle">
+                Explora nuestra colección de módulos de aprendizaje interactivos, diseñados para reforzar los temas clave de matemáticas.
+            </p>
 
-    <section class="filter-section">
-        <div class="container filter-container">
-            <div class="filter-item">
-                <label for="search" id="labelSearch">Buscar Módulo</label>
-                <input type="text" id="search" placeholder="Ej: Fraccionarios, Geometría...">
-            </div>
-            <div class="filter-item">
-                <label for="levelFilter" id="labelLevel">Filtrar por Nivel</label>
-                <select id="levelFilter">
-                    <option value="" id="optionAllLevels">Todos los Niveles</option>
-                    <option value="6°" id="optionLevel6">Matemáticas 6°</option>
-                    <option value="7°" id="optionLevel7">Matemáticas 7°</option>
-                    <option value="8°" id="optionLevel8">Matemáticas 8°</option>
-                </select>
-            </div>
-            <div class="filter-item">
-                <label for="topicFilter" id="labelTopic">Filtrar por Tema</label>
-                <select id="topicFilter">
-                    <option value="" id="optionAllTopics">Todos los Temas</option>
-                    </select>
-            </div>
-        </div>
-        <div class="container" style="text-align: center;">
-            <button class="reset-button" id="resetFilters"><i class="fa-solid fa-arrows-rotate"></i> <span id="buttonReset">Reiniciar Filtros</span></button>
-        </div>
-    </section>
+            {% include 'module_cards_es.html' %} 
 
-    <section class="modules-section">
-        <div class="container">
-            <h2 id="modulesHeader" style="font-size: 2rem; font-weight: 700; margin-bottom: 2rem; color: var(--color-text-dark); text-align: center;">Módulos Disponibles</h2>
-            
-            <div id="moduleListContainer">
-                {% include 'module_cards_es.html' %}
-                
-                <p id="noResultsMessage" style="text-align: center; color: var(--color-text-subtle); font-style: italic; margin-top: 3rem; display: none;">
-                    <i class="fa-solid fa-circle-exclamation"></i> No se encontraron módulos que coincidan con los criterios de búsqueda.
-                </p>
-            </div>
+            {% if not productos %}
+                <div style="text-align: center; padding: 4rem 0;">
+                    <h2 style="color: var(--color-text-subtle);">No hay módulos disponibles en este momento.</h2>
+                    <p>Por favor, revisa más tarde o <a href="/faq" style="font-weight: 600;">contacta a soporte</a>.</p>
+                </div>
+            {% endif %}
             
         </div>
-    </section>
-
-    <section class="cta-section reveal">
-        <div class="container cta-content">
-            <h2 id="ctaTitle">¿Listo para Empezar a Aprender?</h2>
-            <p id="ctaSubtitle">Únete a nuestra plataforma y accede a nuestro primer módulo introductorio de forma gratuita.</p>
-            <a href="/modulo1" class="cta-button" id="ctaButton">Ir al Módulo Gratuito</a>
-        </div>
-    </section>
+    </main>
 
     <footer class="footer">
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-column reveal">
-                    <h4>EDUCARD SAS</h4>
-                    <p id="footerDescription">Impulsando el futuro de la educación con tecnología y didáctica de vanguardia.</p>
-                    <div class="social-icons">
-                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                    </div>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-logo">EDUCARD</h3>
+                    <p data-translate-key="footer_mission">
+                        Potenciamos el aprendizaje de matemáticas y tecnología a través de módulos interactivos y personalizados.
+                    </p>
                 </div>
-                <div class="footer-column reveal">
-                    <h4 id="footerNavTitle">Navegación</h4>
-                    <ul>
-                        <li><a href="/" id="footerHome">Inicio</a></li>
-                        <li><a href="/refuerzos" id="footerRefuerzos">Refuerzos</a></li>
-                        <li><a href="/nosotros" id="footerNosotros">Nosotros</a></li>
-                        <li><a href="/beneficios" id="footerBeneficios">Beneficios</a></li>
-                        <li><a href="/faq" id="footerFAQ">FAQ</a></li>
+
+                <div class="footer-section">
+                    <h4 style="color: var(--color-surface);" data-translate-key="footer_quick_links_title">Enlaces Rápidos</h4>
+                    <ul class="footer-links">
+                        <li><a href="/refuerzos" data-translate-key="nav_refuerzos">Refuerzos</a></li>
+                        <li><a href="/beneficios" data-translate-key="nav_beneficios">Beneficios</a></li>
+                        <li><a href="/nosotros" data-translate-key="nav_nosotros">Nosotros</a></li>
+                        <li><a href="/faq" data-translate-key="nav_faq">FAQ</a></li>
                     </ul>
                 </div>
-                <div class="footer-column reveal">
-                    <h4 id="footerContactTitle">Contacto</h4>
-                    <p>Email: <a href="mailto:info@educardsas.com">info@educardsas.com</a></p>
-                    <p id="footerAddress">Calle 123 # 45 - 67, Bogotá, Colombia</p>
-                    <p id="footerPhone">Tel: (601) 555-1234</p>
-                </div>
-                <div class="footer-column reveal">
-                    <h4 id="footerLegalTitle">Legal</h4>
-                    <ul>
-                        <li><a href="#" id="footerPrivacy">Política de Privacidad</a></li>
-                        <li><a href="#" id="footerTerms">Términos de Servicio</a></li>
-                    </ul>
+
+                <div class="footer-section">
+                    <h4 style="color: var(--color-surface);" data-translate-key="footer_contact_title">Contacto</h4>
+                    <p>
+                        <i class="fa-solid fa-envelope"></i>
+                        <a href="mailto:info@educard.sas.com" data-translate-key="footer_email">info@educard.sas.com</a>
+                    </p>
+                    <p>
+                        <i class="fa-solid fa-phone"></i>
+                        <a href="tel:+573000000000" data-translate-key="footer_phone">+57 300 000 0000</a>
+                    </p>
                 </div>
             </div>
+            
             <div class="footer-bottom">
-                &copy; <span id="currentYear">2024</span> <span id="footerCopyright">EDUCARD SAS. Todos los derechos reservados.</span>
+                &copy; <span id="currentYear"></span> EDUCARD SAS. Todos los derechos reservados. | 
+                <span data-translate-key="footer_country">Colombia.</span>
             </div>
         </div>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            // =========================================
-            // --- 1. GESTIÓN DE LA NAVEGACIÓN Y IDIOMA ---
-            // =========================================
-            
-            // Control del Menú Móvil
+        document.addEventListener('DOMContentLoaded', function() {
+            // 1. Manejo de Navegación y Dropdown de Idiomas (Copia Exacta)
             const menuToggle = document.getElementById('menuToggle');
             const navLinks = document.getElementById('navLinks');
+            const languageSelector = document.getElementById('languageSelector');
 
-            if (menuToggle && navLinks) {
-                menuToggle.addEventListener('click', () => {
-                    navLinks.classList.toggle('active');
-                });
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+            
+            // Función de traducción (Placeholder - asume que existe en index/otro archivo)
+            function applyTranslation(lang) {
+                console.log('Cambiando a idioma:', lang);
+                // Lógica de traducción real aquí...
             }
 
-            // Control de Dropdowns (Idioma)
+            // Manejo de Dropdown de Idiomas
             const languageSelectors = document.querySelectorAll('.language-selector');
 
-            // Función de traducción simulada (Placeholder)
-            const applyTranslation = (lang) => {
-                const langMap = {
-                    'es': {
-                        pageTitle: 'EDUCARD SAS | Catálogo de Refuerzos de Matemáticas',
-                        navHome: 'Inicio',
-                        navRefuerzos: 'Refuerzos',
-                        navNosotros: 'Nosotros',
-                        navBeneficios: 'Beneficios',
-                        navFAQ: 'FAQ',
-                        headerTitle: 'Catálogo de Refuerzos de Matemáticas',
-                        headerSubtitle: 'Explora nuestra colección de módulos de refuerzo para dominar los temas clave. Filtrado por nivel educativo y tema.',
-                        labelSearch: 'Buscar Módulo',
-                        labelLevel: 'Filtrar por Nivel',
-                        optionAllLevels: 'Todos los Niveles',
-                        optionLevel6: 'Matemáticas 6°',
-                        optionLevel7: 'Matemáticas 7°',
-                        optionLevel8: 'Matemáticas 8°',
-                        labelTopic: 'Filtrar por Tema',
-                        optionAllTopics: 'Todos los Temas',
-                        buttonReset: 'Reiniciar Filtros',
-                        modulesHeader: 'Módulos Disponibles',
-                        ctaTitle: '¿Listo para Empezar a Aprender?',
-                        ctaSubtitle: 'Únete a nuestra plataforma y accede a nuestro primer módulo introductorio de forma gratuita.',
-                        ctaButton: 'Ir al Módulo Gratuito',
-                        footerDescription: 'Impulsando el futuro de la educación con tecnología y didáctica de vanguardia.',
-                        footerNavTitle: 'Navegación',
-                        footerHome: 'Inicio',
-                        footerRefuerzos: 'Refuerzos',
-                        footerNosotros: 'Nosotros',
-                        footerBeneficios: 'Beneficios',
-                        footerFAQ: 'FAQ',
-                        footerContactTitle: 'Contacto',
-                        footerAddress: 'Calle 123 # 45 - 67, Bogotá, Colombia',
-                        footerPhone: 'Tel: (601) 555-1234',
-                        footerLegalTitle: 'Legal',
-                        footerPrivacy: 'Política de Privacidad',
-                        footerTerms: 'Términos de Servicio',
-                        footerCopyright: 'EDUCARD SAS. Todos los derechos reservados.',
-                        currentLangName: 'ES',
-                        noResultsMessage: 'No se encontraron módulos que coincidan con los criterios de búsqueda.',
-                    },
-                    'en': {
-                        pageTitle: 'EDUCARD SAS | Math Reinforcement Catalog',
-                        navHome: 'Home',
-                        navRefuerzos: 'Reinforcements',
-                        navNosotros: 'About Us',
-                        navBeneficios: 'Benefits',
-                        navFAQ: 'FAQ',
-                        headerTitle: 'Mathematics Reinforcement Catalog',
-                        headerSubtitle: 'Explore our collection of reinforcement modules to master key topics. Filtered by educational level and subject.',
-                        labelSearch: 'Search Module',
-                        labelLevel: 'Filter by Level',
-                        optionAllLevels: 'All Levels',
-                        optionLevel6: 'Mathematics 6th Grade',
-                        optionLevel7: 'Mathematics 7th Grade',
-                        optionLevel8: 'Mathematics 8th Grade',
-                        labelTopic: 'Filter by Topic',
-                        optionAllTopics: 'All Topics',
-                        buttonReset: 'Reset Filters',
-                        modulesHeader: 'Available Modules',
-                        ctaTitle: 'Ready to Start Learning?',
-                        ctaSubtitle: 'Join our platform and access our first introductory module for free.',
-                        ctaButton: 'Go to Free Module',
-                        footerDescription: 'Driving the future of education with cutting-edge technology and didactics.',
-                        footerNavTitle: 'Navigation',
-                        footerHome: 'Home',
-                        footerRefuerzos: 'Reinforcements',
-                        footerNosotros: 'About Us',
-                        footerBeneficios: 'Benefits',
-                        footerFAQ: 'FAQ',
-                        footerContactTitle: 'Contact',
-                        footerAddress: '123 Street # 45 - 67, Bogotá, Colombia',
-                        footerPhone: 'Phone: (601) 555-1234',
-                        footerLegalTitle: 'Legal',
-                        footerPrivacy: 'Privacy Policy',
-                        footerTerms: 'Terms of Service',
-                        footerCopyright: 'EDUCARD SAS. All rights reserved.',
-                        currentLangName: 'EN',
-                        noResultsMessage: 'No modules were found matching the search criteria.',
-                    },
-                    'de': {
-                        pageTitle: 'EDUCARD SAS | Mathe-Förderungskatalog',
-                        navHome: 'Startseite',
-                        navRefuerzos: 'Förderung',
-                        navNosotros: 'Über Uns',
-                        navBeneficios: 'Vorteile',
-                        navFAQ: 'FAQ',
-                        headerTitle: 'Katalog der Mathematikförderung',
-                        headerSubtitle: 'Entdecken Sie unsere Sammlung von Förderungsmodulen, um Schlüsselthemen zu meistern. Gefiltert nach Bildungsniveau und Thema.',
-                        labelSearch: 'Modul Suchen',
-                        labelLevel: 'Nach Niveau Filtern',
-                        optionAllLevels: 'Alle Niveaus',
-                        optionLevel6: 'Mathematik 6. Klasse',
-                        optionLevel7: 'Mathematik 7. Klasse',
-                        optionLevel8: 'Mathematik 8. Klasse',
-                        labelTopic: 'Nach Thema Filtern',
-                        optionAllTopics: 'Alle Themen',
-                        buttonReset: 'Filter Zurücksetzen',
-                        modulesHeader: 'Verfügbare Module',
-                        ctaTitle: 'Bereit, mit dem Lernen zu Beginnen?',
-                        ctaSubtitle: 'Treten Sie unserer Plattform bei und greifen Sie kostenlos auf unser erstes Einführungsmodul zu.',
-                        ctaButton: 'Zum Kostenlosen Modul',
-                        footerDescription: 'Die Zukunft der Bildung mit Spitzentechnologie und Didaktik vorantreiben.',
-                        footerNavTitle: 'Navigation',
-                        footerHome: 'Startseite',
-                        footerRefuerzos: 'Förderung',
-                        footerNosotros: 'Über Uns',
-                        footerBeneficios: 'Vorteile',
-                        footerFAQ: 'FAQ',
-                        footerContactTitle: 'Kontakt',
-                        footerAddress: 'Calle 123 # 45 - 67, Bogotá, Kolumbien',
-                        footerPhone: 'Tel: (601) 555-1234',
-                        footerLegalTitle: 'Rechtliches',
-                        footerPrivacy: 'Datenschutzrichtlinie',
-                        footerTerms: 'Nutzungsbedingungen',
-                        footerCopyright: 'EDUCARD SAS. Alle Rechte vorbehalten.',
-                        currentLangName: 'DE',
-                        noResultsMessage: 'Es wurden keine Module gefunden, die den Suchkriterien entsprechen.',
-                    }
-                };
-                
-                const translations = langMap[lang];
-
-                if (!translations) return;
-
-                // Actualizar textos
-                document.getElementById('pageTitle').textContent = translations.pageTitle;
-                document.getElementById('navHome').textContent = translations.navHome;
-                document.getElementById('navRefuerzos').textContent = translations.navRefuerzos;
-                document.getElementById('navNosotros').textContent = translations.navNosotros;
-                document.getElementById('navBeneficios').textContent = translations.navBeneficios;
-                document.getElementById('navFAQ').textContent = translations.navFAQ;
-                document.getElementById('headerTitle').textContent = translations.headerTitle;
-                document.getElementById('headerSubtitle').textContent = translations.headerSubtitle;
-                document.getElementById('labelSearch').textContent = translations.labelSearch;
-                document.getElementById('labelLevel').textContent = translations.labelLevel;
-                document.getElementById('optionAllLevels').textContent = translations.optionAllLevels;
-                document.getElementById('optionLevel6').textContent = translations.optionLevel6;
-                document.getElementById('optionLevel7').textContent = translations.optionLevel7;
-                document.getElementById('optionLevel8').textContent = translations.optionLevel8;
-                document.getElementById('labelTopic').textContent = translations.labelTopic;
-                document.getElementById('optionAllTopics').textContent = translations.optionAllTopics;
-                document.getElementById('buttonReset').textContent = translations.buttonReset;
-                document.getElementById('modulesHeader').textContent = translations.modulesHeader;
-                document.getElementById('ctaTitle').textContent = translations.ctaTitle;
-                document.getElementById('ctaSubtitle').textContent = translations.ctaSubtitle;
-                document.getElementById('ctaButton').textContent = translations.ctaButton;
-                document.getElementById('footerDescription').textContent = translations.footerDescription;
-                document.getElementById('footerNavTitle').textContent = translations.footerNavTitle;
-                document.getElementById('footerHome').textContent = translations.footerHome;
-                document.getElementById('footerRefuerzos').textContent = translations.footerRefuerzos;
-                document.getElementById('footerNosotros').textContent = translations.footerNosotros;
-                document.getElementById('footerBeneficios').textContent = translations.footerBeneficios;
-                document.getElementById('footerFAQ').textContent = translations.footerFAQ;
-                document.getElementById('footerContactTitle').textContent = translations.footerContactTitle;
-                document.getElementById('footerAddress').textContent = translations.footerAddress;
-                document.getElementById('footerPhone').textContent = translations.footerPhone;
-                document.getElementById('footerLegalTitle').textContent = translations.footerLegalTitle;
-                document.getElementById('footerPrivacy').textContent = translations.footerPrivacy;
-                document.getElementById('footerTerms').textContent = translations.footerTerms;
-                document.getElementById('footerCopyright').textContent = translations.footerCopyright;
-                document.getElementById('currentLangName').textContent = translations.currentLangName;
-                document.getElementById('noResultsMessage').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> ${translations.noResultsMessage}`;
-
-
-                // Cargar contenido dinámico (Módulos)
-                fetch(`/module_cards_${lang}.html`)
-                    .then(response => response.text())
-                    .then(html => {
-                        document.getElementById('moduleListContainer').innerHTML = html;
-                        // Después de cargar el nuevo contenido, re-ejecutar el filtro
-                        filterModules();
-                        // Re-observar elementos para Scroll Reveal
-                        const reveals = document.querySelectorAll('.reveal');
-                        reveals.forEach(reveal => observer.observe(reveal));
-                    })
-                    .catch(err => console.error('Error loading module content:', err));
-
-            };
-
-            // Inicializar idioma (opcional)
-            const initialLang = 'es'; // Por defecto
-            applyTranslation(initialLang);
-            
             languageSelectors.forEach(selector => {
-                const currentDisplay = selector.querySelector('.language-current');
-                const dropdown = selector.querySelector('.language-dropdown');
-
-                currentDisplay.addEventListener('click', (e) => {
-                    e.stopPropagation(); // Previene que el clic cierre inmediatamente el dropdown
+                selector.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevenir que el clic cierre inmediatamente
+                    const dropdown = selector.querySelector('.language-dropdown');
                     // Cerrar otros dropdowns antes de abrir este
                     document.querySelectorAll('.language-dropdown').forEach(d => d.classList.remove('active'));
                     if (dropdown) dropdown.classList.toggle('active');
@@ -810,135 +589,19 @@
                 document.querySelectorAll('.language-dropdown').forEach(d => d.classList.remove('active'));
             });
 
-
-            // =========================================
-            // --- 2. LÓGICA DE FILTRADO Y BÚSQUEDA ---
-            // =========================================
-
-            const searchInput = document.getElementById('search');
-            const levelFilter = document.getElementById('levelFilter');
-            const topicFilter = document.getElementById('topicFilter');
-            const resetFiltersButton = document.getElementById('resetFilters');
-            const noResultsMessage = document.getElementById('noResultsMessage');
-
-            // 2.1. Recopilar y llenar el filtro de temas
-            const populateTopicFilter = () => {
-                const modules = document.querySelectorAll('.module-card');
-                const topics = new Set();
-                
-                modules.forEach(module => {
-                    const cardContent = module.querySelector('.card-content');
-                    if (cardContent) {
-                        // Buscar temas en el párrafo del contenido (ej. **Temas:** Tema1 y Tema2)
-                        const pTag = cardContent.querySelector('p');
-                        if (pTag) {
-                            const text = pTag.textContent;
-                            // Extraer los temas (asumiendo que están separados por ' y ')
-                            const topicMatch = text.match(/:\s*(.*)\s*y\s*(.*)\./i);
-                            if (topicMatch) {
-                                topics.add(topicMatch[1].trim());
-                                topics.add(topicMatch[2].trim());
-                            }
-                        }
-                        // También puedes buscar por el título o categoría si es necesario
-                        const category = module.querySelector('.card-tag').textContent.trim();
-                        if (category) {
-                            topics.add(category);
-                        }
-                    }
-                });
-
-                // Limpiar y llenar el select de temas
-                topicFilter.innerHTML = '<option value="" id="optionAllTopics">Todos los Temas</option>';
-                const sortedTopics = Array.from(topics).sort();
-
-                sortedTopics.forEach(topic => {
-                    if (topic) {
-                        const option = document.createElement('option');
-                        option.value = topic;
-                        option.textContent = topic;
-                        topicFilter.appendChild(option);
-                    }
-                });
-            };
-
-            // 2.2. Función principal de filtrado
-            const filterModules = () => {
-                const searchTerm = searchInput.value.toLowerCase().trim();
-                const selectedLevel = levelFilter.value;
-                const selectedTopic = topicFilter.value;
-                const modules = document.querySelectorAll('.module-card');
-                let foundResults = false;
-
-                modules.forEach(module => {
-                    const moduleText = module.textContent.toLowerCase();
-                    const categoryTag = module.querySelector('.card-tag') ? module.querySelector('.card-tag').textContent : '';
-
-                    // 1. Coincidencia de Búsqueda de Texto
-                    const matchesSearch = moduleText.includes(searchTerm);
-
-                    // 2. Coincidencia de Nivel
-                    // Si no hay nivel seleccionado O el texto del módulo incluye el nivel
-                    const matchesLevel = !selectedLevel || moduleText.includes(selectedLevel);
-
-                    // 3. Coincidencia de Tema
-                    // Si no hay tema seleccionado O el texto del módulo/categoría incluye el tema
-                    const matchesTopic = !selectedTopic || moduleText.includes(selectedTopic.toLowerCase()) || categoryTag.toLowerCase() === selectedTopic.toLowerCase();
-
-                    // Mostrar u ocultar
-                    if (matchesSearch && matchesLevel && matchesTopic) {
-                        module.style.display = 'block';
-                        foundResults = true;
-                    } else {
-                        module.style.display = 'none';
-                    }
-                });
-
-                // Mostrar/Ocultar mensaje de no resultados
-                if (noResultsMessage) {
-                    noResultsMessage.style.display = foundResults ? 'none' : 'block';
-                }
-            };
-
-            // 2.3. Event Listeners para los filtros
-            searchInput.addEventListener('input', filterModules);
-            levelFilter.addEventListener('change', filterModules);
-            topicFilter.addEventListener('change', filterModules);
-
-            resetFiltersButton.addEventListener('click', () => {
-                searchInput.value = '';
-                levelFilter.value = '';
-                topicFilter.value = '';
-                filterModules(); // Volver a filtrar después de resetear
-            });
-            
-            // Inicializar filtros al cargar la página
-            populateTopicFilter();
-            filterModules();
-
-
-            // =========================================
-            // --- 3. SCROLL REVEAL ---
-            // =========================================
+            // 2. Scroll Reveal (Movimiento al Scroll)
             const reveals = document.querySelectorAll('.reveal');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
                     }
-                    // Opcional: Si quieres que se desactive al salir de la vista:
-                    // else {
-                    //     entry.target.classList.remove('active');
-                    // }
                 });
             }, { root: null, rootMargin: '0px', threshold: 0.1 });
 
             reveals.forEach(reveal => {
                 observer.observe(reveal);
             });
-            
-            // Establecer el año actual en el footer
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
         });
     </script>
 
