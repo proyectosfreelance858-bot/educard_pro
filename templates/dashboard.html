@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Dashboard de Estudiante | EDUCARD SAS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <style>
+        /* ================================================================= */
+        /* --- ESTILOS GLOBAL Y DASHBOARD (Minimalista y Moderno) --- */
+        /* ================================================================= */
+        :root {
+            --color-primary: #5c67ff; 
+            --color-primary-light: #8e96ff;
+            --color-primary-dark: #4b54ff; 
+            --color-secondary: #ffc107; 
+            --color-background: #f8fafd; 
+            --color-surface: #ffffff; 
+            --color-text-dark: #1a202c; 
+            --color-text-subtle: #718096; 
+            --color-border: #e2e8f0;
+            --color-danger: #ef4444; 
+            --color-shadow-light: rgba(0, 0, 0, 0.08); 
+            --font-heading: 'Outfit', sans-serif;
+            --font-body: 'Instrument Sans', sans-serif;
+            --header-height: 70px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: var(--font-body); 
+            color: var(--color-text-dark); 
+            background-color: var(--color-background); 
+            line-height: 1.6; 
+            padding-top: var(--header-height); 
+            min-height: 100vh;
+        }
+        
+        /* --- HEADER Y FOOTER (Consistentes) --- */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; height: var(--header-height);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 3%; 
+            background-color: var(--color-surface);
+            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08); 
+            z-index: 1000;
+        }
+        .logo-container { text-decoration: none; display: flex; align-items: center; }
+        .logo-img { height: 30px; margin-right: 8px; content: url('https://i.postimg.cc/t4tVr741/54c82322-2df7-4887-abc0-da706407fcd4-2.png'); } 
+        .site-name { 
+            font-family: var(--font-heading); 
+            font-size: 1.3rem; 
+            font-weight: 700; 
+            color: var(--color-text-dark); 
+        }
+        .user-info {
+            font-weight: 600;
+            color: var(--color-text-dark);
+            font-size: 1rem;
+        }
+        .user-info i {
+            color: var(--color-primary);
+            margin-right: 5px;
+        }
+
+        /* --- MAIN DASHBOARD LAYOUT --- */
+        .dashboard-main {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* --- HEADINGS Y TEXTO INTRODUCTORIO --- */
+        .welcome-header {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--color-primary-dark);
+        }
+        .welcome-subheader {
+            font-size: 1.1rem;
+            color: var(--color-text-subtle);
+            margin-bottom: 40px;
+        }
+        
+        /* --- GRID DE MÓDULOS --- */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .module-card {
+            background-color: var(--color-surface);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px var(--color-shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            border-top: 5px solid var(--color-primary); /* Borde de color */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .module-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--color-text-dark);
+            margin-bottom: 10px;
+        }
+
+        .module-card p {
+            font-size: 0.95rem;
+            color: var(--color-text-subtle);
+            margin-bottom: 15px;
+        }
+        
+        .module-card .status {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+        .module-card .status i {
+            margin-right: 8px;
+        }
+
+        /* --- ESTILOS DE FALLO (Para cuando no hay módulos) --- */
+        .no-modules {
+            text-align: center;
+            padding: 50px;
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="{{ url_for('index') }}" class="logo-container">
+            <img class="logo-img" alt="Educard Logo">
+            <span class="site-name">EDUCARD S.A.S.</span>
+        </a>
+        <div class="user-info">
+            <i class="fa-solid fa-user-graduate"></i> {{ user_name }} | 
+            <a href="{{ url_for('index') }}" style="color: var(--color-primary); margin-left: 10px; text-decoration: none;">Salir</a>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <h1 class="welcome-header">
+            Hola, {{ user_name }} <span style="font-size: 0.8em; color: var(--color-primary);">🚀</span>
+        </h1>
+        <p class="welcome-subheader">
+            Estos son los módulos de aprendizaje que tienes asignados. ¡A estudiar!
+        </p>
+
+        <p style="font-size: 0.8rem; color: #5a5a5a; margin-bottom: 20px;">
+            DB Status: {{ db_status }}
+        </p>
+        
+        <div class="modules-grid">
+            {% if modules %}
+                {% for module_code in modules %}
+                    {% set module_title = "Módulo de " ~ module_code | replace('M', 'Matemáticas Básico ') %}
+                    {% set module_file = module_code.lower() ~ ".html" %}
+
+                    <div class="module-card" onclick="window.location.href='{{ module_file }}'">
+                        <div>
+                            <h3>{{ module_title }}</h3>
+                            <p>Contenido fundamental sobre {{ module_code }}. Perfecto para reforzar tus bases.</p>
+                        </div>
+                        <div class="status">
+                            <i class="fa-solid fa-circle-play"></i>
+                            Iniciar Módulo
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="no-modules">
+                    <i class="fa-solid fa-triangle-exclamation" style="margin-right: 10px;"></i> 
+                    No se encontraron módulos asignados para tu usuario. Contacta a un administrador.
+                </div>
+            {% endif %}
+        </div>
+        
+    </main>
+    
+</body>
+</html>

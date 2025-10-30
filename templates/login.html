@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Acceso de Usuarios | EDUCARD SAS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <style>
+        /* ================================================================= */
+        /* --- ESTILOS GLOBAL Y DE LAYOUT (Minimalista y Moderno) --- */
+        /* ================================================================= */
+        :root {
+            --color-primary: #5c67ff; /* Azul Educard */
+            --color-primary-light: #8e96ff;
+            --color-primary-dark: #4b54ff; 
+            --color-secondary: #ffc107; /* Amarillo Destacado */
+            --color-background: #f8fafd; /* Fondo muy claro, casi blanco */
+            --color-surface: #ffffff; /* Superficie Blanca */
+            --color-text-dark: #1a202c; /* Texto Principal (Más oscuro) */
+            --color-text-subtle: #718096; /* Texto Secundario (Gris suave) */
+            --color-border: #e2e8f0; /* Borde muy sutil */
+            --color-danger: #ef4444; /* Rojo moderno */
+            --color-shadow-light: rgba(0, 0, 0, 0.08); /* Sombra ligera y moderna */
+            --color-shadow-primary: rgba(92, 103, 255, 0.2); /* Sombra para el botón primario */
+            --font-heading: 'Outfit', sans-serif;
+            --font-body: 'Instrument Sans', sans-serif;
+            --header-height: 70px; /* Header un poco más delgado */
+        }
+
+        /* Reset Básico */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { 
+            font-family: var(--font-body); 
+            color: var(--color-text-dark); 
+            background-color: var(--color-background); 
+            line-height: 1.6; 
+            padding-top: var(--header-height); 
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+            justify-content: center;
+        }
+
+        /* --- CONTENEDOR CENTRAL DE LOGIN --- */
+        .login-container {
+            width: 100%;
+            max-width: 400px; /* Más compacto */
+            padding: 40px;
+            background-color: var(--color-surface);
+            border-radius: 15px; /* Bordes más suaves */
+            box-shadow: 0 8px 25px var(--color-shadow-light); /* Sombra moderna */
+            margin: auto; 
+            animation: fadeIn 0.8s ease-out; /* Animación de entrada */
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-container h2 {
+            font-family: var(--font-heading);
+            font-size: 2rem; /* Más pequeño pero impactante */
+            color: var(--color-text-dark); /* Color más neutro para el título */
+            margin-bottom: 25px; /* Más espacio */
+            text-align: center;
+            font-weight: 700;
+        }
+        .login-container h2 i {
+            color: var(--color-primary); /* Icono con color primario */
+            margin-right: 10px;
+        }
+
+        /* --- FORMULARIO Y CAMPOS --- */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500; /* Menos negrita */
+            color: var(--color-text-subtle); /* Etiqueta más sutil */
+            font-size: 0.95rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px; /* Relleno ajustado */
+            border: 1px solid var(--color-border); /* Borde más fino */
+            border-radius: 8px; /* Bordes más redondeados */
+            font-size: 1rem;
+            color: var(--color-text-dark);
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background-color: var(--color-background); /* Fondo del input para contraste */
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--color-primary); /* Borde primario al enfocar */
+            box-shadow: 0 0 0 3px rgba(92, 103, 255, 0.1); /* Sombra de enfoque más suave */
+            background-color: var(--color-surface); /* Blanco al enfocar */
+        }
+
+        /* --- BOTONES --- */
+        .btn {
+            display: flex; /* Centrado fácil de contenido */
+            align-items: center;
+            justify-content: center;
+            gap: 10px; /* Más espacio entre icono y texto */
+            padding: 14px 25px; 
+            border-radius: 10px; 
+            text-decoration: none; 
+            font-weight: 600; /* Menos audaz que antes */
+            font-size: 1rem; 
+            transition: background-color 0.3s ease, transform 0.2s, box-shadow 0.3s; 
+            border: none; 
+            cursor: pointer;
+            width: 100%; 
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary); 
+            color: white;
+            box-shadow: 0 5px 15px var(--color-shadow-primary); /* Sombra distintiva */
+            margin-top: 10px; /* Espacio para el primer botón */
+        }
+        .btn-primary:hover { 
+            background-color: var(--color-primary-dark); 
+            transform: translateY(-2px); 
+            box-shadow: 0 7px 20px var(--color-shadow-primary); 
+        }
+
+        .btn-secondary {
+            background-color: var(--color-text-subtle); /* Gris oscuro para el botón de admin */
+            color: white;
+            margin-top: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        .btn-secondary:hover {
+            background-color: #5a657a; /* Tonalidad más oscura de secondary */
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        /* --- ALERTA DE MENSAJES --- */
+        #login-message {
+            margin-top: 20px;
+            padding: 12px; /* Relleno ajustado */
+            border-radius: 8px;
+            font-weight: 500;
+            display: none;
+            text-align: center;
+            font-size: 0.95rem;
+            animation: slideIn 0.4s ease-out; /* Animación para el mensaje */
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .alert-error {
+            background-color: #ffebee; /* Rojo muy suave */
+            color: var(--color-danger);
+            border: 1px solid #ffcdd2;
+        }
+
+        .alert-success {
+            background-color: #e8f5e9; /* Verde muy suave */
+            color: #4caf50; /* Verde más profundo */
+            border: 1px solid #c8e6c9;
+        }
+
+        /* --- HEADER Y FOOTER --- */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; height: var(--header-height);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 3%; 
+            background-color: var(--color-surface);
+            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08); /* Sombra más sutil */
+            z-index: 1000;
+        }
+        .logo-container { text-decoration: none; display: flex; align-items: center; }
+        .logo-img { height: 30px; margin-right: 8px; content: url('https://i.postimg.cc/t4tVr741/54c82322-2df7-4887-abc0-da706407fcd4-2.png'); } 
+        .site-name { 
+            font-family: var(--font-heading); 
+            font-size: 1.3rem; /* Más pequeño */
+            font-weight: 700; 
+            color: var(--color-text-dark); 
+        }
+        
+        footer {
+            background-color: #f0f3f8; /* Un gris muy claro para el footer */
+            color: var(--color-text-subtle);
+            padding: 15px 0; /* Relleno más pequeño */
+            margin-top: auto; 
+            width: 100%;
+            border-top: 1px solid var(--color-border); /* Borde superior sutil */
+        }
+        .footer-bottom {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--color-text-subtle);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo-container">
+            <img class="logo-img" alt="Educard Logo">
+            <span class="site-name">EDUCARD S.A.S.</span>
+        </a>
+    </header>
+
+    <main class="login-container">
+        <h2><i class="fa-solid fa-right-to-bracket"></i> Acceder</h2>
+
+        <form id="login-form">
+            <div class="form-group">
+                <label for="nombre">Nombre de Usuario</label>
+                <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre de usuario">
+            </div>
+
+            <div class="form-group">
+                <label for="contrasena">Contraseña</label>
+                <input type="password" id="contrasena" name="contrasena" required placeholder="Tu contraseña">
+            </div>
+
+            <div id="login-message"></div>
+
+            <button type="submit" class="btn btn-primary" data-role="Estudiante">
+                <i class="fa-solid fa-user-graduate"></i> Login Estudiante
+            </button>
+        </form>
+
+        <button id="admin-login-btn" class="btn btn-secondary" data-role="Administrador">
+            <i class="fa-solid fa-user-tie"></i> Login Administrador
+        </button>
+
+    </main>
+
+    <footer>
+        <div class="footer-bottom">
+            &copy; 2024 EDUCARD S.A.S. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // =========================================================================================
+            // ⚠️ ADVERTENCIA DE SEGURIDAD CRÍTICA ⚠️
+            // En un entorno de producción, NUNCA se debe realizar la validación de credenciales
+            // en JavaScript del lado del cliente. Las contraseñas (incluso las simuladas aquí)
+            // deben compararse con un HASH almacenado en la base de datos a través de una API (Backend).
+            // Esta simulación es solo para fines DEMOSTRATIVOS y funcionales de front-end.
+            // =========================================================================================
+
+            const users = [
+                // Simulación de los datos de tu tabla 'usuarios'
+                // Usamos contraseñas en texto plano solo para esta DEMOSTRACIÓN
+                { nombre: 'Nicolas', contrasena: '1072', rol: 'Administrador' },
+                { nombre: 'Kaleth', contrasena: '5020', rol: 'Administrador' },
+                { nombre: 'Rogger', contrasena: '1072', rol: 'Estudiante' }
+            ];
+
+            const form = document.getElementById('login-form');
+            const adminBtn = document.getElementById('admin-login-btn');
+            const nombreInput = document.getElementById('nombre');
+            const contrasenaInput = document.getElementById('contrasena');
+            const loginMessage = document.getElementById('login-message');
+
+            /**
+             * Muestra un mensaje de alerta en la interfaz.
+             * @param {string} message - El mensaje a mostrar.
+             * @param {string} type - 'success' o 'error'.
+             */
+            function showMessage(message, type) {
+                loginMessage.textContent = message;
+                loginMessage.className = type === 'success' ? 'alert-success' : 'alert-error';
+                loginMessage.style.display = 'block';
+            }
+
+            /**
+             * Lógica principal de login, verifica credenciales y rol.
+             * @param {string} requiredRole - El rol requerido para la acción ('Estudiante' o 'Administrador').
+             * @param {Event} e - El evento del formulario/botón.
+             */
+            function handleLogin(requiredRole, e) {
+                e.preventDefault();
+                loginMessage.style.display = 'none'; // Ocultar mensaje previo
+
+                const nombre = nombreInput.value.trim();
+                const contrasena = contrasenaInput.value.trim();
+
+                if (!nombre || !contrasena) {
+                    showMessage('Por favor, ingresa tu nombre y contraseña.', 'error');
+                    return;
+                }
+
+                const user = users.find(u => u.nombre.toLowerCase() === nombre.toLowerCase());
+
+                if (!user) {
+                    showMessage('Credenciales incorrectas: Usuario no encontrado.', 'error');
+                    return;
+                }
+
+                if (user.contrasena !== contrasena) { // ¡Contraseña en texto plano para DEMO!
+                    showMessage('Credenciales incorrectas: Contraseña errónea.', 'error');
+                    return;
+                }
+
+                if (user.rol !== requiredRole) {
+                    showMessage(`Acceso denegado: Tu rol es '${user.rol}'. No tienes acceso como ${requiredRole}.`, 'error');
+                    return;
+                }
+
+                // --- ACCESO EXITOSO ---
+                showMessage(`¡Bienvenido, ${user.nombre}! Acceso exitoso. Redireccionando...`, 'success');
+                
+                // Almacenar datos básicos en sessionStorage para el dashboard (simulación)
+                sessionStorage.setItem('currentUserName', user.nombre);
+                sessionStorage.setItem('currentUserRole', user.rol);
+                
+                let redirectUrl;
+                if (user.rol === 'Administrador') {
+                    redirectUrl = 'dashboardadmin.html';
+                } else { // Asume rol 'Estudiante'
+                    redirectUrl = 'dashboard.html';
+                }
+                
+                // Redirigir después de un breve retraso
+                setTimeout(() => {
+                    window.location.href = redirectUrl;
+                }, 1000); 
+            }
+
+            // Manejador para el botón "Login Estudiante" (Submit principal del formulario)
+            form.addEventListener('submit', (e) => {
+                const role = e.submitter.getAttribute('data-role'); // Obtiene el rol del botón que hizo submit
+                handleLogin(role, e);
+            });
+
+            // Manejador para el botón "Login Administrador"
+            adminBtn.addEventListener('click', (e) => {
+                const role = adminBtn.getAttribute('data-role');
+                handleLogin(role, e);
+            });
+        });
+    </script>
+
+</body>
+</html>
