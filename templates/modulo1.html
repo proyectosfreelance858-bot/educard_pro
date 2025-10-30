@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Módulo Ultra-Dinámico: Operaciones con Números Enteros | EDUCARD SAS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <style>
+        /* ================================================================= */
+        /* --- 1. VARIABLES, RESET Y ESTILOS GLOBALES (Minimalista y Dinámico) --- */
+        /* ================================================================= */
+        :root {
+            --color-primary: #5c67ff; /* Azul Educard */
+            --color-primary-light: #8e96ff;
+            --color-primary-dark: #4b54ff; 
+            --color-secondary: #ffc107; /* Amarillo Destacado */
+            --color-background: #f0f3f8; /* Fondo más frío y moderno */
+            --color-surface: #ffffff; /* Superficie Blanca */
+            --color-text-dark: #1f2937; /* Texto Principal (Casi negro) */
+            --color-text-subtle: #6b7280; /* Texto Secundario */
+            --color-border: #e5e7eb;
+            --color-success: #10b981; /* Verde más vibrante */
+            --color-danger: #ef4444; /* Rojo moderno */
+            --color-shadow-primary: rgba(92, 103, 255, 0.25);
+            --font-heading: 'Outfit', sans-serif;
+            --font-body: 'Instrument Sans', sans-serif;
+            --header-height: 80px;
+            --step-transition-duration: 0.6s; 
+        }
+
+        /* Reset Básico */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { 
+            font-family: var(--font-body); 
+            color: var(--color-text-dark); 
+            background-color: var(--color-background); 
+            line-height: 1.7; 
+            overflow-x: hidden; 
+            padding-top: var(--header-height); 
+        }
+
+        /* Contenedor y Tipografía */
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 5%; 
+        }
+        h1, h2, h3, h4 { 
+            font-family: var(--font-heading); 
+            font-weight: 700; 
+            line-height: 1.2; 
+        }
+        h1 { font-size: 3.2rem; }
+        
+        /* DISEÑO DE TÍTULOS MINIMALISTA */
+        h2 { 
+            font-size: 2.5rem; 
+            color: var(--color-text-dark); 
+            padding-bottom: 5px;
+            border-bottom: 4px solid var(--color-primary-light); /* Subrayado sutil */
+            display: inline-block; 
+            margin-bottom: 20px;
+        }
+        h3 { 
+            font-size: 1.8rem; 
+            color: var(--color-primary-dark); 
+            margin-top: 30px; 
+            font-weight: 700;
+        }
+        h4 { 
+            font-size: 1.3rem; 
+            color: var(--color-text-dark); 
+            margin-top: 20px; 
+            font-weight: 600; 
+            border-left: 5px solid var(--color-secondary); /* Pequeño acento */
+            padding-left: 15px;
+        }
+        p { margin-bottom: 15px; }
+
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-title { font-size: 2.8rem; font-weight: 800; margin-bottom: 15px; }
+        .section-subtitle { font-size: 1.2rem; color: var(--color-text-subtle); max-width: 800px; margin: 0 auto; }
+        
+        /* Botones (CTA) - Se mantienen dinámicos */
+        .btn {
+            display: inline-flex; 
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px; 
+            border-radius: 10px; 
+            text-decoration: none; 
+            font-weight: 700; 
+            font-size: 1rem; 
+            transition: background-color 0.3s ease, transform 0.2s, box-shadow 0.3s; 
+            border: none; 
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary); 
+            color: white;
+            box-shadow: 0 6px 15px var(--color-shadow-primary);
+        }
+        .btn-primary:hover { 
+            background-color: var(--color-primary-dark); 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 20px var(--color-shadow-primary); 
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+            box-shadow: none;
+        }
+        .btn-outline:hover {
+            background-color: var(--color-primary);
+            color: white;
+        }
+
+        /* DISEÑO DE TARJETAS MINIMALISTA Y DINÁMICO */
+        .card {
+            background-color: var(--color-surface);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Sombra ligera */
+            margin-bottom: 25px;
+            border: 1px solid var(--color-border); /* Borde sutil */
+            border-left: 6px solid var(--color-primary); /* Fuerte acento de color primario */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efecto dinámico */
+            animation: fadeIn 0.8s ease-out; /* Animación de entrada */
+        }
+        .card:hover {
+             transform: translateY(-3px); /* Efecto levitación */
+             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .alert {
+            padding: 18px;
+            border-radius: 10px;
+            margin-top: 25px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .alert i { font-size: 1.4rem; }
+        .alert-info { background-color: #e0f2fe; color: #0284c7; border: 1px solid #7dd3fc; }
+        .alert-success { background-color: #d1fae5; color: var(--color-success); border: 1px solid #a7f3d0; }
+        .alert-danger { background-color: #fee2e2; color: var(--color-danger); border: 1px solid #fecaca; }
+        .alert-warning { background-color: #fffbeb; color: #d97706; border: 1px solid #fcd34d; }
+
+        /* Estilos de la tabla de Ley de Signos */
+        .sign-table {
+            width: 90%;
+            margin: 30px auto;
+            border-collapse: separate;
+            border-spacing: 0 10px; 
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            text-align: center;
+        }
+        .sign-table th, .sign-table td {
+            padding: 15px;
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+        }
+        .sign-table th {
+            background-color: var(--color-primary);
+            color: white;
+            font-weight: 700;
+            border: none;
+        }
+        .sign-table tr:first-child th:first-child { border-top-left-radius: 10px; }
+        .sign-table tr:first-child th:last-child { border-top-right-radius: 10px; }
+        
+        .sign-table td:nth-child(3) {
+            font-weight: 800;
+            font-size: 1.4rem;
+        }
+        .sign-table td span.pos { color: var(--color-success); }
+        .sign-table td span.neg { color: var(--color-danger); }
+
+
+        /* ========================================= */
+        /* --- 2. HEADER --- */
+        /* ========================================= */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; height: var(--header-height);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 3%; 
+            background-color: var(--color-surface);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1); z-index: 1000;
+        }
+        .logo-container { text-decoration: none; display: flex; align-items: center; }
+        .logo-img { height: 35px; margin-right: 10px; content: url('https://i.postimg.cc/t4tVr741/54c82322-2df7-4887-abc0-da706407fcd4-2.png'); } 
+        .site-name { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 700; color: var(--color-text-dark); }
+        nav ul { list-style: none; display: flex; }
+        nav ul li { margin-left: 35px; }
+        nav ul li a { text-decoration: none; color: var(--color-text-dark); font-weight: 500; padding: 10px 0; display: block; transition: color 0.3s ease; }
+        nav ul li a:hover { color: var(--color-primary); font-weight: 600; border-bottom: 2px solid var(--color-primary); padding-bottom: 8px; }
+        
+        /* Nuevos Estilos para el Selector de Idioma */
+        .header-actions {
+            display: flex;
+            align-items: center; /* Alineación horizontal de bandera y botón */
+        }
+        .language-selector {
+            position: relative;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 8px;
+            margin-right: 15px; 
+            transition: background-color 0.3s;
+        }
+        .language-selector:hover {
+            background-color: #f0f3f8; /* Efecto hover sutil */
+        }
+        .current-flag img {
+            width: 28px;
+            height: 20px;
+            border-radius: 3px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            z-index: 1001;
+            min-width: 150px;
+            display: none;
+            padding: 8px 0;
+            margin-top: 5px;
+        }
+        .language-dropdown.active {
+            display: block;
+        }
+        .language-dropdown a {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: var(--color-text-dark);
+            font-size: 0.95rem;
+        }
+        .language-dropdown a:hover {
+            background-color: var(--color-background);
+        }
+        .language-dropdown a img {
+            width: 24px;
+            height: 18px;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+
+        .header-actions a.header-button {
+            padding: 10px 20px; background-color: var(--color-primary); color: white;
+            border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.95rem;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .header-actions a.header-button:hover { background-color: var(--color-primary-dark); transform: translateY(-1px); }
+
+        /* ========================================= */
+        /* --- 3. ESTRUCTURA DINÁMICA DE PASOS --- */
+        /* ========================================= */
+        .module-wrapper { padding-top: 40px; }
+        
+        .progress-bar-container {
+            width: 100%;
+            background-color: var(--color-border);
+            border-radius: 5px;
+            margin-bottom: 40px;
+            height: 12px;
+        }
+        .progress-bar {
+            height: 100%;
+            background-color: var(--color-success);
+            border-radius: 5px;
+            transition: width 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); 
+            width: 0%;
+        }
+        
+        .step-content {
+            background-color: var(--color-surface);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            min-height: 650px; 
+            display: none; 
+            opacity: 0;
+            transform: scale(0.95) translateX(20px); 
+            transition: opacity var(--step-transition-duration) ease, transform var(--step-transition-duration) ease;
+        }
+
+        .step-content.active {
+            display: block;
+            opacity: 1;
+            transform: scale(1) translateX(0);
+        }
+
+        .step-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+        }
+        .step-navigation button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* Estilo para el Dato Curioso */
+        .curious-fact {
+            margin-top: 35px;
+            padding: 25px;
+            background-color: #ecfdf5; /* Color suave de éxito */
+            border-radius: 10px;
+            font-size: 1rem;
+            color: var(--color-text-dark);
+            border-left: 5px solid var(--color-success);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-weight: 500;
+        }
+        .curious-fact strong {
+            color: var(--color-primary-dark);
+        }
+
+        /* Estilos para el código de ejemplo */
+        .example-code {
+            background-color: #f3f4f6;
+            color: var(--color-text-dark);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            border: 1px solid var(--color-border);
+            line-height: 1.5;
+        }
+        .example-code strong { color: var(--color-primary-dark); }
+        .example-code .step-label { color: var(--color-secondary); font-weight: 700; }
+
+        /* Contenedor de Video */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* Relación 16:9 */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            margin-bottom: 25px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .content-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilos de la Evaluación Final */
+        #quiz-form label {
+            display: block;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 25px 0 10px;
+            color: var(--color-primary-dark);
+        }
+        #quiz-form input[type="text"],
+        #quiz-form input[type="number"],
+        #quiz-form select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        #quiz-form input:focus, #quiz-form select:focus {
+            outline: none;
+            border-color: var(--color-primary-light);
+            box-shadow: 0 0 0 3px rgba(92, 103, 255, 0.2);
+        }
+        #quiz-form .radio-group, #quiz-form .true-false-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        #quiz-form .option-box {
+            background-color: var(--color-background);
+            padding: 15px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--color-border);
+            cursor: pointer;
+            transition: all 0.2s;
+            flex-grow: 1;
+            text-align: center;
+            font-weight: 600;
+            color: var(--color-text-dark);
+        }
+        #quiz-form .option-box:hover {
+            background-color: #e5e7eb;
+        }
+        #quiz-form input[type="radio"] {
+            display: none;
+        }
+        #quiz-form input[type="radio"]:checked + .option-box {
+            background-color: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary-dark);
+            box-shadow: 0 3px 8px var(--color-shadow-primary);
+        }
+        .incorrect-answer { border: 2px solid var(--color-danger) !important; animation: shake 0.5s; }
+        .correct-answer { border: 2px solid var(--color-success) !important; }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+
+        /* Summary Box */
+        #quiz-result-summary {
+            margin-top: 30px;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            display: none;
+            transition: opacity 0.5s ease;
+        }
+        .summary-success { background-color: #ecfdf5; color: var(--color-success); border: 2px solid #a7f3d0; }
+        .summary-fail { background-color: #fef2f2; color: var(--color-danger); border: 2px solid #fecaca; }
+
+        /* FOOTER ESTILOS */
+        footer {
+            background-color: #1a202c; /* Darker background for footer */
+            color: #e2e8f0;
+            padding: 50px 0 20px 0;
+            margin-top: 60px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-about h5 {
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+        }
+        .footer-about p {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: #ccc;
+        }
+        .footer-links h5 {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: var(--color-secondary);
+        }
+        .footer-links ul {
+            list-style: none;
+        }
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+        .footer-links ul li a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        .footer-links ul li a:hover {
+            color: var(--color-primary-light);
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #2d3748;
+            font-size: 0.8rem;
+            color: #a0aec0;
+        }
+        .footer-about strong {
+            color: var(--color-secondary);
+        }
+        /* Media Queries para Responsive Design */
+        @media (max-width: 1024px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            .step-content { padding: 40px; }
+            nav { display: none; } /* Ocultar nav en pantallas pequeñas (usar menú hamburguesa) */
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.8rem; }
+            .section-title { font-size: 2rem; }
+            .section-subtitle { font-size: 1rem; }
+            .step-content { padding: 30px; min-height: 500px; }
+            .sign-table { width: 100%; font-size: 1rem; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo-container">
+            <img class="logo-img" alt="Educard Logo">
+            <span class="site-name">EDUCARD S.A.S.</span>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="index.html" data-translate="nav_inicio">Inicio</a></li>
+                <li><a href="refuerzos.html" data-translate="nav_refuerzos">Refuerzos</a></li>
+                <li><a href="index.html#nosotros" data-translate="nav_nosotros">Nosotros</a></li>
+                <li><a href="index.html#beneficios" data-translate="nav_beneficios">Beneficios</a></li>
+                <li><a href="faq.html" data-translate="nav_faq">FAQ</a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <div class="language-selector">
+                <div class="current-flag">
+                    <img id="current-flag-img" src="https://flagcdn.com/co.svg" alt="Colombia Flag" class="flag">
+                </div>
+                <div class="language-dropdown">
+                    <a href="#" data-lang="es"><img src="https://flagcdn.com/co.svg" alt="Bandera Colombia"> Español</a>
+                    <a href="#" data-lang="en"><img src="https://flagcdn.com/us.svg" alt="Bandera EE.UU."> English</a>
+                    <a href="#" data-lang="de"><img src="https://flagcdn.com/de.svg" alt="Bandera Alemania"> Deutsch</a>
+                </div>
+            </div>
+            <a href="acceder.html" class="header-button" data-translate="acceder_btn">Acceder</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="module-wrapper">
+            <div class="container">
+                <div class="section-header">
+                    <h1 class="section-title" id="moduleTitle"><i class="fa-solid fa-calculator"></i> Módulo Operaciones con Enteros (Z)</h1>
+                    <p class="section-subtitle" id="moduleSubtitle">El camino dinámico para entender las reglas fundamentales del conjunto de los Números Enteros.</p>
+                </div>
+                
+                <div class="progress-bar-container">
+                    <div id="progress-bar" class="progress-bar"></div>
+                </div>
+
+                <div id="module-content">
+
+                    <div id="step-1" class="step-content"> 
+                        <h2><i class="fa-solid fa-book-open"></i> 1. Introducción: ¿Por Qué y Para Qué?</h2>
+                        <hr style="margin-top: 15px; border-color: var(--color-border);">
+
+                        <div class="card">
+                            <h3 data-translate="step1_def_header">Definición Clave: El Conjunto Z</h3>
+                            <p data-translate="step1_def_text">El conjunto de los <strong>Números Enteros</strong> (simbolizado por la letra <strong>Z</strong>, del alemán *Zahlen*) son el conjunto que incluye a:</p>
+                            <ul style="list-style-type: disc; margin-left: 25px;">
+                                <li data-translate="step1_list1_1">Los Naturales (Enteros positivos): 1, 2, 3...</li>
+                                <li data-translate="step1_list1_2">El Cero: 0 (Elemento neutro).</li>
+                                <li data-translate="step1_list1_3">Los Opuestos (Enteros negativos): -1, -2, -3...</li>
+                            </ul>
+                        </div>
+
+                        <div class="card">
+                            <h3 data-translate="step1_why_header">¿Por Qué Son Esenciales? (El Por Qué)</h3>
+                            <p data-translate="step1_why_text1">Los Naturales (<strong>N</strong>) fallan al intentar restar un número mayor de uno menor (ej. 5 - 8). Los Enteros nacen para hacer de la sustracción una operación siempre posible. Sin ellos, tendríamos que decir que 5 - 8 no tiene respuesta.</p>
+                            <p data-translate="step1_why_text2">En la vida real se usan para: medir temperaturas bajo cero, balances de deuda, altitudes bajo el nivel del mar y movimientos en el tiempo (Ej: "hace 5 años", que es -5).</p>
+                        </div>
+                        
+                        <h3 data-translate="step1_video_header">Video Explicativo: Enteros</h3>
+                        <div class="video-container">
+                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/dayfz0ff1Mc" title="Video de Introducción a Enteros" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <small style="display: block; text-align: center; color: var(--color-text-subtle); margin-top: 10px;" data-translate="step1_video_text">Video: Introducción al conjunto Z (Números Enteros).</small>
+                        </div>
+
+                        <div class="curious-fact">
+                            <strong>Dato Curioso:</strong> <span data-translate="step1_curious_fact">Aunque los números negativos se usaron por primera vez en China alrededor del 200 a.C...</span>
+                        </div>
+                    </div>
+
+                    <div id="step-2" class="step-content">
+                        <h2 data-translate="step2_title"><i class="fa-solid fa-plus-minus"></i> 2. Adición y Sustracción: La Regla del Dinero</h2>
+                        <p class="section-subtitle" data-translate="step2_subtitle">Reglas clave para sumar y restar números enteros.</p>
+                        <hr style="margin-top: 15px; border-color: var(--color-border);">
+
+                        <div class="card">
+                            <h4 data-translate="step2_case1_header">Caso 1: Signos Iguales (Sumar)</h4>
+                            <p data-translate="step2_case1_text1">Cuando los números tienen el mismo signo (ambos positivos o ambos negativos), se <strong>suman</strong> sus valores absolutos y se mantiene el signo. Piensa en esto como una deuda que se acumula o como un aumento de fondos.</p>
+                            <div class="example-code">
+                                <span class="step-label" data-translate="step2_example1_1">Ejemplo:</span> 5 + 8 = <strong>13</strong> <br>
+                                <span class="step-label" data-translate="step2_example1_2">Ejemplo:</span> -5 - 8 = <strong>-13</strong>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <h4 data-translate="step2_case2_header">Caso 2: Signos Diferentes (Restar)</h4>
+                            <p data-translate="step2_case2_text1">Cuando los números tienen signos diferentes, se <strong>resta</strong> el valor absoluto más pequeño del valor absoluto más grande. El resultado llevará el signo del número con el mayor valor absoluto (el 'más fuerte').</p>
+                            <div class="example-code">
+                                <span class="step-label" data-translate="step2_example2_1">Ejemplo:</span> 10 - 4 = <strong>6</strong> <br>
+                                <span class="step-label" data-translate="step2_example2_2">Ejemplo:</span> 4 - 10 = <strong>-6</strong> <br>
+                                <span class="step-label" data-translate="step2_example2_3">Ejemplo:</span> -15 + 7 = <strong>-8</strong>
+                            </div>
+                        </div>
+
+                        <h3 data-translate="step2_practice_header">Practica Rápida</h3>
+                        <div class="card alert-info">
+                            <p data-translate="step2_practice1">Resultado de -10 + 3: <strong>-7</strong></p>
+                            <p data-translate="step2_practice2">Resultado de -15 - 5: <strong>-20</strong></p>
+                        </div>
+
+                        <div class="curious-fact">
+                            <strong>Dato Curioso:</strong> <span data-translate="step2_curious_fact">La recta numérica fue inventada en el siglo XVII. Antes, los matemáticos tenían que imaginar el concepto de números negativos de forma puramente abstracta.</span>
+                        </div>
+                    </div>
+
+                    <div id="step-3" class="step-content">
+                        <h2 data-translate="step3_title"><i class="fa-solid fa-divide"></i> 3. Multiplicación y División: Ley de Signos</h2>
+                        <p class="section-subtitle" data-translate="step3_subtitle">Aplica las famosas reglas de la Ley de Signos.</p>
+                        <hr style="margin-top: 15px; border-color: var(--color-border);">
+                        
+                        <div class="card alert-success">
+                            <h4 data-translate="step3_rule1">Signos Iguales: El resultado es <strong>POSITIVO</strong>.</h4>
+                        </div>
+                        <div class="card alert-danger">
+                            <h4 data-translate="step3_rule2">Signos Diferentes: El resultado es <strong>NEGATIVO</strong>.</h4>
+                        </div>
+
+                        <p style="margin-top: 25px;" data-translate="step3_intro">Para multiplicar o dividir enteros, primero multiplicas o divides los valores absolutos y luego aplicas la Ley de Signos para determinar el signo del resultado.</p>
+
+                        <table class="sign-table">
+                            <thead>
+                                <tr>
+                                    <th data-translate="step3_table_header_op">Operación</th>
+                                    <th data-translate="step3_table_header_sign">Resultado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>(+) x (+)</td>
+                                    <td><span class="pos" data-translate="step3_example_pos_pos_mult">(+)</span></td>
+                                </tr>
+                                <tr>
+                                    <td>(-) x (-)</td>
+                                    <td><span class="pos" data-translate="step3_example_neg_neg_mult">(+)</span></td>
+                                </tr>
+                                <tr>
+                                    <td>(+) x (-)</td>
+                                    <td><span class="neg" data-translate="step3_example_pos_neg_mult">(-)</span></td>
+                                </tr>
+                                <tr>
+                                    <td>(-) x (+)</td>
+                                    <td><span class="neg" data-translate="step3_example_neg_pos_mult">(-)</span></td>
+                                </tr>
+                                <tr>
+                                    <td>(+) ÷ (+)</td>
+                                    <td><span class="pos" data-translate="step3_example_pos_pos_div">(+)</span></td>
+                                </tr>
+                                <tr>
+                                    <td>(-) ÷ (-)</td>
+                                    <td><span class="pos" data-translate="step3_example_neg_neg_div">(+)</span></td>
+                                </tr>
+                                <tr>
+                                    <td>(+) ÷ (-)</td>
+                                    <td><span class="neg" data-translate="step3_example_pos_neg_div">(-)</span></td>
+                                </tr>
+                                <tr>
+                                    <td>(-) ÷ (+)</td>
+                                    <td><span class="neg" data-translate="step3_example_neg_pos_div">(-)</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3 data-translate="step3_example_header">Ejemplos Prácticos</h3>
+                        <div class="example-code">
+                            <span class="step-label" data-translate="step3_example_text1">Ejemplo 1 (Iguales):</span> -5 * -4 = <strong>+20</strong> (Menos por Menos da Más). <br>
+                            <span class="step-label" data-translate="step3_example_text2">Ejemplo 2 (Diferentes):</span> 12 ÷ (-3) = <strong>-4</strong> (Más entre Menos da Menos).
+                        </div>
+                        
+                        <div class="curious-fact">
+                            <strong>Dato Curioso:</strong> <span data-translate="step3_curious_fact">La notación moderna de la multiplicación con el símbolo 'x' fue introducida por William Oughtred en el siglo XVII.</span>
+                        </div>
+                    </div>
+
+                    <div id="step-4" class="step-content">
+                        <h2 data-translate="step4_title"><i class="fa-solid fa-list-ol"></i> 4. Regla de Oro: Orden de Operaciones (PEMDAS/PAPOMUDAS)</h2>
+                        <p class="section-subtitle" data-translate="step4_subtitle">El camino para resolver ejercicios combinados sin errores.</p>
+                        <hr style="margin-top: 15px; border-color: var(--color-border);">
+                        
+                        <div class="card alert-warning">
+                            <h3 data-translate="step4_rule_header">El orden es la clave: PEMDAS / PAPOMUDAS</h3>
+                            <p data-translate="step4_rule_text">Para garantizar un resultado único y correcto en operaciones combinadas, debes seguir un orden estricto:</p>
+                            <ul style="list-style-type: decimal; margin-left: 25px;">
+                                <li data-translate="step4_list_p"><strong>Paréntesis, Corchetes y Llaves (P):</strong> Resuelve primero todas las operaciones dentro de los signos de agrupación, desde el más interno hacia el más externo.</li>
+                                <li data-translate="step4_list_e"><strong>Exponentes y Raíces (E):</strong> Luego, resuelve potencias y raíces.</li>
+                                <li data-translate="step4_list_m_d"><strong>Multiplicación y División (M, D):</strong> Resuelve multiplicaciones y divisiones en el orden en que aparecen, de izquierda a derecha.</li>
+                                <li data-translate="step4_list_a_s"><strong>Adición y Sustracción (A, S):</strong> Finalmente, resuelve sumas y restas en el orden en que aparecen, de izquierda a derecha.</li>
+                            </ul>
+                        </div>
+
+                        <h3 data-translate="step4_example_header">Ejemplo Combinado Resuelto</h3>
+                        <div class="example-code" style="background-color: #eef2ff; border-left: 5px solid var(--color-primary);">
+                            <span class="step-label">Operación:</span> 5 + [ 4 * ( -3 + 7 ) ] - 1 <br>
+                            <span class="step-label" data-translate="step4_example_step1">1. Paréntesis (P):</span> Resuelve (-3 + 7) = <strong>4</strong> <br>
+                            <span class="step-label" data-translate="step4_example_step2">2. El resultado es:</span> 5 + [ 4 * 4 ] - 1 <br>
+                            <span class="step-label" data-translate="step4_example_step3">3. Multiplicación (M):</span> Resuelve [4 * 4] = <strong>16</strong> <br>
+                            <span class="step-label" data-translate="step4_example_step4">4. El resultado es:</span> 5 + 16 - 1 <br>
+                            <span class="step-label" data-translate="step4_example_step5">5. Adición/Sustracción (A, S):</span> 5 + 16 = 21, y 21 - 1 = <strong>20</strong> <br>
+                            <span class="step-label" data-translate="step4_final">Resultado Final:</span> <strong>20</strong>
+                        </div>
+
+                        <div class="curious-fact">
+                            <strong>Dato Curioso:</strong> <span data-translate="step4_curious_fact">El acrónimo PEMDAS (Paréntesis, Exponentes, Multiplicación, División, Adición, Sustracción) es popular en países de habla inglesa, mientras que en español se usa PAPOMUDAS (Paréntesis, Potencias, Multiplicación, División, Adición, Sustracción).</span>
+                        </div>
+                    </div>
+
+                    <div id="step-5" class="step-content">
+                        <h2 data-translate="step5_title"><i class="fa-solid fa-graduation-cap"></i> 5. Evaluación Final: ¡Mide tu Conocimiento!</h2>
+                        <p class="section-subtitle" data-translate="step5_subtitle">Responde el siguiente Quiz de 5 preguntas para validar tu aprendizaje.</p>
+                        <hr style="margin-top: 15px; border-color: var(--color-border);">
+
+                        <form id="quiz-form">
+
+                            <div id="question1">
+                                <label for="q1" data-translate="step5_q1_label">¿Cuál es el resultado de la siguiente operación combinada: -10 + 5 + 9?</label>
+                                <div class="radio-group">
+                                    <input type="radio" id="q1_op1" name="question1" value="4">
+                                    <label for="q1_op1" class="option-box" data-translate="step5_q1_op1">4</label>
+                                    
+                                    <input type="radio" id="q1_op2" name="question1" value="-4">
+                                    <label for="q1_op2" class="option-box" data-translate="step5_q1_op2">-4</label>
+
+                                    <input type="radio" id="q1_op3" name="question1" value="14">
+                                    <label for="q1_op3" class="option-box" data-translate="step5_q1_op3">14</label>
+
+                                    <input type="radio" id="q1_op4" name="question1" value="-6">
+                                    <label for="q1_op4" class="option-box" data-translate="step5_q1_op4">-6</label>
+                                </div>
+                            </div>
+
+                            <div id="question2">
+                                <label for="q2" data-translate="step5_q2_label">Verdadero o Falso: El producto de dos números negativos siempre es un número positivo.</label>
+                                <div class="true-false-group">
+                                    <input type="radio" id="q2_op1" name="question2" value="true">
+                                    <label for="q2_op1" class="option-box">Verdadero</label>
+                                    
+                                    <input type="radio" id="q2_op2" name="question2" value="false">
+                                    <label for="q2_op2" class="option-box">Falso</label>
+                                </div>
+                            </div>
+                            
+                            <div id="question3">
+                                <label for="q3" data-translate="step5_q3_label">Selecciona el opuesto aditivo del número -12:</label>
+                                <div class="radio-group">
+                                    <input type="radio" id="q3_op1" name="question3" value="-12">
+                                    <label for="q3_op1" class="option-box" data-translate="step5_q3_op1">-12</label>
+                                    
+                                    <input type="radio" id="q3_op2" name="question3" value="12">
+                                    <label for="q3_op2" class="option-box" data-translate="step5_q3_op2">12</label>
+
+                                    <input type="radio" id="q3_op3" name="question3" value="0">
+                                    <label for="q3_op3" class="option-box" data-translate="step5_q3_op3">0</label>
+
+                                    <input type="radio" id="q3_op4" name="question3" value="1/12">
+                                    <label for="q3_op4" class="option-box" data-translate="step5_q3_op4">1/12</label>
+                                </div>
+                            </div>
+
+                            <div id="question4">
+                                <label for="q4_input" data-translate="step5_q4_label">Calcula: (-5) + 4 =</label>
+                                <input type="number" id="q4_input" name="question4" required>
+                            </div>
+
+                            <div id="question5">
+                                <label for="q5_input" data-translate="step5_q5_label">Completa la siguiente operación: (-5) * (__) = 25</label>
+                                <input type="text" id="q5_input" name="question5" required>
+                            </div>
+
+                            <div id="quiz-result-summary" class="">
+                                </div>
+
+                            <button type="submit" class="btn btn-primary" style="margin-top: 30px;" data-translate="step5_submit_btn">
+                                <i class="fa-solid fa-clipboard-check"></i> Evaluar Respuestas
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+                
+                <div class="step-navigation">
+                    <button id="prev-btn" class="btn btn-outline" disabled><i class="fa-solid fa-arrow-left"></i> Anterior</button>
+                    <button id="next-btn" class="btn btn-primary">Siguiente <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div> </section> <footer>
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-about">
+                        <h5>EDUCARD S.A.S.</h5>
+                        <p>Somos una empresa dedicada a fortalecer las competencias académicas en matemáticas y tecnología, ofreciendo módulos interactivos y personalizados para el crecimiento de los estudiantes.</p>
+                        <p data-translate="footer_made_with"><strong>Hecho con <i class="fa-solid fa-heart" style="color: #ef4444;"></i> en Cajicá, Cundinamarca.</strong></p>
+                    </div>
+                    <div class="footer-links">
+                        <h5>Enlaces Rápidos</h5>
+                        <ul>
+                            <li><a href="index.html">Inicio</a></li>
+                            <li><a href="refuerzos.html">Refuerzos</a></li>
+                            <li><a href="index.html#nosotros">Nosotros</a></li>
+                            <li><a href="faq.html">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links">
+                        <h5>Recursos</h5>
+                        <ul>
+                            <li><a href="#">Términos y Condiciones</a></li>
+                            <li><a href="#">Política de Privacidad</a></li>
+                            <li><a href="#">Mapa del Sitio</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links">
+                        <h5>Contacto</h5>
+                        <p style="color: #ccc;">Email: info@educard.com</p>
+                        <p style="color: #ccc;">Tel: +57 300 123 4567</p>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    &copy; 2025 EDUCARD S.A.S. Todos los derechos reservados.
+                </div>
+            </div>
+        </footer>
+
+    </main>
+    
+    <script>
+        // =========================================================================
+        // --- CÓDIGO CORREGIDO: LÓGICA DE NAVEGACIÓN Y EVALUACIÓN DE MÓDULOS (JS) ---
+        // =========================================================================
+
+        // --- 1. DATOS Y LÓGICA DE TRADUCCIÓN ---
+const languageData = {
+            es: {
+                nav_inicio: "Inicio",
+                nav_refuerzos: "Refuerzos",
+                nav_nosotros: "Nosotros",
+                nav_beneficios: "Beneficios",
+                nav_faq: "FAQ",
+                acceder_btn: "Acceder",
+                // Step 1
+                step1_def_header: "Definición Clave: El Conjunto Z",
+                step1_def_text: "El conjunto de los Números Enteros (simbolizado por la letra Z, del alemán *Zahlen*) son el conjunto que incluye a:",
+                step1_list1_1: "Los Naturales (Enteros positivos): 1, 2, 3...",
+                step1_list1_2: "El Cero: 0 (Elemento neutro).",
+                step1_list1_3: "Los Opuestos (Enteros negativos): -1, -2, -3...",
+                step1_why_header: "¿Por Qué Son Esenciales? (El Por Qué)",
+                step1_why_text1: "Los Naturales (N) fallan al intentar restar un número mayor de uno menor (ej. 5 - 8). Los Enteros nacen para hacer de la sustracción una operación siempre posible. Sin ellos, tendríamos que decir que 5 - 8 no tiene respuesta.",
+                step1_why_text2: "En la vida real se usan para: medir temperaturas bajo cero, balances de deuda, altitudes bajo el nivel del mar y movimientos en el tiempo (Ej: \"hace 5 años\", que es -5).",
+                step1_video_header: "Video Explicativo: Enteros",
+                step1_video_text: "Video: Introducción al conjunto Z (Números Enteros).",
+                step1_curious_fact: "Aunque los números negativos se usaron por primera vez en China alrededor del 200 a.C...",
+                // Step 2
+                step2_title: "2. Adición y Sustracción: La Regla del Dinero",
+                step2_subtitle: "Reglas clave para sumar y restar números enteros.",
+                step2_case1_header: "Caso 1: Signos Iguales (Sumar)",
+                step2_case1_text1: "Cuando los números tienen el mismo signo (ambos positivos o ambos negativos), se <strong>suman</strong> sus valores absolutos y se mantiene el signo. Piensa en esto como una deuda que se acumula o como un aumento de fondos.",
+                step2_example1_1: "Ejemplo:",
+                step2_example1_2: "Ejemplo:",
+                step2_case2_header: "Caso 2: Signos Diferentes (Restar)",
+                step2_case2_text1: "Cuando los números tienen signos diferentes, se <strong>resta</strong> el valor absoluto más pequeño del valor absoluto más grande. El resultado llevará el signo del número con el mayor valor absoluto (el 'más fuerte').",
+                step2_example2_1: "Ejemplo:",
+                step2_example2_2: "Ejemplo:",
+                step2_example2_3: "Ejemplo:",
+                step2_curious_fact: "La recta numérica fue inventada en el siglo XVII. Antes, los matemáticos tenían que imaginar el concepto de números negativos de forma puramente abstracta.",
+                step2_practice_header: "Practica Rápida",
+                step2_practice1: "Resultado de -10 + 3: <strong>-7</strong>",
+                step2_practice2: "Resultado de -15 - 5: <strong>-20</strong>",
+                // Step 3
+                step3_title: "3. Multiplicación y División: Ley de Signos",
+                step3_subtitle: "Aplica las famosas reglas de la Ley de Signos.",
+                step3_intro: "Para multiplicar o dividir enteros, primero multiplicas o divides los valores absolutos y luego aplicas la Ley de Signos para determinar el signo del resultado.",
+                step3_rule1: "Signos Iguales: El resultado es <strong>POSITIVO</strong>.",
+                step3_rule2: "Signos Diferentes: El resultado es <strong>NEGATIVO</strong>.",
+                step3_table_header_op: "Operación",
+                step3_table_header_sign: "Resultado",
+                step3_example_pos_pos_mult: "(+)",
+                step3_example_neg_neg_mult: "(+)",
+                step3_example_pos_neg_mult: "(-)",
+                step3_example_neg_pos_mult: "(-)",
+                step3_example_pos_pos_div: "(+)",
+                step3_example_neg_neg_div: "(+)",
+                step3_example_pos_neg_div: "(-)",
+                step3_example_neg_pos_div: "(-)",
+                step3_example_header: "Ejemplos Prácticos",
+                step3_example_text1: "Ejemplo 1 (Iguales):",
+                step3_example_text2: "Ejemplo 2 (Diferentes):",
+                step3_curious_fact: "La notación moderna de la multiplicación con el símbolo 'x' fue introducida por William Oughtred en el siglo XVII.",
+                // Step 4
+                step4_title: "4. Regla de Oro: Orden de Operaciones (PEMDAS/PAPOMUDAS)",
+                step4_subtitle: "El camino para resolver ejercicios combinados sin errores.",
+                step4_rule_header: "El orden es la clave: PEMDAS / PAPOMUDAS",
+                step4_rule_text: "Para garantizar un resultado único y correcto en operaciones combinadas, debes seguir un orden estricto:",
+                step4_list_p: "1. <strong>Paréntesis, Corchetes y Llaves (P):</strong> Resuelve primero todas las operaciones dentro de los signos de agrupación, desde el más interno hacia el más externo.",
+                step4_list_e: "2. <strong>Exponentes y Raíces (E):</strong> Luego, resuelve potencias y raíces.",
+                step4_list_m_d: "3. <strong>Multiplicación y División (M, D):</strong> Resuelve multiplicaciones y divisiones en el orden en que aparecen, de izquierda a derecha.",
+                step4_list_a_s: "4. <strong>Adición y Sustracción (A, S):</strong> Finalmente, resuelve sumas y restas en el orden en que aparecen, de izquierda a derecha.",
+                step4_example_header: "Ejemplo Combinado Resuelto",
+                step4_example_step1: "1. Paréntesis (P): Resuelve (-3 + 7) = <strong>4</strong>",
+                step4_example_step2: "2. El resultado es:",
+                step4_example_step3: "3. Multiplicación (M): Resuelve [4 * 4] = <strong>16</strong>",
+                step4_example_step4: "4. El resultado es:",
+                step4_example_step5: "5. Adición/Sustracción (A, S): 5 + 16 = 21, y 21 - 1 = <strong>20</strong>",
+                step4_final: "Resultado Final:",
+                step4_curious_fact: "El acrónimo PEMDAS (Paréntesis, Exponentes, Multiplicación, División, Adición, Sustracción) es popular en países de habla inglesa, mientras que en español se usa PAPOMUDAS (Paréntesis, Potencias, Multiplicación, División, Adición, Sustracción).",
+                // Step 5
+                step5_title: "5. Evaluación Final: ¡Mide tu Conocimiento!",
+                step5_subtitle: "Responde el siguiente Quiz de 5 preguntas para validar tu aprendizaje.",
+                step5_q1_label: "¿Cuál es el resultado de la siguiente operación combinada: -10 + 5 + 9?",
+                step5_q1_op1: "4",
+                step5_q1_op2: "-4",
+                step5_q1_op3: "14",
+                step5_q1_op4: "-6",
+                step5_q2_label: "Verdadero o Falso: El producto de dos números negativos siempre es un número positivo.",
+                step5_q3_label: "Selecciona el opuesto aditivo del número -12:",
+                step5_q3_op1: "-12",
+                step5_q3_op2: "12",
+                step5_q3_op3: "0",
+                step5_q3_op4: "1/12",
+                step5_q4_label: "Calcula: (-5) + 4 =",
+                step5_q5_label: "Completa la siguiente operación: (-5) * (__) = 25",
+                step5_submit_btn: "Evaluar Respuestas",
+                // Quiz Feedback (USAR PLACEHOLDERS {score} y {total})
+                quiz_feedback_perfect: `<i class="fa-solid fa-star"></i> ¡DOMINIO TOTAL! {score} de {total} correctas. Eres un experto en Enteros (Z).`,
+                quiz_feedback_good: `<i class="fa-solid fa-thumbs-up"></i> ¡Muy Bien! {score} de {total} correctas. Revisa los errores marcados para reforzar.`,
+                quiz_feedback_poor: `<i class="fa-solid fa-frown"></i> Resultado: {score} de {total} correctas. Vuelve a la sección de Teoría, ¡aún hay trabajo por hacer!`,
+                // Footer
+                footer_made_with: "<strong>Hecho con <i class=\"fa-solid fa-heart\" style=\"color: #ef4444;\"></i> en Cajicá, Cundinamarca.</strong>"
+            },
+            en: {
+                nav_inicio: "Home",
+                nav_refuerzos: "Reinforcements",
+                nav_nosotros: "About Us",
+                nav_beneficios: "Benefits",
+                nav_faq: "FAQ",
+                acceder_btn: "Access",
+                // Step 1
+                step1_def_header: "Key Definition: The Set Z",
+                step1_def_text: "The set of **Integers** (symbolized by the letter **Z**, from the German *Zahlen*) is the set that includes:",
+                step1_list1_1: "Naturals (Positive Integers): 1, 2, 3...",
+                step1_list1_2: "Zero: 0 (Neutral element).",
+                step1_list1_3: "Opposites (Negative Integers): -1, -2, -3...",
+                step1_why_header: "Why Are They Essential? (The Why)",
+                step1_why_text1: "Naturals (**N**) fail when trying to subtract a larger number from a smaller one (e.g., 5 - 8). Integers are born to make subtraction always possible. Without them, we would have to say that 5 - 8 has no answer.",
+                step1_why_text2: "In real life, they are used for: measuring temperatures below zero, debt balances, altitudes below sea level, and movements in time (E.g.: \"5 years ago\", which is -5).",
+                step1_video_header: "Explanatory Video: Integers",
+                step1_video_text: "Video: Introduction to the set Z (Integers).",
+                step1_curious_fact: "Although negative numbers were first used in China around 200 BC...",
+                // Step 2
+                step2_title: "2. Addition and Subtraction: The Money Rule",
+                step2_subtitle: "Key rules for adding and subtracting integers.",
+                step2_case1_header: "Case 1: Same Signs (Add)",
+                step2_case1_text1: "When numbers have the same sign (both positive or both negative), their absolute values are **added** and the sign is kept. Think of this as accumulating debt or an increase in funds.",
+                step2_example1_1: "Example:",
+                step2_example1_2: "Example:",
+                step2_case2_header: "Case 2: Different Signs (Subtract)",
+                step2_case2_text1: "When numbers have different signs, the smaller absolute value is **subtracted** from the larger absolute value. The result will take the sign of the number with the larger absolute value (the 'stronger' one).",
+                step2_example2_1: "Example:",
+                step2_example2_2: "Example:",
+                step2_example2_3: "Example:",
+                step2_curious_fact: "The number line was invented in the 17th century. Before, mathematicians had to imagine the concept of negative numbers purely abstractly.",
+                step2_practice_header: "Quick Practice",
+                step2_practice1: "Result of -10 + 3: <strong>-7</strong>",
+                step2_practice2: "Result of -15 - 5: <strong>-20</strong>",
+                // Step 3
+                step3_title: "3. Multiplication and Division: Law of Signs",
+                step3_subtitle: "Apply the famous rules of the Law of Signs.",
+                step3_intro: "To multiply or divide integers, you first multiply or divide the absolute values, and then apply the Law of Signs to determine the sign of the result.",
+                step3_rule1: "Same Signs: The result is **POSITIVE**.",
+                step3_rule2: "Different Signs: The result is **NEGATIVE**.",
+                step3_table_header_op: "Operation",
+                step3_table_header_sign: "Result",
+                step3_example_pos_pos_mult: "(+)",
+                step3_example_neg_neg_mult: "(+)",
+                step3_example_pos_neg_mult: "(-)",
+                step3_example_neg_pos_mult: "(-)",
+                step3_example_pos_pos_div: "(+)",
+                step3_example_neg_neg_div: "(+)",
+                step3_example_pos_neg_div: "(-)",
+                step3_example_neg_pos_div: "(-)",
+                step3_example_header: "Practical Examples",
+                step3_example_text1: "Example 1 (Same):",
+                step3_example_text2: "Example 2 (Different):",
+                step3_curious_fact: "The modern notation for multiplication with the 'x' symbol was introduced by William Oughtred in the 17th century.",
+                // Step 4
+                step4_title: "4. Golden Rule: Order of Operations (PEMDAS/BODMAS)",
+                step4_subtitle: "The way to solve combined exercises without errors.",
+                step4_rule_header: "Order is key: PEMDAS / BODMAS",
+                step4_rule_text: "To ensure a unique and correct result in combined operations, you must follow a strict order:",
+                step4_list_p: "1. <strong>Parentheses, Brackets, and Braces (P):</strong> First, solve all operations within grouping signs, from the innermost to the outermost.",
+                step4_list_e: "2. <strong>Exponents and Roots (E):</strong> Next, solve powers and roots.",
+                step4_list_m_d: "3. <strong>Multiplication and Division (M, D):</strong> Solve multiplications and divisions in the order they appear, from left to right.",
+                step4_list_a_s: "4. <strong>Addition and Subtraction (A, S):</strong> Finally, solve additions and subtractions in the order they appear, from left to right.",
+                step4_example_header: "Solved Combined Example",
+                step4_example_step1: "1. Parentheses (P): Solve (-3 + 7) = <strong>4</strong>",
+                step4_example_step2: "2. The result is:",
+                step4_example_step3: "3. Multiplication (M): Solve [4 * 4] = <strong>16</strong>",
+                step4_example_step4: "4. The result is:",
+                step4_example_step5: "5. Addition/Subtraction (A, S): 5 + 16 = 21, and 21 - 1 = <strong>20</strong>",
+                step4_final: "Final Result:",
+                step4_curious_fact: "The acronym PEMDAS (Parentheses, Exponents, Multiplication, Division, Addition, Subtraction) is popular in English-speaking countries, while in Spanish PAPOMUDAS (Parentheses, Powers, Multiplication, Division, Addition, Subtraction) is used.",
+                // Step 5
+                step5_title: "5. Final Assessment: Measure Your Knowledge!",
+                step5_subtitle: "Answer the following 5-question Quiz to validate your learning.",
+                step5_q1_label: "What is the result of the following combined operation: -10 + 5 + 9?",
+                step5_q1_op1: "4",
+                step5_q1_op2: "-4",
+                step5_q1_op3: "14",
+                step5_q1_op4: "-6",
+                step5_q2_label: "True or False: The product of two negative numbers is always a positive number.",
+                step5_q3_label: "Select the additive opposite of the number -12:",
+                step5_q3_op1: "-12",
+                step5_q3_op2: "12",
+                step5_q3_op3: "0",
+                step5_q3_op4: "1/12",
+                step5_q4_label: "Calculate: (-5) + 4 =",
+                step5_q5_label: "Complete the following operation: (-5) * (__) = 25",
+                step5_submit_btn: "Evaluate Answers",
+                // Quiz Feedback
+                quiz_feedback_perfect: `<i class="fa-solid fa-star"></i> TOTAL DOMINATION! {score} out of {total} correct. You are an expert in Integers (Z).`,
+                quiz_feedback_good: `<i class="fa-solid fa-thumbs-up"></i> Very Good! {score} out of {total} correct. Review the marked errors for reinforcement.`,
+                quiz_feedback_poor: `<i class="fa-solid fa-frown"></i> Result: {score} out of {total} correct. Go back to the Theory section, there is still work to be done!`,
+                // Footer
+                footer_made_with: "<strong>Made with <i class=\"fa-solid fa-heart\" style=\"color: #ef4444;\"></i> in Cajicá, Cundinamarca.</strong>"
+            },
+            de: {
+                nav_inicio: "Startseite",
+                nav_refuerzos: "Nachhilfe",
+                nav_nosotros: "Über Uns",
+                nav_beneficios: "Vorteile",
+                nav_faq: "FAQ",
+                acceder_btn: "Zugang",
+                // Step 1
+                step1_def_header: "Schlüsseldefinition: Die Menge Z",
+                step1_def_text: "Die Menge der **ganzen Zahlen** (symbolisiert durch den Buchstaben **Z**, vom deutschen *Zahlen*) ist die Menge, die Folgendes beinhaltet:",
+                step1_list1_1: "Natürliche Zahlen (Positive ganze Zahlen): 1, 2, 3...",
+                step1_list1_2: "Null: 0 (Neutrales Element).",
+                step1_list1_3: "Gegenzahlen (Negative ganze Zahlen): -1, -2, -3...",
+                step1_why_header: "Warum sind sie essentiell? (Das Warum)",
+                step1_why_text1: "Natürliche Zahlen (**N**) versagen beim Versuch, eine größere Zahl von einer kleineren zu subtrahieren (z. B. 5 - 8). Ganze Zahlen entstehen, um die Subtraktion immer möglich zu machen. Ohne sie müssten wir sagen, dass 5 - 8 keine Lösung hat.",
+                step1_why_text2: "Im wirklichen Leben werden sie verwendet für: Messung von Temperaturen unter Null, Schuldsalden, Höhen unter dem Meeresspiegel und Bewegungen in der Zeit (z. B. \"vor 5 Jahren\", was -5 ist).",
+                step1_video_header: "Erklärvideo: Ganze Zahlen",
+                step1_video_text: "Video: Einführung in die Menge Z (Ganze Zahlen).",
+                step1_curious_fact: "Der Zahlenstrahl wurde im 17. Jahrhundert erfunden. Zuvor mussten sich Mathematiker das Konzept negativer Zahlen rein abstrakt vorstellen.",
+                // Step 2
+                step2_title: "2. Addition und Subtraktion: Die Geldregel",
+                step2_subtitle: "Schlüsselregeln für das Addieren und Subtrahieren ganzer Zahlen.",
+                step2_case1_header: "Fall 1: Gleiche Vorzeichen (Addieren)",
+                step2_case1_text1: "Wenn Zahlen das gleiche Vorzeichen haben (beide positiv oder beide negativ), werden ihre absoluten Werte **addiert** und das Vorzeichen beibehalten. Stell dir das als angesammelte Schulden oder eine Erhöhung der Mittel vor.",
+                step2_example1_1: "Beispiel:",
+                step2_example1_2: "Beispiel:",
+                step2_case2_header: "Fall 2: Unterschiedliche Vorzeichen (Subtrahieren)",
+                step2_case2_text1: "Wenn Zahlen unterschiedliche Vorzeichen haben, wird der kleinere absolute Wert vom größeren absoluten Wert **subtrahiert**. Das Ergebnis erhält das Vorzeichen der Zahl mit dem größeren absoluten Wert (der 'stärkere').",
+                step2_example2_1: "Beispiel:",
+                step2_example2_2: "Beispiel:",
+                step2_example2_3: "Beispiel:",
+                step2_curious_fact: "Der Zahlenstrahl wurde im 17. Jahrhundert erfunden. Zuvor mussten sich Mathematiker das Konzept negativer Zahlen rein abstrakt vorstellen.",
+                step2_practice_header: "Kurze Übung",
+                step2_practice1: "Ergebnis von -10 + 3: <strong>-7</strong>",
+                step2_practice2: "Ergebnis von -15 - 5: <strong>-20</strong>",
+                // Step 3
+                step3_title: "3. Multiplikation und Division: Vorzeichenregel",
+                step3_subtitle: "Wende die berühmten Regeln der Vorzeichenregel an.",
+                step3_intro: "Um ganze Zahlen zu multiplizieren oder zu dividieren, multiplizierst oder dividierst du zuerst die absoluten Werte und wendest dann die Vorzeichenregel an, um das Vorzeichen des Ergebnisses zu bestimmen.",
+                step3_rule1: "Gleiche Vorzeichen: Das Ergebnis ist **POSITIV**.",
+                step3_rule2: "Unterschiedliche Vorzeichen: Das Ergebnis ist **NEGATIV**.",
+                step3_table_header_op: "Operation",
+                step3_table_header_sign: "Ergebnis",
+                step3_example_pos_pos_mult: "(+)",
+                step3_example_neg_neg_mult: "(+)",
+                step3_example_pos_neg_mult: "(-)",
+                step3_example_neg_pos_mult: "(-)",
+                step3_example_pos_pos_div: "(+)",
+                step3_example_neg_neg_div: "(+)",
+                step3_example_pos_neg_div: "(-)",
+                step3_example_neg_pos_div: "(-)",
+                step3_example_header: "Praktische Beispiele",
+                step3_example_text1: "Beispiel 1 (Gleich):",
+                step3_example_text2: "Beispiel 2 (Anders):",
+                step3_curious_fact: "Die moderne Notation für die Multiplikation mit dem Symbol 'x' wurde von William Oughtred im 17. Jahrhundert eingeführt.",
+                // Step 4
+                step4_title: "4. Goldene Regel: Reihenfolge der Operationen (PEMDAS/Punkt vor Strich)",
+                step4_subtitle: "Der Weg, kombinierte Aufgaben fehlerfrei zu lösen.",
+                step4_rule_header: "Die Reihenfolge ist entscheidend: PEMDAS / Punkt vor Strich",
+                step4_rule_text: "Um ein eindeutiges und korrektes Ergebnis bei kombinierten Operationen zu gewährleisten, musst du eine strikte Reihenfolge einhalten:",
+                step4_list_p: "1. <strong>Klammern (P):</strong> Löse zuerst alle Operationen innerhalb der Klammern, von der innersten zur äußersten.",
+                step4_list_e: "2. <strong>Exponenten und Wurzeln (E):</strong> Löse als Nächstes Potenzen und Wurzeln.",
+                step4_list_m_d: "3. <strong>Multiplikation und Division (M, D):</strong> Löse Multiplikationen und Divisionen in der Reihenfolge, in der sie erscheinen, von links nach rechts.",
+                step4_list_a_s: "4. <strong>Addition und Subtraktion (A, S):</strong> Schließlich löse Additionen und Subtraktionen in der Reihenfolge, in der sie erscheinen, von links nach rechts.",
+                step4_example_header: "Gelöstes Kombiniertes Beispiel",
+                step4_example_step1: "1. Klammern (P): Löse (-3 + 7) = <strong>4</strong>",
+                step4_example_step2: "2. Das Ergebnis ist:",
+                step4_example_step3: "3. Multiplikación (M): Löse [4 * 4] = <strong>16</strong>",
+                step4_example_step4: "4. Das Ergebnis ist:",
+                step4_example_step5: "5. Addition/Subtraktion (A, S): 5 + 16 = 21, und 21 - 1 = <strong>20</strong>",
+                step4_final: "Endergebnis:",
+                step4_curious_fact: "Das Akronym PEMDAS (Klammern, Exponenten, Multiplikation, Division, Addition, Subtraktion) ist in englischsprachigen Ländern beliebt, während im Deutschen die Regel 'Punkt vor Strich' gilt.",
+                // Step 5
+                step5_title: "5. Endgültige Bewertung: Messe dein Wissen!",
+                step5_subtitle: "Beantworte das folgende 5-Fragen-Quiz, um dein Lernen zu bestätigen.",
+                step5_q1_label: "Was ist das Ergebnis der folgenden kombinierten Operation: -10 + 5 + 9?",
+                step5_q1_op1: "4",
+                step5_q1_op2: "-4",
+                step5_q1_op3: "14",
+                step5_q1_op4: "-6",
+                step5_q2_label: "Wahr oder Falsch: Das Produkt zweier negativer Zahlen ist immer eine positive Zahl.",
+                step5_q3_label: "Wähle das additive Gegenteil der Zahl -12 aus:",
+                step5_q3_op1: "-12",
+                step5_q3_op2: "12",
+                step5_q3_op3: "0",
+                step5_q3_op4: "1/12",
+                step5_q4_label: "Berechne: (-5) + 4 =",
+                step5_q5_label: "Vervollständige die folgende Operation: (-5) * (__) = 25",
+                step5_submit_btn: "Antworten Auswerten",
+                // Quiz Feedback
+                quiz_feedback_perfect: `<i class="fa-solid fa-star"></i> VOLLE KONTROLLE! {score} von {total} richtig. Du bist ein Experte für ganze Zahlen (Z).`,
+                quiz_feedback_good: `<i class="fa-solid fa-thumbs-up"></i> Sehr Gut! {score} von {total} richtig. Überprüfe die markierten Fehler zur Vertiefung.`,
+                quiz_feedback_poor: `<i class="fa-solid fa-frown"></i> Ergebnis: {score} von {total} richtig. Gehe zurück zum Theorieabschnitt, es gibt noch Arbeit zu erledigen!`,
+                // Footer
+                footer_made_with: "<strong>Mit <i class=\"fa-solid fa-heart\" style=\"color: #ef4444;\"></i> in Cajicá, Cundinamarca, erstellt.</strong>"
+            }
+        };
+        function applyTranslation(lang) {
+            const translations = languageData[lang];
+            if (!translations) return;
+
+            document.getElementById('pageTitle').textContent = lang === 'es' ? "Módulo Ultra-Dinámico: Operaciones con Números Enteros | EDUCARD SAS" : "Dynamic Module: Operations with Integers | EDUCARD SAS"; 
+            
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.dataset.translate;
+                if (translations[key]) {
+                    element.innerHTML = translations[key]; // Uso innerHTML para permitir etiquetas como <strong>
+                }
+            });
+
+            // Actualizar la bandera (simulación)
+            const flagImg = document.getElementById('current-flag-img');
+            if (lang === 'es') flagImg.src = 'https://flagcdn.com/co.svg';
+            else if (lang === 'en') flagImg.src = 'https://flagcdn.com/us.svg';
+            else if (lang === 'de') flagImg.src = 'https://flagcdn.com/de.svg';
+        }
+
+
+        // --- 2. LÓGICA DEL MÓDULO (PASOS Y NAVEGACIÓN) ---
+
+        // Variables del Módulo
+        const steps = document.querySelectorAll('.step-content');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const progressBar = document.getElementById('progress-bar');
+        let currentStep = 0;
+        const totalSteps = steps.length;
+
+        /** Muestra el paso actual y actualiza la barra de progreso. */
+        function showStep(stepIndex) {
+            // Ocultar todos los pasos y remover la clase 'active'
+            steps.forEach(step => {
+                step.classList.remove('active');
+            });
+
+            // Mostrar el paso actual
+            steps[stepIndex].classList.add('active');
+            currentStep = stepIndex;
+
+            // Actualizar botones de navegación
+            prevBtn.disabled = currentStep === 0;
+            
+            // Si es el paso final (quiz), ocultar el botón Siguiente
+            if (currentStep === totalSteps - 1) {
+                nextBtn.style.display = 'none';
+                // El botón Anterior debe estar habilitado para permitir volver a la teoría.
+                prevBtn.disabled = false; 
+            } else {
+                nextBtn.style.display = 'inline-flex';
+                nextBtn.disabled = false;
+            }
+
+            // Actualizar barra de progreso
+            const progressPercentage = ((currentStep + 1) / totalSteps) * 100;
+            progressBar.style.width = `${progressPercentage}%`;
+
+            // Subir al tope del módulo
+            document.querySelector('.module-wrapper').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Event Listeners para navegación
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                if (currentStep > 0) {
+                    showStep(currentStep - 1);
+                }
+            });
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                if (currentStep < totalSteps - 1) {
+                    showStep(currentStep + 1);
+                }
+            });
+        }
+        
+
+        // --- 3. LÓGICA DE EVALUACIÓN DEL QUIZ ---
+        const quizForm = document.getElementById('quiz-form');
+        const quizSummaryDiv = document.getElementById('quiz-result-summary');
+
+        const correctAnswers = {
+            question1: '4', // -10 + 5 + 9 = 4
+            question2: 'true', // Ley de Signos: Multiplicación de signos iguales es positivo.
+            question3: '12', // Opuesto de -12 es 12
+            question4: '-1', // (-5) + 4 = -1
+            question5: '-5' // (-5) * (-5) = 25
+        };
+
+        if (quizForm) {
+            quizForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                evaluateQuiz();
+            });
+        }
+        
+        function evaluateQuiz() {
+            let score = 0;
+            const totalQuestions = Object.keys(correctAnswers).length;
+
+            // Limpiar estilos anteriores
+            document.querySelectorAll('.option-box').forEach(box => {
+                box.classList.remove('correct-answer', 'incorrect-answer');
+            });
+            document.querySelectorAll('#quiz-form input, #quiz-form select').forEach(input => {
+                input.classList.remove('correct-answer', 'incorrect-answer');
+            });
+
+            for (const [key, correctValue] of Object.entries(correctAnswers)) {
+                const questionElement = document.getElementById(key);
+                if (!questionElement) continue; 
+
+                let userAnswer = null;
+                let isCorrect = false;
+
+                // Lógica para preguntas de tipo 'radio' (opción única)
+                if (questionElement.querySelector('input[type="radio"]')) {
+                    const checkedInput = questionElement.querySelector('input[name="' + key + '"]:checked');
+                    userAnswer = checkedInput ? checkedInput.value : null;
+
+                    if (userAnswer === correctValue) {
+                        score++;
+                        isCorrect = true;
+                    }
+                    
+                    // Resaltar opciones: verde para la correcta, rojo para la incorrecta seleccionada
+                    questionElement.querySelectorAll('input[name="' + key + '"]').forEach(input => {
+                        const optionBox = input.nextElementSibling;
+                        if (input.value === correctValue) {
+                            optionBox.classList.add('correct-answer');
+                        } else if (input.checked && input.value !== correctValue) {
+                            optionBox.classList.add('incorrect-answer');
+                        }
+                    });
+
+                } 
+                // Lógica para preguntas de tipo 'text' o 'number'
+                else if (questionElement.querySelector('input[type="text"]') || questionElement.querySelector('input[type="number"]')) {
+                    const inputElement = questionElement.querySelector('input');
+                    userAnswer = inputElement.value.trim();
+
+                    const numericCorrectValue = String(correctValue).trim();
+                    
+                    if (userAnswer === numericCorrectValue) {
+                        score++;
+                        isCorrect = true;
+                    }
+
+                    // Resaltar entrada
+                    if (isCorrect) {
+                        inputElement.classList.add('correct-answer');
+                    } else {
+                        inputElement.classList.add('incorrect-answer');
+                    }
+                }
+                // Lógica para preguntas de tipo 'select'
+                else if (questionElement.querySelector('select')) {
+                    const selectElement = questionElement.querySelector('select');
+                    userAnswer = selectElement.value;
+                    
+                    if (userAnswer === correctValue) {
+                        score++;
+                        isCorrect = true;
+                    }
+
+                    // Resaltar select (limitado, solo borde)
+                    if (isCorrect) {
+                        selectElement.classList.add('correct-answer');
+                    } else {
+                        selectElement.classList.add('incorrect-answer');
+                    }
+                }
+            }
+
+            // Mostrar el resumen del resultado
+            displayQuizSummary(score, totalQuestions);
+        }
+
+        function displayQuizSummary(score, totalQuestions) {
+            quizSummaryDiv.style.display = 'block';
+            quizSummaryDiv.classList.remove('summary-success', 'summary-fail');
+
+            let feedbackText;
+
+            if (score === totalQuestions) {
+                quizSummaryDiv.classList.add('summary-success');
+                feedbackText = `<i class="fa-solid fa-star"></i> ¡DOMINIO TOTAL! ${score} de ${totalQuestions} correctas. Eres un experto en Enteros (Z).`;
+            } else if (score >= 3) { // 3 o 4 correctas
+                quizSummaryDiv.classList.add('summary-success');
+                feedbackText = `<i class="fa-solid fa-thumbs-up"></i> ¡Muy Bien! ${score} de ${totalQuestions} correctas. Revisa los errores marcados para reforzar.`;
+            } else {
+                quizSummaryDiv.classList.add('summary-fail');
+                feedbackText = `<i class="fa-solid fa-frown"></i> Resultado: ${score} de ${totalQuestions} correctas. Vuelve a la sección de Teoría, ¡aún hay trabajo por hacer!`;
+            }
+
+            quizSummaryDiv.innerHTML = feedbackText;
+            
+            // Desplazarse al resumen
+            quizSummaryDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+
+        // --- 4. LÓGICA DE INICIALIZACIÓN (Se ejecuta al cargar el DOM) ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Inicializar Idioma
+            const savedLang = localStorage.getItem('educardLang') || 'es';
+            applyTranslation(savedLang);
+
+            // 2. Lógica del Dropdown de Idioma
+            document.querySelectorAll('.language-selector').forEach(selector => {
+                selector.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Evita que el click cierre el dropdown
+                    const dropdown = selector.querySelector('.language-dropdown');
+                    // Cerrar otros dropdowns antes de abrir este
+                    document.querySelectorAll('.language-dropdown').forEach(d => {
+                        if (d !== dropdown) d.classList.remove('active');
+                    });
+                    dropdown.classList.toggle('active');
+                });
+
+                // Manejar la selección de idioma dentro del dropdown
+                selector.querySelectorAll('.language-dropdown a').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const newLang = link.dataset.lang;
+                        applyTranslation(newLang);
+                        localStorage.setItem('educardLang', newLang); // Guardar la preferencia
+                        document.querySelectorAll('.language-dropdown').forEach(d => d.classList.remove('active'));
+                    });
+                });
+            });
+
+            // Cerrar dropdown al hacer clic fuera
+            document.addEventListener('click', () => {
+                document.querySelectorAll('.language-dropdown').forEach(d => d.classList.remove('active'));
+            });
+            
+            // 3. Inicializar Módulo de Pasos (Ejecuta la función de navegación)
+            if (steps.length > 0) {
+                showStep(0);
+            }
+        });
+    </script>
+
+</body>
+</html>

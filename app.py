@@ -9,7 +9,7 @@ load_dotenv()
 app = Flask(__name__)
 
 # --- DATOS FIJOS/GENÉRICOS PARA FALLBACK O MUESTRA ---
-# Esta lista se usa en index.html para mostrar tarjetas fijas.
+# ... (El resto de la lista GENERIC_MATH_TOPICS es el mismo)
 GENERIC_MATH_TOPICS = [
     ("Operaciones con números enteros", "Matemáticas 6°", "Valor Posicional", "Polinomios Aritméticos"),
     ("Fraccionarios y decimales", "Matemáticas 6°", "Operaciones Básicas", "Conversión Decimal"),
@@ -22,15 +22,24 @@ GENERIC_MATH_TOPICS = [
 # --- 2. GESTIÓN DE LA CONEXIÓN A LA BASE DE DATOS ---
 def get_db_connection():
     DATABASE_URL = os.environ.get('DATABASE_URL')
+    
     if not DATABASE_URL:
         # Nota: En un entorno de producción, esto debería ser un error fatal.
         print("ERROR: La variable DATABASE_URL no está definida.")
         return None
+        
+    # Diagnóstico: Imprime el inicio de la URL en la consola del servidor (Render)
+    # Esto ayuda a confirmar que la variable se está cargando
+    print(f"DEBUG DB URL (START): {DATABASE_URL[:30]}...") 
+    
     if DATABASE_URL.startswith('postgres://'):
         # Reemplazo requerido por algunas versiones de psycopg2
         DATABASE_URL = DATABASE_URL.replace('postgres://', 'postgresql://', 1)
+        
     try:
-        conn = psycopg2.connect(DATABASE_URL)
+        # **AÑADIR SSLMODE REQUERIDO:**
+        # Render/Heroku a menudo exigen conexiones SSL. Si falla, el problema puede ser este.
+        conn = psycopg2.connect(DATABASE_URL, sslmode='require') 
         return conn
     except Exception as e:
         print(f"Error crítico al conectar a la base de datos: {e}")
@@ -69,15 +78,17 @@ def index():
         except Exception as e:
             # Capturar cualquier error de SQL o conexión
             db_status = f"⚠️ Conectado, pero la consulta falló: {e}"
+            # Diagnóstico: Imprimir error de consulta o tabla no encontrada
+            print(f"ERROR DURANTE LA CONSULTA SQL: {e}")
         finally:
             # Aseguramos el cierre de la conexión
             if conn:
                 conn.close()
     else:
-        db_status = "❌ Fallo Crítico de Conexión. Revisa la DATABASE_URL."
+        # Aquí se imprimirá el error de conexión si get_db_connection() falló
+        db_status = "❌ Fallo Crítico de Conexión. Revisa la DATABASE_URL y los logs del servidor."
     
     # Renderizar la plantilla HTML.
-    # CRÍTICO: Pasamos la lista GENERIC_MATH_TOPICS como 'generic_products' para los datos fijos.
     return render_template(
         'index.html', 
         db_status=db_status, 
@@ -86,12 +97,11 @@ def index():
     )
 
 # --- RUTAS PARA PÁGINAS ESTÁTICAS DEL MENÚ ---
+# ... (Estas rutas no cambian)
 
 @app.route('/refuerzos')
 def refuerzos():
     """Renderiza la página de Refuerzos."""
-    # Como esta página lista productos, podrías replicar la lógica de la BD aquí
-    # si quisieras que cargue datos dinámicos.
     return render_template('refuerzos.html')
 
 @app.route('/nosotros')
