@@ -3,7 +3,7 @@ import os
 import psycopg2
 from flask import Flask, render_template
 from dotenv import load_dotenv
-import urllib.parse  # <--- NUEVA IMPORTACIÓN
+import urllib.parse # <--- NUEVA IMPORTACIÓN
 
 # --- 1. CONFIGURACIÓN INICIAL ---
 load_dotenv()
@@ -19,35 +19,35 @@ GENERIC_MATH_TOPICS = [
     ("Funciones y Gráficos", "Matemáticas 6°", "Dominio y Rango", "Interpretación de Gráficos"),
 ]
 
-# --- 2. GESTIÓN DE LA CONEXIÓN A LA BASE DE DATOS (MÉTODO EXPLÍCITO) ---
+# --- 2. GESTIÓN DE LA CONEXIÓN A LA BASE DE DATOS (MÉTODO EXPLÍCITO FINAL) ---
 def get_db_connection():
     DATABASE_URL = os.environ.get('DATABASE_URL')
     
     if not DATABASE_URL:
-        print("ERROR: La variable DATABASE_URL no está definida.")
+        # Esto solo se verá en los logs de Render si la variable no está configurada.
+        print("ERROR: La variable DATABASE_URL no está definida.") 
         return None
         
-    # Diagnóstico: Imprime el inicio de la URL en la consola del servidor (Render)
     print(f"DEBUG DB URL (START): {DATABASE_URL[:30]}...") 
     
-    # 1. Asegurar el prefijo 'postgresql' para un parseo correcto
+    # Asegurar el prefijo 'postgresql' para un parseo correcto con urllib
     if DATABASE_URL.startswith('postgres://'):
         safe_url = DATABASE_URL.replace('postgres://', 'postgresql://', 1)
     else:
         safe_url = DATABASE_URL
     
     try:
-        # 2. Descomponer la URL
+        # Descomponer la URL
         url = urllib.parse.urlparse(safe_url)
         
-        # 3. Conectar usando parámetros explícitos (diccionario de conexión)
+        # Conectar usando parámetros explícitos y SSL
         conn = psycopg2.connect(
             database=url.path[1:],  # Ignora el "/" inicial
             user=url.username,
             password=url.password,
             host=url.hostname,
             port=url.port,
-            sslmode='require'  # Sigue siendo CRÍTICO en la nube
+            sslmode='require'  # CRÍTICO para Render y otras plataformas cloud
         )
         return conn
         
@@ -55,7 +55,7 @@ def get_db_connection():
         print(f"Error CRÍTICO al conectar a la base de datos (Método Explícito): {e}")
         return None
 
-# --- 3. RUTAS DE LA APLICACIÓN (sin cambios) ---
+# --- 3. RUTAS DE LA APLICACIÓN ---
 @app.route('/')
 def index():
     db_status = "Desconectado"
@@ -64,7 +64,6 @@ def index():
     conn = get_db_connection()
 
     if conn:
-        # ... (La lógica de conexión y consulta sigue siendo la misma)
         try:
             cur = conn.cursor()
             cur.execute('SELECT version();')
@@ -87,7 +86,7 @@ def index():
             if conn:
                 conn.close()
     else:
-        db_status = "❌ Fallo Crítico de Conexión. Revisa los logs de error del servidor."
+        db_status = "❌ Fallo Crítico de Conexión a DB."
     
     return render_template(
         'index.html', 
@@ -96,24 +95,26 @@ def index():
         generic_products=GENERIC_MATH_TOPICS 
     )
 
-@app.route('/refuerzos')
-def refuerzos():
-    return render_template('refuerzos.html')
+# --- RUTAS DE NAVEGACIÓN (DEFINIDAS SIN .html) ---
 
-@app.route('/nosotros')
+@app.route('/refuerzos') # URL: /refuerzos
+def refuerzos():
+    return render_template('refuerzos.html') # Renderiza el archivo: refuerzos.html
+
+@app.route('/nosotros') # URL: /nosotros
 def nosotros():
     return render_template('nosotros.html')
 
-@app.route('/beneficios')
+@app.route('/beneficios') # URL: /beneficios
 def beneficios():
     return render_template('beneficios.html')
 
-@app.route('/faq')
+@app.route('/faq') # URL: /faq
 def faq():
     return render_template('faq.html')
 
 
-# --- 4. INICIO DEL SERVIDOR (sin cambios) ---
+# --- 4. INICIO DEL SERVIDOR ---
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, debug=True)
